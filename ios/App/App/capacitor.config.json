@@ -1,0 +1,6 @@
+{
+	"appId": "io.justpro.me",
+	"appName": "JustPro",
+	"webDir": "www",
+	"bundledWebRuntime": true
+}
