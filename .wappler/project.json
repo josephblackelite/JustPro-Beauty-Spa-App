@@ -24,8 +24,6 @@
       "type": "local"
     }
   ],
-  "hostingType": "wappler",
-  "projectServerModel": "node",
   "runtime": "capacitor",
   "projectType": "app",
   "capacitor": {
@@ -33,6 +31,6 @@
       "checked": true
     },
     "platform": "android",
-    "target": ""
+    "target": "Pixel_4_XL_API_32"
   }
 }
