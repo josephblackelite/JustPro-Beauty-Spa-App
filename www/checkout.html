@@ -1,6 +1,10 @@
 <!-- Wappler include head-page="index.html" is="dmx-app" id="checkout" appConnect="local" framework7_6="With App Connect" framework7_icons="local" capacitor="local" components="{dmxSwiper:{}}" -->
 
 <div class="page">
+    <form is="dmx-serverconnect-form" id="Setup_Intent_ephemeral_key_gen" method="post" action="https://api.justpro.me/api/stripe/create_setup_intent" site="JustPro-Spa-Backend" dmx-on:success="run({runJS:{function:'createPaymentFlow',args:[`app.main.f7page.Setup_Intent_ephemeral_key_gen.data.client_secret`,`app.main.f7page.Setup_Intent_ephemeral_key_gen.data.customer_id`,`app.main.f7page.Setup_Intent_ephemeral_key_gen.data.ephemeral_key`]}})"><input id="User_id" name="user_id" dmx-bind:value="app.Current_user.data.customer.id" type="hidden">
+        <input id="setUp" name="setUp" type="text" value="setUp">
+    </form>
+    <dmx-value id="card_setup_started"></dmx-value>
     <div class="navbar">
         <div class="navbar-inner">
             <a href="#" class="link back">
@@ -22,17 +26,19 @@
     <div class="page-content wappler-block pt-70">
         <div class="block no-margin">
             <h5>Check out</h5>
+
         </div>
         <div class="block no-margin">
             <div class="list accordion-list dz-accordion dz-list">
                 <ul class="padding">
                     <li class="accordion-item accordion-item-opened">
-                        <a href="#" class="item-link item-content">
+                        <div href="#" class="">
                             <div class="item-inner display-flex ">
                                 <div class="item-title">Your cards</div>
-                                <a href="">Add new card</a>
+                                <a href="" dmx-on:click="app.main.f7page.Setup_Intent_ephemeral_key_gen.submit()" dmx-hide="app.main.f7page.Setup_Intent_ephemeral_key_gen.state.executing">Add new card</a>
+                                <div class="preloader color-purple" dmx-show="app.main.f7page.Setup_Intent_ephemeral_key_gen.state.executing"></div>
                             </div>
-                        </a>
+                        </div>
                         <div class="accordion-item-content">
                             <div class="item-content-inner mb-30">
                                 <!-- Payment Swiper -->
@@ -85,7 +91,9 @@
                 <h2 class="checkout-total">$158.0</h2>
             </div>
         </div>
+        <div class="block"></div>
         <div class="block">
+            <p>Transaction amount will be debited immediately after submitting the payment form. It will appear as JustPro Portal Co. LLC in your bank statement, please keep a copy of the transaction data.</p>
             <a href="/checkout" class="button-large rounded-xl button button-fill" dmx-on:click="app.main.navigate('/order-tracking',{})">Pay</a>
         </div>
     </div>

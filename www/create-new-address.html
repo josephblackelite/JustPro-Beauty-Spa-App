@@ -23,8 +23,7 @@
     <div class="page-content content-area pt-90 wappler-block">
         <div class="container">
             <div class="form-elements">
-                <form is="dmx-serverconnect-form" method="post" id="update_profile_form" dmx-on:success="run({'f7.dialog.confirm':{title:'Success',text:'Your profile information is now update',then:{steps:{run:{action:`app.main.back(,{})`}}}}})" site="JustPro-Spa-Backend" action="https://api.justpro.me/api/security/update_profile" dmx-on:invalid="run({'f7.dialog.alert':{title:'Error',text:`app.main.f7page.update_profile_form.lastError.response`}})">
-                    <input id="user_id" name="user_id" type="hidden" dmx-bind:value="app.Current_user.data.customer.id">
+                <form is="dmx-serverconnect-form" method="post" id="add_new_address" dmx-on:success="run({'f7.dialog.confirm':{title:'Success',text:'Your profile information is now update',then:{steps:{run:{action:`app.main.back(,{})`}}}}})" site="JustPro-Spa-Backend" action="https://api.justpro.me/api/security/update_profile" dmx-on:invalid="run({'f7.dialog.alert':{title:'Error',text:`app.main.f7page.update_profile_form.lastError.response`}})"><input id="user_id" name="user_id" type="hidden" dmx-bind:value="app.Current_user.data.customer.id">
                     <input id="country" name="user_id1" type="hidden" dmx-bind:value="app.Current_user.data.customer.id">
                     <input id="long" name="user_id2" type="hidden" dmx-bind:value="app.Current_user.data.customer.id">
                     <input id="last" name="user_id3" type="hidden" dmx-bind:value="app.Current_user.data.customer.id">
@@ -42,7 +41,7 @@
                                 <div class="item-inner">
                                     <div class="item-title item-label">Type address</div>
                                     <div class="item-input-wrap">
-                                        <input type="text" placeholder="e.g Villa. 8, Oak str." class="form-control" id="address_element" name="address_element" dmx-bind:value="app.Current_user.data.customer.customer_name" is="dmx-google-autocomplete" />
+                                        <input type="text" placeholder="e.g Villa. 8, Oak str." class="form-control" id="address_element" name="address_element" is="dmx-google-autocomplete">
                                     </div>
                                 </div>
                             </li>
@@ -86,9 +85,8 @@
                         </ul>
                     </div>
                     <div class="clearfix text-align-center pb-30">
-                        <p>All fields are required</p>
-                        <button href="" class="button-large button button-fill rounded-xl button-gray color-purple" dmx-on:click="run({condition:{if:`(app.main.f7page.update_profile_form.name.value &amp;&amp; (app.main.f7page.update_profile_form.gender.value &amp;&amp; (app.main.f7page.update_profile_form.mobile_number.value &amp;&amp; app.main.f7page.update_profile_form.email.value)))`,then:{steps:{run:{action:`app.main.f7page.update_profile_form.submit()`}}}}})" dmx-bind:disabled="app.main.f7page.update_profile_form.state.executing"><span dmx-hide="app.main.f7page.update_profile_form.state.executing">Update profile details</span>
-                            <div class="preloader color-purple" dmx-show="app.main.f7page.update_profile_form.state.executing"></div>
+                        <button href="" class="button-large button button-fill rounded-xl button-gray color-purple" dmx-on:click="run({condition:{if:`(app.main.f7page.add_new_address.name.value &amp;&amp; (app.main.f7page.add_new_address.gender.value &amp;&amp; (app.main.f7page.add_new_address.mobile_number.value &amp;&amp; app.main.f7page.add_new_address.email.value)))`,then:{steps:{run:{action:`app.main.f7page.add_new_address.submit()`}}}}})" dmx-bind:disabled="app.main.f7page.add_new_address.state.executing"><span dmx-hide="app.main.f7page.add_new_address.state.executing">ADD ADDRESS</span>
+                            <div class="preloader color-purple" dmx-show="app.main.f7page.add_new_address.state.executing"></div>
                         </button>
                     </div>
                 </form>

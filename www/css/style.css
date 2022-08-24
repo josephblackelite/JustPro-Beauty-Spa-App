@@ -3990,3 +3990,7 @@ h6, .h6 {
 .pt-70.relative {
   position: relative;
   left: 0px; }
+
+.item-input-focused {
+      border-width: 0 0px 0px 0px;
+  }

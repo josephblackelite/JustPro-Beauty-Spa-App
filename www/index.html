@@ -66,6 +66,8 @@
     <script src="dmxAppConnect/dmxLazyLoad/dmxLazyLoad.js" defer></script>
     <script src="dmxAppConnect/dmxLazyLoad/lazysizes.min.js" defer></script>
     <script src="dmxAppConnect/dmxGooglePlaces/dmxGooglePlaces.js" defer></script>
+    <link rel="stylesheet" href="dmxAppConnect/dmxDropzone/dmxDropzone.css" />
+    <script src="dmxAppConnect/dmxDropzone/dmxDropzone.js" defer></script>
 </head>
 
 <body is="dmx-app" id="index">
@@ -74,6 +76,38 @@
 
         <dmx-local-manager id="local_store"></dmx-local-manager>
 
+        <script is="dmx-flow" id="Redirect_to_login_or_home" type="text/dmx-flow" autorun>[
+  {
+    condition: {
+      if: "{{local_store.data.not_new_user}}",
+      then: {
+        steps: {
+          condition: {
+            if: "{{!local_store.data.user_id}}",
+            then: {
+              steps: {
+                run: {action: "{{app.main.navigate('/login',{})}}"}
+              }
+            },
+            else: {
+              steps: {
+                run: {action: "{{app.main.navigate('/home',{})}}"}
+              }
+            }
+          }
+        }
+      },
+      else: {
+        steps: {
+          run: {action: "{{app.main.navigate('/',{})}}"}
+        }
+      }
+    }
+  },
+  {
+    runJS: {function: "hideSplashScreen"}
+  }
+]</script>
         <dmx-value id="otp_id"></dmx-value>
         <!-- Statusbar overlay -->
 
@@ -112,38 +146,7 @@
     }
   }
 }</script>
-        <script is="dmx-flow" id="Redirect_to_login_or_home" type="text/dmx-flow" autorun>[
-  {
-    condition: {
-      if: "{{local_store.data.not_new_user}}",
-      then: {
-        steps: {
-          condition: {
-            if: "{{!local_store.data.user_id}}",
-            then: {
-              steps: {
-                run: {action: "{{app.main.navigate('/login',{})}}"}
-              }
-            },
-            else: {
-              steps: {
-                run: {action: "{{app.main.navigate('/home',{})}}"}
-              }
-            }
-          }
-        }
-      },
-      else: {
-        steps: {
-          run: {action: "{{app.main.navigate('/',{})}}"}
-        }
-      }
-    }
-  },
-  {
-    runJS: {function: "hideSplashScreen"}
-  }
-]</script>
+
         <dmx-json-datasource id="countryList" is="dmx-serverconnect" url="countryList.json"></dmx-json-datasource>
         <dmx-serverconnect id="Current_user" url="https://api.justpro.me/api/security/logged_in_user_data" site="JustPro-Spa-Backend" dmx-param:user_id="local_store.data.user_id" sockets="true"></dmx-serverconnect>
         <div class="statusbar"></div>

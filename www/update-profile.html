@@ -1,4 +1,4 @@
-<!-- Wappler include head-page="index.html" is="dmx-app" id="updateprofile" appConnect="local" framework7_6="With App Connect" framework7_icons="local" capacitor="local" components="{dmxFormatter:{}}" -->
+<!-- Wappler include head-page="index.html" is="dmx-app" id="updateprofile" appConnect="local" framework7_6="With App Connect" framework7_icons="local" capacitor="local" components="{dmxFormatter:{},dmxDropzone:{}}" -->
 
 <div class="page profile-wrapper">
     <div class="navbar">
@@ -31,7 +31,7 @@
                     </div>
                     <div class="list">
                         <ul class="row">
-                            <li class="item-content col-100 item-input item-input-with-value">
+                            <li class="item-content col-100 item-input item-input-with-value no-border no-hairline">
                                 <div class="item-inner">
                                     <div class="item-title item-label">Name</div>
                                     <div class="item-input-wrap">
@@ -50,7 +50,7 @@
                                     </div>
                                 </div>
                             </li>
-                            <li class="item-content col-100 item-input">
+                            <li class="item-content col-100 item-input item-input-with-value">
                                 <div class="item-inner">
                                     <div class="item-title item-label">Mobile number</div>
                                     <div class="item-input-wrap row">
@@ -71,6 +71,14 @@
                                     </div>
                                 </div>
                             </li>
+                            <li class="item-content col-100 item-input">
+                                <div class="item-inner">
+                                    <div class="item-title item-label">Upload profile photo</div>
+                                    <div class="item-input-wrap">
+                                        <input id="profile_photo" type="file" is="dmx-dropzone" name="profile_photo">
+                                    </div>
+                                </div>
+                            </li>
                         </ul>
                     </div>
                     <div class="clearfix text-align-center pb-30">
@@ -80,6 +88,7 @@
                         </button>
                     </div>
                 </form>
+
             </div>
         </div>
     </div>

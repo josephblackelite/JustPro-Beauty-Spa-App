@@ -29,9 +29,13 @@
                     <ul class="row">
                         <li class="item-content col-100 item-input item-input-with-value">
                             <div class="item-inner">
-                                <div class="item-title item-label">Flat number</div>
+                                <div class="item-title item-label">Select address</div>
                                 <div class="item-input-wrap">
-                                    <input type="text" name="flat_number" class="form-control" id="flat_number">
+                                    <select id="select1" class="form-control">
+                                        <option value="1">Address one</option>
+                                        <option value="2">Address two</option>
+                                        <option value="3">Option Three</option>
+                                    </select>
                                 </div>
                             </div>
 
@@ -41,13 +45,15 @@
             </div>
             <a href="" class="button rounded-xl button button-fill" dmx-on:click="app.main.navigate('/create-new-address',{})">Add a new address</a>
         </div>
+        <div class="block full-page-map block-strong">
+
+            <dmx-google-maps id="maps" dmx-bind:markers="" height="100%"></dmx-google-maps>
+        </div>
+        <div class="block">
+            <a href="/checkout" class="button rounded-xl button button-fill" dmx-on:click="app.main.navigate('/choose-address',{})">Continue</a>
+        </div>
     </div>
 
-    <div class="block full-page-map">
 
-        <dmx-google-maps id="maps" dmx-bind:markers="" height="100%"></dmx-google-maps>
-    </div>
-    <div class="block">
-        <a href="/checkout" class="button rounded-xl button button-fill" dmx-on:click="app.main.navigate('/choose-address',{})">Continue</a>
-    </div>
+
 </div>
