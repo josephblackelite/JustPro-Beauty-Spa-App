@@ -1,0 +1,86 @@
+<!-- Wappler include head-page="index.html" is="dmx-app" id="updateprofile" appConnect="local" framework7_6="With App Connect" framework7_icons="local" capacitor="local" components="{dmxFormatter:{}}" -->
+
+<div class="page profile-wrapper">
+    <div class="navbar">
+        <div class="navbar-inner">
+
+            <a href="#" class="link back">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M0.439312 13.0606L5.75391 18.3752C6.04683 18.6682 6.43069 18.8146 6.81459 18.8146C7.1985 18.8146 7.58236 18.6682 7.87528 18.3752C8.46103 17.7894 8.46103 16.8397 7.87528 16.2539L5.12133 13.5H22.5C23.3284 13.5 24 12.8284 24 12C24 11.1716 23.3284 10.5 22.5 10.5H5.12133L7.87528 7.7461C8.46103 7.1603 8.46103 6.21057 7.87528 5.62477C7.28944 5.03898 6.33975 5.03898 5.75391 5.62477L0.439312 10.9394C-0.146437 11.5251 -0.146437 12.4749 0.439312 13.0606Z" fill="black" />
+                </svg>
+            </a>
+            <div class="right">
+                <a href="#" class="link panel-open" data-panel="left">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M14 12C14 10.8955 13.1046 10 12 10C10.8954 10 10 10.8955 10 12C10 13.1046 10.8954 14 12 14C13.1046 14 14 13.1046 14 12Z" fill="black" />
+                        <path d="M14 20C14 18.8954 13.1046 18 12 18C10.8954 18 10 18.8954 10 20C10 21.1045 10.8954 22 12 22C13.1046 22 14 21.1045 14 20Z" fill="black" />
+                        <path d="M14 4C14 2.89544 13.1046 2.00001 12 2.00001C10.8954 2.00001 10 2.89544 10 4C10 5.10457 10.8954 6 12 6C13.1046 6 14 5.10457 14 4Z" fill="black" />
+                    </svg>
+                </a>
+            </div>
+        </div>
+    </div>
+    <div class="page-content content-area pt-90">
+        <div class="container">
+            <div class="form-elements">
+                <form is="dmx-serverconnect-form" method="post" id="update_profile_form" dmx-on:success="run({'f7.dialog.confirm':{title:'Success',text:'Your profile information is now update',then:{steps:{run:{action:`app.main.back(,{})`}}}}})" site="JustPro-Spa-Backend" action="https://api.justpro.me/api/security/update_profile" dmx-on:invalid="run({'f7.dialog.alert':{title:'Error',text:`app.main.f7page.update_profile_form.lastError.response`}})">
+                    <input id="user_id" name="user_id" type="hidden" dmx-bind:value="app.Current_user.data.customer.id">
+                    <div class="title-head">
+                        <h2 class="title">Update your profile</h2>
+                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor </p>
+                    </div>
+                    <div class="list">
+                        <ul class="row">
+                            <li class="item-content col-100 item-input item-input-with-value">
+                                <div class="item-inner">
+                                    <div class="item-title item-label">Name</div>
+                                    <div class="item-input-wrap">
+                                        <input type="text" placeholder="name" class="form-control" id="name" name="name" dmx-bind:value="app.Current_user.data.customer.customer_name" />
+                                    </div>
+                                </div>
+                            </li>
+                            <li class="item-content col-100 item-input item-input-with-value">
+                                <div class="item-inner">
+                                    <div class="item-title item-label">Gender</div>
+                                    <div class="item-input-wrap">
+                                        <select id="gender" class="form-control" name="gender" dmx-bind:value="app.Current_user.data.customer.customer_sex">
+                                            <option value="male">Male</option>
+                                            <option value="female">Female</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </li>
+                            <li class="item-content col-100 item-input">
+                                <div class="item-inner">
+                                    <div class="item-title item-label">Mobile number</div>
+                                    <div class="item-input-wrap row">
+                                        <div class="col-30"><select id="country_code" class="form-control" name="country_code" dmx-bind:options="app.countryList.data" optiontext="code+' '+dial_code" optionvalue="code" dmx-bind:value="'AE'">
+                                            </select>
+                                        </div>
+                                        <div class="col-70"><input type="number" placeholder="+971*********" class="form-control" id="mobile_number" dmx-bind:value="app.Current_user.data.customer.phone_number" name="mobile_number" /></div>
+
+
+                                    </div>
+                                </div>
+                            </li>
+                            <li class="item-content col-100 item-input">
+                                <div class="item-inner">
+                                    <div class="item-title item-label">Email</div>
+                                    <div class="item-input-wrap">
+                                        <input type="email" placeholder="Email Address" class="form-control" name="email" dmx-bind:value="app.Current_user.data.customer.customer_email">
+                                    </div>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="clearfix text-align-center pb-30">
+                        <p>All fields are required</p>
+                        <button href="" class="button-large button button-fill rounded-xl button-gray color-purple" dmx-on:click="run({condition:{if:`(app.main.f7page.update_profile_form.name.value &amp;&amp; (app.main.f7page.update_profile_form.gender.value &amp;&amp; (app.main.f7page.update_profile_form.mobile_number.value &amp;&amp; app.main.f7page.update_profile_form.email.value)))`,then:{steps:{run:{action:`app.main.f7page.update_profile_form.submit()`}}}}})" dmx-bind:disabled="app.main.f7page.update_profile_form.state.executing"><span dmx-hide="app.main.f7page.update_profile_form.state.executing">Update profile details</span>
+                            <div class="preloader color-purple" dmx-show="app.main.f7page.update_profile_form.state.executing"></div>
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

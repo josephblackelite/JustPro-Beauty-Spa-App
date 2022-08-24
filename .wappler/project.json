@@ -1,5 +1,5 @@
 {
-  "projectName": "JustPro-Spa-Beauty",
+  "projectName": "JustPro-Beauty",
   "designFramework": "framework7",
   "useRouting": true,
   "routingHandler": "framework7",
@@ -24,15 +24,15 @@
       "type": "local"
     }
   ],
-  "hostingType": "wappler",
-  "projectServerModel": "node",
   "runtime": "capacitor",
   "projectType": "app",
   "capacitor": {
     "capacitor": {
       "checked": true
     },
-    "platform": "android",
-    "target": ""
+    "platform": "ios",
+    "target": "CA8DC66C-F443-4380-83B0-551C568992F1",
+    "device": null,
+    "deviceId": null
   }
 }

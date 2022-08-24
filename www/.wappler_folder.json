@@ -1,0 +1,74 @@
+{
+  "login.html": {
+    "layoutPage": "",
+    "description": ""
+  },
+  "otpPage.html": {
+    "layoutPage": "",
+    "description": ""
+  },
+  "order-prompt.html": {
+    "layoutPage": "",
+    "description": ""
+  },
+  "order-confirmation.html": {
+    "layoutPage": "",
+    "description": ""
+  },
+  "product-info.html": {
+    "layoutPage": "",
+    "description": ""
+  },
+  "order-tracking.html": {
+    "layoutPage": "",
+    "description": ""
+  },
+  "choose-professional.html": {
+    "layoutPage": "",
+    "description": ""
+  },
+  "schedule.html": {
+    "layoutPage": "",
+    "description": ""
+  },
+  "choose-address.html": {
+    "layoutPage": "",
+    "description": ""
+  },
+  "checkout.html": {
+    "layoutPage": "",
+    "description": ""
+  },
+  "home.html": {
+    "layoutPage": "",
+    "description": ""
+  },
+  "notifications.html": {
+    "layoutPage": "",
+    "description": ""
+  },
+  "profile.html": {
+    "layoutPage": "",
+    "description": ""
+  },
+  "orders.html": {
+    "layoutPage": "",
+    "description": ""
+  },
+  "message-list.html": {
+    "layoutPage": "",
+    "description": ""
+  },
+  "message-view.html": {
+    "layoutPage": "",
+    "description": ""
+  },
+  "update-profile.html": {
+    "layoutPage": "",
+    "description": ""
+  },
+  "create-new-address.html": {
+    "layoutPage": "",
+    "description": ""
+  }
+}

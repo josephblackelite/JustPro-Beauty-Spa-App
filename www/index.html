@@ -1,40 +1,359 @@
 <!doctype html>
-<html><head>
-<meta charset="UTF-8">
-<title>Untitled Document</title>
-<!-- New Wappler Page -->
+<html dir="ltr">
+
+<head>
+    <script src="dmxAppConnect/dmxAppConnect.js"></script>
+    <meta charset="UTF-8">
+    <title>Untitled Document</title>
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.22.2/moment.min.js" integrity="sha256-CutOzxCRucUsn6C6TcEYsauvvYilEniTXldPa6/wu0k=" crossorigin="anonymous"></script>
+    <script src="https://api.justpro.me/socket.io/socket.io.js" defer></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no, viewport-fit=cover">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="format-detection" content="telephone=no">
+    <meta name="msapplication-tap-highlight" content="no">
+    <meta http-equiv="Content-Security-Policy" content="default-src * 'self' 'unsafe-inline' 'unsafe-eval' data: gap: content:">
+    <link rel="stylesheet" href="dmxFramework7_icons/css/framework7-icons.css" />
+
+
+    <script src="capacitor.js"></script>
+
+    <script src="dmxAppConnect/dmxSwiper/dmxSwiper.js" defer></script>
+    <script src="dmxAppConnect/dmxSwiper/swiper.min.js" defer></script>
+    <link rel="stylesheet" href="dmxAppConnect/dmxSwiper/themes/default.css" />
+
+
+    <!-- Google sign in -->
+    <meta name="google-signin-client_id" content="907397645441-ojrqmb5i4ujgjg1gi9ps16juujlmt37o.apps.googleusercontent.com" />
+    <meta name="google-signin-scope" content="profile email" />
+
+
+    <link rel="stylesheet" href="dmxAppConnect/dmxDatePicker/daterangepicker.min.css" />
+    <script src="dmxAppConnect/dmxDatePicker/daterangepicker.min.js" defer></script>
+    <link rel="stylesheet" href="dmxAppConnect/dmxDatePicker/dmxDatePicker.css" />
+    <script src="dmxAppConnect/dmxDatePicker/dmxDatePicker.js" defer></script>
+
+
+    <link rel="stylesheet" href="../dmxAppConnect/dmxDatePicker/bgthemes/dark-calendar.css" />
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDLjn3oBBJGgvLSneVWJtOnk5e5CA4UGVQ&amp;libraries=places"></script>
+    <script src="dmxAppConnect/dmxGoogleMaps/dmxGoogleMaps.js" defer></script>
+    <script src="dmxAppConnect/dmxStateManagement/dmxStateManagement.js" defer></script>
+    <script src="dmxAppConnect/dmxFormatter/dmxFormatter.js" defer></script>
+
+    <script src="socket.io/socket.io.js" defer></script>
+    <script src="dmxAppConnect/dmxSockets/dmxSockets.js" defer></script>
+    <script src="dmxAppConnect/dmxScheduler/dmxScheduler.js" defer></script>
+    <link rel="stylesheet" href="dmxAppConnect/dmxValidator/dmxValidator.css" />
+    <script src="dmxAppConnect/dmxValidator/dmxValidator.js" defer></script>
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&display=swap">
+    <link rel="stylesheet" href="Framework7/6/css/framework7-bundle.min.css" />
+    <script src="Framework7/6/js/framework7-bundle.min.js"></script>
+    <script src="js/routes.js"></script>
+    <script src="dmxAppConnect/dmxFramework7_6/dmxFramework7_6.js" defer></script>
+    <link rel="stylesheet" href="css/bootstrap-icons.css" />
+    <link rel="stylesheet" href="fontawesome5/css/all.min.css" />
+
+    <!-- Style css -->
+    <link rel="stylesheet" href="css/perfect-scrollbar.css">
+    <link rel="stylesheet" href="css/line-awesome/css/line-awesome.min.css">
+    <link rel="stylesheet" href="css/app.css">
+    <link rel="stylesheet" href="css/style.css" />
+    <script src="dmxAppConnect/dmxLazyLoad/dmxLazyLoad.js" defer></script>
+    <script src="dmxAppConnect/dmxLazyLoad/lazysizes.min.js" defer></script>
+    <script src="dmxAppConnect/dmxGooglePlaces/dmxGooglePlaces.js" defer></script>
 </head>
-<body is="dmx-app" id="">
-	<div id="app" is="dmx-f7-app">
-	  <!-- Statusbar overlay -->
-	  <div class="statusbar"></div>
 
-	  <!-- Your main view, should have "view-main" class -->
-	  <div id="main" class="view view-main">
-	    <!-- Initial Page, "data-name" contains page name -->
-	    <div id="index" class="page" data-name="index">
+<body is="dmx-app" id="index">
+    <div id="app" is="dmx-f7-app" class="color-theme-deeppurple" theme="aurora">
 
-	      <!-- Top Navbar -->
-	      <div class="navbar">
-       	  <div class="navbar-bg"></div>
-	        <div class="navbar-inner">
-	          <div class="title sliding">Awesome App</div>
-	        </div>
-	      </div>
 
-	      <!-- Toolbar -->
-	      <div class="toolbar toolbar-bottom">
-	        <div class="toolbar-inner">
-	          <a href="#" class="link">Hello</a>
-	          <a href="#" class="link">World</a>
-	        </div>
-	      </div>
+        <dmx-local-manager id="local_store"></dmx-local-manager>
 
-	      <!-- Scrollable page content -->
-	      <div class="page-content wappler-block">
-	      </div>
-	    </div>
-	  </div>
-	</div>
+        <dmx-value id="otp_id"></dmx-value>
+        <!-- Statusbar overlay -->
+
+        <script is="dmx-flow" id="App_notifcation" type="text/dmx-flow">{
+          meta: {
+            $param: [
+              {type: "text", name: "title"},
+              {type: "text", name: "text"}
+            ]
+          },
+          exec: {
+            steps: {
+              runJS: {
+                function: "createNotification",
+                args: [
+                  "{{app.main.login.App_notifcation.$param.title}}",
+                  "{{app.main.login.App_notifcation.$param.text}}"
+                ]
+              }
+            }
+          }
+        }</script>
+        <script is="dmx-flow" id="Show_proloader" type="text/dmx-flow">{
+  meta: {
+    $param: [
+      {type: "text", name: "title"},
+      {type: "text", name: "text"}
+    ]
+  },
+  exec: {
+    steps: {
+      runJS: {
+        function: "dialogPreloader",
+        args: ["'Loading'"]
+      }
+    }
+  }
+}</script>
+        <script is="dmx-flow" id="Redirect_to_login_or_home" type="text/dmx-flow" autorun>[
+  {
+    condition: {
+      if: "{{local_store.data.not_new_user}}",
+      then: {
+        steps: {
+          condition: {
+            if: "{{!local_store.data.user_id}}",
+            then: {
+              steps: {
+                run: {action: "{{app.main.navigate('/login',{})}}"}
+              }
+            },
+            else: {
+              steps: {
+                run: {action: "{{app.main.navigate('/home',{})}}"}
+              }
+            }
+          }
+        }
+      },
+      else: {
+        steps: {
+          run: {action: "{{app.main.navigate('/',{})}}"}
+        }
+      }
+    }
+  },
+  {
+    runJS: {function: "hideSplashScreen"}
+  }
+]</script>
+        <dmx-json-datasource id="countryList" is="dmx-serverconnect" url="countryList.json"></dmx-json-datasource>
+        <dmx-serverconnect id="Current_user" url="https://api.justpro.me/api/security/logged_in_user_data" site="JustPro-Spa-Backend" dmx-param:user_id="local_store.data.user_id" sockets="true"></dmx-serverconnect>
+        <div class="statusbar"></div>
+
+        <!-- Sidebar Nav -->
+        <div class="panel panel-left panel-resizable panel-init sidebar-left panel-reveal">
+            <div class="page">
+                <div class="page-content">
+                    <div class="sidebar-menu">
+                        <div class="main-logo left">
+                            <div class="logo-icon">
+                                <svg width="35" height="40" viewBox="0 0 80 92" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <path d="M71.9842 92.0001H4.06284C2.07803 92.0001 0.469116 90.3912 0.469116 88.4064C0.469116 86.4216 2.07803 84.8127 4.06284 84.8127H71.9842C73.969 84.8127 75.5779 86.4216 75.5779 88.4064C75.5779 90.3912 73.969 92.0001 71.9842 92.0001Z" fill="#F7DBB3" />
+                                    <path d="M59.4307 66.0549L60.0778 63.5839C60.088 63.5451 60.1146 63.5249 60.1238 63.5235C62.1241 63.1986 67.2742 62.1033 71.8868 58.9584C76.8878 55.5487 79.5311 50.8698 79.5311 45.4275C79.5311 42.6219 78.5693 39.9979 76.8233 38.039C75.502 36.5573 73.2306 36.4268 71.7493 37.7477C70.2678 39.0684 70.1373 41.34 71.458 42.8217C72.1901 43.6428 72.3439 44.692 72.3439 45.4275C72.3439 48.4692 70.8701 50.9528 67.8383 53.0199C64.3207 55.4182 60.1622 56.2356 58.9716 56.4291C56.1484 56.8875 53.8535 58.9814 53.125 61.7635L52.4688 64.2703C52.462 64.296 52.4557 64.3217 52.4496 64.3475C51.5952 67.9335 48.4239 70.438 44.7373 70.438H31.3767C27.6901 70.438 24.5188 67.9335 23.6644 64.3475L16.9215 36.0524C16.6651 34.976 16.9113 33.8605 17.5971 32.9921C18.2828 32.1237 19.311 31.6258 20.4175 31.6258H55.809C56.9155 31.6258 57.9437 32.1239 58.6293 32.9921C59.315 33.8605 59.5614 34.976 59.305 36.0524L56.8332 46.4255C56.373 48.3562 57.5652 50.2943 59.496 50.7543C61.4267 51.2148 63.365 50.0222 63.8248 48.0915L66.2965 37.7184C67.066 34.4891 66.3273 31.143 64.2701 28.5377C62.2126 25.9324 59.1287 24.4384 55.809 24.4384H20.4175C17.0978 24.4384 14.0138 25.9324 11.9564 28.5377C9.89919 31.143 9.16032 34.4893 9.92991 37.7184L16.6721 66.0134C18.301 72.8505 24.3476 77.6254 31.376 77.6254H44.7365C51.7511 77.6253 57.7873 72.8699 59.4307 66.0549ZM38.1557 17.2509C37.4341 17.2509 36.7062 17.0344 36.0737 16.5841C34.4572 15.4325 34.0801 13.1886 35.2315 11.5719C35.3275 11.4372 35.3936 11.3303 35.4385 11.2501C35.3598 11.1064 35.252 10.9256 35.1643 10.7788C34.2871 9.31004 32.4618 6.25394 35.0498 1.79144C36.0457 0.0743568 38.2447 -0.510162 39.9616 0.485658C41.6785 1.48148 42.2632 3.68048 41.2673 5.39738C40.9092 6.01496 40.8983 6.27874 40.8983 6.28125C40.9243 6.4056 41.1714 6.81941 41.3349 7.09325C42.21 8.55841 44.0309 11.6071 41.0857 15.7417C40.3849 16.726 39.2784 17.2509 38.1557 17.2509ZM26.711 15.7419C29.6562 11.6071 27.8353 8.55842 26.9602 7.09343C26.7967 6.81977 26.5496 6.40596 26.5236 6.28143C26.5236 6.27892 26.5345 6.01514 26.8926 5.39756C27.8885 3.68066 27.3038 1.48166 25.5869 0.485838C23.87 -0.509982 21.671 0.0745366 20.6751 1.79162C18.0871 6.25412 19.9124 9.31022 20.7896 10.779C20.8773 10.9258 20.9853 11.1064 21.0638 11.2503C21.0189 11.3304 20.9528 11.4373 20.8568 11.5721C19.7054 13.1887 20.0824 15.4327 21.699 16.5843C22.3315 17.0347 23.0594 17.2511 23.781 17.2511C24.9035 17.2509 26.01 16.726 26.711 15.7419ZM55.2811 15.7419C58.2263 11.6071 56.4054 8.55842 55.5303 7.09343C55.3668 6.81977 55.1197 6.40596 55.0937 6.28143C55.0937 6.27892 55.1046 6.01514 55.4627 5.39756C56.4586 3.68066 55.8739 1.48166 54.157 0.485838C52.4401 -0.509982 50.2411 0.0745366 49.2452 1.79162C46.6572 6.25412 48.4825 9.31022 49.3597 10.779C49.4474 10.9258 49.5554 11.1064 49.6339 11.2503C49.589 11.3304 49.5229 11.4373 49.4269 11.5721C48.2755 13.1887 48.6525 15.4327 50.2691 16.5843C50.9016 17.0347 51.6295 17.2511 52.3511 17.2511C53.4736 17.2509 54.5801 16.726 55.2811 15.7419Z" fill="#04764e" class="svg-primary" />
+                                </svg>
+                            </div>
+                            <div class="logo-content">
+                                <h2 class="logo-name">JustPro</h2>
+                            </div>
+                        </div>
+                        <a href="#" class="panel-close">
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <rect x="2" y="18.7509" width="23.6893" height="3.55339" rx="1.7767" transform="rotate(-45 2 18.7509)" fill="#5F5F5F" />
+                                <rect width="23.6893" height="3.55339" rx="1.7767" transform="matrix(-0.707107 -0.707107 -0.707107 0.707107 21.2634 18.7509)" fill="#5F5F5F" />
+                            </svg>
+                        </a>
+                        <div class="nav-bar list menu-list dz-list">
+                            <ul>
+                                <li>
+                                    <a href="/home/" class="item-link item-selected">
+                                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                            <path d="M3 8.40009V21.0001C3 21.2653 3.10536 21.5197 3.29289 21.7072C3.48043 21.8947 3.73478 22.0001 4 22.0001H20C20.2652 22.0001 20.5196 21.8947 20.7071 21.7072C20.8946 21.5197 21 21.2653 21 21.0001V8.40009C21.0001 8.23646 20.96 8.07531 20.8833 7.93077C20.8066 7.78623 20.6956 7.66273 20.56 7.5711L12.56 2.1711C12.3946 2.05932 12.1996 1.99959 12 1.99959C11.8004 1.99959 11.6054 2.05932 11.44 2.1711L3.44 7.5711C3.30443 7.66273 3.19342 7.78623 3.11671 7.93077C3.03999 8.07531 2.99992 8.23646 3 8.40009ZM14 20.0001H10V14.0001H14V20.0001ZM5 8.9321L12 4.2071L19 8.9321V20.0001H16V13.0001C16 12.7349 15.8946 12.4805 15.7071 12.293C15.5196 12.1055 15.2652 12.0001 15 12.0001H9C8.73478 12.0001 8.48043 12.1055 8.29289 12.293C8.10536 12.4805 8 12.7349 8 13.0001V20.0001H5V8.9321Z" fill="#04764E" />
+                                        </svg>
+                                        <span>Home</span>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="/orders/" class="item-link">
+                                        <svg width="24" height="24" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                            <path d="M20 18H9C8.73478 18 8.48043 17.8946 8.29289 17.7071C8.10536 17.5196 8 17.2652 8 17C8 16.7348 8.10536 16.4804 8.29289 16.2929C8.48043 16.1054 8.73478 16 9 16H20C20.2277 16.0002 20.4486 15.9227 20.6262 15.7803C20.8039 15.638 20.9276 15.4392 20.977 15.217L22.977 6.217C23.0095 6.07075 23.0087 5.91906 22.9748 5.77314C22.9408 5.62723 22.8744 5.49081 22.7806 5.37398C22.6868 5.25715 22.568 5.16288 22.4329 5.09815C22.2978 5.03342 22.1498 4.99988 22 5H6.719L5.975 1.775C5.9241 1.55458 5.79997 1.35794 5.62289 1.21718C5.4458 1.07642 5.22622 0.999855 5 1H2C1.73478 1 1.48043 1.10536 1.29289 1.29289C1.10536 1.48043 1 1.73478 1 2C1 2.26522 1.10536 2.51957 1.29289 2.70711C1.48043 2.89464 1.73478 3 2 3H4.2L6.935 14.834C6.49977 15.2462 6.19836 15.7797 6.06981 16.3652C5.94125 16.9507 5.99148 17.5613 6.21398 18.1179C6.43649 18.6746 6.82101 19.1516 7.31775 19.4871C7.81449 19.8227 8.40054 20.0014 9 20H20C20.2652 20 20.5196 19.8947 20.7071 19.7071C20.8946 19.5196 21 19.2652 21 19C21 18.7348 20.8946 18.4804 20.7071 18.2929C20.5196 18.1054 20.2652 18 20 18ZM20.753 7L19.2 14H8.8L7.18 7H20.753Z" fill="#B0ACB3"></path>
+                                            <path d="M10 23C10.5523 23 11 22.5523 11 22C11 21.4477 10.5523 21 10 21C9.44771 21 9 21.4477 9 22C9 22.5523 9.44771 23 10 23Z" fill="#B0ACB3"></path>
+                                            <path d="M18 23C18.5523 23 19 22.5523 19 22C19 21.4477 18.5523 21 18 21C17.4477 21 17 21.4477 17 22C17 22.5523 17.4477 23 18 23Z" fill="#B0ACB3"></path>
+                                        </svg>
+                                        <span class="">My Orders</span>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a class="item-link" href="/order-confirmation">
+                                        <svg width="24" height="24" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                            <path d="M20 18H9C8.73478 18 8.48043 17.8946 8.29289 17.7071C8.10536 17.5196 8 17.2652 8 17C8 16.7348 8.10536 16.4804 8.29289 16.2929C8.48043 16.1054 8.73478 16 9 16H20C20.2277 16.0002 20.4486 15.9227 20.6262 15.7803C20.8039 15.638 20.9276 15.4392 20.977 15.217L22.977 6.217C23.0095 6.07075 23.0087 5.91906 22.9748 5.77314C22.9408 5.62723 22.8744 5.49081 22.7806 5.37398C22.6868 5.25715 22.568 5.16288 22.4329 5.09815C22.2978 5.03342 22.1498 4.99988 22 5H6.719L5.975 1.775C5.9241 1.55458 5.79997 1.35794 5.62289 1.21718C5.4458 1.07642 5.22622 0.999855 5 1H2C1.73478 1 1.48043 1.10536 1.29289 1.29289C1.10536 1.48043 1 1.73478 1 2C1 2.26522 1.10536 2.51957 1.29289 2.70711C1.48043 2.89464 1.73478 3 2 3H4.2L6.935 14.834C6.49977 15.2462 6.19836 15.7797 6.06981 16.3652C5.94125 16.9507 5.99148 17.5613 6.21398 18.1179C6.43649 18.6746 6.82101 19.1516 7.31775 19.4871C7.81449 19.8227 8.40054 20.0014 9 20H20C20.2652 20 20.5196 19.8947 20.7071 19.7071C20.8946 19.5196 21 19.2652 21 19C21 18.7348 20.8946 18.4804 20.7071 18.2929C20.5196 18.1054 20.2652 18 20 18ZM20.753 7L19.2 14H8.8L7.18 7H20.753Z" fill="#B0ACB3" />
+                                            <path d="M10 23C10.5523 23 11 22.5523 11 22C11 21.4477 10.5523 21 10 21C9.44771 21 9 21.4477 9 22C9 22.5523 9.44771 23 10 23Z" fill="#B0ACB3" />
+                                            <path d="M18 23C18.5523 23 19 22.5523 19 22C19 21.4477 18.5523 21 18 21C17.4477 21 17 21.4477 17 22C17 22.5523 17.4477 23 18 23Z" fill="#B0ACB3" />
+                                        </svg>
+                                        <span>Cart</span>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="/notifications/" class="item-link">
+                                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                            <path d="M19 1.00012C18.2089 1.00012 17.4355 1.23472 16.7777 1.67424C16.1199 2.11377 15.6072 2.73848 15.3045 3.46939C15.0017 4.20029 14.9225 5.00456 15.0769 5.78048C15.2312 6.55641 15.6122 7.26914 16.1716 7.82855C16.731 8.38796 17.4437 8.76892 18.2196 8.92326C18.9956 9.0776 19.7998 8.99839 20.5307 8.69564C21.2616 8.39289 21.8864 7.8802 22.3259 7.2224C22.7654 6.56461 23 5.79125 23 5.00012C23 3.93926 22.5786 2.92184 21.8284 2.17169C21.0783 1.42155 20.0609 1.00012 19 1.00012ZM19 7.00012C18.6044 7.00012 18.2178 6.88282 17.8889 6.66306C17.56 6.4433 17.3036 6.13094 17.1522 5.76549C17.0009 5.40004 16.9613 4.9979 17.0384 4.60994C17.1156 4.22198 17.3061 3.86561 17.5858 3.58591C17.8655 3.3062 18.2219 3.11572 18.6098 3.03855C18.9978 2.96138 19.3999 3.00099 19.7654 3.15236C20.1308 3.30374 20.4432 3.56008 20.6629 3.88898C20.8827 4.21788 21 4.60456 21 5.00012C21 5.53056 20.7893 6.03926 20.4142 6.41434C20.0391 6.78941 19.5304 7.00012 19 7.00012Z" fill="#B0ACB3" />
+                                            <path d="M19.0001 10.9999C18.7349 10.9999 18.4806 11.1053 18.293 11.2928C18.1055 11.4803 18.0001 11.7347 18.0001 11.9999V20.9999H3.00012V5.99994H12.0001C12.2653 5.99994 12.5197 5.89458 12.7072 5.70705C12.8948 5.51951 13.0001 5.26516 13.0001 4.99994C13.0001 4.73473 12.8948 4.48037 12.7072 4.29284C12.5197 4.1053 12.2653 3.99995 12.0001 3.99995H2.00012C1.73491 3.99995 1.48055 4.1053 1.29302 4.29284C1.10548 4.48037 1.00012 4.73473 1.00012 4.99994V21.9999C1.00012 22.2651 1.10548 22.5194 1.29302 22.707C1.48055 22.8945 1.73491 22.9999 2.00012 22.9999H19.0001C19.2653 22.9999 19.5197 22.8945 19.7072 22.707C19.8948 22.5194 20.0001 22.2651 20.0001 21.9999V11.9999C20.0001 11.7347 19.8948 11.4803 19.7072 11.2928C19.5197 11.1053 19.2653 10.9999 19.0001 10.9999Z" fill="#B0ACB3" />
+                                        </svg>
+                                        <span>Notifications (2)</span>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="/rewards/" class="item-link">
+                                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24">
+                                            <path d="M22.029,5.994,20.97,1.758A1,1,0,0,0,20,1H4a1,1,0,0,0-.97.758L1.971,5.994A4,4,0,0,0,2.7,9.45a4.033,4.033,0,0,0,.3.3V22a1,1,0,0,0,1,1H20a1,1,0,0,0,1-1V9.753a4.033,4.033,0,0,0,.3-.3A4,4,0,0,0,22.029,5.994ZM10,6l.251-3h3.492L14,6l.066.8A2.027,2.027,0,0,1,12.042,9h-.084A2.027,2.027,0,0,1,9.937,6.8ZM4.28,8.22a2.016,2.016,0,0,1-.369-1.741L4.781,3H8.247L7.9,7.14A2.041,2.041,0,0,1,5.879,9,2.015,2.015,0,0,1,4.28,8.22ZM13,21H11V16h2Zm6,0H15V15a1,1,0,0,0-1-1H10a1,1,0,0,0-1,1v6H5V10.9A3.953,3.953,0,0,0,8.911,9.589c.03.035.051.076.083.11A4.04,4.04,0,0,0,11.958,11h.084a4.04,4.04,0,0,0,2.964-1.3c.032-.034.053-.075.083-.11A3.953,3.953,0,0,0,19,10.9Zm.72-12.78a2.015,2.015,0,0,1-1.6.78A2.041,2.041,0,0,1,16.1,7.14L15.753,3h3.466l.87,3.479A2.016,2.016,0,0,1,19.72,8.22Z" />
+                                        </svg>
+                                        <span>Rewards</span>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="/profile/" class="item-link">
+                                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                            <path d="M15.7 11.7172C16.6839 10.9478 17.4031 9.89058 17.7575 8.69293C18.1118 7.49528 18.0836 6.2169 17.6767 5.03606C17.2698 3.85523 16.5046 2.8308 15.4877 2.10563C14.4708 1.38045 13.253 0.990694 12.004 0.990694C10.755 0.990694 9.53719 1.38045 8.52031 2.10563C7.50342 2.8308 6.73819 3.85523 6.33131 5.03606C5.92443 6.2169 5.89619 7.49528 6.25053 8.69293C6.60487 9.89058 7.32413 10.9478 8.308 11.7172C6.44917 12.4568 4.85467 13.7365 3.73027 15.3912C2.60587 17.0459 2.00318 18.9996 2 21.0002V22.0002C2 22.2654 2.10536 22.5197 2.29289 22.7073C2.48043 22.8948 2.73478 23.0002 3 23.0002H21C21.2652 23.0002 21.5196 22.8948 21.7071 22.7073C21.8946 22.5197 22 22.2654 22 22.0002V21.0002C21.9975 19.0005 21.3959 17.0475 20.273 15.3929C19.1501 13.7383 17.5573 12.458 15.7 11.7172ZM8 7.00017C8 6.20904 8.2346 5.43568 8.67412 4.77789C9.11365 4.12009 9.73836 3.6074 10.4693 3.30465C11.2002 3.0019 12.0044 2.92269 12.7804 3.07703C13.5563 3.23137 14.269 3.61233 14.8284 4.17174C15.3878 4.73115 15.7688 5.44388 15.9231 6.21981C16.0775 6.99573 15.9983 7.8 15.6955 8.5309C15.3928 9.2618 14.8801 9.88652 14.2223 10.326C13.5645 10.7656 12.7911 11.0002 12 11.0002C10.9391 11.0002 9.92172 10.5787 9.17157 9.82859C8.42143 9.07845 8 8.06103 8 7.00017ZM4 21.0002C4 18.8784 4.84285 16.8436 6.34315 15.3433C7.84344 13.843 9.87827 13.0002 12 13.0002C14.1217 13.0002 16.1566 13.843 17.6569 15.3433C19.1571 16.8436 20 18.8784 20 21.0002H4Z" fill="#B0ACB3" />
+                                        </svg>
+                                        <span>Profile</span>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="/message-list/" class="item-link">
+                                        <svg height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
+                                            <path d="m12 22a9.941 9.941 0 0 0 4.924-1.3l3.76 1.253a.987.987 0 0 0 .316.047 1 1 0 0 0 .948-1.316l-1.248-3.76a9.995 9.995 0 1 0 -8.7 5.076zm0-18a7.989 7.989 0 0 1 6.757 12.269 1 1 0 0 0 -.1.851l.766 2.3-2.3-.766a.991.991 0 0 0 -.851.1 8 8 0 1 1 -4.272-14.754z" />
+                                            <path d="m8 10.5h8a1 1 0 0 0 0-2h-8a1 1 0 0 0 0 2z" />
+                                            <path d="m8 15.5h4a1 1 0 0 0 0-2h-4a1 1 0 0 0 0 2z" />
+                                        </svg>
+                                        <span>Message</span>
+                                    </a>
+                                </li>
+                                <li>
+
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="sidebar-footer">
+                        <!-- <h5 class="name">Ombe Coffee App</h5> -->
+                        <p>App Version 1.1.0</p>
+                        <a href="" class="button rounded-xl button-fill color-red margin-top" dmx-on:click="local_store.remove('user_id');main.navigate('/login',{})">Log out</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- View Main -->
+        <div class="view view-main view-init safe-areas" id="main">
+            <!-- <div class="row no-gutters vh-100 overlay-primary-dark loader-screen" style="background-image: url(img/background/bg1.jpg);">
+                <div class="col align-self-center text-white text-align-center">
+                    <div id="loading-area">
+                        <div class="logo-icon">
+                            <svg width="80" height="92" viewBox="0 0 80 92" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M71.9842 92.0001H4.06284C2.07803 92.0001 0.469116 90.3912 0.469116 88.4064C0.469116 86.4216 2.07803 84.8127 4.06284 84.8127H71.9842C73.969 84.8127 75.5779 86.4216 75.5779 88.4064C75.5779 90.3912 73.969 92.0001 71.9842 92.0001Z" fill="#F7DBB3" />
+                                <path d="M59.4307 66.0549L60.0778 63.5839C60.088 63.5451 60.1146 63.5249 60.1238 63.5235C62.1241 63.1986 67.2742 62.1033 71.8868 58.9584C76.8878 55.5487 79.5311 50.8698 79.5311 45.4275C79.5311 42.6219 78.5693 39.9979 76.8233 38.039C75.502 36.5573 73.2306 36.4268 71.7493 37.7477C70.2678 39.0684 70.1373 41.34 71.458 42.8217C72.1901 43.6428 72.3439 44.692 72.3439 45.4275C72.3439 48.4692 70.8701 50.9528 67.8383 53.0199C64.3207 55.4182 60.1622 56.2356 58.9716 56.4291C56.1484 56.8875 53.8535 58.9814 53.125 61.7635L52.4688 64.2703C52.462 64.296 52.4557 64.3217 52.4496 64.3475C51.5952 67.9335 48.4239 70.438 44.7373 70.438H31.3767C27.6901 70.438 24.5188 67.9335 23.6644 64.3475L16.9215 36.0524C16.6651 34.976 16.9113 33.8605 17.5971 32.9921C18.2828 32.1237 19.311 31.6258 20.4175 31.6258H55.809C56.9155 31.6258 57.9437 32.1239 58.6293 32.9921C59.315 33.8605 59.5614 34.976 59.305 36.0524L56.8332 46.4255C56.373 48.3562 57.5652 50.2943 59.496 50.7543C61.4267 51.2148 63.365 50.0222 63.8248 48.0915L66.2965 37.7184C67.066 34.4891 66.3273 31.143 64.2701 28.5377C62.2126 25.9324 59.1287 24.4384 55.809 24.4384H20.4175C17.0978 24.4384 14.0138 25.9324 11.9564 28.5377C9.89919 31.143 9.16032 34.4893 9.92991 37.7184L16.6721 66.0134C18.301 72.8505 24.3476 77.6254 31.376 77.6254H44.7365C51.7511 77.6253 57.7873 72.8699 59.4307 66.0549ZM38.1557 17.2509C37.4341 17.2509 36.7062 17.0344 36.0737 16.5841C34.4572 15.4325 34.0801 13.1886 35.2315 11.5719C35.3275 11.4372 35.3936 11.3303 35.4385 11.2501C35.3598 11.1064 35.252 10.9256 35.1643 10.7788C34.2871 9.31004 32.4618 6.25394 35.0498 1.79144C36.0457 0.0743568 38.2447 -0.510162 39.9616 0.485658C41.6785 1.48148 42.2632 3.68048 41.2673 5.39738C40.9092 6.01496 40.8983 6.27874 40.8983 6.28125C40.9243 6.4056 41.1714 6.81941 41.3349 7.09325C42.21 8.55841 44.0309 11.6071 41.0857 15.7417C40.3849 16.726 39.2784 17.2509 38.1557 17.2509ZM26.711 15.7419C29.6562 11.6071 27.8353 8.55842 26.9602 7.09343C26.7967 6.81977 26.5496 6.40596 26.5236 6.28143C26.5236 6.27892 26.5345 6.01514 26.8926 5.39756C27.8885 3.68066 27.3038 1.48166 25.5869 0.485838C23.87 -0.509982 21.671 0.0745366 20.6751 1.79162C18.0871 6.25412 19.9124 9.31022 20.7896 10.779C20.8773 10.9258 20.9853 11.1064 21.0638 11.2503C21.0189 11.3304 20.9528 11.4373 20.8568 11.5721C19.7054 13.1887 20.0824 15.4327 21.699 16.5843C22.3315 17.0347 23.0594 17.2511 23.781 17.2511C24.9035 17.2509 26.01 16.726 26.711 15.7419ZM55.2811 15.7419C58.2263 11.6071 56.4054 8.55842 55.5303 7.09343C55.3668 6.81977 55.1197 6.40596 55.0937 6.28143C55.0937 6.27892 55.1046 6.01514 55.4627 5.39756C56.4586 3.68066 55.8739 1.48166 54.157 0.485838C52.4401 -0.509982 50.2411 0.0745366 49.2452 1.79162C46.6572 6.25412 48.4825 9.31022 49.3597 10.779C49.4474 10.9258 49.5554 11.1064 49.6339 11.2503C49.589 11.3304 49.5229 11.4373 49.4269 11.5721C48.2755 13.1887 48.6525 15.4327 50.2691 16.5843C50.9016 17.0347 51.6295 17.2511 52.3511 17.2511C53.4736 17.2509 54.5801 16.726 55.2811 15.7419Z" fill="#fff" />
+                            </svg>
+                        </div>
+                        <h2 class="load-text">
+                            <span>O</span>
+                            <span>m</span>
+                            <span>b</span>
+                            <span>e</span>
+                        </h2>
+                    </div>
+                </div>
+            </div> -->
+            <div class="page page-onboading" data-name="index" path="/" id="indexPage">
+                <div class="page-content">
+                    <div class="started-swiper-box">
+                        <div data-pagination='{"el": ".swiper-pagination", "hideOnClick": true}' class="swiper-container swiper-init swiper-container-initialized swiper-container-horizontal get-started">
+                            <div class="swiper-wrapper">
+                                <div class="swiper-slide">
+                                    <div class="slide-info">
+                                        <div class="dz-media">
+                                            <img src="img/svg/illustration.svg" alt="" />
+                                        </div>
+                                        <div class="slide-content">
+                                            <h2 class="dz-title">Let’s meet our summer coffee drinks</h2>
+                                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="swiper-slide">
+                                    <div class="slide-info">
+                                        <div class="dz-media">
+                                            <img src="img/svg/coffee-mug.svg" alt="" />
+                                        </div>
+                                        <div class="slide-content">
+                                            <h2 class="dz-title">Start your morning with great coffee</h2>
+                                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore.</p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="swiper-slide">
+                                    <div class="slide-info">
+                                        <div class="dz-media">
+                                            <img src="img/svg/coffee-cup.svg" alt="" />
+                                        </div>
+                                        <div class="slide-content">
+                                            <h2 class="dz-title">Best coffee shop in this town</h2>
+                                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore.</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="swiper-pagination swiper-pagination-bullets"></div>
+                        </div>
+                    </div>
+                    <div class="block">
+                        <a href="" class="button-large rounded-xl button button-fill" dmx-on:click="main.navigate('/login',{});local_store.set('not_new_user',1)">Get started</a>
+                    </div>
+
+
+                </div>
+
+            </div>
+        </div>
+
+
+
+        <!-- Your main view, should have "view-main" class -->
+    </div>
+    <script src="js/app.js"></script>
+    <script src="js/plugins.js"></script>
+    <script src="js/oneSignal.js"></script>
+
+    <script>
+        console.log(window)
+        // Create notification
+        function createNotification(title, text) {
+            Framework7.instance.notification.create({
+                icon : "<img src='img/avator/avatar1.jpg' />",
+                title : title,
+                closeButton : true,
+                closeTimeout : 5000
+            })
+        }
+
+        // Dialog Proloader
+        function showPreloader() {
+        Framework7.instance.dialog.preloader("Loading")
+        }
+
+        //Close preloader dialog
+        function closePreloader() {
+        Framework7.instance.dialog.close()
+        }
+        
+    </script>
+
 </body>
+
 </html>

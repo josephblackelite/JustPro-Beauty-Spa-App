@@ -1,0 +1,106 @@
+{
+  "project_info": {
+    "project_number": "907397645441",
+    "project_id": "findmaid-app",
+    "storage_bucket": "findmaid-app.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:907397645441:android:b981f4cb893d9465c5b980",
+        "android_client_info": {
+          "package_name": "com.maidz.app"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "907397645441-oe3pi6401qoe4um8v945abdtuccirqsb.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.maidz.app",
+            "certificate_hash": "a6a58a7cb72b0b0fb590cecbad317bee18ad4ace"
+          }
+        },
+        {
+          "client_id": "907397645441-vv8tatfkh94kq0jt6afjapf97iiif916.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.maidz.app",
+            "certificate_hash": "9ef107efd6a5aaf054ffe8e2a27085d023aa2d08"
+          }
+        },
+        {
+          "client_id": "907397645441-ojrqmb5i4ujgjg1gi9ps16juujlmt37o.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCKgmKLRa3OugQ6NZaEgSulJaHa05xJhuQ"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "907397645441-ojrqmb5i4ujgjg1gi9ps16juujlmt37o.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "907397645441-c44n4vkequf3ct5dpcae8fukq5frgvjn.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.maidz.app"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:907397645441:android:898042b7dfaa1a92c5b980",
+        "android_client_info": {
+          "package_name": "io.justpro.me"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "907397645441-melo0cen5h1qtsunbtps52f90cjhplam.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "io.justpro.me",
+            "certificate_hash": "9ef107efd6a5aaf054ffe8e2a27085d023aa2d08"
+          }
+        },
+        {
+          "client_id": "907397645441-ojrqmb5i4ujgjg1gi9ps16juujlmt37o.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCKgmKLRa3OugQ6NZaEgSulJaHa05xJhuQ"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "907397645441-ojrqmb5i4ujgjg1gi9ps16juujlmt37o.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "907397645441-c44n4vkequf3ct5dpcae8fukq5frgvjn.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.maidz.app"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

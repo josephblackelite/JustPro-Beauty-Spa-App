@@ -1,0 +1,84 @@
+<!-- Wappler include head-page="index.html" is="dmx-app" id="schedule" appConnect="local" framework7_6="With App Connect" framework7_icons="local" capacitor="local" components="{dmxDatePicker:{}}" jquery_slim_35="cdn" moment_2="cdn" fontawesome_5="local" -->
+
+<div class="page">
+    <div class="navbar">
+        <div class="navbar-inner">
+
+            <a href="#" class="link back">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M0.439312 13.0606L5.75391 18.3752C6.04683 18.6682 6.43069 18.8146 6.81459 18.8146C7.1985 18.8146 7.58236 18.6682 7.87528 18.3752C8.46103 17.7894 8.46103 16.8397 7.87528 16.2539L5.12133 13.5H22.5C23.3284 13.5 24 12.8284 24 12C24 11.1716 23.3284 10.5 22.5 10.5H5.12133L7.87528 7.7461C8.46103 7.1603 8.46103 6.21057 7.87528 5.62477C7.28944 5.03898 6.33975 5.03898 5.75391 5.62477L0.439312 10.9394C-0.146437 11.5251 -0.146437 12.4749 0.439312 13.0606Z" fill="black" />
+                </svg>
+            </a>
+            <div class="title">Book an appointment</div>
+            <div class="right">
+                <a href="#" class="link panel-open" data-panel="left">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M14 12C14 10.8955 13.1046 10 12 10C10.8954 10 10 10.8955 10 12C10 13.1046 10.8954 14 12 14C13.1046 14 14 13.1046 14 12Z" fill="black" />
+                        <path d="M14 20C14 18.8954 13.1046 18 12 18C10.8954 18 10 18.8954 10 20C10 21.1045 10.8954 22 12 22C13.1046 22 14 21.1045 14 20Z" fill="black" />
+                        <path d="M14 4C14 2.89544 13.1046 2.00001 12 2.00001C10.8954 2.00001 10 2.89544 10 4C10 5.10457 10.8954 6 12 6C13.1046 6 14 5.10457 14 4Z" fill="black" />
+                    </svg>
+                </a>
+            </div>
+        </div>
+    </div>
+    <div class="page-content wappler-block">
+
+
+        <div class="container welcome-inner">
+            <div class="block">
+                <div class="row">
+                    <div class="col-auto  padding">
+                        <div class="card-overlay style-1 bg-primary">
+                            <div class="dz-media display-flex justify-content-space-between">
+                                <img src="assets/images/prince-akachi-J1OScm_uHUQ-unsplash.jpg" alt="">
+                                <div class="rating-info">
+                                    <h2 class="rating-text">4.0</h2>
+                                    <ul class="rating-list">
+                                        <li class="rating-star"><i class="fas fa-star"></i></li>
+
+                                    </ul>
+                                </div>
+
+                            </div>
+                            <div class="dz-info">
+                                <h5 class="item-title title text-color-white">SANDRA</h5>
+                                <div class="dz-meta">
+                                    <ul>
+                                        <li class="price">Available tommorrow </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-auto  padding">
+                        <div class="block-title">Choose date and time</div>
+                        <div class="list no-hairlines-md">
+                            <ul>
+                                <li>
+                                    <div class="item-content item-input">
+                                        <div class="item-inner">
+                                            <div class="item-input-wrap">
+                                                <input type="datetime-local" name="name" is="dmx-date-picker" timepicker="">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="block">
+                <a href="" class="button-large rounded-xl button button-fill" dmx-on:click="app.main.navigate('/choose-address',{})">Continue</a>
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+    // Date + Time
+    calendarDateTime = $f7.calendar.create({
+    inputEl: '#demo-calendar-date-time',
+    timePicker: true,
+    dateFormat: { month: 'numeric', day: 'numeric', year: 'numeric', hour: 'numeric', minute: 'numeric' },
+    });
+</script>

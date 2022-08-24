@@ -4,4 +4,6 @@
     <string name="title_activity_main">JustPro</string>
     <string name="package_name">io.justpro.me</string>
     <string name="custom_url_scheme">io.justpro.me</string>
+    <string name="server_client_id">907397645441-ojrqmb5i4ujgjg1gi9ps16juujlmt37o.apps.googleusercontent.com</string>
+    
 </resources>
