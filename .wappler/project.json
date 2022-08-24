@@ -31,7 +31,7 @@
       "checked": true
     },
     "platform": "android",
-    "target": "Pixel_3_API_31",
+    "target": "",
     "device": null,
     "deviceId": null
   }

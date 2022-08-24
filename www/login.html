@@ -5,13 +5,13 @@
     <div class="page-content wappler-block">
         <dmx-scheduler id="submit_gogle_form" dmx-on:tick="run({condition:{if:`app.main.login.GoogleSignInForm.googleImgUrl.value`,then:{steps:{run:{action:`app.main.login.GoogleSignInForm.submit()`}}}}})" delay="1"></dmx-scheduler>
         <div class="container welcome-inner">
-            <div class="text-align-center mb-70">
+            <div class="text-align-center mb-40">
                 <div class="main-logo center mb-50">
 
                     <h2 class="logo-name"><img src="assets/images/logo.png"></h2>
                     <p class="logo-text">&nbsp;JustPro Spa and Beauty Company LLC</p>
                 </div>
-                <h2 class="ma-0">Start your beauty journey</h2>
+                <h4 class="ma-0">Book a beauty professional</h4>
             </div>
             <div class="clearfix pb-30">
                 <form action="https://api.justpro.me/api/security/login_register_with_number" is="dmx-serverconnect-form" method="post" id="login_register_with_number" site="JustPro-Spa-Backend" dmx-on:invalid="run({'f7.dialog.alert':{title:'Error',text:`app.main.login.login_register_with_number.lastError.response`}})" dmx-on:success="run([{condition:{if:`app.main.login.login_register_with_number.data.Logged_in_user_id`,then:{steps:[{run:{action:`app.local_store.set(\'user_id\',app.main.login.login_register_with_number.data.Logged_in_user_id)`}},{runJS:{function:'addExternalUserId',args:[`app.main.login.login_register_with_number.data.Logged_in_user_id.toString()`]}}]},else:{steps:[{run:{action:`app.local_store.set(\'user_id\',app.main.login.login_register_with_number.data.insert.identity)`}},{runJS:{function:'addExternalUserId',args:[`app.main.login.login_register_with_number.data.insert.identity.toString()`]}}]}}},{condition:{if:`!app.Current_user.data.customer.phone_number_verified`,then:{steps:[{condition:{if:`(app.main.login.login_register_with_number.data.exec.api.data.status == \'open\')`,then:{steps:[{run:{action:`app.otp_id.setValue(app.main.login.login_register_with_number.data.exec.api.data.otp_id)`}},{run:{action:`app.main.navigate(\'/verifyOtp\',{})`}}]}}},{condition:{if:`(app.main.login.login_register_with_number.data.exec_copy.api.data.status == \'open\')`,then:{steps:[{run:{action:`app.otp_id.setValue(app.main.login.login_register_with_number.data.exec_copy.api.data.otp_id)`}},{run:{action:`app.main.navigate(\'/verifyOtp\',{})`}}]}}}]},else:{steps:{run:{action:`app.main.navigate(\'/home\',{})`}}}}}])">
@@ -25,7 +25,7 @@
                                             <select id="country_code" class="form-control" name="country_code" dmx-bind:options="app.countryList.data" optiontext="code+' '+dial_code" optionvalue="code" dmx-bind:value="'AE'">
                                             </select>
                                         </div>
-                                        <div class="col-70"><input type="number" placeholder="+971*********" class="form-control" id="mobile_number" dmx-bind:value="app.Current_user.data.customer.phone_number" name="mobile_number" /></div>
+                                        <div class="col-70"><input type="number" placeholder="052 xxx xxxx" class="form-control" id="mobile_number" dmx-bind:value="app.Current_user.data.customer.phone_number" name="mobile_number" /></div>
                                     </div>
                                 </div>
                             </li>
