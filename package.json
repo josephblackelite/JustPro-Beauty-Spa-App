@@ -20,7 +20,7 @@
     "onesignal-cordova-plugin": "^3.1.1"
   },
   "devDependencies": {
-    "@capacitor/cli": "^4.0.0"
+    "@capacitor/cli": "^4.1.0"
   },
   "cordova": {
     "plugins": {}
