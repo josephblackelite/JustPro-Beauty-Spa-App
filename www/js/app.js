@@ -10,7 +10,7 @@ if (document.location.search.indexOf('theme=') >= 0) {
 // Preloader
 setTimeout(function () {
     $('.loader-screen').hide();
-}, 2000);
+}, 3800);
 
 // // Init App
 // var app = new Framework7({

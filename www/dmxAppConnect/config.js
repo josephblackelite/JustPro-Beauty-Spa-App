@@ -37,15 +37,31 @@ dmx.config({
       },
       {
         "type": "text",
-        "name": "product_name"
+        "name": "name"
       },
       {
         "type": "text",
-        "name": "product_quantity"
+        "name": "quantity"
       },
       {
         "type": "text",
-        "name": "product_amt"
+        "name": "amount"
+      },
+      {
+        "type": "text",
+        "name": "matrix"
+      },
+      {
+        "type": "text",
+        "name": "total"
+      },
+      {
+        "type": "text",
+        "name": "vat"
+      },
+      {
+        "type": "text",
+        "name": "product_avatar"
       }
     ]
   },
@@ -142,6 +158,51 @@ dmx.config({
         {
           "type": "text",
           "name": "product_amt"
+        }
+      ],
+      "outputType": "array"
+    },
+    "repeat1": {
+      "meta": [
+        {
+          "name": "$id",
+          "type": "number"
+        },
+        {
+          "type": "text",
+          "name": "product_id"
+        },
+        {
+          "type": "text",
+          "name": "product_stripe_id"
+        },
+        {
+          "type": "text",
+          "name": "name"
+        },
+        {
+          "type": "text",
+          "name": "quantity"
+        },
+        {
+          "type": "text",
+          "name": "amount"
+        },
+        {
+          "type": "text",
+          "name": "matrix"
+        },
+        {
+          "type": "text",
+          "name": "total"
+        },
+        {
+          "type": "text",
+          "name": "vat"
+        },
+        {
+          "type": "text",
+          "name": "product_avatar"
         }
       ],
       "outputType": "array"
