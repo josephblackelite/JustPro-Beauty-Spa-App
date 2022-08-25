@@ -1,74 +1,78 @@
-<!-- Wappler include head-page="index.html" is="dmx-app" id="orderconfirmation" appConnect="local" framework7_6="With App Connect" framework7_icons="local" capacitor="local" fontawesome_5="local" components="{dmxFormatter:{}}" -->
+<!-- Wappler include head-page="index.html" is="dmx-app" id="orderconfirmation" appConnect="local" framework7_6="With App Connect" framework7_icons="local" capacitor="local" fontawesome_5="local" components="{dmxFormatter:{},dmxPreloader:{}}" -->
 
 
 <div class="page">
+    <div class="padding-top padding-bottom">
+        <div class="navbar no-hairline no-shadow no-border">
+            <div class="navbar-inner" style="padding-right:0px !important; padding-left:0px !important; margin-right:0px !important">
+                <div class="left">
+                    <a href="#" class="link back">
+                        <i class="icon f7-icons">arrow_left</i>
+                    </a>
 
-    <div class="navbar">
-        <div class="navbar-inner margin-top">
-            <div class="left">
-                <a href="#" class="link back"><i class="icon f7-icons">arrow_left</i>
-                </a>
-            </div>
-
-            <div class="title">Details</div>
-            <div class="right">
-                <a href="#" class="link panel-open" data-panel="left">
-                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <path d="M14 12C14 10.8955 13.1046 10 12 10C10.8954 10 10 10.8955 10 12C10 13.1046 10.8954 14 12 14C13.1046 14 14 13.1046 14 12Z" fill="black" />
-                        <path d="M14 20C14 18.8954 13.1046 18 12 18C10.8954 18 10 18.8954 10 20C10 21.1045 10.8954 22 12 22C13.1046 22 14 21.1045 14 20Z" fill="black" />
-                        <path d="M14 4C14 2.89544 13.1046 2.00001 12 2.00001C10.8954 2.00001 10 2.89544 10 4C10 5.10457 10.8954 6 12 6C13.1046 6 14 5.10457 14 4Z" fill="black" />
-                    </svg>
-                </a>
-            </div>
-        </div>
-    </div>
-
-    <div class="page-content item-details pt-0">
-
-        <div class="dz-banner-heading bg-primary">
-            <img src="assets/images/joel-mott-dQBkIZzyM-4-unsplash.jpg" class="bnr-img" alt="" />
-        </div>
-
-        <div class="dz-banner-height"></div>
-
-        <div class="fixed-content container">
-            <div class="clearfix">
-                <h3 class="ma-0">We can't wait to meet you</h3>
-                <p>Some complimentary text</p>
-            </div>
-            <div class="item-rating" dmx-text="app.Cart.data.count()">10</div>
-
-            <div class="">
-                <div class=" display-flex align-items-center justify-content-space-between" dmx-repeat:repeat_cart_items="app.Cart.data">
-                    <p class="text-color-purple" dmx-text="product_name.capitalize()"> Full leg waxing</p>
-                    <h4 class=""><sup>AED</sup>{{(product_amt * product_quantity)}}</h4>
-                    <!-- <h4 class="">30<sup>min</sup></h4> -->
-                    <div class="stepper stepper-init stepper-round">
-                        <div class="stepper-button-minus" dmx-on:click="app.Cart.upsert({product_id: product_id},{product_quantity: `product_quantity - 1`})" dmx-hide="(product_quantity < 2)"></div>
-                        <div class="stepper-input-wrap"><input type="text" min="0" max="100" step="1" readonly="" dmx-bind:value="product_quantity" data-rule-min="1" data-rule-max="100"></div>
-                        <div class="stepper-button-plus" dmx-on:click="app.Cart.upsert({product_id: product_id},{product_quantity: `product_quantity + 1`})"></div>
-                    </div>
                 </div>
 
+                <div class="title">Shopping Cart</div>
+                <div class="right">
+                    <a href="#" class="link panel-open icon-only" data-panel="left">
+
+                        <i class="icon f7-icons">ellipsis_vertical</i>
+                    </a>
+                </div>
+            </div>
+        </div>
+
+    </div>
+    <div class="toolbar toolbar-bottom toolbar-bottom-md">
+        <div class="toolbar-inner" style="padding:10px !important">
+            <a href="#!" class="item-link list-button button-large rounded-xl button-18 bg-color-primary button-fill text-color-white color-deeppurple" style="width:100%">Continue</a>
+        </div>
+    </div>
+
+    <div class="page-content bg-gray pt-20">
+        <dmx-preloader id="justpropreloader" spinner="pulse" color="#674EA7"></dmx-preloader>
+
+        <div class="container" style="margin-bottom:150px !important">
+            <div class="row">
+                <div class="col-100 text-align-right">
+                    <p style="margin-bottom:0px !important"><small>Basket Total</small></p>
+                    <h2 style="margin-top:-5px !important">{{app.Cart.data.sum(`total`.toNumber())}}</h2>
+                </div>{{Cart.data.sum(`total.toNumber()`)}}
             </div>
 
 
 
-            <p class="mt-0 mb-30">*)Dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore</p>
 
-            <a href="/choose-professional" class="button-large button rounded-xl button-fill">Choose your professional</a>
 
+
+            <div class="list search-list mt-0 mb-10 dz-list item-list no-shadow" dmx-repeat:repeat1="app.Cart.data">
+                <ul class="row">
+                    <li class="col-100 medium-100 mb-20">
+                        <div class="wishlist-bx">
+                            <div class="dz-media">
+                                <a href="/item-details/"><img dmx-bind:src="app.main.f7page.repeat1[0].product_avatar"></a>
+                            </div>
+                            <div class="dz-info">
+                                <div class="dz-head">
+                                    <h6 class="item-title mb-0" style="margin-bottom:0px !important"><a href="/item-details/">{{name.capitalize()}}</a></h6>
+                                    <p style="margin-top:4px !important">{{quantity}} People <span dmx-show="(matrix == 0)"> {{matrix}} hour</span></p>
+                                </div>
+                                <div class="dz-meta">
+                                    <ul>
+                                        <li class="price">{{total.toNumber().formatCurrency('AED', '.', ',', 2)}} </li>
+                                        <li>
+                                            <label class="bookmark-btn">
+                                                <button class="button-4 text-align-center" style="height:30px !important; width:30px !important; margin-top:10px !important"><i class="bi bi-trash fa-2x fa-fw"></i> </button>
+
+                                            </label>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </li>
+                </ul>
+            </div>
         </div>
-
     </div>
-
 </div>
-
-<script>
-    export default (props) => {
-    const openDemo1 = () => {
-		$('.add-wishlist-btn').toggleClass('active');
-    }
-	return $render;
-}
-</script>

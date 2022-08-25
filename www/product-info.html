@@ -1,79 +1,129 @@
-<!-- Wappler include head-page="index.html" is="dmx-app" id="productinfo" appConnect="local" framework7_6="With App Connect" framework7_icons="local" capacitor="local" fontawesome_5="local" components="{dmxSwiper:{},dmxFormatter:{},dmxSockets:{}}" -->
+<!-- Wappler include head-page="index.html" is="dmx-app" id="productinfo" appConnect="local" framework7_6="With App Connect" framework7_icons="local" capacitor="local" fontawesome_5="local" components="{dmxSwiper:{},dmxFormatter:{},dmxSockets:{},dmxPreloader:{},dmxValidator:{}}" -->
 
+<style>
+    .strong {
+        font-weight: 600 !important;
+    }
+</style>
 <div class="page" path="/product-info/:id" data-name="product-info" id="product_info">
     <dmx-value id="varQty" dmx-bind:value="app.main.product_info.qty_form.quantity.value"></dmx-value>
     <dmx-serverconnect id="service_info" url="https://api.justpro.me/api/services/service_info" site="JustPro-Spa-Backend" dmx-param:service_id="app.main.product_info.route.params.id" sockets="true"></dmx-serverconnect>
-    <div class="navbar">
-        <div class="navbar-inner" style="margin-top:20px !important; background-color:#FFF">
-            <a href="#" class="link back">
-                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <path d="M0.439312 13.0606L5.75391 18.3752C6.04683 18.6682 6.43069 18.8146 6.81459 18.8146C7.1985 18.8146 7.58236 18.6682 7.87528 18.3752C8.46103 17.7894 8.46103 16.8397 7.87528 16.2539L5.12133 13.5H22.5C23.3284 13.5 24 12.8284 24 12C24 11.1716 23.3284 10.5 22.5 10.5H5.12133L7.87528 7.7461C8.46103 7.1603 8.46103 6.21057 7.87528 5.62477C7.28944 5.03898 6.33975 5.03898 5.75391 5.62477L0.439312 10.9394C-0.146437 11.5251 -0.146437 12.4749 0.439312 13.0606Z" fill="black" />
-                </svg>
-            </a>
-            <div class="title text-align-left">Product details</div>
-            <div class="right">
-                <a href="#" class="link panel-open" data-panel="left">
-                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <path d="M14 12C14 10.8955 13.1046 10 12 10C10.8954 10 10 10.8955 10 12C10 13.1046 10.8954 14 12 14C13.1046 14 14 13.1046 14 12Z" fill="black" />
-                        <path d="M14 20C14 18.8954 13.1046 18 12 18C10.8954 18 10 18.8954 10 20C10 21.1045 10.8954 22 12 22C13.1046 22 14 21.1045 14 20Z" fill="black" />
-                        <path d="M14 4C14 2.89544 13.1046 2.00001 12 2.00001C10.8954 2.00001 10 2.89544 10 4C10 5.10457 10.8954 6 12 6C13.1046 6 14 5.10457 14 4Z" fill="black" />
-                    </svg>
-                </a>
+
+
+    <div class="padding-top padding-bottom">
+        <div class="navbar no-hairline no-shadow no-border">
+            <div class="navbar-inner" style="padding-right:0px !important; padding-left:0px !important; margin-right:0px !important">
+                <div class="left">
+                    <a href="#" class="link back">
+                        <i class="icon f7-icons">arrow_left</i>
+                    </a>
+
+                </div>
+
+                <div class="title">Product details</div>
+                <div class="right">
+                    <a href="#" class="link panel-open icon-only" data-panel="left">
+
+                        <i class="icon f7-icons">ellipsis_vertical</i>
+                    </a>
+                </div>
             </div>
         </div>
+
     </div>
-    <div class="page-content bg-gray pt-70">
+    <div class="toolbar toolbar-bottom toolbar-bottom-md">
+        <div class="toolbar-inner" style="padding:10px !important">
+            <a href="#!" class="item-link list-button button-large rounded-xl button-18 bg-color-primary button-fill text-color-white color-deeppurple" dmx-on:click="run({condition:{if:`(app.main.product_info.qty_form.quantity.value >= 1)`,then:{steps:[{run:{action:`app.Cart.upsert({product_id: app.main.product_info.service_info.data.queryServices.id},{product_id: app.main.product_info.service_info.data.queryServices.id, product_stripe_id: app.main.product_info.service_info.data.queryServices.stripe_product_id, product_name: app.main.product_info.service_info.data.queryServices.product_name.capitalize(), product_quantity: product_quantity+app.main.product_info.varQty.value.toNumber(), product_amt: app.main.product_info.service_info.data.queryServices.product_amt, name: app.main.product_info.service_info.data.queryServices.product_name, quantity: app.main.product_info.qty_form.quantity.value.toNumber(), amount: app.main.product_info.service_info.data.queryServices.product_amt, matrix: app.main.product_info.qty_form.matrix.value, total: app.main.product_info.overall_total.value, vat: app.main.product_info.vat_amount.value, product_avatar: app.main.product_info.service_info.data.queryServices.product_avatar})`}},{run:{action:`app.main.navigate(\'/order-prompt\',{})`}}]},else:{steps:{'f7.dialog.alert':{text:'Please select the number of people that need this service.',title:'How many people?'}}}}})" dmx-show="app.main.product_info.service_info.data.queryServices" style="width:100%">Book Now</a>
+        </div>
+    </div>
+    <div class="page-content bg-gray pt-0">
+        <dmx-preloader id="justpropreloader" spinner="pulse" color="#674EA7"></dmx-preloader>
 
         <div class="review-product">
             <div class="container display-flex flex-direction-column align-items-center">
                 <div class="margin-bottom">
-                    <div is="dmx-swiper" id="swiper1">
+                    <div is="dmx-swiper" id="swiper1" dmx-bind:slides="app.main.product_info.service_info.data.queryServices.services_photos">
                         <div class="swiper-slide">
-                            <img src="assets/images/prince-akachi-J1OScm_uHUQ-unsplash.jpg" width="250" height="250">
+                            <img dmx-bind:src="avatar_url" width="200" height="200">
                         </div>
                     </div>
                 </div>
                 <div class="dz-content margin-left">
-                    <h5 class="title text-align-center" dmx-text="app.main.product_info.service_info.data.queryServices.product_name.capitalize()">Product name</h5>
+                    <h3 class="title text-align-center strong">{{app.main.product_info.service_info.data.queryServices.product_name.capitalize()}}</h3>
+
+
                     <div class="row">
-                        <div class="col">
+                        <div class="col-100 text-align-center">
+                            <h2 class="strong"> {{app.main.product_info.overall_total.value.toNumber().formatCurrency('AED', '.', ',', 2)}}</h2>
+                            <p class="text-align-center" style="margin-top:-25px"><small>5% VAT Included </small></p>
+                            <input type="hidden" name="vat_amount" id="vat_amount" dmx-bind:value="app.main.product_info.working_total.value.toNumber().per(5)">
+
+                            <input type="hidden" name="working_total" id="working_total" dmx-bind:value="(app.main.product_info.service_info.data.queryServices.product_amt.toNumber() * (app.main.product_info.qty_form.quantity.value * app.main.product_info.qty_form.matrix.value))">
+                            <input type="hidden" name="overall_total" id="overall_total" dmx-bind:value="(app.main.product_info.working_total.value.toNumber() + app.main.product_info.vat_amount.value.toNumber())">
+                        </div>
+                        <div class="col-100">
                             <form action="" id="qty_form">
                                 <div class="list">
+
                                     <ul>
-                                        <li class="item-input-outline item-input-with-info">
-                                            <div class="item-content item-input">
-                                                <div class="item-inner">
-                                                    <div class="item-title item-label"></div>
-                                                    <div class="item-input-wrap">
-                                                        <select id="quantity" class="form-control">
-                                                            <option value="1">Quantity</option>
-                                                            <option selected="" value="1">1 Person</option>
-                                                            <option value="2">2 People</option>
-                                                        </select>
+                                        <li>
+                                            <a class="item-link smart-select smart-select-init">
+                                                <select name="quantity" id="quantity" required="" data-msg-required="Please select quantity">
+                                                    <option value="" selected>0 Person</option>
+                                                    <option value="1">1 Person</option>
+                                                    <option value="2">2 People</option>
+                                                    <option value="3">3 People</option>
+                                                    <option value="4">4 People</option>
+                                                    <option value="5">5 People</option>
+                                                    <option value="6">6 People</option>
+                                                </select>
+                                                <div class="item-content">
+                                                    <div class="item-inner">
+                                                        <div class="item-title strong">How many People?</div>
                                                     </div>
                                                 </div>
-                                            </div>
+                                            </a>
+                                        </li>
+
+                                    </ul>
+
+                                    <ul dmx-show="app.main.product_info.service_info.data.queryServices.amount_matrix">
+                                        <li>
+                                            <a class="item-link smart-select smart-select-init">
+                                                <select name="matrix" id="matrix" required="" data-msg-required="Please select quantity">
+                                                    <option value="1" selected>60 Minutes </option>
+                                                    <option value="2">120 Minutes </option>
+                                                    <option value="3">180 Minutes </option>
+                                                </select>
+                                                <div class="item-content">
+                                                    <div class="item-inner">
+                                                        <div class="item-title strong">How many {{app.main.product_info.service_info.data.queryServices.amount_matrix}}?</div>
+                                                    </div>
+                                                </div>
+                                            </a>
                                         </li>
                                     </ul>
                                 </div>
-                                <div class="col-100" dmx-show="app.main.product_info.service_info.data.queryServices"><a href="/order-prompt" class="item-link list-button button-large rounded-xl button button-fill text-color-white" dmx-on:click="run({run:{action:`app.Cart.upsert({product_id: app.main.product_info.service_info.data.queryServices.id},{product_id: app.main.product_info.service_info.data.queryServices.id, product_stripe_id: app.main.product_info.service_info.data.queryServices.stripe_product_id, product_name: app.main.product_info.service_info.data.queryServices.product_name.capitalize(), product_quantity: product_quantity+app.main.product_info.varQty.value.toNumber(), product_amt: app.main.product_info.service_info.data.queryServices.product_amt})`}})">Add to cart</a></div>
+
                             </form>
                         </div>
 
 
                     </div>
-                    <div class="row" style="margin-top:20px !important">
+                    <div class="row">
+                        <div class="col-100">
+                            <small class="strong">Service Description</small>
+                        </div>
                         <div class="col">
-                            <p dmx-text="app.main.product_info.service_info.data.queryServices.product_description">Product description - Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+                            <p>{{app.main.product_info.service_info.data.queryServices.product_description}}</p>
                         </div>
                     </div>
 
                 </div>
             </div>
         </div>
-        <div class="write-reviews-box container">
+        <div class="write-reviews-box container margin-bottom">
             <div class="reviews-head text-align-center">
-                <h4 class="title mt-0 mb-10">Give it a try</h4>
                 <p class="text-black ma-0">More than 90% of our clients responded with positive reviews on this service.</p>
             </div>
             <div class="rating-info">
