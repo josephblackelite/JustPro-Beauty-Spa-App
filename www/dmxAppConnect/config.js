@@ -44,5 +44,54 @@ dmx.config({
         ]
       }
     ]
+  },
+  "orderprompt": {
+    "repeat_nails_services": {
+      "meta": [
+        {
+          "type": "text",
+          "name": "product_name"
+        },
+        {
+          "type": "text",
+          "name": "product_description"
+        },
+        {
+          "type": "text",
+          "name": "product_avatar"
+        },
+        {
+          "type": "number",
+          "name": "product_amt"
+        },
+        {
+          "type": "text",
+          "name": "amount_matrix"
+        },
+        {
+          "type": "boolean",
+          "name": "availability"
+        },
+        {
+          "type": "text",
+          "name": "stripe_product_id"
+        },
+        {
+          "type": "text",
+          "name": "category"
+        },
+        {
+          "name": "services_photos",
+          "type": "array",
+          "sub": [
+            {
+              "type": "text",
+              "name": "avatar_url"
+            }
+          ]
+        }
+      ],
+      "outputType": "array"
+    }
   }
 });
