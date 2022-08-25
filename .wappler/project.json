@@ -30,9 +30,9 @@
     "capacitor": {
       "checked": true
     },
-    "platform": "ios",
-    "target": "CA8DC66C-F443-4380-83B0-551C568992F1",
-    "device": "",
-    "deviceId": ""
+    "platform": "android",
+    "target": "Resizable_Edited_API_33",
+    "device": null,
+    "deviceId": null
   }
 }
