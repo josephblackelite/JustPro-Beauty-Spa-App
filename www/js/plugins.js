@@ -7,14 +7,14 @@ const { GoogleAuth, FacebookLogin, FacebookLoginResponse, Stripe, PaymentFlowEve
 
 // FACEBOOK AUTH PLUGIN  >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 
-// FacebookLogin.initialize({ appId: '767926361075499' });
+FacebookLogin.initialize({ appId: '1191813141432284' });
 
-// const FACEBOOK_PERMISSIONS = [
-//     'email',
-//     'user_birthday',
-//     'user_photos',
-//     'user_gender',
-// ];
+const FACEBOOK_PERMISSIONS = [
+    'email',
+    'user_birthday',
+    'user_photos',
+    'user_gender',
+];
 
 let token;
 let user;

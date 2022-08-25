@@ -68,10 +68,12 @@
     <script src="dmxAppConnect/dmxGooglePlaces/dmxGooglePlaces.js" defer></script>
     <link rel="stylesheet" href="dmxAppConnect/dmxDropzone/dmxDropzone.css" />
     <script src="dmxAppConnect/dmxDropzone/dmxDropzone.js" defer></script>
+    <script src="dmxAppConnect/dmxDatastore/dmxDatastore.js" defer></script>
 </head>
 
 <body is="dmx-app" id="index">
     <div id="app" is="dmx-f7-app" class="color-theme-deeppurple" theme="aurora">
+
 
 
         <dmx-local-manager id="local_store"></dmx-local-manager>
@@ -149,6 +151,9 @@
 
         <dmx-json-datasource id="countryList" is="dmx-serverconnect" url="countryList.json"></dmx-json-datasource>
         <dmx-serverconnect id="Current_user" url="https://api.justpro.me/api/security/logged_in_user_data" site="JustPro-Spa-Backend" dmx-param:user_id="local_store.data.user_id" sockets="true"></dmx-serverconnect>
+        <dmx-value id="service_category" dmx-bind:value="'nails'"></dmx-value>
+        <dmx-datastore id="Cart" session="true"></dmx-datastore>
+        <dmx-value id="cartQtyVal" dmx-bind:value="0"></dmx-value>
         <div class="statusbar"></div>
 
         <!-- Sidebar Nav -->
@@ -250,7 +255,7 @@
 
         <!-- View Main -->
         <div class="view view-main view-init safe-areas" id="main">
-            <!-- <div class="row no-gutters vh-100 overlay-primary-dark loader-screen" style="background-image: url(img/background/bg1.jpg);">
+            <div class="row no-gutters vh-100 overlay-primary-dark loader-screen" style="background-image: url(img/background/bg1.jpg);">
                 <div class="col align-self-center text-white text-align-center">
                     <div id="loading-area">
                         <div class="logo-icon">
@@ -267,7 +272,7 @@
                         </h2>
                     </div>
                 </div>
-            </div> -->
+            </div>
             <div class="page page-onboading" data-name="index" path="/" id="indexPage">
                 <div class="page-content" style="background-image:url(assets/images/bg.jpg)">
                     <div class="started-swiper-box">
@@ -356,7 +361,34 @@
             $$(".item-link").addClass("item-selected")
         }
     </script>
+    <script>
+        let slideIndex = 1;
+        showSlides(slideIndex);
 
+function plusSlides(n) {
+  showSlides(slideIndex += n);
+}
+
+function currentSlide(n) {
+  showSlides(slideIndex = n);
+}
+
+function showSlides(n) {
+  let i;
+  let slides = document.getElementsByClassName("mySlides");
+  let dots = document.getElementsByClassName("dot");
+  if (n > slides.length) {slideIndex = 1}    
+  if (n < 1) {slideIndex = slides.length}
+  for (i = 0; i < slides.length; i++) {
+    slides[i].style.display = "none";  
+  }
+  for (i = 0; i < dots.length; i++) {
+    dots[i].className = dots[i].className.replace(" active", "");
+  }
+  slides[slideIndex-1].style.display = "block";  
+  dots[slideIndex-1].className += " active";
+}
+    </script>
 </body>
 
 </html>

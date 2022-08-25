@@ -70,5 +70,9 @@
   "create-new-address.html": {
     "layoutPage": "",
     "description": ""
+  },
+  "customer-name-prompt.html": {
+    "layoutPage": "",
+    "description": ""
   }
 }

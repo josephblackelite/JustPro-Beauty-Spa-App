@@ -5,5 +5,6 @@
     <string name="package_name">io.justpro.me</string>
     <string name="custom_url_scheme">io.justpro.me</string>
     <string name="server_client_id">907397645441-ojrqmb5i4ujgjg1gi9ps16juujlmt37o.apps.googleusercontent.com</string>
-    
+    <string name="facebook_app_id">1191813141432284</string>
+<string name="facebook_client_token">2b1e0e41bacfe1ed6794f6adbb0d5818</string>
 </resources>

@@ -21,7 +21,7 @@ var routes = [
     "url": "./order-confirmation.html"
   },
   {
-    "path": "/product-info",
+    "path": "/product-info/:id",
     "url": "./product-info.html"
   },
   {
@@ -75,5 +75,9 @@ var routes = [
   {
     "path": "/create-new-address",
     "url": "./create-new-address.html"
+  },
+  {
+    "path": "/customer-name-prompt",
+    "url": "./customer-name-prompt.html"
   }
 ]

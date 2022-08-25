@@ -28,7 +28,26 @@
 				<string>com.googleusercontent.apps.907397645441-2oqehsfpq5iavd88kmhj26atgtj0dfdk</string>
 			</array>
 		</dict>
+        <dict>
+			<key>CFBundleURLSchemes</key>
+			<array>
+				<string>fb1191813141432284</string>
+			</array>
+		</dict>
 	</array>
+    <key>FacebookAppID</key>
+	<string>1191813141432284</string>
+    <key>FacebookClientToken</key>
+<string>2b1e0e41bacfe1ed6794f6adbb0d5818</string>
+	<key>FacebookDisplayName</key>
+	<string>JustPro</string>
+	<key>LSApplicationQueriesSchemes</key>
+	<array>
+		<string>fbapi</string>
+		<string>fbauth2</string>
+	</array>
+
+
 	<key>CFBundleVersion</key>
 	<string>1</string>
 	<key>LSRequiresIPhoneOS</key>
@@ -64,3 +83,8 @@
 	<true/>
 </dict>
 </plist>
+
+
+
+
+

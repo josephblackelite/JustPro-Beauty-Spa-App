@@ -1,6 +1,8 @@
-<!-- Wappler include head-page="index.html" is="dmx-app" id="productinfo" appConnect="local" framework7_6="With App Connect" framework7_icons="local" capacitor="local" fontawesome_5="local" -->
+<!-- Wappler include head-page="index.html" is="dmx-app" id="productinfo" appConnect="local" framework7_6="With App Connect" framework7_icons="local" capacitor="local" fontawesome_5="local" components="{dmxSwiper:{},dmxFormatter:{},dmxSockets:{}}" -->
 
-<div class="page">
+<div class="page" path="/product-info/:id" data-name="product-info" id="product_info">
+    <dmx-value id="varQty" dmx-bind:value="app.main.product_info.qty_form.quantity.value"></dmx-value>
+    <dmx-serverconnect id="service_info" url="https://api.justpro.me/api/services/service_info" site="JustPro-Spa-Backend" dmx-param:service_id="app.main.product_info.route.params.id" sockets="true"></dmx-serverconnect>
     <div class="navbar">
         <div class="navbar-inner" style="margin-top:20px !important; background-color:#FFF">
             <a href="#" class="link back">
@@ -21,16 +23,21 @@
         </div>
     </div>
     <div class="page-content bg-gray pt-70">
+
         <div class="review-product">
             <div class="container display-flex flex-direction-column align-items-center">
-                <div class="big-image margin-bottom">
-                    <img src="assets/images/prince-akachi-J1OScm_uHUQ-unsplash.jpg" alt="" width="256" height="256" />
+                <div class="margin-bottom">
+                    <div is="dmx-swiper" id="swiper1">
+                        <div class="swiper-slide">
+                            <img src="assets/images/prince-akachi-J1OScm_uHUQ-unsplash.jpg" width="250" height="250">
+                        </div>
+                    </div>
                 </div>
                 <div class="dz-content margin-left">
-                    <h5 class="title text-align-center">Product name</h5>
+                    <h5 class="title text-align-center" dmx-text="app.main.product_info.service_info.data.queryServices.product_name.capitalize()">Product name</h5>
                     <div class="row">
                         <div class="col">
-                            <form action="">
+                            <form action="" id="qty_form">
                                 <div class="list">
                                     <ul>
                                         <li class="item-input-outline item-input-with-info">
@@ -38,9 +45,9 @@
                                                 <div class="item-inner">
                                                     <div class="item-title item-label"></div>
                                                     <div class="item-input-wrap">
-                                                        <select id="select2" class="form-control">
-                                                            <option value="">Quantity</option>
-                                                            <option value="1">1 Person</option>
+                                                        <select id="quantity" class="form-control">
+                                                            <option value="1">Quantity</option>
+                                                            <option selected="" value="1">1 Person</option>
                                                             <option value="2">2 People</option>
                                                         </select>
                                                     </div>
@@ -49,7 +56,7 @@
                                         </li>
                                     </ul>
                                 </div>
-                                <div class="col-100"><a href="/order-prompt" class="item-link list-button button-large rounded-xl button button-fill text-color-white">Add to cart</a></div>
+                                <div class="col-100" dmx-show="app.main.product_info.service_info.data.queryServices"><a href="/order-prompt" class="item-link list-button button-large rounded-xl button button-fill text-color-white" dmx-on:click="run({run:{action:`app.Cart.upsert({product_id: app.main.product_info.service_info.data.queryServices.id},{product_id: app.main.product_info.service_info.data.queryServices.id, product_stripe_id: app.main.product_info.service_info.data.queryServices.stripe_product_id, product_name: app.main.product_info.service_info.data.queryServices.product_name.capitalize(), product_quantity: product_quantity+app.main.product_info.varQty.value.toNumber(), product_amt: app.main.product_info.service_info.data.queryServices.product_amt})`}})">Add to cart</a></div>
                             </form>
                         </div>
 
@@ -57,7 +64,7 @@
                     </div>
                     <div class="row" style="margin-top:20px !important">
                         <div class="col">
-                            <p>Product description - Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+                            <p dmx-text="app.main.product_info.service_info.data.queryServices.product_description">Product description - Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
                         </div>
                     </div>
 
