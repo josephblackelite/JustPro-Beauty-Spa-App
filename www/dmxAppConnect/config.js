@@ -25,6 +25,28 @@ dmx.config({
           }
         ]
       }
+    ],
+    "Cart": [
+      {
+        "type": "text",
+        "name": "product_id"
+      },
+      {
+        "type": "text",
+        "name": "product_stripe_id"
+      },
+      {
+        "type": "text",
+        "name": "product_name"
+      },
+      {
+        "type": "text",
+        "name": "product_quantity"
+      },
+      {
+        "type": "text",
+        "name": "product_amt"
+      }
     ]
   },
   "onboarding": {
@@ -92,6 +114,43 @@ dmx.config({
         }
       ],
       "outputType": "array"
+    }
+  },
+  "orderconfirmation": {
+    "repeat_cart_items": {
+      "meta": [
+        {
+          "name": "$id",
+          "type": "number"
+        },
+        {
+          "type": "text",
+          "name": "product_id"
+        },
+        {
+          "type": "text",
+          "name": "product_stripe_id"
+        },
+        {
+          "type": "text",
+          "name": "product_name"
+        },
+        {
+          "type": "text",
+          "name": "product_quantity"
+        },
+        {
+          "type": "text",
+          "name": "product_amt"
+        }
+      ],
+      "outputType": "array"
+    }
+  },
+  "productinfo": {
+    "varQty": {
+      "meta": null,
+      "outputType": "text"
     }
   }
 });

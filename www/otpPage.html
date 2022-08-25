@@ -14,7 +14,7 @@
                 </div>
             </div>
             <div class="tab tab-active form-elements tabs">
-                <form class="tab tab-active" id="verifyOtp_form" is="dmx-serverconnect-form" method="post" action="https://api.justpro.me/api/security/verify_otp" site="JustPro-Spa-Backend" dmx-on:success="run({condition:{if:`app.Current_user.data.customer.customer_avatar_url`,then:{steps:{run:{action:`app.main.navigate(\'/home\',{})`}}},else:{steps:{run:{action:`app.main.navigate(\'/customer-name-prompt\',{})`}}}}})">
+                <form class="tab tab-active" id="verifyOtp_form" is="dmx-serverconnect-form" method="post" action="https://api.justpro.me/api/security/verify_otp" site="JustPro-Spa-Backend" dmx-on:success="run({condition:{if:`app.Current_user.data.customer.customer_name`,then:{steps:{run:{action:`app.main.navigate(\'/home\',{})`}}},else:{steps:{run:{action:`app.main.navigate(\'/customer-name-prompt\',{})`}}}}})">
                     <input id="otp_id" name="otp_id" dmx-bind:value="app.otp_id.value" type="hidden">
                     <input id="mobile_number" name="mobile_number" dmx-bind:value="app.Current_user.data.customer.phone_number" type="hidden">
                     <div class="title-head">

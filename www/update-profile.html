@@ -23,7 +23,7 @@
     <div class="page-content content-area pt-90">
         <div class="container">
             <div class="form-elements">
-                <form is="dmx-serverconnect-form" method="post" id="update_profile_form" dmx-on:success="run({'f7.dialog.confirm':{title:'Success',text:'Your profile information is now update',then:{steps:{run:{action:`app.main.back(,{})`}}}}})" site="JustPro-Spa-Backend" action="https://api.justpro.me/api/security/update_profile" dmx-on:invalid="run({'f7.dialog.alert':{title:'Error',text:`app.main.f7page.update_profile_form.lastError.response`}})">
+                <form is="dmx-serverconnect-form" method="post" id="update_profile_form" dmx-on:success="run({'f7.dialog.confirm':{title:'Success',text:'Your profile information is now updated!',then:{steps:{run:{action:`app.main.back(,{})`}}}}})" site="JustPro-Spa-Backend" action="https://api.justpro.me/api/security/update_profile" dmx-on:invalid="run({'f7.dialog.alert':{title:'Error',text:`app.main.f7page.update_profile_form.lastError.response`}})">
                     <input id="user_id" name="user_id" type="hidden" dmx-bind:value="app.Current_user.data.customer.id">
                     <div class="title-head">
                         <h2 class="title">Update your profile</h2>
