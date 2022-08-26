@@ -74,5 +74,9 @@
   "customer-name-prompt.html": {
     "layoutPage": "",
     "description": ""
+  },
+  "appointment-page.html": {
+    "layoutPage": "",
+    "description": ""
   }
 }

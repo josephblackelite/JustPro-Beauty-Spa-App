@@ -1,8 +1,8 @@
-<!-- Wappler include head-page="index.html" is="dmx-app" id="checkout" appConnect="local" framework7_6="With App Connect" framework7_icons="local" capacitor="local" components="{dmxSwiper:{}}" -->
+<!-- Wappler include head-page="index.html" is="dmx-app" id="checkout" appConnect="local" framework7_6="With App Connect" framework7_icons="local" capacitor="local" components="{dmxSwiper:{},dmxFormRepeat:{},dmxFormatter:{}}" -->
 
 <div class="page">
     <form is="dmx-serverconnect-form" id="Setup_Intent_ephemeral_key_gen" method="post" action="https://api.justpro.me/api/stripe/create_setup_intent" site="JustPro-Spa-Backend" dmx-on:success="run({runJS:{function:'createPaymentFlow',args:[`app.main.f7page.Setup_Intent_ephemeral_key_gen.data.client_secret`,`app.main.f7page.Setup_Intent_ephemeral_key_gen.data.customer_id`,`app.main.f7page.Setup_Intent_ephemeral_key_gen.data.ephemeral_key`]}})"><input id="User_id" name="user_id" dmx-bind:value="app.Current_user.data.customer.id" type="hidden">
-        <input id="setUp" name="setUp" type="text" value="setUp">
+        <input id="setUp" name="setUp" type="hidden" value="setUp">
     </form>
     <dmx-value id="card_setup_started"></dmx-value>
     <div class="navbar" style="margin-top:20px !important">
@@ -26,6 +26,21 @@
         </div>
     </div>
     <div class="page-content wappler-block pt-70">
+        <form id="items_hidden" is="dmx-serverconnect-form" method="post" dmx-show="">
+            <div dmx-repeat:repeat_cart_items="app.Cart.data">
+                <input name="product_id" type="text" id="product_id" dmx-bind:value="product_id">
+                <input name="product_stripe_id" type="text" id="product_stripe_id" dmx-bind:value="product_stripe_id">
+                <input name="quantity" type="text" id="quantity" dmx-bind:value="quantity">
+                <input name="matrix" type="text" id="matrix" dmx-bind:value="matrix">
+                <input name="total" type="text" id="total" dmx-bind:value="total">
+                <input name="vat" type="text" id="vat" dmx-bind:value="vat">
+                <input name="address_id" type="text" id="address_id">
+                <input name="appointment_date" type="text" id="appointment_date" dmx-bind:value="appointment_date">
+                <input name="timeSlot_start" type="text" id="timeSlot_start" dmx-bind:value="timeSlot_start">
+                <input name="timeSlot_end" type="text" id="timeSlot_end" dmx-bind:value="timeSlot_end">
+            </div>
+
+        </form>
         <div class="block no-margin">
             <h5>Check out</h5>
 
@@ -90,13 +105,57 @@
             </div>
             <div class="checkout-total">
                 <p class="title">Total Payment</p>
-                <h2 class="checkout-total">$158.0</h2>
+                <h2 class="checkout-total">{{Cart.data.sum(`total.toNumber()`).formatCurrency('AED', '.', ',', 2)}}</h2>
             </div>
         </div>
         <div class="block"></div>
         <div class="block">
             <p>Transaction amount will be debited immediately after submitting the payment form. It will appear as JustPro Portal Co. LLC in your bank statement, please keep a copy of the transaction data.</p>
-            <a href="/checkout" class="button-large rounded-xl button button-fill" dmx-on:click="app.main.navigate('/order-tracking',{})">Pay</a>
+            <a href="/checkout" class="button-large rounded-xl button button-fill" dmx-on:click="run({condition:{if:`!app.Current_user.data.customer.phone_number`,then:{steps:{runJS:{function:'showVerifyNumberSheet'}}},else:{steps:{run:{action:`app.main.navigate(\'/order-tracking\',{})`}}}}})">Pay</a>
+        </div>
+
+
+
+
+        <!-- Sheet modal -->
+        <div class="sheet-modal verifyNumberSheet">
+            <div class="toolbar">
+                <div class="toolbar-inner">
+                    <div class="left"></div>
+                    <div class="title text-align-center">Verify mobile number</div>
+                    <div class="right"></div>
+                </div>
+            </div>
+            <div class="sheet-modal-inner">
+                <div class="block no-margin-top">
+                    <form action="https://api.justpro.me/api/security/verify_user_number" is="dmx-serverconnect-form" method="post" id="verify_user_number" site="JustPro-Spa-Backend" dmx-on:success="run({condition:{if:`(app.main.f7page.verify_user_number.data.exec.api.data.status == \'open\')`,then:{steps:[{runJS:{function:'closeVerifyNumberSheet'}},{run:{action:`app.otp_id.setValue(app.main.f7page.verify_user_number.data.exec.api.data.otp_id);app.main.navigate(\'/verifyOtp/1\',{})`}}]}}})" class="no-padding" dmx-on:invalid="run({'f7.dialog.alert':{title:'Error',text:`app.main.f7page.verify_user_number.lastError.response`}})">
+                        <input id="user_id" name="user_id" type="hidden" dmx-bind:value="app.Current_user.data.customer.id">
+                        <div class="list no-margin-top ">
+                            <ul class="row">
+                                <li class="item-content col-100 item-input item-input-with-value">
+                                    <div class="item-inner">
+                                        <div class="item-title item-label">Mobile number</div>
+                                        <div class="item-input-wrap row">
+                                            <div class="col-30"><select id="country_code" class="form-control" name="country_code" dmx-bind:options="app.countryList.data" optiontext="code+' '+dial_code" optionvalue="code" dmx-bind:value="'AE'">
+                                                </select>
+                                            </div>
+                                            <div class="col-70"><input type="number" placeholder="524******" class="form-control" id="mobile_number" dmx-bind:value="app.Current_user.data.customer.phone_number" name="mobile_number" /></div>
+                                        </div>
+                                    </div>
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="clearfix text-align-center pb-30">
+
+                            <button href="" class="button-large button button-fill rounded-xl button-gray color-purple" dmx-on:click="run({condition:{if:`app.main.f7page.verify_user_number.mobile_number.value`,then:{steps:{run:{action:`app.main.f7page.verify_user_number.submit()`}}}}})" dmx-bind:disabled="app.main.f7page.update_profile_form.state.executing"><span dmx-hide="app.main.f7page.verify_user_number.state.executing">Verify my number</span>
+                                <div class="preloader color-purple" dmx-show="app.main.f7page.verify_user_number.state.executing"></div>
+                            </button>
+                        </div>
+
+
+                    </form>
+                </div>
+            </div>
         </div>
     </div>
 </div>

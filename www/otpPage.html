@@ -1,7 +1,7 @@
 <!-- Wappler include head-page="index.html" is="dmx-app" id="otpPage" appConnect="local" framework7_6="With App Connect" framework7_icons="local" capacitor="local" components="{dmxValidator:{}}" -->
 
-<div class="page account-area" path="/verifyOtp" data-name="verifyOtp" id="verifyOtp">
-    <form is="dmx-serverconnect-form" method="post" id="resend_otp" action="https://api.justpro.me/api/security/resend_otp" site="JustPro-Spa-Backend" dmx-on:success="run([{run:{action:`app.otp_id.setValue(app.main.verifyOtp.resend_otp.data.resend_otp.data.otp_id)`}},{runJS:{function:'createNotication',args:['`\'New otp code sent!\'`,`\'Check your sms inbox for new otp code.\'`]}}])">
+<div class="page account-area" path="/verifyOtp/:checkout?" data-name="verifyOtp" id="verifyOtp">
+    <form is="dmx-serverconnect-form" method="post" id="resend_otp" action="https://api.justpro.me/api/security/resend_otp" site="JustPro-Spa-Backend" dmx-on:success="run([{run:{action:`app.otp_id.setValue(app.main.verifyOtp.resend_otp.data.resend_otp.data.otp_id)`}},{runJS:{function:'createNotication',args:[`\'New otp code sent!\'`,`\'Check your sms inbox for new otp code.\'`]}}])">
         <input id="resend_otp_id" name="otp_id" type="hidden" dmx-bind:value="app.otp_id.value">
     </form>
     <div class="page-content wappler-block">
@@ -14,7 +14,7 @@
                 </div>
             </div>
             <div class="tab tab-active form-elements tabs">
-                <form class="tab tab-active" id="verifyOtp_form" is="dmx-serverconnect-form" method="post" action="https://api.justpro.me/api/security/verify_otp" site="JustPro-Spa-Backend" dmx-on:success="run({condition:{if:`app.Current_user.data.customer.customer_name`,then:{steps:{run:{action:`app.main.navigate(\'/home\',{})`}}},else:{steps:{run:{action:`app.main.navigate(\'/customer-name-prompt\',{})`}}}}})">
+                <form class="tab tab-active" id="verifyOtp_form" is="dmx-serverconnect-form" method="post" action="https://api.justpro.me/api/security/verify_otp" site="JustPro-Spa-Backend" dmx-on:success="run({condition:{if:`app.main.verifyOtp.route.params.checkout`,then:{steps:{run:{action:`app.main.navigate(\'/checkout\',{})`}}},else:{steps:{condition:{if:`app.Current_user.data.customer.customer_name`,then:{steps:{run:{action:`app.main.navigate(\'/home\',{})`}}},else:{steps:{run:{action:`app.main.navigate(\'/customer-name-prompt\',{})`}}}}}}}})">
                     <input id="otp_id" name="otp_id" dmx-bind:value="app.otp_id.value" type="hidden">
                     <input id="mobile_number" name="mobile_number" dmx-bind:value="app.Current_user.data.customer.phone_number" type="hidden">
                     <div class="title-head">
@@ -23,7 +23,7 @@
                     </div>
                     <div class="list">
                         <ul class="row">
-                            <li class="item-content item-input col-100">
+                            <li class="item-content item-input col-100 item-input-with-value">
                                 <div class="item-inner">
                                     <div class="item-title item-label">Enter otp code</div>
                                     <div class="item-input-wrap">

@@ -9,7 +9,7 @@ var routes = [
     "name": "index"
   },
   {
-    "path": "/verifyOtp",
+    "path": "/verifyOtp/:checkout?",
     "url": "./otpPage.html"
   },
   {
@@ -79,5 +79,9 @@ var routes = [
   {
     "path": "/customer-name-prompt",
     "url": "./customer-name-prompt.html"
+  },
+  {
+    "path": "/appointment-page",
+    "url": "./appointment-page.html"
   }
 ]

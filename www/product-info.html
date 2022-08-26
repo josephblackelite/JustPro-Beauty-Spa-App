@@ -6,10 +6,29 @@
     }
 </style>
 <div class="page" path="/product-info/:id" data-name="product-info" id="product_info">
+
     <dmx-value id="varQty" dmx-bind:value="app.main.product_info.qty_form.quantity.value"></dmx-value>
     <dmx-serverconnect id="service_info" url="https://api.justpro.me/api/services/service_info" site="JustPro-Spa-Backend" dmx-param:service_id="app.main.product_info.route.params.id" sockets="true"></dmx-serverconnect>
 
 
+    <script is="dmx-flow" id="ShowSlides" type="text/dmx-flow" autorun>[
+  {
+    wait: {delay: 2000}
+  },
+  {
+    condition: {
+      if: "{{app.main.product_info.service_info.data.queryServices.services_photos}}",
+      then: {
+        steps: {
+          runJS: {
+            function: "showSlides",
+            args: ["1"]
+          }
+        }
+      }
+    }
+  }
+]</script>
     <div class="padding-top padding-bottom">
         <div class="navbar no-hairline no-shadow no-border">
             <div class="navbar-inner" style="padding-right:0px !important; padding-left:0px !important; margin-right:0px !important">
@@ -33,7 +52,7 @@
     </div>
     <div class="toolbar toolbar-bottom toolbar-bottom-md">
         <div class="toolbar-inner" style="padding:10px !important">
-            <a href="#!" class="item-link list-button button-large rounded-xl button-18 bg-color-primary button-fill text-color-white color-deeppurple" dmx-on:click="run({condition:{if:`(app.main.product_info.qty_form.quantity.value >= 1)`,then:{steps:[{run:{action:`app.Cart.upsert({product_id: app.main.product_info.service_info.data.queryServices.id},{product_id: app.main.product_info.service_info.data.queryServices.id, product_stripe_id: app.main.product_info.service_info.data.queryServices.stripe_product_id, product_name: app.main.product_info.service_info.data.queryServices.product_name.capitalize(), product_quantity: product_quantity+app.main.product_info.varQty.value.toNumber(), product_amt: app.main.product_info.service_info.data.queryServices.product_amt, name: app.main.product_info.service_info.data.queryServices.product_name, quantity: app.main.product_info.qty_form.quantity.value.toNumber(), amount: app.main.product_info.service_info.data.queryServices.product_amt, matrix: app.main.product_info.qty_form.matrix.value, total: app.main.product_info.overall_total.value, vat: app.main.product_info.vat_amount.value, product_avatar: app.main.product_info.service_info.data.queryServices.product_avatar})`}},{run:{action:`app.main.navigate(\'/order-prompt\',{})`}}]},else:{steps:{'f7.dialog.alert':{text:'Please select the number of people that need this service.',title:'How many people?'}}}}})" dmx-show="app.main.product_info.service_info.data.queryServices" style="width:100%">Book Now</a>
+            <a href="#!" class="item-link list-button button-large rounded-xl button-18 bg-color-primary button-fill text-color-white color-deeppurple" dmx-on:click="run({condition:{if:`(app.main.product_info.qty_form.quantity.value >= 1)`,then:{steps:[{run:{action:`app.Cart.upsert({product_id: app.main.product_info.service_info.data.queryServices.id},{product_id: app.main.product_info.service_info.data.queryServices.id, product_stripe_id: app.main.product_info.service_info.data.queryServices.stripe_product_id, product_name: app.main.product_info.service_info.data.queryServices.product_name.capitalize(), product_quantity: product_quantity+app.main.product_info.varQty.value.toNumber(), product_amt: app.main.product_info.service_info.data.queryServices.product_amt, name: app.main.product_info.service_info.data.queryServices.product_name, quantity: app.main.product_info.qty_form.quantity.value.toNumber(), amount: app.main.product_info.service_info.data.queryServices.product_amt, matrix: app.main.product_info.qty_form.matrix.value, total: app.main.product_info.overall_total.value, vat: app.main.product_info.vat_amount.value, product_avatar: app.main.product_info.service_info.data.queryServices.product_avatar, customer_id: 1})`}},{run:{action:`app.main.navigate(\'/order-prompt\',{})`}}]},else:{steps:{'f7.dialog.alert':{text:'Please select the number of people that need this service.',title:'How many people?'}}}}})" dmx-show="app.main.product_info.service_info.data.queryServices" style="width:100%">Book Now</a>
         </div>
     </div>
     <div class="page-content bg-gray pt-0">
@@ -42,10 +61,22 @@
         <div class="review-product">
             <div class="container display-flex flex-direction-column align-items-center">
                 <div class="margin-bottom">
-                    <div is="dmx-swiper" id="swiper1" dmx-bind:slides="app.main.product_info.service_info.data.queryServices.services_photos">
-                        <div class="swiper-slide">
-                            <img dmx-bind:src="avatar_url" width="200" height="200">
+                    <div class="slideshow-container">
+
+                        <div class="mySlides fade" dmx-repeat:repeat_service_images="app.main.product_info.service_info.data.queryServices.services_photos">
+                            <div class="numbertext">{{($index + 1)+' / '+app.main.product_info.service_info.data.queryServices.services_photos.count()}}</div>
+                            <img src="assets/images/joel-mott-dQBkIZzyM-4-unsplash.jpg" style="width:100%" dmx-bind:src="avatar_url" height="512">
+                            <div class="text">Caption Text</div>
                         </div>
+
+                        <a class="prev" onclick="plusSlides(-1)">❮</a>
+                        <a class="next" onclick="plusSlides(1)">❯</a>
+
+                    </div>
+                    <br>
+
+                    <div style="text-align:center">
+                        <span class="dot" dmx-repeat:repeat_dots="app.main.product_info.service_info.data.queryServices.services_photos" dmx-on:click="run({runJS:{function:'currentSlide',args:[`($index + 1)`]}})"></span>
                     </div>
                 </div>
                 <div class="dz-content margin-left">

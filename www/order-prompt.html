@@ -24,7 +24,7 @@
     </div>
 
 
-    <div class="toolbar toolbar-bottom fab-morph-target no-hairline no-shadow">
+    <div class="toolbar toolbar-bottom no-hairline no-shadow" dmx-show="app.Cart.data.count()>0">
         <div class="toolbar-inner padding">
 
             <a class="link fab-close">Continue Shopping</a>
@@ -32,13 +32,14 @@
         </div>
     </div>
 
-    <div class="fab fab-right-bottom fab-extended fab-morph" data-morph-to=".toolbar" style="border-radius:100% !important; padding:10px" dmx-show="app.Cart.data.count()>=1">
+    <!-- Cart Fab -->
+    <!-- <div class="fab fab-right-bottom fab-extended fab-morph" data-morph-to=".toolbar" style="border-radius:100% !important; padding:10px; display: hidden" dmx-show="app.Cart.data.count()>=1">
 
         <a href="#" class="">
             <i class="icon f7-icons size-70">cart <span class="badge color-white text-color-black">{{app.Cart.data.count()}}</span></i>
         </a>
 
-    </div>
+    </div> -->
 
 
     <div class="page-content location-wraper bg-gray">
@@ -53,7 +54,7 @@
 
             <div class="container">
                 <!-- Search -->
-                <form data-search-container=".search-list" data-search-in=".item-title" class="searchbar searchbar-init search-box list-search-bx" style="border-bottom:0px !important">
+                <!-- <form data-search-container=".search-list" data-search-in=".item-title" class="searchbar searchbar-init search-box list-search-bx" style="border-bottom:0px !important;">
                     <div class="searchbar-inner" style="border-bottom:0px !important">
                         <div class="searchbar-input-wrap" style="margin-bottom:20px !important; border-bottom:0px !important">
                             <input type="search" placeholder="search services" style="border-bottom:0px !important" />
@@ -64,7 +65,7 @@
                             </i>
                         </div>
                     </div>
-                </form>
+                </form> -->
                 <div class="list simple-list searchbar-not-found" style="border-bottom:0px !important; border-top:0px !important">
                     <ul>
                         <li>Nothing found</li>

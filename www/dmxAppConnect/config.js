@@ -62,6 +62,26 @@ dmx.config({
       {
         "type": "text",
         "name": "product_avatar"
+      },
+      {
+        "type": "text",
+        "name": "address_id"
+      },
+      {
+        "type": "text",
+        "name": "appointment_date"
+      },
+      {
+        "type": "text",
+        "name": "timeSlot_start"
+      },
+      {
+        "type": "text",
+        "name": "timeSlot_end"
+      },
+      {
+        "type": "text",
+        "name": "customer_id"
       }
     ]
   },
@@ -212,6 +232,91 @@ dmx.config({
     "varQty": {
       "meta": null,
       "outputType": "text"
+    },
+    "repeat_service_images": {
+      "meta": [
+        {
+          "type": "text",
+          "name": "avatar_url"
+        }
+      ],
+      "outputType": "array"
+    },
+    "repeat_dots": {
+      "meta": [
+        {
+          "type": "text",
+          "name": "avatar_url"
+        }
+      ],
+      "outputType": "array"
+    }
+  },
+  "checkout": {
+    "repeat1": {
+      "meta": [
+        {
+          "name": "$id",
+          "type": "number"
+        },
+        {
+          "type": "text",
+          "name": "product_id"
+        },
+        {
+          "type": "text",
+          "name": "product_stripe_id"
+        },
+        {
+          "type": "text",
+          "name": "name"
+        },
+        {
+          "type": "text",
+          "name": "quantity"
+        },
+        {
+          "type": "text",
+          "name": "amount"
+        },
+        {
+          "type": "text",
+          "name": "matrix"
+        },
+        {
+          "type": "text",
+          "name": "total"
+        },
+        {
+          "type": "text",
+          "name": "vat"
+        },
+        {
+          "type": "text",
+          "name": "product_avatar"
+        },
+        {
+          "type": "text",
+          "name": "address_id"
+        },
+        {
+          "type": "text",
+          "name": "appointment_date"
+        },
+        {
+          "type": "text",
+          "name": "timeSlot_start"
+        },
+        {
+          "type": "text",
+          "name": "timeSlot_end"
+        },
+        {
+          "type": "text",
+          "name": "customer_id"
+        }
+      ],
+      "outputType": "array"
     }
   }
 });

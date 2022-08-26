@@ -4093,6 +4093,11 @@ h6, .h6 {
   to {opacity: 1}
 }
 
+/* On smaller screens, decrease text size */
+@media only screen and (max-width: 300px) {
+  .prev, .next,.text {font-size: 11px}
+}
+
  /* CSS */
         .button-4 {
             -webkit-appearance: none;
@@ -4188,9 +4193,7 @@ h6, .h6 {
         min-height: 40px;
         min-width: 0px;
         overflow: hidden;
-        padding: 0px;
-        padding-left: 20px;
-        padding-right: 20px;
+        padding: 0px 20px;
         text-align: center;
         -ms-touch-action: manipulation;
             touch-action: manipulation;
@@ -4225,3 +4228,17 @@ h6, .h6 {
         .strong {
             font-weight: 900px;
         }
+
+        .flex-buttons {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-wrap: wrap;
+      flex-wrap: wrap;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row; }
+
+
+        

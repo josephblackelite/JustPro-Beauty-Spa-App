@@ -1,0 +1,73 @@
+<!-- Wappler include head-page="index.html" is="dmx-app" id="appointmentpage" appConnect="local" framework7_6="With App Connect" framework7_icons="local" capacitor="local" components="{dmxCalendar:{},dmxSwiper:{},dmxFormatter:{},dmxStripe:{}}" -->
+
+<div class="page" path="/appointment-page" data-name="appointment-page" id="appointmentpage">
+    <dmx-value id="appointment_timeStart" dmx-bind:value="'9:00 am'"></dmx-value>
+    <dmx-value id="appointment_timeEnd" dmx-bind:value="'10:00 am'"></dmx-value>
+    <div class="navbar">
+        <div class="navbar-inner">
+            <div class="left"><a href="#" class="link back">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M0.439312 13.0606L5.75391 18.3752C6.04683 18.6682 6.43069 18.8146 6.81459 18.8146C7.1985 18.8146 7.58236 18.6682 7.87528 18.3752C8.46103 17.7894 8.46103 16.8397 7.87528 16.2539L5.12133 13.5H22.5C23.3284 13.5 24 12.8284 24 12C24 11.1716 23.3284 10.5 22.5 10.5H5.12133L7.87528 7.7461C8.46103 7.1603 8.46103 6.21057 7.87528 5.62477C7.28944 5.03898 6.33975 5.03898 5.75391 5.62477L0.439312 10.9394C-0.146437 11.5251 -0.146437 12.4749 0.439312 13.0606Z" fill="black" />
+                    </svg>
+                </a></div>
+
+            <div class="title">Book appointment</div>
+            <div class="right">
+                <a href="#" class="link panel-open" data-panel="left">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M14 12C14 10.8955 13.1046 10 12 10C10.8954 10 10 10.8955 10 12C10 13.1046 10.8954 14 12 14C13.1046 14 14 13.1046 14 12Z" fill="black" />
+                        <path d="M14 20C14 18.8954 13.1046 18 12 18C10.8954 18 10 18.8954 10 20C10 21.1045 10.8954 22 12 22C13.1046 22 14 21.1045 14 20Z" fill="black" />
+                        <path d="M14 4C14 2.89544 13.1046 2.00001 12 2.00001C10.8954 2.00001 10 2.89544 10 4C10 5.10457 10.8954 6 12 6C13.1046 6 14 5.10457 14 4Z" fill="black" />
+                    </svg>
+                </a>
+            </div>
+        </div>
+    </div>
+    <div class="toolbar toolbar-bottom toolbar-bottom-md">
+        <div class="toolbar-inner" style="padding:10px !important">
+            <a class="item-link list-button button-large rounded-xl button-18 bg-color-primary button-fill text-color-white color-deeppurple" style="width:100%" dmx-on:click="run({condition:{if:`app.main.appointmentpage.form.appointmentDate.value`,then:{steps:[{run:{action:`app.Cart.update({customer_id: 1},{appointment_date: app.main.appointmentpage.form.appointmentDate.value, timeSlot_start: app.main.appointmentpage.appointment_timeStart.value, timeSlot_end: app.main.appointmentpage.appointment_timeEnd.value})`}},{run:{action:`app.main.navigate(\'/choose-address\',{})`}}]},else:{steps:{'f7.dialog.alert':{title:'Missing step',text:'Appointment date value is missing!'}}}}})">Continue</a>
+        </div>
+    </div>
+    <div class="page-content content-area pt-70 wappler-block">
+        <div class="container">
+            <p>Choose a date and time you will like our professionals to serve you.</p>
+            <form id="form" method="post" is="dmx-serverconnect-form">
+                <div class="block-title">Select apointment date</div>
+
+                <div class="list no-hairlines-md">
+                    <ul>
+                        <li>
+                            <div class="item-content item-input">
+                                <div class="item-inner">
+                                    <div class="item-input-wrap">
+                                        <input type="text" placeholder="Select date and time" id="appointmentDate" dmx-on:focus="run({runJS:{function:'showStartDate'}})" />
+                                    </div>
+                                </div>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+            </form>
+            <div class="block no-padding">
+                <div class="block-title">Choose a time slot</div>
+                <div class="flex-buttons">
+
+                    <div class="flex-shrink-1 margin">
+                        <button class="button button-outline button-round" dmx-on:click="app.main.appointmentpage.appointment_timeStart.setValue('9:00 am');app.main.appointmentpage.appointment_timeEnd.setValue('10:00 am')" dmx-class:button-fill="(app.main.appointmentpage.appointment_timeStart.value == '9:00 am')">9:00 am - 10:00am</button>
+                    </div>
+                    <div class="flex-shrink-1 margin">
+                        <button class="button button-outline button-round" dmx-on:click="app.main.appointmentpage.appointment_timeStart.setValue('11:00 am');app.main.appointmentpage.appointment_timeEnd.setValue('12:00pm')" dmx-class:button-fill="(app.main.appointmentpage.appointment_timeStart.value == '11:00 am')">11:00 am - 12:00pm</button>
+                    </div>
+                    <div class="flex-shrink-1 margin">
+                        <button class="button button-outline button-round" dmx-on:click="app.main.appointmentpage.appointment_timeStart.setValue('1:00 pm');app.main.appointmentpage.appointment_timeEnd.setValue('2:00pm')" dmx-class:button-fill="(app.main.appointmentpage.appointment_timeStart.value == '1:00 pm')">1:00 pm - 2:00pm</button>
+                    </div>
+                    <div class="flex-shrink-1 margin">
+                        <button class="button button-outline button-round" dmx-on:click="app.main.appointmentpage.appointment_timeStart.setValue('3:00 pm');app.main.appointmentpage.appointment_timeEnd.setValue('4:00pm')" dmx-class:button-fill="(app.main.appointmentpage.appointment_timeStart.value == '3:00 pm')">3:00 pm - 4:00pm</button>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
