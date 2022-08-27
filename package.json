@@ -13,11 +13,12 @@
     "@capacitor-community/facebook-login": "^4.0.0",
     "@capacitor-community/stripe": "^4.0.0",
     "@capacitor/android": "^4.0.0",
-    "@capacitor/core": "^3.3.3",
+    "@capacitor/core": "^4.0.1",
     "@capacitor/ios": "^4.0.0",
     "@capacitor/local-notifications": "^4.0.1",
     "@capacitor/splash-screen": "^4.0.1",
     "@codetrix-studio/capacitor-google-auth": "^3.2.0",
+    "cordova-plugin-otp-autofill": "^0.0.2",
     "onesignal-cordova-plugin": "^3.1.1"
   },
   "devDependencies": {

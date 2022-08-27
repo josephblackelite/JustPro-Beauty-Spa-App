@@ -52,8 +52,8 @@
                         <div href="#" class="">
                             <div class="item-inner display-flex ">
                                 <div class="item-title">Your cards</div>
-                                <a href="" dmx-on:click="app.main.f7page.Setup_Intent_ephemeral_key_gen.submit()" dmx-hide="app.main.f7page.Setup_Intent_ephemeral_key_gen.state.executing">Add new card</a>
-                                <div class="preloader color-purple" dmx-show="app.main.f7page.Setup_Intent_ephemeral_key_gen.state.executing"></div>
+                                <a href="" dmx-on:click="run([{run:{action:`app.main.f7page.card_setup_started.setValue(1)`}},{run:{action:`app.main.f7page.Setup_Intent_ephemeral_key_gen.submit()`}}])" dmx-hide="((app.main.f7page.card_setup_started.value == 1) &amp;&amp; ((app.STRIPE_CARD_SETUP.value != 'Failed') &amp;&amp; (app.STRIPE_CARD_SETUP.value != 'Completed')))">Add new card</a>
+                                <div class="preloader color-purple" dmx-show="((app.main.f7page.card_setup_started.value == 1) && ((app.STRIPE_CARD_SETUP.value != 'Failed') && (app.STRIPE_CARD_SETUP.value != 'Completed')))"></div>
                             </div>
                         </div>
                         <div class="accordion-item-content">
@@ -111,13 +111,13 @@
         <div class="block"></div>
         <div class="block">
             <p>Transaction amount will be debited immediately after submitting the payment form. It will appear as JustPro Portal Co. LLC in your bank statement, please keep a copy of the transaction data.</p>
-            <a href="/checkout" class="button-large rounded-xl button button-fill" dmx-on:click="run({condition:{if:`!app.Current_user.data.customer.phone_number`,then:{steps:{runJS:{function:'showVerifyNumberSheet'}}},else:{steps:{run:{action:`app.main.navigate(\'/order-tracking\',{})`}}}}})">Pay</a>
+            <a href="/checkout" class="button-large rounded-xl button button-fill" dmx-on:click="run({condition:{if:`!app.Current_user.data.customer.customer_email`,then:{steps:{runJS:{function:'showEnterEmailAddressSheet'}}},else:{steps:{condition:{if:`!app.Current_user.data.customer.phone_number`,then:{steps:{runJS:{function:'showVerifyNumberSheet'}}},else:{steps:{run:{action:`app.main.navigate(\'/order-tracking\',{})`}}}}}}}})">Pay</a>
         </div>
 
 
 
 
-        <!-- Sheet modal -->
+        <!-- Verify Number Sheet modal -->
         <div class="sheet-modal verifyNumberSheet">
             <div class="toolbar">
                 <div class="toolbar-inner">
@@ -147,12 +147,47 @@
                         </div>
                         <div class="clearfix text-align-center pb-30">
 
-                            <button href="" class="button-large button button-fill rounded-xl button-gray color-purple" dmx-on:click="run({condition:{if:`app.main.f7page.verify_user_number.mobile_number.value`,then:{steps:{run:{action:`app.main.f7page.verify_user_number.submit()`}}}}})" dmx-bind:disabled="app.main.f7page.update_profile_form.state.executing"><span dmx-hide="app.main.f7page.verify_user_number.state.executing">Verify my number</span>
+                            <button href="" class="button-large button button-fill rounded-xl button-gray color-purple" dmx-on:click="run({condition:{if:`app.main.f7page.verify_user_number.mobile_number.value`,then:{steps:{run:{action:`app.main.f7page.verify_user_number.submit()`}}}}})" dmx-bind:disabled="app.main.f7page.verify_user_number.state.executing"><span dmx-hide="app.main.f7page.verify_user_number.state.executing">Verify my number</span>
                                 <div class="preloader color-purple" dmx-show="app.main.f7page.verify_user_number.state.executing"></div>
                             </button>
                         </div>
 
 
+                    </form>
+                </div>
+            </div>
+        </div>
+
+        <!-- Enter email address Sheet modal -->
+        <div class="sheet-modal EnterEmailAddressSheet">
+            <div class="toolbar">
+                <div class="toolbar-inner">
+                    <div class="left"></div>
+                    <div class="title text-align-center">Enter email address</div>
+                    <div class="right"></div>
+                </div>
+            </div>
+            <div class="sheet-modal-inner">
+                <div class="block no-margin-top">
+                    <form action="https://api.justpro.me/api/security/collect_user_email_for_checkout" is="dmx-serverconnect-form" method="post" id="enter_email_address" site="JustPro-Spa-Backend" dmx-on:success="run({runJS:{function:'closeEnterEmailAddressSheet'}})" class="no-padding" dmx-on:invalid="run({'f7.dialog.alert':{title:'Error',text:'There is an error'}})"><input id="user__id" name="user_id" type="hidden" dmx-bind:value="app.Current_user.data.customer.id">
+                        <div class="list no-margin-top ">
+                            <ul class="row">
+                                <li class="item-content col-100 item-input">
+                                    <div class="item-inner">
+                                        <div class="item-title item-label">Email</div>
+                                        <div class="item-input-wrap">
+                                            <input type="email" placeholder="Email Address" class="form-control" name="email" dmx-bind:value="app.Current_user.data.customer.customer_email">
+                                        </div>
+                                    </div>
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="clearfix text-align-center pb-30">
+
+                            <button href="" class="button-large button button-fill rounded-xl button-gray color-purple" dmx-on:click="run({condition:{if:`app.main.f7page.enter_email_address.email.value`,then:{steps:{run:{action:`app.main.f7page.enter_email_address.submit()`}}}}})" dmx-bind:disabled="app.main.f7page.enter_email_address.state.executing"><span dmx-hide="app.main.f7page.enter_email_address.state.executing">Submit</span>
+                                <div class="preloader color-purple" dmx-show="app.main.f7page.enter_email_address.state.executing"></div>
+                            </button>
+                        </div>
                     </form>
                 </div>
             </div>

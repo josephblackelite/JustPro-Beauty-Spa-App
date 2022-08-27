@@ -282,3 +282,39 @@ async function hideSplashScreen() {
     await SplashScreen.hide();
 }
 
+
+//Otp auto fill - Android >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+
+// var options = {
+//     otpLength: 6,
+//     delimiter: 'is',
+//     senderID: 'JustPro',
+//     timeout: 1200
+// }
+
+function successCallback(result) {
+    if (result === 'Resend OTP') {
+        smsOtpAutofill.startOTPListener(successCallback, errorCallback, {
+            otpLength: 6,
+            delimiter: 'is',
+            senderID: 'JustPro',
+            timeout: 120
+        });
+    } else {
+        //Set the result (OTP value) to the field
+        $$("#otp_code").val(result)
+    }
+}
+function errorCallback(message) {
+    Framework7.instance.dialog.alert(message, "Err")
+}
+function startOtpWatch() {
+    smsOtpAutofill.startOTPListener(successCallback, errorCallback, {
+        otpLength: 6,
+        delimiter: 'is',
+        senderID: 'JustPro',
+        timeout: 120
+    });
+}
+
+
