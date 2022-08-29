@@ -23,7 +23,7 @@
     </div>
     <div class="toolbar toolbar-bottom toolbar-bottom-md">
         <div class="toolbar-inner" style="padding:10px !important">
-            <button href="" class="button-large button-18 button-fill rounded-xl button-gray color-purple" dmx-on:click="app.main.addaddress.add_new_address.submit()" dmx-bind:disabled="app.main.addaddress.add_new_address.state.executing"><span dmx-hide="app.main.addaddress.add_new_address.state.executing" style="width:100% !important">Save Address</span>
+            <button href="" class="button-large button-18 button-fill rounded-xl bg-color-primary" dmx-on:click="app.main.addaddress.add_new_address.submit()" dmx-bind:disabled="app.main.addaddress.add_new_address.state.executing"><span dmx-hide="app.main.addaddress.add_new_address.state.executing" style="width:100% !important">Save Address</span>
                 <div class="preloader color-purple" dmx-show="app.main.addaddress.add_new_address.state.executing"></div>
             </button>
         </div>
@@ -44,11 +44,11 @@
 
 
 
-                    <div class="list no-hairlines-md">
+                    <div class="list no-hairlines-md padding-top">
                         <ul>
                             <li class="item-content item-input padding-bottom">
                                 <div class="item-inner">
-                                    <div class="item-title item-label">Start typing your address</div>
+                                    <div class="item-title item-label strong">Start typing your address</div>
                                     <div class="item-input-wrap">
                                         <input input type="text" placeholder="e.g Villa. 8, Oak str." class="form-control" id="inp_location" name="address_element" is="dmx-google-autocomplete" country="AE" types="address" />
                                         <span class="input-clear-button"></span>
@@ -57,7 +57,7 @@
                             </li>
                             <li class="item-content item-input padding-bottom">
                                 <div class="item-inner">
-                                    <div class="item-title item-label">Building Name</div>
+                                    <div class="item-title item-label strong">Building Name</div>
                                     <div class="item-input-wrap">
                                         <input type="text" name="building" class="form-control" id="building_name" placeholder="Oak tower" required="" />
                                         <span class="input-clear-button"></span>
@@ -66,7 +66,7 @@
                             </li>
                             <li class="item-content item-input padding-bottom">
                                 <div class="item-inner">
-                                    <div class="item-title item-label">Flat/Office Number</div>
+                                    <div class="item-title item-label strong">Flat/Office Number</div>
                                     <div class="item-input-wrap">
                                         <input type="text" name="apartment" class="form-control" id="flat_number" required="" />
                                         <span class="input-clear-button"></span>
@@ -75,7 +75,7 @@
                             </li>
                             <li class="item-content item-input padding-bottom">
                                 <div class="item-inner">
-                                    <div class="item-title item-label">Address Nickname</div>
+                                    <div class="item-title item-label strong">Address Nickname</div>
                                     <div class="item-input-wrap">
                                         <input id="address_name" name="address_name" type="text" required="" />
                                         <span class="input-clear-button"></span>

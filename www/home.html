@@ -27,9 +27,9 @@
                         <i class="icon f7-icons" style="padding-bottom:20px !important">ellipsis_vertical</i>
                     </a>
                 </div>
-                <div class="subnavbar text-align-right bg-color-primary text-color-white">
-                    <div class="block display-flex justify-content-flex-end text-align-right">
-                        <h4 class="text-align-right text-color-white"><a href="/profile" class="link text-align-right text-color-white">Hello, {{app.Current_user.data.customer.customer_name.titlecase()}}</a></h4>
+                <div class="subnavbar bg-color-primary text-color-white">
+                    <div class="block text-align-right">
+                        <h4 class="text-color-white"><a href="/profile" class="link text-align-right text-color-white">Hello, {{app.Current_user.data.customer.customer_name.titlecase()}}</a></h4>
                     </div>
                 </div>
             </div>
@@ -116,7 +116,7 @@
                                         <a dmx-on:click="app.main.navigate('/product-info/'+id,{})"><img src="" alt="" dmx-bind:src="app.main.orderprompt.queryServices.data.queryServices[0].product_avatar" /></a>
                                     </div>
                                     <div class="card-info">
-                                        <a href="" class="button-4 btn-dir popover-open" title="This product is nice" data-popover="#popover1" dmx-on:click="app.main.orderprompt.popover_title.setValue(product_name.capitalize());app.main.orderprompt.popover_description.setValue(product_description.capitalize())">
+                                        <a href="" class="button-4 btn-dir bg-color-primary popover-open" title="This product is nice" data-popover="#popover1" dmx-on:click="app.main.orderprompt.popover_title.setValue(product_name.capitalize());app.main.orderprompt.popover_description.setValue(product_description.capitalize())">
 
                                             <i class="bi bi-question-circle"></i>
                                             <span>Info</span>
@@ -152,7 +152,7 @@
                                         <a dmx-on:click="app.main.navigate('/product-info/'+id,{})"><img alt="" dmx-bind:src="app.main.orderprompt.queryServices.data.queryServices[0].product_avatar" /></a>
                                     </div>
                                     <div class="card-info">
-                                        <a href="" class="button-4 btn-dir popover-open" title="This product is nice" data-popover="#popover1" dmx-on:click="app.main.orderprompt.popover_title.setValue(product_name.capitalize());app.main.orderprompt.popover_description.setValue(product_description.capitalize())">
+                                        <a href="" class="button-4 btn-dir bg-color-primary  popover-open" title="This product is nice" data-popover="#popover1" dmx-on:click="app.main.orderprompt.popover_title.setValue(product_name.capitalize());app.main.orderprompt.popover_description.setValue(product_description.capitalize())">
 
                                             <i class="bi bi-question-circle"></i>
                                             <span>Info</span> </a>
@@ -187,7 +187,7 @@
                                         <a dmx-on:click="app.main.navigate('/product-info/'+id,{})"><img alt="" dmx-bind:src="app.main.orderprompt.queryServices.data.queryServices[0].product_avatar" /></a>
                                     </div>
                                     <div class="card-info">
-                                        <a href="" class="button btn-dir popover-open" title="This product is nice" data-popover="#popover1" dmx-on:click="app.main.orderprompt.popover_title.setValue(product_name.capitalize());app.main.orderprompt.popover_description.setValue(product_description.capitalize())">
+                                        <a href="" class="button btn-dir  bg-color-primary popover-open" title="This product is nice" data-popover="#popover1" dmx-on:click="app.main.orderprompt.popover_title.setValue(product_name.capitalize());app.main.orderprompt.popover_description.setValue(product_description.capitalize())">
 
                                             <i class="bi bi-question-circle"></i>
                                             <span>Info</span>
@@ -223,7 +223,7 @@
                                         <a dmx-on:click="app.main.navigate('/product-info/'+id,{})"><img alt="" dmx-bind:src="app.main.orderprompt.queryServices.data.queryServices[0].product_avatar" /></a>
                                     </div>
                                     <div class="card-info">
-                                        <a href="" class="button btn-dir popover-open" title="This product is nice" data-popover="#popover1" dmx-on:click="app.main.orderprompt.popover_title.setValue(product_name.capitalize());app.main.orderprompt.popover_description.setValue(product_description.capitalize())">
+                                        <a href="" class="button btn-dir  bg-color-primary popover-open" title="This product is nice" data-popover="#popover1" dmx-on:click="app.main.orderprompt.popover_title.setValue(product_name.capitalize());app.main.orderprompt.popover_description.setValue(product_description.capitalize())">
 
                                             <i class="bi bi-question-circle"></i>
                                             <span>Info</span>

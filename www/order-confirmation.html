@@ -25,7 +25,7 @@
     </div>
     <div class="toolbar toolbar-bottom toolbar-bottom-md">
         <div class="toolbar-inner" style="padding:10px !important">
-            <a class="item-link list-button button-large rounded-xl button-18 bg-color-primary button-fill text-color-white color-deeppurple" style="width:100%" dmx-bind:href="'/appointment-page'">Continue</a>
+            <a class="button-large rounded-xl button-18 bg-color-primary text-color-white" style="width:100%" dmx-bind:href="'/appointment-page'">Continue</a>
         </div>
     </div>
 
@@ -34,7 +34,7 @@
 
         <div class="container" style="margin-bottom:150px !important">
 
-            <div class="block text-align-right">
+            <div class="block text-align-right" dmx-hide="(app.Cart.data.count() < 1)">
                 <p style="margin-bottom:0px !important"><small>Basket Total</small></p>
                 <h2 style="margin-top:-5px !important">{{Cart.data.sum(`total.toNumber()`).formatCurrency('AED', '.', ',', 2)}}</h2>
 
@@ -44,6 +44,10 @@
 
 
 
+            <div class="block text-align-center padding-top padding-bottom" dmx-show="(app.Cart.data.count() < 1)">
+                <h4> Your shopping cart is empty.</h4>
+
+            </div>
 
 
 
@@ -63,7 +67,7 @@
                                     <div class="col-70">
                                         <p class="price">{{total.toNumber().formatCurrency('AED', '.', ',', 2)}}</p>
                                     </div>
-                                    <div class="col-30"> <button class="button-18 text-align-center bg-color-primary" style="height:30px !important; width:30px !important; margin-top:10px !important" dmx-on:click="run({'f7.dialog.confirm':{title:'Cart action',text:'This item will be removed from your cart.',then:{steps:{run:{action:`app.Cart.delete({product_id: product_id})`}}}}})"><i class="bi bi-trash fa-fw text-color-white margin"></i> </button></div>
+                                    <div class="col-30"> <button class="button-18 text-align-center bg-color-primary" style="height:30px !important; width:30px !important; margin-top:10px !important" dmx-on:click="run({'f7.dialog.confirm':{title:'Delete Item?',text:'This item will be removed from your cart.',then:{steps:{run:{action:`app.Cart.delete({product_id: product_id})`}}}}})"><i class="bi bi-trash fa-fw text-color-white margin"></i> </button></div>
                                 </div>
                                 <!--  <div class="dz-meta">
                                         <ul>
