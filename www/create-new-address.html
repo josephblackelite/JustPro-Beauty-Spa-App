@@ -1,88 +1,94 @@
 <!-- Wappler include head-page="index.html" is="dmx-app" id="createnewaddress" appConnect="local" framework7_6="With App Connect" framework7_icons="local" capacitor="local" components="{dmxGooglePlaces:{},dmxValidator:{}}" -->
 
-<div class="page profile-wrapper">
-    <div id="test" class="padding-top">
-        <div class="navbar">
-            <div class="navbar-inner">
+<div class="page profile-wrapper" id="addaddress" data-name="create-new-address" path="/create-new-address">
+    <div class="padding-top padding-bottom">
+        <div class="navbar no-hairline no-shadow no-border">
+            <div class="navbar-inner" style="padding-right:0px !important; padding-left:0px !important; margin-right:0px !important">
+                <div class="left">
+                    <a href="#" class="link back">
+                        <i class="icon f7-icons">arrow_left</i>
+                    </a>
 
-                <a href="#" class="link back">
-                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <path d="M0.439312 13.0606L5.75391 18.3752C6.04683 18.6682 6.43069 18.8146 6.81459 18.8146C7.1985 18.8146 7.58236 18.6682 7.87528 18.3752C8.46103 17.7894 8.46103 16.8397 7.87528 16.2539L5.12133 13.5H22.5C23.3284 13.5 24 12.8284 24 12C24 11.1716 23.3284 10.5 22.5 10.5H5.12133L7.87528 7.7461C8.46103 7.1603 8.46103 6.21057 7.87528 5.62477C7.28944 5.03898 6.33975 5.03898 5.75391 5.62477L0.439312 10.9394C-0.146437 11.5251 -0.146437 12.4749 0.439312 13.0606Z" fill="black" />
-                    </svg>
-                </a>
+                </div>
+
+                <div class="title">Add Address</div>
                 <div class="right">
-                    <a href="#" class="link panel-open" data-panel="left">
-                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                            <path d="M14 12C14 10.8955 13.1046 10 12 10C10.8954 10 10 10.8955 10 12C10 13.1046 10.8954 14 12 14C13.1046 14 14 13.1046 14 12Z" fill="black" />
-                            <path d="M14 20C14 18.8954 13.1046 18 12 18C10.8954 18 10 18.8954 10 20C10 21.1045 10.8954 22 12 22C13.1046 22 14 21.1045 14 20Z" fill="black" />
-                            <path d="M14 4C14 2.89544 13.1046 2.00001 12 2.00001C10.8954 2.00001 10 2.89544 10 4C10 5.10457 10.8954 6 12 6C13.1046 6 14 5.10457 14 4Z" fill="black" />
-                        </svg>
+                    <a href="#" class="link panel-open icon-only" data-panel="left">
+
+                        <i class="icon f7-icons">ellipsis_vertical</i>
                     </a>
                 </div>
             </div>
         </div>
     </div>
-    <div class="page-content content-area pt-90 wappler-block">
+    <div class="toolbar toolbar-bottom toolbar-bottom-md">
+        <div class="toolbar-inner" style="padding:10px !important">
+            <button href="" class="button-large button-18 button-fill rounded-xl button-gray color-purple" dmx-on:click="app.main.addaddress.add_new_address.submit()" dmx-bind:disabled="app.main.addaddress.add_new_address.state.executing"><span dmx-hide="app.main.addaddress.add_new_address.state.executing" style="width:100% !important">Save Address</span>
+                <div class="preloader color-purple" dmx-show="app.main.addaddress.add_new_address.state.executing"></div>
+            </button>
+        </div>
+    </div>
+    <div class="page-content content-area wappler-block">
         <div class="container">
             <div class="form-elements">
-                <form is="dmx-serverconnect-form" method="post" id="add_new_address" dmx-on:success="app.main.navigate('/checkout/'+app.main.f7page.add_new_address.data.insert_address.identity,{})" site="JustPro-Spa-Backend" action="https://api.justpro.me/api/customer_address_actions/create_new_address" dmx-on:invalid=""><input id="customer_id" name="customer_id" type="hidden" dmx-bind:value="app.Current_user.data.customer.id">
-                    <input id="country" name="country" type="hidden" dmx-bind:value="app.main.f7page.add_new_address.inp_location.components.country.long">
-                    <input id="logitude" name="logitude" type="hidden" dmx-bind:value="app.main.f7page.add_new_address.inp_location.longitude">
-                    <input id="latitude" name="latitude" type="hidden" dmx-bind:value="app.main.f7page.add_new_address.inp_location.latitude">
-                    <input id="state" name="state" type="hidden" dmx-bind:value="app.main.f7page.add_new_address.inp_location.components.administrativeAreaLevel1.long">
-                    <input id="street_name" name="street" type="hidden" dmx-bind:value="app.main.f7page.add_new_address.inp_location.address">
-                    <input id="city" name="city" type="hidden" dmx-bind:value="app.main.f7page.add_new_address.inp_location.components.locality.long">
-                    <input id="full_address" name="full_address" type="hidden" dmx-bind:value="app.main.f7page.add_new_address.inp_location.value">
-                    <input id="google_place_id" name="google_place_id" type="hidden" dmx-bind:value="app.main.f7page.add_new_address.inp_location.placeId">
-                    <div class="title-head">
-                        <h2 class="title">Add a new address</h2>
-                        <p>This is address will be used for contact purposes.</p>
-                    </div>
-                    <div class="list">
-                        <ul class="row">
-                            <li class="item-content col-100 item-input item-input-with-value">
+                <form is="dmx-serverconnect-form" method="post" id="add_new_address" dmx-on:success="app.main.navigate('/checkout/'+app.main.addaddress.add_new_address.data.insert_address.identity,{})" site="JustPro-Spa-Backend" action="https://api.justpro.me/api/customer_address_actions/create_new_address" dmx-on:invalid=""><input id="customer_id" name="customer_id" type="hidden" dmx-bind:value="app.Current_user.data.customer.id">
+                    <input id="country" name="country" type="hidden" dmx-bind:value="app.main.addaddress.add_new_address.inp_location.components.country.long">
+                    <input id="logitude" name="logitude" type="hidden" dmx-bind:value="app.main.addaddress.add_new_address.inp_location.longitude">
+                    <input id="latitude" name="latitude" type="hidden" dmx-bind:value="app.main.addaddress.add_new_address.inp_location.latitude">
+                    <input id="state" name="state" type="hidden" dmx-bind:value="app.main.addaddress.add_new_address.inp_location.components.administrativeAreaLevel1.long">
+                    <input id="street_name" name="street" type="hidden" dmx-bind:value="app.main.addaddress.add_new_address.inp_location.address">
+                    <input id="city" name="city" type="hidden" dmx-bind:value="app.main.addaddress.add_new_address.inp_location.components.locality.long">
+                    <input id="full_address" name="full_address" type="hidden" dmx-bind:value="app.main.addaddress.add_new_address.inp_location.value">
+                    <input id="google_place_id" name="google_place_id" type="hidden" dmx-bind:value="app.main.addaddress.add_new_address.inp_location.placeId">
+
+
+
+
+                    <div class="list no-hairlines-md">
+                        <ul>
+                            <li class="item-content item-input padding-bottom">
                                 <div class="item-inner">
-                                    <div class="item-title item-label">Type address</div>
+                                    <div class="item-title item-label">Start typing your address</div>
                                     <div class="item-input-wrap">
-                                        <input type="text" placeholder="e.g Villa. 8, Oak str." class="form-control" id="inp_location" name="address_element" is="dmx-google-autocomplete" country="AE" types="address">
+                                        <input input type="text" placeholder="e.g Villa. 8, Oak str." class="form-control" id="inp_location" name="address_element" is="dmx-google-autocomplete" country="AE" types="address" />
+                                        <span class="input-clear-button"></span>
                                     </div>
                                 </div>
                             </li>
-                            <li class="item-content col-100 item-input item-input-with-value">
-
+                            <li class="item-content item-input padding-bottom">
                                 <div class="item-inner">
-                                    <div class="item-title item-label">Flat number</div>
+                                    <div class="item-title item-label">Building Name</div>
                                     <div class="item-input-wrap">
-                                        <input type="text" name="apartment" class="form-control" id="flat_number" required="">
-                                    </div>
-                                </div>
-
-                            </li>
-                            <li class="item-content col-100 item-input item-input-with-value">
-
-                                <div class="item-inner">
-                                    <div class="item-title item-label">Building name</div>
-                                    <div class="item-input-wrap">
-                                        <input type="text" name="building" class="form-control" id="building_name" placeholder="Oak tower" required="">
-                                    </div>
-                                </div>
-
-                            </li>
-                            <li class="item-content col-100 item-input item-input-with-value">
-                                <div class="item-inner">
-                                    <div class="item-title item-label">Address name</div>
-                                    <div class="item-input-wrap">
-                                        <input id="address_name" name="address_name" type="text" required="">
+                                        <input type="text" name="building" class="form-control" id="building_name" placeholder="Oak tower" required="" />
+                                        <span class="input-clear-button"></span>
                                     </div>
                                 </div>
                             </li>
-
+                            <li class="item-content item-input padding-bottom">
+                                <div class="item-inner">
+                                    <div class="item-title item-label">Flat/Office Number</div>
+                                    <div class="item-input-wrap">
+                                        <input type="text" name="apartment" class="form-control" id="flat_number" required="" />
+                                        <span class="input-clear-button"></span>
+                                    </div>
+                                </div>
+                            </li>
+                            <li class="item-content item-input padding-bottom">
+                                <div class="item-inner">
+                                    <div class="item-title item-label">Address Nickname</div>
+                                    <div class="item-input-wrap">
+                                        <input id="address_name" name="address_name" type="text" required="" />
+                                        <span class="input-clear-button"></span>
+                                    </div>
+                                </div>
+                            </li>
                         </ul>
                     </div>
+
+
+
                     <div class="clearfix text-align-center pb-30">
-                        <button href="" class="button-large button button-fill rounded-xl button-gray color-purple" dmx-on:click="app.main.f7page.add_new_address.submit()" dmx-bind:disabled="app.main.f7page.add_new_address.state.executing"><span dmx-hide="app.main.f7page.add_new_address.state.executing">ADD ADDRESS</span>
-                            <div class="preloader color-purple" dmx-show="app.main.f7page.add_new_address.state.executing"></div>
-                        </button>
+
                     </div>
                 </form>
             </div>

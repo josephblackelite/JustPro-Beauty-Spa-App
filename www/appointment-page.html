@@ -3,32 +3,33 @@
 <div class="page" path="/appointment-page" data-name="appointment-page" id="appointmentpage">
     <dmx-value id="appointment_timeStart" dmx-bind:value="'9:00 am'"></dmx-value>
     <dmx-value id="appointment_timeEnd" dmx-bind:value="'10:00 am'"></dmx-value>
-    <div class="navbar">
-        <div class="navbar-inner">
-            <div class="left"><a href="#" class="link back">
-                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <path d="M0.439312 13.0606L5.75391 18.3752C6.04683 18.6682 6.43069 18.8146 6.81459 18.8146C7.1985 18.8146 7.58236 18.6682 7.87528 18.3752C8.46103 17.7894 8.46103 16.8397 7.87528 16.2539L5.12133 13.5H22.5C23.3284 13.5 24 12.8284 24 12C24 11.1716 23.3284 10.5 22.5 10.5H5.12133L7.87528 7.7461C8.46103 7.1603 8.46103 6.21057 7.87528 5.62477C7.28944 5.03898 6.33975 5.03898 5.75391 5.62477L0.439312 10.9394C-0.146437 11.5251 -0.146437 12.4749 0.439312 13.0606Z" fill="black" />
-                    </svg>
-                </a></div>
+    <div class="padding-top padding-bottom">
+        <div class="navbar no-hairline no-shadow no-border">
+            <div class="navbar-inner" style="padding-right:0px !important; padding-left:0px !important; margin-right:0px !important">
+                <div class="left">
+                    <a href="#" class="link back">
+                        <i class="icon f7-icons">arrow_left</i>
+                    </a>
 
-            <div class="title">Book appointment</div>
-            <div class="right">
-                <a href="#" class="link panel-open" data-panel="left">
-                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <path d="M14 12C14 10.8955 13.1046 10 12 10C10.8954 10 10 10.8955 10 12C10 13.1046 10.8954 14 12 14C13.1046 14 14 13.1046 14 12Z" fill="black" />
-                        <path d="M14 20C14 18.8954 13.1046 18 12 18C10.8954 18 10 18.8954 10 20C10 21.1045 10.8954 22 12 22C13.1046 22 14 21.1045 14 20Z" fill="black" />
-                        <path d="M14 4C14 2.89544 13.1046 2.00001 12 2.00001C10.8954 2.00001 10 2.89544 10 4C10 5.10457 10.8954 6 12 6C13.1046 6 14 5.10457 14 4Z" fill="black" />
-                    </svg>
-                </a>
+                </div>
+
+                <div class="title">Appointment</div>
+                <div class="right">
+                    <a href="#" class="link panel-open icon-only" data-panel="left">
+
+                        <i class="icon f7-icons">ellipsis_vertical</i>
+                    </a>
+                </div>
             </div>
         </div>
+
     </div>
     <div class="toolbar toolbar-bottom toolbar-bottom-md">
         <div class="toolbar-inner" style="padding:10px !important">
-            <a class="item-link list-button button-large rounded-xl button-18 bg-color-primary button-fill text-color-white color-deeppurple" style="width:100%" dmx-on:click="run({condition:{if:`app.main.appointmentpage.form.appointmentDate.value.toDate()`,then:{steps:[{run:{action:`app.Cart.update({customer_id: 1},{appointment_date: app.main.appointmentpage.form.appointmentDate.value.toDate(), timeSlot_start: app.main.appointmentpage.appointment_timeStart.value, timeSlot_end: app.main.appointmentpage.appointment_timeEnd.value})`}},{run:{action:`app.main.navigate(\'/choose-address\',{})`}}]},else:{steps:{'f7.dialog.alert':{title:'Missing step',text:'Appointment date value is missing!'}}}}})">Continue</a>
+            <a class="item-link list-button button-large rounded-xl button-18 bg-color-primary button-fill text-color-white color-deeppurple" style="width:100%" dmx-on:click="run({condition:{if:`app.main.appointmentpage.form.appointmentDate.value.toDate()`,then:{steps:[{run:{action:`app.Cart.update({customer_id: 1},{appointment_date: app.main.appointmentpage.form.appointmentDate.value.toDate(), timeSlot_start: app.main.appointmentpage.appointment_timeStart.value, timeSlot_end: app.main.appointmentpage.appointment_timeEnd.value})`}},{run:{action:`app.main.navigate(\'/choose-address\',{})`}}]},else:{steps:{'f7.dialog.alert':{title:'Appointment Date',text:'Please select an appointment date.'}}}}})">Continue</a>
         </div>
     </div>
-    <div class="page-content content-area pt-70 wappler-block">
+    <div class="page-content content-area wappler-block">
         <div class="container">
             <p>Choose a date and time you will like our professionals to serve you.</p>
             <form id="form" method="post" is="dmx-serverconnect-form">

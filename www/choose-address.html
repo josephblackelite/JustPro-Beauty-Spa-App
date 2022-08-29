@@ -1,41 +1,47 @@
 <!-- Wappler include head-page="index.html" is="dmx-app" id="chooseaddress" appConnect="local" framework7_6="With App Connect" framework7_icons="local" capacitor="local" components="{dmxDatePicker:{},dmxGoogleMaps:{},dmxGooglePlaces:{},dmxSockets:{},dmxFormatter:{}}" jquery_slim_35="cdn" moment_2="cdn" -->
 
-<div class="page location-tracking">
-    <dmx-serverconnect id="selected_address_data" url="https://api.justpro.me/api/customer_address_actions/selcted_address_data" site="JustPro-Spa-Backend" dmx-param:address_id="app.main.f7page.address_select_form.select_address.value" sockets="true"></dmx-serverconnect>
+<div class="page location-tracking" id="chooseaddress" data-name="choose-address" path="/choose-address">
+    <dmx-serverconnect id="selected_address_data" url="https://api.justpro.me/api/customer_address_actions/selcted_address_data" site="JustPro-Spa-Backend" dmx-param:address_id="app.main.chooseaddress.address_select_form.select_address.value" sockets="true"></dmx-serverconnect>
 
     <script is="dmx-flow" id="showAddressSheet" type="text/dmx-flow" autorun>{
   runJS: {function: "showAddressSheet"}
 }</script>
-    <div class="navbar" style="margin-top:20px">
-        <div class="navbar-inner">
+    <div class="padding-top padding-bottom">
+        <div class="navbar no-hairline no-shadow no-border">
+            <div class="navbar-inner" style="padding-right:0px !important; padding-left:0px !important; margin-right:0px !important">
+                <div class="left">
+                    <a href="#" class="link back">
+                        <i class="icon f7-icons">arrow_left</i>
+                    </a>
 
-            <a href="#" class="link back">
-                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <path d="M0.439312 13.0606L5.75391 18.3752C6.04683 18.6682 6.43069 18.8146 6.81459 18.8146C7.1985 18.8146 7.58236 18.6682 7.87528 18.3752C8.46103 17.7894 8.46103 16.8397 7.87528 16.2539L5.12133 13.5H22.5C23.3284 13.5 24 12.8284 24 12C24 11.1716 23.3284 10.5 22.5 10.5H5.12133L7.87528 7.7461C8.46103 7.1603 8.46103 6.21057 7.87528 5.62477C7.28944 5.03898 6.33975 5.03898 5.75391 5.62477L0.439312 10.9394C-0.146437 11.5251 -0.146437 12.4749 0.439312 13.0606Z" fill="black" />
-                </svg>
-            </a>
-            <div class="title">Choose address</div>
-            <div class="right">
-                <a href="#" class="link panel-open" data-panel="left">
-                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <path d="M14 12C14 10.8955 13.1046 10 12 10C10.8954 10 10 10.8955 10 12C10 13.1046 10.8954 14 12 14C13.1046 14 14 13.1046 14 12Z" fill="black" />
-                        <path d="M14 20C14 18.8954 13.1046 18 12 18C10.8954 18 10 18.8954 10 20C10 21.1045 10.8954 22 12 22C13.1046 22 14 21.1045 14 20Z" fill="black" />
-                        <path d="M14 4C14 2.89544 13.1046 2.00001 12 2.00001C10.8954 2.00001 10 2.89544 10 4C10 5.10457 10.8954 6 12 6C13.1046 6 14 5.10457 14 4Z" fill="black" />
-                    </svg>
-                </a>
+                </div>
+
+                <div class="title">Address</div>
+                <div class="right">
+                    <a href="#" class="link panel-open icon-only" data-panel="left">
+
+                        <i class="icon f7-icons">ellipsis_vertical</i>
+                    </a>
+                </div>
             </div>
+        </div>
+
+    </div>
+    <div class="toolbar toolbar-bottom toolbar-bottom-md" dmx-show="app.main.chooseaddress.address_select_form.select_address.value">
+        <div class="toolbar-inner" style="padding:10px !important">
+            <a class="button-18 button-large button-fill bg-color-primary text-color-white" href="" dmx-on:click="run([{runJS:{function:'closeAddressSheet'}},{run:{action:`app.main.navigate(\'/checkout/\'+app.main.chooseaddress.address_select_form.select_address.value,{})`}}])" style="width:100%">Select this address</a>
         </div>
     </div>
     <div class="fab fab-left-bottom">
-        <a href="#" dmx-on:click="app.main.f7page.showAddressSheet.run()">
-            <i class="icon f7-icons">arrow_branch</i>
+        <a href="#" dmx-on:click="app.main.chooseaddress.showAddressSheet.run()">
+            <i class="bi bi-geo-alt-fill"></i>
         </a>
     </div>
     <div class="page-content wappler-block pt-70 relative">
         <div>
 
-            <dmx-google-maps id="maps" class="full-page-map" height="100%" zoom-control="true" zoom="20" dmx-bind:address="app.main.f7page.selected_address_data.data.query.full_address" dmx-bind:latitude="app.main.f7page.selected_address_data.data.query.latitude" dmx-bind:longitude="app.main.f7page.selected_address_data.data.query.logitude">
-                <dmx-google-maps-marker id="marker1" dmx-bind:address="app.main.f7page.selected_address_data.data.query.full_address" dmx-bind:latitude="app.main.f7page.selected_address_data.data.query.latitude" dmx-bind:longitude="app.main.f7page.selected_address_data.data.query.logitude"></dmx-google-maps-marker>
+            <dmx-google-maps id="maps" class="full-page-map" height="100%" zoom-control="true" zoom="20" dmx-bind:address="app.main.chooseaddress.selected_address_data.data.query.full_address" dmx-bind:latitude="app.main.chooseaddress.selected_address_data.data.query.latitude" dmx-bind:longitude="app.main.chooseaddress.selected_address_data.data.query.logitude">
+                <dmx-google-maps-marker id="marker1" dmx-bind:address="app.main.chooseaddress.selected_address_data.data.query.full_address" dmx-bind:latitude="app.main.chooseaddress.selected_address_data.data.query.latitude" dmx-bind:longitude="app.main.chooseaddress.selected_address_data.data.query.logitude"></dmx-google-maps-marker>
             </dmx-google-maps>
         </div>
 
@@ -45,19 +51,25 @@
             <div class="toolbar">
                 <div class="toolbar-inner">
                     <div class="left"></div>
-                    <div class="title text-align-center">Choose service delivery address</div>
+                    <div class="title text-align-center">Where do you want this service?</div>
                     <div class="right"></div>
                 </div>
             </div>
+
             <div class="sheet-modal-inner">
-                <div class="sheet-modal-swipe-step">
+                <div class="block">
+                    <div>
+                        <a class="button-18 button-large button-fill " href="" dmx-on:click="run([{runJS:{function:'closeAddressSheet'}},{run:{action:`app.main.navigate(\'/create-new-address\',{})`}}])" style="width:100%">Add a new address</a>
+                    </div>
+                </div>
+                <div class="sheet-modal-swipe-step" dmx-show="app.main.chooseaddress.address_select_form.select_address.value">
                     <div class="">
                         <form action="" is="dmx-serverconnect-form" method="post" id="address_select_form">
                             <div class="list">
                                 <ul class="row">
                                     <li class="item-content col-100 item-input item-input-with-value">
                                         <div class="item-inner">
-                                            <div class="item-title item-label">Select address</div>
+                                            <div class="item-title item-label">My Addresses</div>
                                             <div class="item-input-wrap">
                                                 <select id="select_address" class="form-control" dmx-bind:options="app.Current_user.data.customer.customer_addresses" optionvalue="id" optiontext="address_name">
                                                 </select>
@@ -69,16 +81,12 @@
                             </div>
                         </form>
                     </div>
-                    <div class="padding-horizontal padding-bottom">
-                        <a class="button button-large button-fill" href="" dmx-on:click="run([{runJS:{function:'closeAddressSheet'}},{run:{action:`app.main.navigate(\'/checkout/\'+app.main.f7page.address_select_form.select_address.value,{})`}}])">Continue</a>
-                    </div>
                 </div>
-                <div class="block-title block-title-medium margin-top"></div>
-                <div class="block">
-                    <div class="padding-horizontal padding-bottom">
-                        <a class="button button-large button-fill color-white text-color-purple" href="" dmx-on:click="run([{runJS:{function:'closeAddressSheet'}},{run:{action:`app.main.navigate(\'/create-new-address\',{})`}}])">Add a new address</a>
-                    </div>
+
+                <div class="block" dmx-show="app.main.chooseaddress.address_select_form.select_address.value">
+                    <a href="#!" class="text-align-center button-4" dmx-on:click="run({runJS:{function:'closeAddressSheet'}})" style="width:100% !important">Close and Continue</a>
                 </div>
+
             </div>
         </div>
     </div>

@@ -9,12 +9,12 @@ var routes = [
     "name": "index"
   },
   {
-    "path": "/verifyOtp/:checkout?",
+    "path": "/verifyOtp",
     "url": "./otpPage.html"
   },
   {
     "path": "/order-prompt",
-    "url": "./order-prompt.html"
+    "url": "./home.html"
   },
   {
     "path": "/order-confirmation",
@@ -65,6 +65,10 @@ var routes = [
     "url": "./message-list.html"
   },
   {
+    "path": "/appointment-page",
+    "url": "./appointment-page.html"
+  },
+  {
     "path": "/message-view",
     "url": "./message-view.html"
   },
@@ -79,9 +83,5 @@ var routes = [
   {
     "path": "/customer-name-prompt",
     "url": "./customer-name-prompt.html"
-  },
-  {
-    "path": "/appointment-page",
-    "url": "./appointment-page.html"
   }
 ]
