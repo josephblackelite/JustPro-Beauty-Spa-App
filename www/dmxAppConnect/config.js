@@ -318,5 +318,11 @@ dmx.config({
       ],
       "outputType": "array"
     }
+  },
+  "chooseaddress": {
+    "var": {
+      "meta": null,
+      "outputType": "text"
+    }
   }
 });

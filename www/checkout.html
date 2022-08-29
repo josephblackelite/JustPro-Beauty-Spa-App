@@ -26,18 +26,9 @@
         </div>
     </div>
     <div class="page-content wappler-block pt-70">
-        <form id="items_hidden" is="dmx-serverconnect-form" method="post" dmx-show="">
-            <div dmx-repeat:repeat_cart_items="app.Cart.data">
-                <input name="product_id" type="text" id="product_id" dmx-bind:value="product_id">
-                <input name="product_stripe_id" type="text" id="product_stripe_id" dmx-bind:value="product_stripe_id">
-                <input name="quantity" type="text" id="quantity" dmx-bind:value="quantity">
-                <input name="matrix" type="text" id="matrix" dmx-bind:value="matrix">
-                <input name="total" type="text" id="total" dmx-bind:value="total">
-                <input name="vat" type="text" id="vat" dmx-bind:value="vat">
-                <input name="address_id" type="text" id="address_id">
-                <input name="appointment_date" type="text" id="appointment_date" dmx-bind:value="appointment_date">
-                <input name="timeSlot_start" type="text" id="timeSlot_start" dmx-bind:value="timeSlot_start">
-                <input name="timeSlot_end" type="text" id="timeSlot_end" dmx-bind:value="timeSlot_end">
+        <form id="items_hidden" is="dmx-serverconnect-form" method="post">
+            <div is="dmx-form-repeat" id="formRepeat1" sortable="true" dmx-bind:items="app.Cart.data">
+                <input id="text1" name="text1" type="text" dmx-bind:value="items[$index].product_id">
             </div>
 
         </form>
@@ -128,7 +119,7 @@
             </div>
             <div class="sheet-modal-inner">
                 <div class="block no-margin-top">
-                    <form action="https://api.justpro.me/api/security/verify_user_number" is="dmx-serverconnect-form" method="post" id="verify_user_number" site="JustPro-Spa-Backend" dmx-on:success="run({condition:{if:`(app.main.f7page.verify_user_number.data.exec.api.data.status == \'open\')`,then:{steps:[{runJS:{function:'closeVerifyNumberSheet'}},{run:{action:`app.otp_id.setValue(app.main.f7page.verify_user_number.data.exec.api.data.otp_id);app.main.navigate(\'/verifyOtp/1\',{})`}}]}}})" class="no-padding" dmx-on:invalid="run({'f7.dialog.alert':{title:'Error',text:`app.main.f7page.verify_user_number.lastError.response`}})">
+                    <form action="https://api.justpro.me/api/security/verify_user_number" is="dmx-serverconnect-form" method="post" id="verify_user_number" site="JustPro-Spa-Backend" dmx-on:success="run({condition:{if:`(app.main.f7page.verify_user_number.data.exec.api.data.status == \'open\')`,then:{steps:[{runJS:{function:'closeVerifyNumberSheet'}},{runJS:{function:'startOtpWatch'}},{run:{action:`app.otp_id.setValue(app.main.f7page.verify_user_number.data.exec.api.data.otp_id);app.main.navigate(\'/verifyOtp/1\',{})`}}]}}})" class="no-padding" dmx-on:invalid="run({'f7.dialog.alert':{title:'Error',text:`app.main.f7page.verify_user_number.lastError.response`}})">
                         <input id="user_id" name="user_id" type="hidden" dmx-bind:value="app.Current_user.data.customer.id">
                         <div class="list no-margin-top ">
                             <ul class="row">
@@ -194,3 +185,6 @@
         </div>
     </div>
 </div>
+<script>
+
+</script>

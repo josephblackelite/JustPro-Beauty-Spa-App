@@ -62,7 +62,7 @@
                                             <li class="price">{{total.toNumber().formatCurrency('AED', '.', ',', 2)}} </li>
                                             <li>
                                                 <label class="bookmark-btn">
-                                                    <button class="button-4 text-align-center" style="height:30px !important; width:30px !important; margin-top:10px !important"><i class="bi bi-trash fa-2x fa-fw"></i> </button>
+                                                    <button class="button-4 text-align-center" style="height:30px !important; width:30px !important; margin-top:10px !important" dmx-on:click="run({'f7.dialog.confirm':{title:'Cart action',text:'This item will removed from cart.',then:{steps:{run:{action:`app.Cart.delete({product_id: product_id})`}}}}})"><i class="bi bi-trash fa-2x fa-fw"></i> </button>
 
                                                 </label>
                                             </li>

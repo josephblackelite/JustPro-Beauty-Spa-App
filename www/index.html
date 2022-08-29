@@ -81,15 +81,64 @@
     <script src="dmxAppConnect/dmxFormRepeat/dmxFormRepeat.js" defer></script>
     <script src="https://js.stripe.com/v3/" defer></script>
     <script src="dmxAppConnect/dmxStripe/dmxStripe.js" defer></script>
+    <script src="https://cdn.jsdelivr.net/npm/sortablejs@1/Sortable.min.js"></script>
 </head>
 
 <body is="dmx-app" id="index">
+
+
+
+
+
+
+
+
+
+
+
     <div id="app" is="dmx-f7-app" class="color-theme-deeppurple" theme="aurora">
 
 
 
-        <dmx-local-manager id="local_store"></dmx-local-manager>
 
+
+
+
+        <!-- Statusbar overlay -->
+
+
+
+
+
+
+
+
+
+
+
+        <dmx-local-manager id="local_store"></dmx-local-manager>
+        <script is="dmx-flow" id="App_notifcation" type="text/dmx-flow">{
+          meta: {
+            $param: [
+              {type: "text", name: "title"},
+              {type: "text", name: "text"}
+            ]
+          },
+          exec: {
+            steps: {
+              runJS: {
+                function: "createNotification",
+                args: [
+                  "{{app.main.login.App_notifcation.$param.title}}",
+                  "{{app.main.login.App_notifcation.$param.text}}"
+                ]
+              }
+            }
+          }
+        }</script>
+        <dmx-serverconnect id="Current_user" url="https://api.justpro.me/api/security/logged_in_user_data" site="JustPro-Spa-Backend" dmx-param:user_id="local_store.data.user_id" sockets="true"></dmx-serverconnect>
+        <dmx-value id="service_category" dmx-bind:value="'nails'"></dmx-value>
+        <dmx-datastore id="Cart"></dmx-datastore>
         <script is="dmx-flow" id="Redirect_to_login_or_home" type="text/dmx-flow" autorun>[
   {
     condition: {
@@ -122,28 +171,8 @@
     runJS: {function: "hideSplashScreen"}
   }
 ]</script>
+        <dmx-value id="panelLinkClassToggle" dmx-bind:value="'home'"></dmx-value><input id="STRIPE_CARD_SETUP" name="text1" type="hidden">
         <dmx-value id="otp_id"></dmx-value>
-        <!-- Statusbar overlay -->
-
-        <script is="dmx-flow" id="App_notifcation" type="text/dmx-flow">{
-          meta: {
-            $param: [
-              {type: "text", name: "title"},
-              {type: "text", name: "text"}
-            ]
-          },
-          exec: {
-            steps: {
-              runJS: {
-                function: "createNotification",
-                args: [
-                  "{{app.main.login.App_notifcation.$param.title}}",
-                  "{{app.main.login.App_notifcation.$param.text}}"
-                ]
-              }
-            }
-          }
-        }</script>
         <script is="dmx-flow" id="Show_proloader" type="text/dmx-flow">{
   meta: {
     $param: [
@@ -160,14 +189,8 @@
     }
   }
 }</script>
-
         <dmx-json-datasource id="countryList" is="dmx-serverconnect" url="countryList.json"></dmx-json-datasource>
-        <dmx-serverconnect id="Current_user" url="https://api.justpro.me/api/security/logged_in_user_data" site="JustPro-Spa-Backend" dmx-param:user_id="local_store.data.user_id" sockets="true"></dmx-serverconnect>
-        <dmx-value id="service_category" dmx-bind:value="'nails'"></dmx-value>
-        <dmx-datastore id="Cart"></dmx-datastore>
         <dmx-value id="cartQtyVal" dmx-bind:value="0"></dmx-value>
-        <dmx-value id="panelLinkClassToggle" dmx-bind:value="'home'"></dmx-value>
-        <input id="STRIPE_CARD_SETUP" name="text1" type="hidden">
         <div class="statusbar"></div>
 
         <!-- Sidebar Nav -->
@@ -372,6 +395,7 @@
         function hidePanel() {
             Framework7.instance.panel.close(".panel", true)
         }
+
     </script>
     <script>
         let slideIndex = 1;
@@ -440,6 +464,23 @@ function showEnterEmailAddressSheet() {
 function closeEnterEmailAddressSheet() {
    Framework7.instance.sheet.close(".EnterEmailAddressSheet", true)
 }
+
+function showAddressSheet() {
+    Framework7.instance.sheet.open(".address-sheet-swipe-to-step", true)
+    }
+
+    function closeAddressSheet() {
+    Framework7.instance.sheet.close(".address-sheet-swipe-to-step", true)
+    }
+    </script>
+
+    <script>
+        window.initAutoComplete = function() {
+      		var acInputs = document.getElementById("inp_location");
+      		var autocomplete = new google.maps.places.Autocomplete(acInputs);
+      		google.maps.event.addListener(autocomplete, 'place_changed', function() {});
+    	}
+    
     </script>
 </body>
 

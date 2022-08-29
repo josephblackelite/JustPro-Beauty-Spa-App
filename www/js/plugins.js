@@ -309,12 +309,15 @@ function errorCallback(message) {
     Framework7.instance.dialog.alert(message, "Err")
 }
 function startOtpWatch() {
-    smsOtpAutofill.startOTPListener(successCallback, errorCallback, {
-        otpLength: 6,
-        delimiter: 'is',
-        senderID: 'JustPro',
-        timeout: 120
-    });
+    if (Capacitor.platform != "ios") {
+        smsOtpAutofill.startOTPListener(successCallback, errorCallback, {
+            otpLength: 6,
+            delimiter: 'is',
+            senderID: 'JustPro',
+            timeout: 120
+        });
+
+    }
 }
 
 
