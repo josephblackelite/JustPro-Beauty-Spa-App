@@ -83,5 +83,13 @@ var routes = [
   {
     "path": "/customer-name-prompt",
     "url": "./customer-name-prompt.html"
+  },
+  {
+    "path": "/billing",
+    "url": "./billing.html"
+  },
+  {
+    "path": "/customer-addresses",
+    "url": "./customer-addresses.html"
   }
 ]

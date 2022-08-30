@@ -154,7 +154,7 @@
             },
             else: {
               steps: {
-                run: {action: "{{app.main.navigate('/home',{})}}"}
+                run: {action: "{{app.main.navigate('/order-prompt',{})}}"}
               }
             }
           }
@@ -232,13 +232,13 @@
                                     </a>
                                 </li>
                                 <li>
-                                    <a class="item-link" dmx-on:click="run([{run:{action:`app.main.navigate(\'/profile\',{});app.panelLinkClassToggle.setValue(\'profile\')`}},{runJS:{function:'hidePanel'}}])" dmx-class:item-selected="(panelLinkClassToggle.value == 'profile')">
+                                    <a class="item-link" dmx-on:click="run([{run:{action:`app.main.navigate(\'/billing\',{});app.panelLinkClassToggle.setValue(\'billing\')`}},{runJS:{function:'hidePanel'}}])" dmx-class:item-selected="(panelLinkClassToggle.value == 'billing')">
                                         <i class="bi bi-credit-card"></i>
                                         <span>Billing</span>
                                     </a>
                                 </li>
                                 <li>
-                                    <a class="item-link" dmx-on:click="run([{run:{action:`app.main.navigate(\'/profile\',{});app.panelLinkClassToggle.setValue(\'profile\')`}},{runJS:{function:'hidePanel'}}])" dmx-class:item-selected="(panelLinkClassToggle.value == 'profile')">
+                                    <a class="item-link" dmx-on:click="run([{run:{action:`app.main.navigate(\'/customer-addresses\',{});app.panelLinkClassToggle.setValue(\'customer-addresses\')`}},{runJS:{function:'hidePanel'}}])" dmx-class:item-selected="(panelLinkClassToggle.value == 'customer-addresses')">
                                         <i class="bi bi-geo-alt-fill"></i>
                                         <span>My Address(es)</span>
                                     </a>

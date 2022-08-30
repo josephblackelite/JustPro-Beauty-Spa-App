@@ -78,5 +78,13 @@
   "appointment-page.html": {
     "layoutPage": "",
     "description": ""
+  },
+  "billing.html": {
+    "layoutPage": "",
+    "description": ""
+  },
+  "customer-addresses.html": {
+    "layoutPage": "",
+    "description": ""
   }
 }

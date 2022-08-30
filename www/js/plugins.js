@@ -93,12 +93,14 @@ Stripe.initialize({
 
 // be able to get event of PaymentFlow
 Stripe.addListener("paymentFlowLoaded", () => {
-    console.log('PaymentFlowEventsEnum.Loaded');
+    dmx.parse("app.main.checkout.justpropreloader.hide()")
+    dmx.parse("app.main.billing.justpropreloader.hide()")
     $$('#STRIPE_CARD_SETUP').val('Loaded');
 })
 
 Stripe.addListener("paymentFlowOpened", () => {
-    console.log('PaymentFlowEventsEnum.Opened');
+    dmx.parse("app.main.checkout.justpropreloader.hide()")
+    dmx.parse("app.main.billing.justpropreloader.hide()")
     $$('#STRIPE_CARD_SETUP').val('Opened');
 })
 
@@ -108,26 +110,24 @@ Stripe.addListener("paymentFlowCreated", () => {
 })
 
 Stripe.addListener("paymentFlowCompleted", () => {
-    console.log('PaymentFlowEventsEnum.Completed');
-    $$('#STRIPE_CARD_SETUP').val('Completed');
-    dmx.parse("indexPageRefresh.run()");
+    Framework7.instance.views.main.router.navigate("/order-tracking")
 })
 
 Stripe.addListener("paymentFlowFailedToLoad", () => {
-    console.log('PaymentFlowEventsEnum.Failed');
-    $$('#STRIPE_CARD_SETUP').val('FailedToLoad');
-    dmx.parse("indexPageRefresh.run()");
+    dmx.parse("app.main.checkout.justpropreloader.hide()")
+    dmx.parse("app.main.billing.justpropreloader.hide()")
 })
 
 Stripe.addListener("paymentFlowCanceled", () => {
-    console.log('PaymentFlowEventsEnum.Canceled');
-    $$('#STRIPE_CARD_SETUP').val('Canceled');
-    dmx.parse("indexPageRefresh.run()");
+    dmx.parse("app.main.checkout.justpropreloader.hide()")
+    dmx.parse("app.main.billing.justpropreloader.hide()")
+
 })
 Stripe.addListener("paymentFlowFailed", () => {
-    console.log('PaymentFlowEventsEnum.Failed');
+    dmx.parse("app.main.checkout.justpropreloader.hide()")
+    dmx.parse("app.main.billing.justpropreloader.hide()")
     $$('#STRIPE_CARD_SETUP').val('Failed');
-    dmx.parse("indexPageRefresh.run()");
+
 })
 
 

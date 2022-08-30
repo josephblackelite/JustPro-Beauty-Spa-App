@@ -1,10 +1,10 @@
-<!-- Wappler include head-page="index.html" is="dmx-app" id="checkout" appConnect="local" framework7_6="With App Connect" framework7_icons="local" capacitor="local" components="{dmxSwiper:{},dmxFormRepeat:{},dmxFormatter:{},dmxPreloader:{},dmxValidator:{}}" -->
+<!-- Wappler include head-page="index.html" is="dmx-app" id="checkout" appConnect="local" framework7_6="With App Connect" framework7_icons="local" capacitor="local" components="{dmxSwiper:{},dmxFormRepeat:{},dmxFormatter:{},dmxPreloader:{},dmxValidator:{},dmxDatastore:{}}" -->
 
 <div class="page" id="checkout" data-name="checkout" path="/checkout/:address_id">
     <form is="dmx-serverconnect-form" id="Setup_Intent_ephemeral_key_gen" method="post" action="https://api.justpro.me/api/stripe/create_setup_intent" site="JustPro-Spa-Backend" dmx-on:success="run({runJS:{function:'createPaymentFlow',args:[`app.main.checkout.Setup_Intent_ephemeral_key_gen.data.client_secret`,`app.main.checkout.Setup_Intent_ephemeral_key_gen.data.customer_id`,`app.main.checkout.Setup_Intent_ephemeral_key_gen.data.ephemeral_key`]}})"><input id="User_id" name="user_id" dmx-bind:value="app.Current_user.data.customer.id" type="hidden">
-        <input id="setUp" name="setUp" type="hidden" value="setUp">
+        <input id="setUp" name="setUp" type="hidden">
     </form>
-    <dmx-value id="card_setup_started"></dmx-value>
+    <dmx-serverconnect id="customerPayments" url="https://api.justpro.me/api/stripe/customerPaymentMethods" site="JustPro-Spa-Backend" dmx-param:stripecustomerid="app.Current_user.data.customer.stripe_customer_id"></dmx-serverconnect>
     <div class="padding-top padding-bottom">
         <div class="navbar no-hairline no-shadow no-border">
             <div class="navbar-inner" style="padding-right:0px !important; padding-left:0px !important; margin-right:0px !important">
@@ -31,82 +31,95 @@
         </div>
     </div>
     <div class="page-content wappler-block">
-         <dmx-preloader id="justpropreloader" spinner="pulse" color="#ff6600"></dmx-preloader>
+        <dmx-preloader id="justpropreloader" spinner="pulse" color="#ff6600"></dmx-preloader>
         <form id="items_hidden" is="dmx-serverconnect-form" method="post">
-            <div is="dmx-form-repeat" id="formRepeat1" sortable="true" dmx-bind:items="app.Cart.data">
-                <input id="text1" name="text1" type="text" dmx-bind:value="items[$index].product_id">
+            <input id="customer_id" name="customer_id" type="text" dmx-bind:value="app.Current_user.data.customer.id">
+            <input id="address_id" name="address_id" type="text" dmx-bind:value="app.main.checkout.route.params.address_id">
+            <div is="dmx-form-repeat" id="cartRepeat" dmx-bind:items="app.Cart.data">
+                <input id="product_id" name="product_id" type="text" dmx-bind:value="$value.product_id">
+                <input id="product_stripe_id" name="product_stripe_id" type="text" dmx-bind:value="$value.product_stripe_id">
+                <input id="quantity" name="quantity" type="text" dmx-bind:value="$value.quantity">
+                <input id="matrix" name="matrix" type="text" dmx-bind:value="$value.matrix">
+                <input id="amount" name="amount" type="text" dmx-bind:value="$value.amount">
+                <input id="total" name="total" type="text" dmx-bind:value="$value.total">
+                <input id="vat" name="vat" type="text" dmx-bind:value="$value.vat">
+                <input id="appointment_date" name="appointment_date" type="text" dmx-bind:value="$value.appointment_date">
+                <input id="timeSlot_start" name="timeSlot_start" type="text" dmx-bind:value="$value.timeSlot_start">
+                <input id="timeSlot_end" name="timeSlot_end" type="text" dmx-bind:value="$value.timeSlot_end">
             </div>
+
 
         </form>
 
         <div class="block">
-            <a href="" dmx-on:click="run({run:{action:`app.main.checkout.Setup_Intent_ephemeral_key_gen.submit()`}})" class="button-4 button-large bg-color-blue text-color-white rounded-lg text-align-center" style="width:100% !important"><i class="bi bi-credit-card"></i> Add new card</a>
+            <a href="" dmx-on:click="run({condition:{if:`app.Current_user.data.customer.customer_email`,then:{steps:{run:{action:`app.main.checkout.Setup_Intent_ephemeral_key_gen.setUp.setValue(\'setUp\');app.main.checkout.Setup_Intent_ephemeral_key_gen.submit();app.main.checkout.justpropreloader.show()`}}},else:{steps:{runJS:{function:'showEnterEmailAddressSheet'}}}}})" class="button-4 button-large bg-color-blue text-color-white rounded-lg text-align-center" style="width:100% !important"><i class="bi bi-credit-card"></i> Add new card</a>
 
         </div>
-    </div>
-
-    <div class="block no-margin">
-        <div class="list accordion-list dz-accordion dz-list">
-            <ul class="padding">
-                <li class="accordion-item accordion-item-opened">
-                    <div class="accordion-item-content">
-                        <div class="item-content-inner mb-30">
-                            <!-- Payment Swiper -->
-                            <div data-space-between="15" data-slides-per-view="auto" data-centered-slides="false" class="swiper-container swiper-init payment-swiper item-swiper">
-                                <div class="swiper-wrapper">
-                                    <div class="swiper-slide">
-                                        <div class="payment-card">
-                                            <div class="card-media">
-                                                <img src="img/card/card1.png" alt="">
-                                            </div>
-                                            <div class="card-info">
-                                                <div class="clearfix">
-                                                    <h5 class="card-name">Credit Card</h5>
-                                                    <p class="card-number">1234 **** **** ****</p>
+        <div class="block no-margin">
+            <div class="list accordion-list dz-accordion dz-list">
+                <ul class="padding">
+                    <li class="accordion-item accordion-item-opened">
+                        <div class="accordion-item-content">
+                            <div class="item-content-inner mb-30">
+                                <!-- Payment Swiper -->
+                                <div data-space-between="15" data-slides-per-view="auto" data-centered-slides="false" class="swiper-container swiper-init payment-swiper item-swiper">
+                                    <div class="swiper-wrapper">
+                                        <div class="swiper-slide" dmx-repeat:repeat_user_cards="app.main.checkout.customerPayments.data.customerPaymentMethods">
+                                            <div class="payment-card">
+                                                <div class="card-media">
+                                                    <img src="img/card/card1.png" alt="">
+                                                    <img src="img/card/card2.png" alt="">
                                                 </div>
-                                                <div class="bottom-info">
-                                                    <p>04 / 25</p>
-                                                    <p>KEVIN HARD</p>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="swiper-slide">
-                                        <div class="payment-card">
-                                            <div class="card-media">
-                                                <img src="img/card/card2.png" alt="">
-                                            </div>
-                                            <div class="card-info">
-                                                <div class="clearfix">
-                                                    <h5 class="card-name">Credit Card</h5>
-                                                    <p class="card-number">1234 **** **** ****</p>
-                                                </div>
-                                                <div class="bottom-info">
-                                                    <p>04 / 25</p>
-                                                    <p>KEVIN HARD</p>
+                                                <div class="card-info">
+                                                    <div class="clearfix">
+                                                        <h5 class="card-name">{{card.funding}}</h5>
+                                                        <p class="card-number">{{card.last4}} **** **** ****</p>
+                                                    </div>
+                                                    <div class="bottom-info">
+                                                        <p>{{card.exp_month+' / '+card.exp_year}}</p>
+                                                        <p>{{card.brand}}</p>
+                                                    </div>
                                                 </div>
                                             </div>
                                         </div>
+                                        <!-- <div class="swiper-slide">
+                                            <div class="payment-card">
+                                                <div class="card-media">
+                                                    <img src="img/card/card2.png" alt="">
+                                                </div>
+                                                <div class="card-info">
+                                                    <div class="clearfix">
+                                                        <h5 class="card-name">Credit Card</h5>
+                                                        <p class="card-number">1234 **** **** ****</p>
+                                                    </div>
+                                                    <div class="bottom-info">
+                                                        <p>04 / 25</p>
+                                                        <p>KEVIN HARD</p>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div> -->
                                     </div>
                                 </div>
                             </div>
                         </div>
-                    </div>
-                </li>
+                    </li>
 
-            </ul>
+                </ul>
+            </div>
+            <div class="checkout-total">
+                <p class="title">Total Amount</p>
+                <h1 class="checkout-total strong" style="margin-bottom:-5px !important">{{Cart.data.sum(`total.toNumber()`).formatCurrency('AED', '.', ',', 2)}}</h1>
+                <small> + 5% VAT of {{Cart.data.sum(`vat.toNumber()`).formatCurrency('AED', '.', ',', 2)}}</small>
+            </div>
         </div>
-        <div class="checkout-total">
-            <p class="title">Total Amount</p>
-            <h1 class="checkout-total strong" style="margin-bottom:-5px !important">{{Cart.data.sum(`total.toNumber()`).formatCurrency('AED', '.', ',', 2)}}</h1>
-            <small> + 5% VAT of {{Cart.data.sum(`vat.toNumber()`).formatCurrency('AED', '.', ',', 2)}}</small>
+        <div class="block"></div>
+        <div class="block">
+            <p>Payment is processed by Stripe.com.</p>
         </div>
     </div>
-    <div class="block"></div>
-    <div class="block">
-        <p>Payment is processed by Stripe.com.</p>
 
-    </div>
+
 
 
 

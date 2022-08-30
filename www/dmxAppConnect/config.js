@@ -317,12 +317,408 @@ dmx.config({
         }
       ],
       "outputType": "array"
+    },
+    "repeat_user_cards": {
+      "meta": [
+        {
+          "name": "acss_debit",
+          "type": "object"
+        },
+        {
+          "name": "afterpay_clearpay",
+          "type": "object"
+        },
+        {
+          "name": "alipay",
+          "type": "object"
+        },
+        {
+          "name": "au_becs_debit",
+          "type": "object"
+        },
+        {
+          "name": "bacs_debit",
+          "type": "object"
+        },
+        {
+          "name": "bancontact",
+          "type": "object"
+        },
+        {
+          "name": "billing_details",
+          "type": "object"
+        },
+        {
+          "name": "boleto",
+          "type": "object"
+        },
+        {
+          "name": "card",
+          "type": "object"
+        },
+        {
+          "name": "card_present",
+          "type": "object"
+        },
+        {
+          "name": "created",
+          "type": "number"
+        },
+        {
+          "name": "customer",
+          "type": "text"
+        },
+        {
+          "name": "customer_balance",
+          "type": "object"
+        },
+        {
+          "name": "eps",
+          "type": "object"
+        },
+        {
+          "name": "fpx",
+          "type": "object"
+        },
+        {
+          "name": "giropay",
+          "type": "object"
+        },
+        {
+          "name": "grabpay",
+          "type": "object"
+        },
+        {
+          "name": "id",
+          "type": "text"
+        },
+        {
+          "name": "ideal",
+          "type": "object"
+        },
+        {
+          "name": "interac_present",
+          "type": "object"
+        },
+        {
+          "name": "klarna",
+          "type": "object"
+        },
+        {
+          "name": "konbini",
+          "type": "object"
+        },
+        {
+          "name": "livemode",
+          "type": "boolean"
+        },
+        {
+          "name": "metadata",
+          "type": "object"
+        },
+        {
+          "name": "object",
+          "type": "text"
+        },
+        {
+          "name": "oxxo",
+          "type": "object"
+        },
+        {
+          "name": "p24",
+          "type": "object"
+        },
+        {
+          "name": "paynow",
+          "type": "object"
+        },
+        {
+          "name": "sepa_debit",
+          "type": "object"
+        },
+        {
+          "name": "sofort",
+          "type": "object"
+        },
+        {
+          "name": "type",
+          "type": "text"
+        },
+        {
+          "name": "us_bank_account",
+          "type": "object"
+        },
+        {
+          "name": "wechat_pay",
+          "type": "object"
+        }
+      ],
+      "outputType": "text"
     }
   },
   "chooseaddress": {
     "var": {
       "meta": null,
       "outputType": "text"
+    }
+  },
+  "billing": {
+    "repeat_user_cards": {
+      "meta": [
+        {
+          "name": "acss_debit",
+          "type": "object"
+        },
+        {
+          "name": "afterpay_clearpay",
+          "type": "object"
+        },
+        {
+          "name": "alipay",
+          "type": "object"
+        },
+        {
+          "name": "au_becs_debit",
+          "type": "object"
+        },
+        {
+          "name": "bacs_debit",
+          "type": "object"
+        },
+        {
+          "name": "bancontact",
+          "type": "object"
+        },
+        {
+          "name": "billing_details",
+          "type": "object"
+        },
+        {
+          "name": "boleto",
+          "type": "object"
+        },
+        {
+          "name": "card",
+          "type": "object"
+        },
+        {
+          "name": "card_present",
+          "type": "object"
+        },
+        {
+          "name": "created",
+          "type": "number"
+        },
+        {
+          "name": "customer",
+          "type": "text"
+        },
+        {
+          "name": "customer_balance",
+          "type": "object"
+        },
+        {
+          "name": "eps",
+          "type": "object"
+        },
+        {
+          "name": "fpx",
+          "type": "object"
+        },
+        {
+          "name": "giropay",
+          "type": "object"
+        },
+        {
+          "name": "grabpay",
+          "type": "object"
+        },
+        {
+          "name": "id",
+          "type": "text"
+        },
+        {
+          "name": "ideal",
+          "type": "object"
+        },
+        {
+          "name": "interac_present",
+          "type": "object"
+        },
+        {
+          "name": "klarna",
+          "type": "object"
+        },
+        {
+          "name": "konbini",
+          "type": "object"
+        },
+        {
+          "name": "livemode",
+          "type": "boolean"
+        },
+        {
+          "name": "metadata",
+          "type": "object"
+        },
+        {
+          "name": "object",
+          "type": "text"
+        },
+        {
+          "name": "oxxo",
+          "type": "object"
+        },
+        {
+          "name": "p24",
+          "type": "object"
+        },
+        {
+          "name": "paynow",
+          "type": "object"
+        },
+        {
+          "name": "sepa_debit",
+          "type": "object"
+        },
+        {
+          "name": "sofort",
+          "type": "object"
+        },
+        {
+          "name": "type",
+          "type": "text"
+        },
+        {
+          "name": "us_bank_account",
+          "type": "object"
+        },
+        {
+          "name": "wechat_pay",
+          "type": "object"
+        }
+      ],
+      "outputType": "text"
+    }
+  },
+  "customeraddresses": {
+    "repeat1": {
+      "meta": [
+        {
+          "type": "number",
+          "name": "id"
+        },
+        {
+          "type": "text",
+          "name": "address_name"
+        },
+        {
+          "type": "number",
+          "name": "logitude"
+        },
+        {
+          "type": "number",
+          "name": "latitude"
+        },
+        {
+          "type": "text",
+          "name": "street"
+        },
+        {
+          "type": "text",
+          "name": "building"
+        },
+        {
+          "type": "text",
+          "name": "apartment"
+        },
+        {
+          "type": "text",
+          "name": "city"
+        },
+        {
+          "type": "text",
+          "name": "state"
+        },
+        {
+          "type": "text",
+          "name": "country"
+        },
+        {
+          "type": "number",
+          "name": "google_geoPoint_longitude"
+        },
+        {
+          "type": "number",
+          "name": "google_geoPoint_latitude"
+        },
+        {
+          "type": "text",
+          "name": "google_place_id"
+        }
+      ],
+      "outputType": "array"
+    },
+    "repeat_customer_addresses": {
+      "meta": [
+        {
+          "type": "number",
+          "name": "id"
+        },
+        {
+          "type": "text",
+          "name": "address_name"
+        },
+        {
+          "type": "number",
+          "name": "logitude"
+        },
+        {
+          "type": "number",
+          "name": "latitude"
+        },
+        {
+          "type": "text",
+          "name": "street"
+        },
+        {
+          "type": "text",
+          "name": "building"
+        },
+        {
+          "type": "text",
+          "name": "apartment"
+        },
+        {
+          "type": "text",
+          "name": "city"
+        },
+        {
+          "type": "text",
+          "name": "state"
+        },
+        {
+          "type": "text",
+          "name": "country"
+        },
+        {
+          "type": "number",
+          "name": "google_geoPoint_longitude"
+        },
+        {
+          "type": "number",
+          "name": "google_geoPoint_latitude"
+        },
+        {
+          "type": "text",
+          "name": "google_place_id"
+        },
+        {
+          "type": "text",
+          "name": "full_address"
+        }
+      ],
+      "outputType": "array"
     }
   }
 });

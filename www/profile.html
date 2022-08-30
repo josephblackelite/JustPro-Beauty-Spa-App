@@ -1,4 +1,4 @@
-<!-- Wappler include head-page="index.html" is="dmx-app" id="profile" appConnect="local" framework7_6="With App Connect" framework7_icons="local" capacitor="local" components="{dmxSwiper:{},dmxLazyLoad:{}}" -->
+<!-- Wappler include head-page="index.html" is="dmx-app" id="profile" appConnect="local" framework7_6="With App Connect" capacitor="local" components="{dmxSwiper:{},dmxLazyLoad:{}}" bootstrap_icons="local" framework7_icons="local" fontawesome_5="local" -->
 
 <div class="page profile-wraper">
 
@@ -70,7 +70,15 @@
                                 <h5 class="title" dmx-text="app.Current_user.data.customer.customer_email">example@gmail.com</h5>
                             </div>
                         </li>
-
+                        <li>
+                            <div class="icon-bx">
+                                <i class="fas fa-map-marker-alt text-color-primary margin fa-2x"></i>
+                            </div>
+                            <div class="dz-content">
+                                <p class="sub-title">Your address</p>
+                                <a dmx-on:click="run({run:{action:`app.panelLinkClassToggle.setValue(\'customer-addresses\');app.main.navigate(\'/customer-addresses\',{})`}})">View your address</a>
+                            </div>
+                        </li>
                     </ul>
                 </div>
 
