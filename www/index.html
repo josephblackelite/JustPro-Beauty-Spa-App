@@ -50,7 +50,7 @@
     <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&display=swap">
+    <link href="https://fonts.googleapis.com/css2?family=Maven+Pro&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="Framework7/6/css/framework7-bundle.min.css" />
     <script src="Framework7/6/js/framework7-bundle.min.js"></script>
     <script src="js/routes.js"></script>
@@ -87,6 +87,22 @@
 <body is="dmx-app" id="index">
 
 
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Maven+Pro&display=swap');
+
+        body {
+            font-family: 'Maven Pro', sans-serif !important;
+        }
+
+        .bg-color-primary {
+            background-image: url(assets/images/bg-style.png);
+            background-size: cover !important;
+        }
+
+        toolbar toolbar-bottom {
+            background-image: url(assets/images/bg-style.png) !important;
+        }
+    </style>
 
 
 
@@ -95,8 +111,7 @@
 
 
 
-
-    <div id="app" is="dmx-f7-app" class="color-theme-deeporange" theme="aurora">
+    <div id="app" is="dmx-f7-app" theme="aurora" class="color-theme-deeporange">
 
 
 
@@ -137,7 +152,7 @@
           }
         }</script>
         <dmx-serverconnect id="Current_user" url="https://api.justpro.me/api/security/logged_in_user_data" site="JustPro-Spa-Backend" dmx-param:user_id="local_store.data.user_id" sockets="true"></dmx-serverconnect>
-        <dmx-value id="service_category" dmx-bind:value="'nails'"></dmx-value>
+        <dmx-value id="service_category" dmx-bind:value="'massage'"></dmx-value>
         <dmx-datastore id="Cart"></dmx-datastore>
         <script is="dmx-flow" id="Redirect_to_login_or_home" type="text/dmx-flow" autorun>[
   {
@@ -234,7 +249,7 @@
                                 <li>
                                     <a class="item-link" dmx-on:click="run([{run:{action:`app.main.navigate(\'/billing\',{});app.panelLinkClassToggle.setValue(\'billing\')`}},{runJS:{function:'hidePanel'}}])" dmx-class:item-selected="(panelLinkClassToggle.value == 'billing')">
                                         <i class="bi bi-credit-card"></i>
-                                        <span>Billing</span>
+                                        <span>Payments</span>
                                     </a>
                                 </li>
                                 <li>
@@ -414,7 +429,10 @@ var today = new Date();
         disabled: {
           from: infinite,
           to: today
-        }
+        },
+        openIn: 'customModal',
+        header: true,
+        footer: true,
         
       });
 }

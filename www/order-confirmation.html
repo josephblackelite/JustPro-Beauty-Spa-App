@@ -24,20 +24,21 @@
 
     </div>
     <div class="toolbar toolbar-bottom toolbar-bottom-md">
-        <div class="toolbar-inner" style="padding:10px !important">
-            <a class="button-large rounded-xl button-18 bg-color-primary text-color-white" style="width:100%" dmx-bind:href="'/appointment-page'">Continue</a>
+        <div class="toolbar-inner justify-content-center" style="padding:10px !important">
+            <a class="button-large rounded-xl button-6 bg-color-primary text-color-white" style="width:100%" dmx-bind:href="'/appointment-page'" dmx-hide="(app.Cart.data.count() < 1)">Continue &nbsp;<i class="bi-arrow-right-circle-fill"></i></a>
+            <a class="button-large rounded-xl button-18 bg-color-primary text-color-white" style="width:100%" dmx-bind:href="'/home'" dmx-show="(app.Cart.data.count() < 1)">Keep Shopping</a>
         </div>
     </div>
 
-    <div class="page-content bg-gray pt-20">
+    <div class="page-content bg-gray">
         <dmx-preloader id="justpropreloader" spinner="pulse" color="#ff6600"></dmx-preloader>
 
         <div class="container" style="margin-bottom:150px !important">
 
             <div class="block text-align-right" dmx-hide="(app.Cart.data.count() < 1)">
                 <p style="margin-bottom:0px !important"><small>Basket Total</small></p>
-                <h2 style="margin-top:-5px !important">{{Cart.data.sum(`total.toNumber()`).formatCurrency('AED', '.', ',', 2)}}</h2>
-
+                <h1 style="margin-top:-5px !important; margin-bottom:-5px !important">{{Cart.data.sum(`total.toNumber()`).formatCurrency('AED', '.', ',', 2)}}</h1>
+                <small>Including VAT {{Cart.data.sum(`vat.toNumber()`).formatCurrency('AED', '.', ',', 2)}}</small>
             </div>
 
 

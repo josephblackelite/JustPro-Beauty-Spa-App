@@ -77,19 +77,19 @@ var routes = [
     "url": "./update-profile.html"
   },
   {
-    "path": "/create-new-address",
+    "path": "/create-new-address/:from_manage_address?",
     "url": "./create-new-address.html"
   },
   {
-    "path": "/customer-name-prompt",
-    "url": "./customer-name-prompt.html"
+    "path": "/customer-addresses",
+    "url": "./customer-addresses.html"
   },
   {
     "path": "/billing",
     "url": "./billing.html"
   },
   {
-    "path": "/customer-addresses",
-    "url": "./customer-addresses.html"
+    "path": "/customer-name-prompt",
+    "url": "./customer-name-prompt.html"
   }
 ]

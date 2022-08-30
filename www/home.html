@@ -8,14 +8,19 @@
         .strong {
             font-weight: 600 !important;
         }
+
+        .custom-font {
+            font-family: 'Maven Pro', sans-serif !important;
+        }
     </style>
-    <div class="padding-top padding-bottom">
+
+    <div class="padding-top padding-bottom" style="padding-top:20px !important">
 
         <div class="navbar no-hairline no-shadow no-border">
             <div class="navbar-inner" style="padding-right:0px !important; padding-left:0px !important; margin-right:0px !important">
                 <div class="left">
                     <a href="#!" class="link">
-                        <img src="assets/images/logo-pages.png" style="padding-bottom:20px !important">
+                        <img src="assets/images/logo-pages.png" style="padding-bottom:30px !important; padding-top:20px !important">
                     </a>
 
                 </div>
@@ -24,13 +29,13 @@
                 <div class="right">
                     <a href="#" class="link panel-open icon-only" data-panel="left">
 
-                        <i class="icon f7-icons" style="padding-bottom:20px !important">ellipsis_vertical</i>
+                        <i class="icon f7-icons" style="padding-bottom:30px !important; padding-top:20px !important">ellipsis_vertical</i>
                     </a>
                 </div>
-                <div class="subnavbar bg-color-primary text-color-white">
-                    <div class="block text-align-right">
-                        <h4 class="text-color-white"><a href="/profile" class="link text-align-right text-color-white">Hello, {{app.Current_user.data.customer.customer_name.titlecase()}}</a></h4>
-                    </div>
+                <div class="subnavbar bg-color-primary text-color-white no-border" style="background-image:url(assets/images/bg-style.png); background-size:cover !important">
+
+                    <h4 class="text-color-white small custom-font"><a href="/profile" class="link text-color-white small"><small>Hello, {{app.Current_user.data.customer.customer_name.titlecase()}}</small></a></h4>
+
                 </div>
             </div>
         </div>
@@ -38,9 +43,9 @@
 
     </div>
 
-    <div class="toolbar toolbar-bottom toolbar-bottom-md" dmx-show="app.Cart.data.count()>0">
-        <div class="toolbar-inner" style="padding:10px !important">
-            <a href="/order-confirmation" class="button-18 rounded-lg bg-color-primary text-color-white" style="width:100%">
+    <div class="toolbar toolbar-bottom toolbar-bottom-md" dmx-show="app.Cart.data.count()>0" style="height:60px !important">
+        <div class="toolbar-inner justify-content-center" style="padding:10px !important;">
+            <a href="/order-confirmation" class="button-6 button-large rounded-lg text-color-white bg-color-primary" style="width:100%">
                 {{app.Cart.data.count()}} &nbsp;<i class="bi bi-basket"></i> &nbsp; Proceed &nbsp;<i class="bi-arrow-right-circle-fill"></i></a>
         </div>
     </div>
@@ -64,51 +69,40 @@
 
 
 
-        <div class="mb-10 pt-10" style="border-bottom:0px !important">
 
-            <div class="container">
-                <!-- Search -->
-                <!-- <form data-search-container=".search-list" data-search-in=".item-title" class="searchbar searchbar-init search-box list-search-bx" style="border-bottom:0px !important;">
-                    <div class="searchbar-inner" style="border-bottom:0px !important">
-                        <div class="searchbar-input-wrap" style="margin-bottom:20px !important; border-bottom:0px !important">
-                            <input type="search" placeholder="search services" style="border-bottom:0px !important" />
-                            <i class="searchbar-icon" style="border-bottom:0px !important">
-                                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                    <path d="M9.65925 19.3102C11.8044 19.3103 13.8882 18.5946 15.5806 17.2764L21.9653 23.6612C22.4423 24.1218 23.2023 24.1086 23.663 23.6316C24.1123 23.1664 24.1123 22.4288 23.663 21.9636L17.2782 15.5788C20.5491 11.3682 19.7874 5.30335 15.5769 2.03244C11.3663 -1.23846 5.30149 -0.476784 2.03058 3.73376C-1.24033 7.9443 -0.478646 14.0092 3.73189 17.2801C5.42702 18.597 7.51269 19.3113 9.65925 19.3102ZM4.52915 4.52732C7.36245 1.69396 11.9561 1.69391 14.7895 4.52721C17.6229 7.36052 17.6229 11.9542 14.7896 14.7876C11.9563 17.6209 7.36261 17.621 4.52925 14.7877C4.5292 14.7876 4.5292 14.7876 4.52915 14.7876C1.69584 11.9749 1.67915 7.39796 4.49181 4.56465C4.50424 4.55217 4.51667 4.53974 4.52915 4.52732Z" fill="#C9C9C9" />
-                                </svg>
-                            </i>
-                        </div>
-                    </div>
-                </form> -->
 
-                <h5 style="margin-top:-10px !important; margin-bottom:-10px !important">Book A Service</h5>
-                <div data-space-between="12" data-slides-per-view="auto" data-centered-slides="false" class="swiper-container swiper-init tabbar tab-style-1 main-swiper" style="margin-top:20px !important; ; border-top:0px !important">
-                    <div class="swiper-wrapper">
-                        <div class="swiper-slide">
-                            <a href="#Nails" class="tab-link tab-link-active button-18" dmx-on:click="app.service_category.setValue('nails')">Nails</a>
-                        </div>
-                        <div class="swiper-slide">
-                            <a href="#Waxing" class="tab-link button-18" dmx-on:click="app.service_category.setValue('waxing')">Waxing</a>
-                        </div>
-                        <div class="swiper-slide">
-                            <a href="#Threading" class="tab-link button-18" dmx-on:click="app.service_category.setValue('threading')">Threading</a>
-                        </div>
-                        <div class="swiper-slide">
-                            <a href="#Massage" class="tab-link button-18" dmx-on:click="app.service_category.setValue('massage')">Massage</a>
-                        </div>
+        <div class="block mt-10 mb-10">
+
+            <h5 style="margin-top:-10px !important; margin-bottom:0px !important custom-font">Book A Service <i class="bi bi-chevron-down"></i></h5>
+            <div data-space-between="12" data-slides-per-view="auto" data-centered-slides="false" class="swiper-container swiper-init tabbar tab-style-1 main-swiper" style="border-top:0px !important; margin-top:-20px !important">
+                <div class="swiper-wrapper">
+                    <div class="swiper-slide">
+                        <a href="#Massage" class="tab-link tab-link-active smallfont button-small button button-4" dmx-on:click="app.service_category.setValue('massage')" style="height:30px !important">Massage
+                        </a>
                     </div>
+                    <div class="swiper-slide">
+                        <a href="#Nails" class="tab-link smallfont button-small button button-4" dmx-on:click="app.service_category.setValue('nails')" style="height:30px !important">Nails</a>
+                    </div>
+                    <div class="swiper-slide">
+                        <a href="#Waxing" class="tab-link smallfont button-small button button-4" dmx-on:click="app.service_category.setValue('waxing')" style="height:30px !important">Waxing</a>
+                    </div>
+                    <div class="swiper-slide">
+                        <a href="#Threading" class="tab-link smallfont button-small button button-4" dmx-on:click="app.service_category.setValue('threading')" style="height:30px !important">Threading</a>
+                    </div>
+
                 </div>
-
-
             </div>
+
+
         </div>
 
 
+
         <div class="tabs-swipeable-wrap tabs-height-auto">
-            <div class="tabs">
-                <div id="Nails" class="tab tab-active">
+            <div class="tabs" style="margin-bottom:80px !important">
+                <div id="Nails" class="tab">
                     <div class="container">
-                        <h6 class="filter-text mt-0 mb-30">{{app.main.orderprompt.queryServices.data.queryServices.count()}} {{app.service_category.value.titlecase()}} services found</h6>
+                        <h6 class="filter-text mt-0 mb-5 smallfont">{{app.main.orderprompt.queryServices.data.queryServices.count()}} {{app.service_category.value.titlecase()}} services found</h6>
                         <div class="list search-list mt-0 mb-20 dz-list searchbar-found">
                             <ul class="row" is="dmx-repeat" id="repeat_nails_services" dmx-bind:repeat="app.main.orderprompt.queryServices.data.queryServices">
                                 <li class="store-card col- medium-50 card-list mb-20">
@@ -116,16 +110,16 @@
                                         <a dmx-on:click="app.main.navigate('/product-info/'+id,{})"><img src="" alt="" dmx-bind:src="app.main.orderprompt.queryServices.data.queryServices[0].product_avatar" /></a>
                                     </div>
                                     <div class="card-info">
-                                        <a href="" class="button-4 btn-dir bg-color-primary popover-open" title="This product is nice" data-popover="#popover1" dmx-on:click="app.main.orderprompt.popover_title.setValue(product_name.capitalize());app.main.orderprompt.popover_description.setValue(product_description.capitalize())">
+                                        <a href="" class="button-4 btn-dir bg-color-primary popover-open smallfont" title="This product is nice" data-popover="#popover1" dmx-on:click="app.main.orderprompt.popover_title.setValue(product_name.capitalize());app.main.orderprompt.popover_description.setValue(product_description.capitalize())">
 
                                             <i class="bi bi-question-circle"></i>
-                                            <span>Info</span>
+                                            <span>What is this?</span>
                                         </a>
-                                        <h5 class="item-title title strong"><a dmx-on:click="app.main.navigate('/product-info/'+id,{})">{{product_name.capitalize()}}</a></h5>
+                                        <h4 class="item-title title strong" style="text-transform:uppercase;"><a dmx-on:click="app.main.navigate('/product-info/'+id,{})">{{product_name.capitalize()}}</a></h4>
                                         <div class="info-bottom">
                                             <p class="time" dmx-text="amount_matrix.capitalize()">09:00 AM - 10:00 PM</p>
-                                            <div class="location text-primary">
-                                                {{product_amt+' AED'}}
+                                            <div class="location text-primary strong">
+                                                {{product_amt.toNumber().formatCurrency('AED', '.', ',', 2)}}
                                             </div>
                                         </div>
                                     </div>
@@ -144,7 +138,7 @@
                 </div>
                 <div id="Waxing" class="tab">
                     <div class="container">
-                        <h6 class="filter-text mt-0 mb-30">{{app.main.orderprompt.queryServices.data.queryServices.count()}} {{app.service_category.value.titlecase()}} services found</h6>
+                        <h6 class="filter-text mt-0 mb-5 smallfont">{{app.main.orderprompt.queryServices.data.queryServices.count()}} {{app.service_category.value.titlecase()}} services found</h6>
                         <div class="list search-list mt-0 mb-20 dz-list searchbar-found">
                             <ul class="row" is="dmx-repeat" id="repeat_waxing_services" dmx-bind:repeat="app.main.orderprompt.queryServices.data.queryServices">
                                 <li class="store-card col- medium-50 card-list mb-20">
@@ -155,12 +149,12 @@
                                         <a href="" class="button-4 btn-dir bg-color-primary  popover-open" title="This product is nice" data-popover="#popover1" dmx-on:click="app.main.orderprompt.popover_title.setValue(product_name.capitalize());app.main.orderprompt.popover_description.setValue(product_description.capitalize())">
 
                                             <i class="bi bi-question-circle"></i>
-                                            <span>Info</span> </a>
-                                        <h5 class="item-title title strong"><a dmx-on:click="app.main.navigate('/product-info/'+id,{})">{{product_name.capitalize()}}</a></h5>
+                                            <span>What is this?</span> </a>
+                                        <h5 class="item-title title strong" style="text-transform:uppercase;"><a dmx-on:click="app.main.navigate('/product-info/'+id,{})">{{product_name.capitalize()}}</a></h5>
                                         <div class="info-bottom">
                                             <p class="time" dmx-text="amount_matrix.capitalize()">09:00 AM - 10:00 PM</p>
-                                            <div class="location text-primary">
-                                                {{product_amt+' AED'}}
+                                            <div class="location text-primary strong">
+                                                {{product_amt.toNumber().formatCurrency('AED', '.', ',', 2)}}
                                             </div>
                                         </div>
                                     </div>
@@ -179,7 +173,7 @@
                 </div>
                 <div id="Threading" class="tab">
                     <div class="container">
-                        <h6 class="filter-text mt-0 mb-30">{{app.main.orderprompt.queryServices.data.queryServices.count()}} {{app.service_category.value.titlecase()}} services found</h6>
+                        <h6 class="filter-text mt-0 mb-5 smallfont">{{app.main.orderprompt.queryServices.data.queryServices.count()}} {{app.service_category.value.titlecase()}} services found</h6>
                         <div class="list search-list mt-0 mb-20 dz-list searchbar-found">
                             <ul class="row" is="dmx-repeat" id="repeat_threading_services" dmx-bind:repeat="app.main.orderprompt.queryServices.data.queryServices">
                                 <li class="store-card col- medium-50 card-list mb-20">
@@ -187,16 +181,16 @@
                                         <a dmx-on:click="app.main.navigate('/product-info/'+id,{})"><img alt="" dmx-bind:src="app.main.orderprompt.queryServices.data.queryServices[0].product_avatar" /></a>
                                     </div>
                                     <div class="card-info">
-                                        <a href="" class="button btn-dir  bg-color-primary popover-open" title="This product is nice" data-popover="#popover1" dmx-on:click="app.main.orderprompt.popover_title.setValue(product_name.capitalize());app.main.orderprompt.popover_description.setValue(product_description.capitalize())">
+                                        <a href="" class="button-4 btn-dir  bg-color-primary popover-open" title="This product is nice" data-popover="#popover1" dmx-on:click="app.main.orderprompt.popover_title.setValue(product_name.capitalize());app.main.orderprompt.popover_description.setValue(product_description.capitalize())">
 
                                             <i class="bi bi-question-circle"></i>
-                                            <span>Info</span>
+                                            <span>What is this?</span>
                                         </a>
-                                        <h5 class="item-title title strong"><a dmx-on:click="app.main.navigate('/product-info/'+id,{})">{{product_name.capitalize()}}</a></h5>
+                                        <h5 class="item-title title strong" style="text-transform:uppercase;"><a dmx-on:click="app.main.navigate('/product-info/'+id,{})">{{product_name.capitalize()}}</a></h5>
                                         <div class="info-bottom">
                                             <p class="time" dmx-text="amount_matrix.capitalize()">09:00 AM - 10:00 PM</p>
-                                            <div class="location text-primary">
-                                                {{product_amt+' AED'}}
+                                            <div class="location text-primary strong">
+                                                {{product_amt.toNumber().formatCurrency('AED', '.', ',', 2)}}
                                             </div>
                                         </div>
                                     </div>
@@ -213,9 +207,9 @@
                         </div>
                     </div>
                 </div>
-                <div id="Massage" class="tab">
+                <div id="Massage" class="tab tab-active">
                     <div class="container">
-                        <h6 class="filter-text mt-0 mb-30">{{app.main.orderprompt.queryServices.data.queryServices.count()}} {{app.service_category.value.titlecase()}} services found</h6>
+                        <h6 class="filter-text mt-0 mb-5 smallfont">{{app.main.orderprompt.queryServices.data.queryServices.count()}} {{app.service_category.value.titlecase()}} services found</h6>
                         <div class="list search-list mt-0 mb-20 dz-list searchbar-found">
                             <ul class="row" is="dmx-repeat" id="repeat_massage_services" dmx-bind:repeat="app.main.orderprompt.queryServices.data.queryServices">
                                 <li class="store-card col- medium-50 card-list mb-20">
@@ -223,16 +217,16 @@
                                         <a dmx-on:click="app.main.navigate('/product-info/'+id,{})"><img alt="" dmx-bind:src="app.main.orderprompt.queryServices.data.queryServices[0].product_avatar" /></a>
                                     </div>
                                     <div class="card-info">
-                                        <a href="" class="button btn-dir  bg-color-primary popover-open" title="This product is nice" data-popover="#popover1" dmx-on:click="app.main.orderprompt.popover_title.setValue(product_name.capitalize());app.main.orderprompt.popover_description.setValue(product_description.capitalize())">
+                                        <a href="" class="button-4 btn-dir  bg-color-primary popover-open" title="This product is nice" data-popover="#popover1" dmx-on:click="app.main.orderprompt.popover_title.setValue(product_name.capitalize());app.main.orderprompt.popover_description.setValue(product_description.capitalize())">
 
                                             <i class="bi bi-question-circle"></i>
-                                            <span>Info</span>
+                                            <span>What is this?</span>
                                         </a>
-                                        <h5 class="item-title title strong"><a dmx-on:click="app.main.navigate('/product-info/'+id,{})">{{product_name.capitalize()}}</a></h5>
+                                        <h4 class="item-title title strong" style="text-transform:uppercase;"><a dmx-on:click="app.main.navigate('/product-info/'+id,{})">{{product_name.capitalize()}}</a></h4>
                                         <div class="info-bottom">
                                             <p class="time" dmx-text="amount_matrix.capitalize()">09:00 AM - 10:00 PM</p>
-                                            <div class="location text-primary">
-                                                {{product_amt+' AED'}}
+                                            <div class="location text-primary strong">
+                                                {{product_amt.toNumber().formatCurrency('AED', '.', ',', 2)}}
                                             </div>
                                         </div>
                                     </div>

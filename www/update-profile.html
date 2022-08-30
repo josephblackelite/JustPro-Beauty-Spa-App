@@ -1,4 +1,4 @@
-<!-- Wappler include head-page="index.html" is="dmx-app" id="updateprofile" appConnect="local" framework7_6="With App Connect" framework7_icons="local" capacitor="local" components="{dmxFormatter:{},dmxDropzone:{}}" -->
+<!-- Wappler include head-page="index.html" is="dmx-app" id="updateprofile" appConnect="local" framework7_6="With App Connect" framework7_icons="local" capacitor="local" components="{dmxFormatter:{},dmxDropzone:{},dmxValidator:{}}" -->
 
 <div class="page profile-wrapper" id="updateprofile" data-name="update-profile" path="/update-profile">
     <div class="padding-top padding-bottom">
@@ -22,8 +22,8 @@
         </div>
     </div>
     <div class="toolbar toolbar-bottom toolbar-bottom-md">
-        <div class="toolbar-inner" style="padding:10px !important">
-            <button href="" class="button-large button-18 bg-color-primary button-fill rounded-xl" dmx-on:click="run({condition:{if:`(app.main.updateprofile.update_profile_form.name.value &amp;&amp; (app.main.updateprofile.update_profile_form.gender.value &amp;&amp; (app.main.updateprofile.update_profile_form.mobile_number.value &amp;&amp; app.main.updateprofile.update_profile_form.email.value)))`,then:{steps:{run:{action:`app.main.updateprofile.update_profile_form.submit()`}}}}})" dmx-bind:disabled="app.main.updateprofile.update_profile_form.state.executing"><span dmx-hide="app.main.updateprofile.update_profile_form.state.executing" style="width:100% !important">Save Profile</span>
+        <div class="toolbar-inner justify-content-center" style="padding:10px !important">
+            <button href="" class="button-large button-6 bg-color-primary button-fill rounded-xl" dmx-on:click="run({condition:{if:`(app.main.updateprofile.update_profile_form.name.value &amp;&amp; (app.main.updateprofile.update_profile_form.gender.value &amp;&amp; (app.main.updateprofile.update_profile_form.mobile_number.value &amp;&amp; app.main.updateprofile.update_profile_form.email.value)))`,then:{steps:{run:{action:`app.main.updateprofile.update_profile_form.submit()`}}}}})" dmx-bind:disabled="app.main.updateprofile.update_profile_form.state.executing"><span dmx-hide="app.main.updateprofile.update_profile_form.state.executing" style="width:100% !important">Save Profile</span>
                 <div class="preloader color-purple" dmx-show="app.main.updateprofile.update_profile_form.state.executing"></div>
             </button>
         </div>
@@ -34,55 +34,66 @@
                 <form is="dmx-serverconnect-form" method="post" id="update_profile_form" dmx-on:success="run({'f7.dialog.confirm':{title:'Success',text:'Your profile information is now updated!',then:{steps:{run:{action:`app.main.back(\'/profile\',{})`}}}}})" site="JustPro-Spa-Backend" action="https://api.justpro.me/api/security/update_profile" dmx-on:invalid="run({'f7.dialog.alert':{title:'Error',text:`app.main.updateprofile.update_profile_form.lastError.response`}})">
                     <input id="user_id" name="user_id" type="hidden" dmx-bind:value="app.Current_user.data.customer.id">
                     <div class="title-head">
-                        <h2 class="title">Update your profile</h2>
-                        <p>Please provide basic information to help our stylists identify you. </p>
+                        <p>Kindly provide basic information to help our stylists identify and contact you. </p>
                     </div>
-                    <div class="list">
-                        <ul class="row">
-                            <li class="item-content col-100 item-input item-input-with-value no-border no-hairline">
-                                <div class="item-inner">
-                                    <div class="item-title item-label">Name</div>
-                                    <div class="item-input-wrap">
-                                        <input type="text" placeholder="name" class="form-control" id="name" name="name" dmx-bind:value="app.Current_user.data.customer.customer_name" />
+                    <div class="list no-hairlines-md padding-top">
+                        <ul>
+
+                            <li class="item-content item-input item-input-outline">
+
+                                <div class="item-inner" style="width:100% !important">
+                                    <div class="item-title item-floating-label strong">What's your Name?</div>
+                                    <div class="item-input-wrap" style="width:100% !important">
+                                        <input type="text" placeholder="name" class="form-control" id="name" name="name" dmx-bind:value="app.Current_user.data.customer.customer_name" style="width:100% !important" />
+                                        <span class="input-clear-button"></span>
                                     </div>
                                 </div>
                             </li>
-                            <li class="item-content col-100 item-input item-input-with-value">
+                            <li class="item-content item-input item-input-outline">
+
                                 <div class="item-inner">
-                                    <div class="item-title item-label">Gender</div>
-                                    <div class="item-input-wrap">
-                                        <select id="gender" class="form-control" name="gender" dmx-bind:value="app.Current_user.data.customer.customer_sex">
+                                    <div class="item-title item-floating-label strong">Whats your Gender?</div>
+                                    <div class="item-input-wrap input-dropdown-wrap" style="width:100% !important">
+                                        <select id="gender" class="form-control" name="gender" dmx-bind:value="app.Current_user.data.customer.customer_sex" style="width:100% !important">
                                             <option value="male">Male</option>
                                             <option value="female">Female</option>
                                         </select>
+                                        <span class="input-clear-button"></span>
                                     </div>
                                 </div>
                             </li>
-                            <li class="item-content col-100 item-input item-input-with-value">
+
+                            <li class="item-content item-input item-input-outline">
+
                                 <div class="item-inner">
-                                    <div class="item-title item-label">Mobile number</div>
-                                    <div class="item-input-wrap row">
-                                        <input id="mobile_number" name="mobile_number" type="text" class="form-control" dmx-bind:value="app.Current_user.data.customer.phone_number">
+                                    <div class="item-title item-floating-label strong">What's your best number?</div>
+                                    <div class="item-input-wrap input-dropdown-wrap" style="width:100% !important">
+                                        <input id="mobile_number" name="mobile_number" type="text" class="form-control" dmx-bind:value="app.Current_user.data.customer.phone_number" required="" data-msg-required="We need your phone number" dmx-class:disabled="app.Current_user.data.customer.phone_number_verified">
+                                        <span class="input-clear-button"></span>
                                     </div>
                                 </div>
                             </li>
-                            <li class="item-content col-100 item-input">
+                            <li class="item-content item-input item-input-outline">
+
                                 <div class="item-inner">
-                                    <div class="item-title item-label">Email</div>
-                                    <div class="item-input-wrap">
-                                        <input type="email" placeholder="Email Address" class="form-control" name="email" dmx-bind:value="app.Current_user.data.customer.customer_email">
+                                    <div class="item-title item-floating-label strong">Best Email Address?</div>
+                                    <div class="item-input-wrap input-dropdown-wrap" style="width:100% !important">
+                                        <input type="email" placeholder="Email Address" class="form-control" name="email" dmx-bind:value="app.Current_user.data.customer.customer_email" required="" data-rule-email="" data-msg-required="We need your email address" dmx-class:disabled="app.Current_user.data.customer.email_verified">
+                                        <span class="input-clear-button"></span>
                                     </div>
                                 </div>
                             </li>
-                            <li class="item-content col-100 item-input">
-                                <div class="item-inner">
-                                    <div class="item-title item-label">Upload profile photo</div>
-                                    <div class="item-input-wrap">
-                                        <input id="profile_photo" type="file" is="dmx-dropzone" name="profile_photo">
-                                    </div>
-                                </div>
-                            </li>
+
+
                         </ul>
+
+
+                    </div>
+                    <div class="card" style="margin-bottom:80px !important">
+                        <div class="card-header">Profile Photo</div>
+                        <div class="card-content card-content-padding">
+                            <input id="profile_photo" type="file" is="dmx-dropzone" name="profile_photo">
+                        </div>
                     </div>
                     <div class="clearfix text-align-center pb-30">
                         <p>All fields are required</p>

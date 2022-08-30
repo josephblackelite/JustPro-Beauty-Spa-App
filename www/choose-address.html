@@ -28,8 +28,8 @@
 
     </div>
     <div class="toolbar toolbar-bottom toolbar-bottom-md" dmx-show="app.main.chooseaddress.address_select_form.select_address.value">
-        <div class="toolbar-inner" style="padding:10px !important">
-            <a class="button-18 button-large button-fill bg-color-primary text-color-white" href="" dmx-on:click="run([{runJS:{function:'closeAddressSheet'}},{run:{action:`app.main.navigate(\'/checkout/\'+app.main.chooseaddress.address_select_form.select_address.value,{})`}}])" style="width:100%">Select this address</a>
+        <div class="toolbar-inner justify-content-center" style="padding:10px !important">
+            <a class="button-6 button-large button-fill bg-color-primary text-color-white" href="" dmx-on:click="run([{runJS:{function:'closeAddressSheet'}},{run:{action:`app.main.navigate(\'/checkout/\'+app.main.chooseaddress.address_select_form.select_address.value,{})`}}])" style="width:100%">Continue &nbsp;<i class="bi-arrow-right-circle-fill"></i></a>
         </div>
     </div>
     <div class="fab fab-left-bottom">
@@ -49,7 +49,7 @@
         <!-- Choose address -->
         <div class="sheet-modal address-sheet-swipe-to-step" style="height:auto; --f7-sheet-bg-color: #fff;">
             <div class="toolbar">
-                <div class="toolbar-inner">
+                <div class="toolbar-inner justify-content-center">
                     <div class="left"></div>
                     <div class="title text-align-center">Where do you want this service?</div>
                     <div class="right"></div>
@@ -59,23 +59,26 @@
             <div class="sheet-modal-inner">
                 <div class="block">
                     <div>
-                        <a class="button-18 button-small bg-color-primary button-fill " href="" dmx-on:click="run([{runJS:{function:'closeAddressSheet'}},{run:{action:`app.main.navigate(\'/create-new-address\',{})`}}])" style="width:100%">Add a new address</a>
+                        <a class="button-18 button-small bg-color-primary button-fill " href="" dmx-on:click="run([{runJS:{function:'closeAddressSheet'}},{run:{action:`app.main.navigate(\'/create-new-address\',{})`}}])" style="width:100%; margin-top:-20px !important">Add a new address</a>
                     </div>
                 </div>
                 <div class="sheet-modal-swipe-step" dmx-show="app.main.chooseaddress.address_select_form.select_address.value">
+                    <!-- -->
                     <div class="">
                         <form action="" is="dmx-serverconnect-form" method="post" id="address_select_form">
-                            <div class="list">
+                            <div class="list" style="margin-top:-20px !important">
                                 <ul class="row">
-                                    <li class="item-content col-100 item-input item-input-with-value">
-                                        <div class="item-inner">
-                                            <div class="item-title item-label">My Addresses</div>
+                                    <li class="item-content item-input item-input-outline" style="width:100% !important">
+
+                                        <div class="item-inner" style="width:100% !important">
+                                            <div class="item-title item-floating-label strong">My Saved Address <i class="bi bi-geo-alt-fill"></i></div>
                                             <div class="item-input-wrap">
-                                                <select id="select_address" class="form-control" dmx-bind:options="app.Current_user.data.customer.customer_addresses" optionvalue="id" optiontext="address_name">
+                                                <select id="select_address" class="form-control" dmx-bind:options="app.Current_user.data.customer.customer_addresses" optionvalue="id" optiontext="address_name" placeholder="My Saved Address" style="width:100% !important">
+                                                    <option value="0">Choose Address</option>
                                                 </select>
+                                                <span class="input-clear-button"></span>
                                             </div>
                                         </div>
-
                                     </li>
                                 </ul>
                             </div>
@@ -84,7 +87,8 @@
                 </div>
 
                 <div class="block" dmx-show="app.main.chooseaddress.address_select_form.select_address.value">
-                    <a href="#!" class="text-align-center button-4" dmx-on:click="run({runJS:{function:'closeAddressSheet'}})" style="width:100% !important">Close and Continue</a>
+                    <!-- -->
+                    <a href="#!" class="text-align-center button-18 bg-color-blue" dmx-on:click="run({runJS:{function:'closeAddressSheet'}})" style="width:100% !important; margin-top:-20px !important" dmx-show="app.main.chooseaddress.address_select_form.select_address.value >0 ">Use this Address</a>
                 </div>
 
             </div>

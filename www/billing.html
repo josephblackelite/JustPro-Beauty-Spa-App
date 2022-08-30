@@ -15,7 +15,7 @@
 
                 </div>
 
-                <div class="title">Appointment</div>
+                <div class="title">Payments</div>
                 <div class="right">
                     <a href="#" class="link panel-open icon-only" data-panel="left">
 
@@ -26,8 +26,16 @@
         </div>
 
     </div>
+    <div class="toolbar toolbar-bottom toolbar-bottom-md">
+        <div class="toolbar-inner justify-content-center" style="padding:10px !important">
+            <a href="" dmx-on:click="run({condition:{if:`app.Current_user.data.customer.customer_email`,then:{steps:{run:{action:`app.main.billing.Setup_Intent_ephemeral_key_gen.submit();app.main.billing.justpropreloader.show()`}}},else:{steps:{runJS:{function:'showEnterEmailAddressSheet'}}}}})" class="button-6 button-large bg-color-primary text-color-white rounded-lg text-align-center" style="width:100% !important"><i class="bi bi-credit-card"></i> &nbsp; Manage cards</a>
+        </div>
+    </div>
     <div class="page-content wappler-block">
         <dmx-preloader id="justpropreloader" spinner="pulse" color="#ff6600"></dmx-preloader>
+        <div class="block" dmx-show="app.main.billing.customerPayments.data.customerPaymentMethods">
+            <h4 class="padding-bottom">My Cards</h4>
+        </div>
         <div class="block no-margin">
             <div class="list accordion-list dz-accordion dz-list">
                 <ul class="padding">
@@ -83,11 +91,8 @@
         </div>
 
         <div class="block">
-            <p class="text-align-center">Powered is processed by Stripe.com.</p>
+            <p class="text-align-center">JustPro payments is managed by our payment partner stripe.com.</p>
         </div>
-        <div class="block">
-            <a href="" dmx-on:click="run({condition:{if:`app.Current_user.data.customer.customer_email`,then:{steps:{run:{action:`app.main.billing.Setup_Intent_ephemeral_key_gen.submit();app.main.billing.justpropreloader.show()`}}},else:{steps:{runJS:{function:'showEnterEmailAddressSheet'}}}}})" class="button-4 button-large bg-color-blue text-color-white rounded-lg text-align-center" style="width:100% !important"><i class="bi bi-credit-card"></i> Manage cards</a>
 
-        </div>
     </div>
 </div>

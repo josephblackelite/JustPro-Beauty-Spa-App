@@ -26,8 +26,8 @@
         </div>
     </div>
     <div class="toolbar toolbar-bottom toolbar-bottom-md">
-        <div class="toolbar-inner" style="padding:10px !important">
-            <a href="/checkout" class="button-large rounded-xl button-18 button-fill text-color-white bg-color-primary" dmx-on:click="run({condition:{if:`!app.Current_user.data.customer.customer_email`,then:{steps:{runJS:{function:'showEnterEmailAddressSheet'}}},else:{steps:{condition:{if:`!app.Current_user.data.customer.phone_number`,then:{steps:{runJS:{function:'showVerifyNumberSheet'}}},else:{steps:{run:{action:`app.main.navigate(\'/order-tracking\',{})`}}}}}}}})" style="width:100%">Pay Now</a>
+        <div class="toolbar-inner justify-content-center" style="padding:10px !important">
+            <a href="/checkout" class="button-large rounded-xl button-6 button-fill text-color-white bg-color-primary" dmx-on:click="run({condition:{if:`!app.Current_user.data.customer.customer_email`,then:{steps:{runJS:{function:'showEnterEmailAddressSheet'}}},else:{steps:{condition:{if:`!app.Current_user.data.customer.phone_number`,then:{steps:{runJS:{function:'showVerifyNumberSheet'}}},else:{steps:{run:{action:`app.main.navigate(\'/order-tracking\',{})`}}}}}}}})" style="width:100%">Pay Now</a>
         </div>
     </div>
     <div class="page-content wappler-block">
@@ -127,7 +127,7 @@
     <!-- Verify Number Sheet modal -->
     <div class="sheet-modal verifyNumberSheet">
         <div class="toolbar">
-            <div class="toolbar-inner">
+            <div class="toolbar-inner justify-content-center">
                 <div class="left"></div>
                 <div class="title text-align-center">Please verify your mobile number</div>
                 <div class="right"></div>
@@ -168,7 +168,7 @@
     <!-- Enter email address Sheet modal -->
     <div class="sheet-modal EnterEmailAddressSheet">
         <div class="toolbar">
-            <div class="toolbar-inner">
+            <div class="toolbar-inner justify-content-center">
                 <div class="left"></div>
                 <div class="title text-align-center">Please add your email address</div>
                 <div class="right"></div>
