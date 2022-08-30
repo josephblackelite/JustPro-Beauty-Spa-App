@@ -121,7 +121,7 @@
                         <div class="list search-list mt-0 mb-20 dz-list searchbar-found">
                             <ul class="row" is="dmx-repeat" id="repeat_nails_services" dmx-bind:repeat="app.main.orderprompt.queryServices.data.queryServices">
                                 <li class="store-card col- medium-50 card-list mb-20">
-                                    <div class="card-media">
+                                    <div class="card-media bottom-30">
                                         <a dmx-on:click="app.main.navigate('/product-info/'+id,{})"><img src="" alt="" dmx-bind:src="app.main.orderprompt.queryServices.data.queryServices[0].product_avatar" /></a>
                                     </div>
                                     <div class="card-info">
@@ -131,7 +131,7 @@
                                             <span>What is this?</span>
                                         </a>
                                         <h4 class="item-title title strong" style="text-transform:uppercase;"><a dmx-on:click="app.main.navigate('/product-info/'+id,{})">{{product_name.capitalize()}}</a></h4>
-                                        <div class="info-bottom">
+                                        <div class="info-bottom up-10 bottom-15">
                                             <p class="time" dmx-text="amount_matrix.capitalize()">09:00 AM - 10:00 PM</p>
                                             <div class="location text-primary strong">
                                                 {{product_amt.toNumber().formatCurrency('AED', '.', ',', 2)}}
@@ -157,7 +157,7 @@
                         <div class="list search-list mt-0 mb-20 dz-list searchbar-found">
                             <ul class="row" is="dmx-repeat" id="repeat_waxing_services" dmx-bind:repeat="app.main.orderprompt.queryServices.data.queryServices">
                                 <li class="store-card col- medium-50 card-list mb-20">
-                                    <div class="card-media">
+                                    <div class="card-media bottom-30">
                                         <a dmx-on:click="app.main.navigate('/product-info/'+id,{})"><img alt="" dmx-bind:src="app.main.orderprompt.queryServices.data.queryServices[0].product_avatar" /></a>
                                     </div>
                                     <div class="card-info">
@@ -166,7 +166,7 @@
                                             <i class="bi bi-question-circle"></i>
                                             <span>What is this?</span> </a>
                                         <h5 class="item-title title strong" style="text-transform:uppercase;"><a dmx-on:click="app.main.navigate('/product-info/'+id,{})">{{product_name.capitalize()}}</a></h5>
-                                        <div class="info-bottom">
+                                        <div class="info-bottom up-10 bottom-15">
                                             <p class="time" dmx-text="amount_matrix.capitalize()">09:00 AM - 10:00 PM</p>
                                             <div class="location text-primary strong">
                                                 {{product_amt.toNumber().formatCurrency('AED', '.', ',', 2)}}
@@ -192,7 +192,7 @@
                         <div class="list search-list mt-0 mb-20 dz-list searchbar-found">
                             <ul class="row" is="dmx-repeat" id="repeat_threading_services" dmx-bind:repeat="app.main.orderprompt.queryServices.data.queryServices">
                                 <li class="store-card col- medium-50 card-list mb-20">
-                                    <div class="card-media">
+                                    <div class="card-media bottom-30">
                                         <a dmx-on:click="app.main.navigate('/product-info/'+id,{})"><img alt="" dmx-bind:src="app.main.orderprompt.queryServices.data.queryServices[0].product_avatar" /></a>
                                     </div>
                                     <div class="card-info">
@@ -202,7 +202,7 @@
                                             <span>What is this?</span>
                                         </a>
                                         <h5 class="item-title title strong" style="text-transform:uppercase;"><a dmx-on:click="app.main.navigate('/product-info/'+id,{})">{{product_name.capitalize()}}</a></h5>
-                                        <div class="info-bottom">
+                                        <div class="info-bottom up-10 bottom-15">
                                             <p class="time" dmx-text="amount_matrix.capitalize()">09:00 AM - 10:00 PM</p>
                                             <div class="location text-primary strong">
                                                 {{product_amt.toNumber().formatCurrency('AED', '.', ',', 2)}}
@@ -228,7 +228,7 @@
                         <div class="list search-list mt-0 mb-20 dz-list searchbar-found">
                             <ul class="row" is="dmx-repeat" id="repeat_massage_services" dmx-bind:repeat="app.main.orderprompt.queryServices.data.queryServices">
                                 <li class="store-card col- medium-50 card-list mb-20">
-                                    <div class="card-media">
+                                    <div class="card-media bottom-30">
                                         <a dmx-on:click="app.main.navigate('/product-info/'+id,{})"><img alt="" dmx-bind:src="app.main.orderprompt.queryServices.data.queryServices[0].product_avatar" /></a>
                                     </div>
                                     <div class="card-info">
@@ -238,7 +238,7 @@
                                             <span>What is this?</span>
                                         </a>
                                         <h4 class="item-title title strong" style="text-transform:uppercase;"><a dmx-on:click="app.main.navigate('/product-info/'+id,{})">{{product_name.capitalize()}}</a></h4>
-                                        <div class="info-bottom">
+                                        <div class="info-bottom up-10 bottom-15">
                                             <p class="time" dmx-text="amount_matrix.capitalize()">09:00 AM - 10:00 PM</p>
                                             <div class="location text-primary strong">
                                                 {{product_amt.toNumber().formatCurrency('AED', '.', ',', 2)}}
