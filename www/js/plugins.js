@@ -105,7 +105,8 @@ Stripe.addListener("paymentFlowOpened", () => {
 })
 
 Stripe.addListener("paymentFlowCreated", () => {
-    console.log('PaymentFlowEventsEnum.Created');
+    dmx.parse("app.main.checkout.justpropreloader.hide()")
+    dmx.parse("app.main.billing.justpropreloader.hide()")
     $$('#STRIPE_CARD_SETUP').val('Created');
 })
 
@@ -124,6 +125,7 @@ Stripe.addListener("paymentFlowCanceled", () => {
     dmx.parse("app.main.billing.justpropreloader.hide()")
 
 })
+
 Stripe.addListener("paymentFlowFailed", () => {
     dmx.parse("app.main.checkout.justpropreloader.hide()")
     dmx.parse("app.main.billing.justpropreloader.hide()")
