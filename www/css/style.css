@@ -21,8 +21,16 @@ Table of Sass Contents
 
 /* Custom color theme */
 
-
 :root {
+  --f7-theme-color: #A11F71;
+  --f7-theme-color-rgb: 161, 31, 113;
+  --f7-theme-color-shade: #7f1859;
+  --f7-theme-color-tint: #c32689;
+    --f7-theme-color-light: #81bd67;
+  --f7-theme-color-white: #fff;
+  --border-color: #F3F3F3; 
+}
+/*:root {
   --f7-theme-color: #6ab04c;
   --f7-theme-color-rgb: 106, 176, 76;
   --f7-theme-color-shade: #599440;
@@ -30,7 +38,7 @@ Table of Sass Contents
   --f7-theme-color-light: #81bd67;
   --f7-theme-color-white: #fff;
   --border-color: #F3F3F3; }
-
+*/
 /*
 
 0 - 600: Phone
@@ -60,7 +68,7 @@ body {
   overflow-x: hidden;
   height: 100%;
   position: relative;
-  color: #777777;
+  color:  var(--f7-theme-color);
   max-width: 100%;
   font-size: 14px;
   font-weight: 400;
@@ -3476,11 +3484,18 @@ h6, .h6 {
 /* Theme Color */
 :root,
 .md:not([class*='color-theme']) {
-  --f7-theme-color: #04764E;
+  /*--f7-theme-color: #04764E;
   --f7-theme-color-rgb: 18,34,97;
   --f7-theme-color-shade: #00613f;
   --f7-theme-color-tint: #07ac72;
   --f7-theme-color-light: #D9EDE6; }
+  */
+
+  --f7-theme-color: #A11F71;
+  --f7-theme-color-rgb: 161, 31, 113;
+  --f7-theme-color-shade: #7f1859;
+  --f7-theme-color-tint: #c32689;
+}
 
 .color-theme-red {
   --f7-theme-color: #ff3b30;
