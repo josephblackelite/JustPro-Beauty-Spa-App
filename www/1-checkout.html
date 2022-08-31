@@ -1,13 +1,16 @@
-<!-- Wappler include head-page="index.html" is="dmx-app" id="checkout" appConnect="local" framework7_6="With App Connect" framework7_icons="local" capacitor="local" components="{dmxSwiper:{},dmxFormRepeat:{},dmxFormatter:{},dmxPreloader:{},dmxValidator:{},dmxDatastore:{},dmxScheduler:{}}" -->
+<!-- Wappler include head-page="index.html" is="dmx-app" id="checkout" appConnect="local" framework7_6="With App Connect" framework7_icons="local" capacitor="local" components="{dmxSwiper:{},dmxFormRepeat:{},dmxFormatter:{},dmxPreloader:{},dmxValidator:{},dmxDatastore:{}}" -->
 
 <div class="page" id="checkout" data-name="checkout" path="/checkout/:address_id">
+    <script is="dmx-flow" id="flow1" type="text/dmx-flow" autorun>{
+  run: {action: "{{app.main.checkout.items_hidden.submit()}}"}
+}</script>
     <form is="dmx-serverconnect-form" id="Setup_Intent_ephemeral_key_gen" method="post" action="https://api.justpro.me/api/stripe/create_setup_intent" site="JustPro-Spa-Backend" dmx-on:success="run({runJS:{function:'createPaymentFlow',args:[`app.main.checkout.Setup_Intent_ephemeral_key_gen.data.client_secret`,`app.main.checkout.Setup_Intent_ephemeral_key_gen.data.customer_id`,`app.main.checkout.Setup_Intent_ephemeral_key_gen.data.ephemeral_key`]}})"><input id="User_id" name="user_id" dmx-bind:value="app.Current_user.data.customer.id" type="hidden">
         <input id="setUp" name="setUp" type="hidden">
-        <input id="customer_id" name="customer_id" type="hidden" dmx-bind:value="app.Current_user.data.customer.id"><input id="address_id" name="address_id" dmx-bind:value="app.main.checkout.route.params.address_id" type="hidden">
+        <input id="customer_id" name="customer_id" type="text" dmx-bind:value="app.Current_user.data.customer.id"><input id="address_id" name="address_id" type="text" dmx-bind:value="app.main.checkout.route.params.address_id">
         <div is="dmx-form-repeat" id="cartRepeat" dmx-bind:items="app.Cart.data">
             <input id="product_id" name="product_id" type="hidden" dmx-bind:value="$value.product_id">
             <input id="product_stripe_id" name="product_stripe_id" type="hidden" dmx-bind:value="$value.product_stripe_id">
-            <input id="quantity" name="quantity" type="hidden" dmx-bind:value="$value.quantity">
+            <input id="quantity" name="quantity" type="text" dmx-bind:value="$value.quantity">
             <input id="matrix" name="matrix" type="hidden" dmx-bind:value="$value.matrix">
             <input id="amount" name="amount" type="hidden" dmx-bind:value="$value.amount">
             <input id="total" name="total" type="hidden" dmx-bind:value="$value.total">
@@ -18,7 +21,6 @@
         </div>
     </form>
     <dmx-serverconnect id="customerPayments" url="https://api.justpro.me/api/stripe/customerPaymentMethods" site="JustPro-Spa-Backend" dmx-param:stripecustomerid="app.Current_user.data.customer.stripe_customer_id"></dmx-serverconnect>
-    <dmx-scheduler id="check_last_order" dmx-on:tick="run({condition:{if:`((app.customers_orders.data.query[0].id == app.main.checkout.Setup_Intent_ephemeral_key_gen.data.insertOrder.identity) &amp;&amp; app.customers_orders.data.query[0].order_paid)`,then:{steps:{run:{action:`app.main.navigate(\'/order-tracking\',{})`}}}}})" noload="true"></dmx-scheduler>
     <div class="padding-top padding-bottom">
         <div class="navbar no-hairline no-shadow no-border">
             <div class="navbar-inner" style="padding-right:0px !important; padding-left:0px !important; margin-right:0px !important">
@@ -40,8 +42,8 @@
         </div>
     </div>
     <div class="toolbar toolbar-bottom toolbar-bottom-md">
-        <div class="toolbar-inner justify-content-center" style="padding:10px !important">
-            <a href="/checkout" class="button-large rounded-xl button-6 button-fill text-color-white bg-color-primary" dmx-on:click="run({condition:{if:`!app.Current_user.data.customer.customer_email`,then:{steps:{runJS:{function:'showEnterEmailAddressSheet'}}},else:{steps:{condition:{if:`!app.Current_user.data.customer.phone_number`,then:{steps:{runJS:{function:'showVerifyNumberSheet'}}},else:{steps:{run:{action:`app.main.checkout.Setup_Intent_ephemeral_key_gen.submit()`}}}}}}}})" style="width:100%">Pay Now</a>
+        <div class="toolbar-inner" style="padding:10px !important">
+            <a href="/checkout" class="button-large rounded-xl button-18 button-fill text-color-white bg-color-primary" dmx-on:click="run({condition:{if:`!app.Current_user.data.customer.customer_email`,then:{steps:{runJS:{function:'showEnterEmailAddressSheet'}}},else:{steps:{condition:{if:`!app.Current_user.data.customer.phone_number`,then:{steps:{runJS:{function:'showVerifyNumberSheet'}}},else:{steps:{run:{action:`app.main.checkout.Setup_Intent_ephemeral_key_gen.submit()`}}}}}}}})" style="width:100%">Pay Now</a>
         </div>
     </div>
     <div class="page-content wappler-block">
@@ -123,7 +125,7 @@
     <!-- Verify Number Sheet modal -->
     <div class="sheet-modal verifyNumberSheet">
         <div class="toolbar">
-            <div class="toolbar-inner justify-content-center">
+            <div class="toolbar-inner">
                 <div class="left"></div>
                 <div class="title text-align-center">Please verify your mobile number</div>
                 <div class="right"></div>
@@ -164,7 +166,7 @@
     <!-- Enter email address Sheet modal -->
     <div class="sheet-modal EnterEmailAddressSheet">
         <div class="toolbar">
-            <div class="toolbar-inner justify-content-center">
+            <div class="toolbar-inner">
                 <div class="left"></div>
                 <div class="title text-align-center">Please add your email address</div>
                 <div class="right"></div>

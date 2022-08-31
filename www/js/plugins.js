@@ -110,7 +110,8 @@ Stripe.addListener("paymentFlowCreated", () => {
 })
 
 Stripe.addListener("paymentFlowCompleted", () => {
-    Framework7.instance.views.main.router.navigate("/order-tracking")
+    dmx.parse("app.main.checkout.justpropreloader.show()")
+    dmx.parse("app.main.checkout.check_last_order.start()")
 })
 
 Stripe.addListener("paymentFlowFailedToLoad", () => {
