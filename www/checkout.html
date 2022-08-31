@@ -48,10 +48,7 @@
     <div class="page-content wappler-block">
         <dmx-preloader id="justpropreloader" spinner="pulse" color="#ff6600"></dmx-preloader>
 
-        <div class="block">
-            <a href="" dmx-on:click="run({condition:{if:`app.Current_user.data.customer.customer_email`,then:{steps:{run:{action:`app.main.checkout.Setup_Intent_ephemeral_key_gen.setUp.setValue(\'setUp\');app.main.checkout.Setup_Intent_ephemeral_key_gen.submit();app.main.checkout.justpropreloader.show()`}}},else:{steps:{runJS:{function:'showEnterEmailAddressSheet'}}}}})" class="button-4 button-large bg-color-blue text-color-white rounded-lg text-align-center" style="width:100% !important"><i class="bi bi-credit-card"></i> Add new card</a>
 
-        </div>
         <div class="block no-margin">
             <div class="list accordion-list dz-accordion dz-list">
                 <ul class="padding">
