@@ -4397,10 +4397,10 @@ margin-bottom:-20px !important
 
 
 .page-content {
-    background-image:url(/assets/images/new_bg.png) !important;
+  background-image:url(/assets/images/new_bg.png) !important; 
     background-size:cover;
     background-position:center;
-}
+  }
 
 .rating {
   unicode-bidi: bidi-override;

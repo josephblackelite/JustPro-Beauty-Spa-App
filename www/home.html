@@ -1,6 +1,7 @@
 <!-- Wappler include head-page="index.html" is="dmx-app" id="orderprompt" appConnect="local" framework7_6="With App Connect" framework7_icons="local" capacitor="local" components="{dmxSwiper:{},dmxFormatter:{},dmxSockets:{},dmxPreloader:{}}" bootstrap_icons="local" fontawesome_5="local" -->
 
 <div class="page page-home" path="/order-prompt" data-name="order-prompt" id="orderprompt">
+    <dmx-datetime id="var1"></dmx-datetime>
     <dmx-serverconnect id="queryServices" url="https://api.justpro.me/api/services/query_services" site="JustPro-Spa-Backend" dmx-param:category="app.service_category.value" sockets="true" dmx-on:start="app.showPreloader('deeporange')" dmx-on:done="app.hidePreloader()"></dmx-serverconnect>
     <dmx-value id="popover_title"></dmx-value>
     <dmx-value id="popover_description"></dmx-value>
@@ -18,34 +19,23 @@
     <div class="padding-top padding-bottom" style="padding-top:20px !important; padding-bottom:30px !important">
         <div class="navbar no-hairline no-shadow no-border">
             <div class="navbar-inner" data-name="order-prompt">
-                <div class="subnavbar">
-                    <h4 class="montserrat smallfont text-color-primary"><a href="/profile" class="link small">
+                <div class="subnavbar justify-content-right">
+                    <h4 class="montserrat text-color-primary text-light"><a href="/profile" class="link small">
                             <small>
-                                <script>
-                                    var d = new Date();
-                            var time = d.getHours();                            
-                            if (time < 12) { document.write("Good morning!");
-                                }
-                                if (time > 12) {
-                                document.write("Good afternoon!");
-                                }
-                                if (time == 12) {
-                                document.write("Go eat lunch!");
-                                }
-                                </script>
-
-
-                                {{app.Current_user.data.customer.customer_name.titlecase()}}
+                                {{app.Current_user.data.customer.customer_name.titlecase()}}, howdy?
                             </small>
                         </a>
                     </h4>
                 </div>
                 <div class="left">
-                    <a href="#!"><img src="assets/images/logo-pages.png"> </a>
+                    <img src="assets/images/logo-pages.png">
+
                 </div>
-                <div class="title">&nbsp;</div>
-                <div class="right">
-                    <a href="#" class="link panel-open icon-only" data-panel="left">
+                <div class="title">
+
+                </div>
+                <div class="right mr-0" style="mr-0">
+                    <a href="#" class="link panel-open icon-only mr-0 pr-0" data-panel="left" style="margin-right:-40px !important; padding-right:-40px !important">
                         <i class="icon f7-icons">ellipsis_vertical</i>
                     </a>
                 </div>
