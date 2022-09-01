@@ -110,7 +110,7 @@ Stripe.addListener("paymentFlowCreated", () => {
 
 Stripe.addListener("paymentFlowCompleted", () => {
     dmx.parse("app.main.checkout.justpropreloader.show()")
-    dmx.parse("app.main.checkout.check_last_order.start()")
+    dmx.parse("app.main.checkout.check_last_order.run()")
 })
 
 Stripe.addListener("paymentFlowFailedToLoad", () => {

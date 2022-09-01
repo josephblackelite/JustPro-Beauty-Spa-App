@@ -20,11 +20,39 @@
                 </div>
             </div>
         </div>
+        <dmx-value id="last_order_id"></dmx-value>
     </div>
 
     <dmx-serverconnect id="customerPaymentMethods" url="https://api.justpro.me/api/stripe/customerPaymentMethods" site="JustPro-Spa-Backend" dmx-param:stripecustomerid="app.Current_user.data.customer.stripe_customer_id" sockets="true" dmx-param:customer_id="app.Current_user.data.customer.id"></dmx-serverconnect>
-    <dmx-scheduler id="check_last_order" dmx-on:tick="run({condition:{if:`((app.customers_orders.data.query[0].id == app.main.checkout.Setup_Intent_ephemeral_key_gen.data.insertOrder.identity) &amp;&amp; app.customers_orders.data.query[0].order_paid)`,then:{steps:{run:{action:`app.Cart.clear();app.main.navigate(\'/orders\',{})`}}},else:{steps:{condition:{if:`((app.customers_orders.data.query[0].id == app.main.checkout.Setup_Intent_ephemeral_key_gen.data.insertOrder.identity) &amp;&amp; !app.customers_orders.data.query[0].order_paid)`,then:{steps:[{run:{action:`app.main.checkout.justpropreloader.hide()`}},{'f7.dialog.alert':{title:'Error',text:'We are unable to process your payment, please confirm that you have sufficient funds in your account or try again with another '}}]}}}}}})" noload="true"></dmx-scheduler>
-    <dmx-scheduler id="check_last_order_for_card" dmx-on:tick="run([{wait:{delay:3000}},{run:{action:`app.customers_orders.load({customer_id: app.local_store.data.user_id})`}},{condition:{if:`((app.customers_orders.data.query[0].id == app.main.checkout.bill_selected_card.insertOrder.identity) &amp;&amp; app.customers_orders.data.query[0].order_paid)`,then:{steps:{run:{action:`app.Cart.clear();app.main.navigate(\'/orders\',{})`}}},else:{steps:{condition:{if:`((app.customers_orders.data.query[0].id == app.main.checkout.bill_selected_card.data.insertOrder.identity) &amp;&amp; !app.customers_orders.data.query[0].order_paid)`,then:{steps:[{run:{action:`app.main.checkout.justpropreloader.hide()`}},{'f7.dialog.alert':{title:'Error',text:'We are unable to process your payment, please confirm that you have sufficient funds in your account or try again with another '}}]}}}}}}])" noload="true"></dmx-scheduler>
+    <dmx-serverconnect id="lastOrder" url="https://api.justpro.me/api/customer_orders/last_order" site="JustPro-Spa-Backend" dmx-param:stripecustomerid="app.Current_user.data.customer.stripe_customer_id" sockets="true" dmx-param:customer_id="app.Current_user.data.customer.id"></dmx-serverconnect>
+    <script is="dmx-flow" id="check_last_order" type="text/dmx-flow">[
+  {
+    wait: {delay: 10000}
+  },
+  {
+    condition: {
+      if: "{{((app.main.checkout.last_order_id.value == app.main.checkout.lastOrder.data.queryLastOrder.id) && (app.main.checkout.lastOrder.data.queryLastOrder.order_paid == 1))}}",
+      then: {
+        steps: {
+          run: {action: "{{app.main.navigate('/order-tracking',{})}}"}
+        }
+      },
+      else: {
+        steps: {
+          f7.dialog.confirm: {
+            text: "We are unable to process your payment, please confirm that you have enough money in your account and try again?",
+            title: "Payment can't be processed",
+            then: {
+              steps: {
+                run: {action: "{{app.main.checkout.justpropreloader.hide()}}"}
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+]</script>
 
     <div class="toolbar toolbar-bottom toolbar-bottom-md">
         <div class="toolbar-inner justify-content-center" style="padding:10px !important">
@@ -65,23 +93,6 @@
                                                 Pay with this card
                                             </button>
                                         </div>
-                                        <!-- <div class="swiper-slide">
-                                            <div class="payment-card">
-                                                <div class="card-media">
-                                                    <img src="img/card/card2.png" alt="">
-                                                </div>
-                                                <div class="card-info">
-                                                    <div class="clearfix">
-                                                        <h5 class="card-name">Credit Card</h5>
-                                                        <p class="card-number">1234 **** **** ****</p>
-                                                    </div>
-                                                    <div class="bottom-info">
-                                                        <p>04 / 25</p>
-                                                        <p>KEVIN HARD</p>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div> -->
                                     </div>
                                 </div>
                             </div>
@@ -101,7 +112,7 @@
             <p>Payment is processed by Stripe.com.</p>
         </div>
 
-        <form is="dmx-serverconnect-form" id="Setup_Intent_ephemeral_key_gen" method="post" action="https://api.justpro.me/api/stripe/create_setup_intent" site="JustPro-Spa-Backend" dmx-on:success="run({runJS:{function:'createPaymentFlow',args:[`app.main.checkout.Setup_Intent_ephemeral_key_gen.data.client_secret`,`app.main.checkout.Setup_Intent_ephemeral_key_gen.data.customer_id`,`app.main.checkout.Setup_Intent_ephemeral_key_gen.data.ephemeral_key`]}})"><input id="User_id" name="user_id" dmx-bind:value="app.Current_user.data.customer.id" type="hidden">
+        <form is="dmx-serverconnect-form" id="Setup_Intent_ephemeral_key_gen" method="post" action="https://api.justpro.me/api/stripe/create_setup_intent" site="JustPro-Spa-Backend" dmx-on:success="run([{run:{action:`app.main.checkout.last_order_id.setValue(app.main.checkout.Setup_Intent_ephemeral_key_gen.data.insertOrder.identity)`}},{runJS:{function:'createPaymentFlow',args:[`app.main.checkout.Setup_Intent_ephemeral_key_gen.data.client_secret`,`app.main.checkout.Setup_Intent_ephemeral_key_gen.data.customer_id`,`app.main.checkout.Setup_Intent_ephemeral_key_gen.data.ephemeral_key`]}}])"><input id="User_id" name="user_id" dmx-bind:value="app.Current_user.data.customer.id" type="hidden">
             <input id="setUp" name="setUp" type="hidden">
             <input id="customer_id" name="customer_id" type="hidden" dmx-bind:value="app.Current_user.data.customer.id"><input id="address_id" name="address_id" dmx-bind:value="app.main.checkout.route.params.address_id" type="hidden">
             <div is="dmx-form-repeat" id="cartRepeat" dmx-bind:items="app.Cart.data">
@@ -117,7 +128,7 @@
                 <input id="timeSlot_end" name="timeSlot_end" type="hidden" dmx-bind:value="$value.timeSlot_end">
             </div>
         </form>
-        <form is="dmx-serverconnect-form" id="bill_selected_card" method="post" action="https://api.justpro.me/api/stripe/bill_customer_card" site="JustPro-Spa-Backend" dmx-on:success="run({run:{action:`app.main.checkout.justpropreloader.show();app.main.checkout.check_last_order_for_card.start()`}})">
+        <form is="dmx-serverconnect-form" id="bill_selected_card" method="post" action="https://api.justpro.me/api/stripe/bill_customer_card" site="JustPro-Spa-Backend" dmx-on:success="run([{run:{action:`app.main.checkout.last_order_id.setValue(app.main.checkout.bill_selected_card.data.insertOrder.identity)`}},{run:{action:`app.main.checkout.justpropreloader.show();app.main.checkout.check_last_order.run()`}}])">
             <input id="selected_payment_method" name="selected_payment_method" type="hidden">
             <input id="User_id_bill_selected_card" name="user_id" dmx-bind:value="app.Current_user.data.customer.id" type="hidden">
             <input id="setUp_bill_selected_card" name="setUp" type="hidden">
