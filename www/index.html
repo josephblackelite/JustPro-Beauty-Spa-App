@@ -114,6 +114,19 @@
 
         <dmx-local-manager id=" local_store">
         </dmx-local-manager>
+
+        <dmx-serverconnect id="Current_user" url="https://api.justpro.me/api/security/logged_in_user_data" site="JustPro-Spa-Backend" dmx-param:user_id="local_store.data.user_id" sockets="true"></dmx-serverconnect>
+        <dmx-serverconnect id="customers_orders" url="https://api.justpro.me/api/customer_orders/list_orders" site="JustPro-Spa-Backend" dmx-param:customer_id="Current_user.data.customer.id" sockets="true"></dmx-serverconnect>
+        <dmx-datastore id="Cart"></dmx-datastore>
+
+
+        <dmx-json-datasource id="countryList" is="dmx-serverconnect" url="countryList.json"></dmx-json-datasource>
+        <dmx-value id="service_category" dmx-bind:value="'massage'"></dmx-value>
+        <dmx-value id="panelLinkClassToggle" dmx-bind:value="'home'"></dmx-value>
+        <dmx-value id="otp_id"></dmx-value>
+
+
+        <dmx-value id="cartQtyVal" dmx-bind:value="0"></dmx-value><input id="STRIPE_CARD_SETUP" name="text1" type="hidden">
         <script is="dmx-flow" id="App_notifcation" type="text/dmx-flow">{
           meta: {
             $param: [
@@ -133,9 +146,6 @@
             }
           }
         }</script>
-        <dmx-serverconnect id="Current_user" url="https://api.justpro.me/api/security/logged_in_user_data" site="JustPro-Spa-Backend" dmx-param:user_id="local_store.data.user_id" sockets="true"></dmx-serverconnect>
-        <dmx-value id="service_category" dmx-bind:value="'massage'"></dmx-value>
-        <dmx-datastore id="Cart"></dmx-datastore>
         <script is="dmx-flow" id="Redirect_to_login_or_home" type="text/dmx-flow" autorun>[
   {
     condition: {
@@ -168,8 +178,6 @@
     runJS: {function: "hideSplashScreen"}
   }
 ]</script>
-        <dmx-value id="panelLinkClassToggle" dmx-bind:value="'home'"></dmx-value><input id="STRIPE_CARD_SETUP" name="text1" type="hidden">
-        <dmx-value id="otp_id"></dmx-value>
         <script is="dmx-flow" id="Show_proloader" type="text/dmx-flow">{
   meta: {
     $param: [
@@ -186,9 +194,7 @@
     }
   }
 }</script>
-        <dmx-json-datasource id="countryList" is="dmx-serverconnect" url="countryList.json"></dmx-json-datasource>
-        <dmx-value id="cartQtyVal" dmx-bind:value="0"></dmx-value>
-        <dmx-serverconnect id="customers_orders" url="https://api.justpro.me/api/customer_orders/list_orders" site="JustPro-Spa-Backend" dmx-param:customer_id="Current_user.data.customer.id" sockets="true"></dmx-serverconnect>
+
         <div class="statusbar"></div>
 
         <!-- Sidebar Nav -->
