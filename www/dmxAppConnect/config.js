@@ -329,139 +329,39 @@ dmx.config({
     "repeat_user_cards": {
       "meta": [
         {
-          "name": "acss_debit",
-          "type": "object"
+          "type": "number",
+          "name": "id"
         },
         {
-          "name": "afterpay_clearpay",
-          "type": "object"
+          "type": "text",
+          "name": "stripe_payment_method_id"
         },
         {
-          "name": "alipay",
-          "type": "object"
+          "type": "text",
+          "name": "country"
         },
         {
-          "name": "au_becs_debit",
-          "type": "object"
+          "type": "text",
+          "name": "exp_year"
         },
         {
-          "name": "bacs_debit",
-          "type": "object"
+          "type": "text",
+          "name": "exp_month"
         },
         {
-          "name": "bancontact",
-          "type": "object"
+          "type": "text",
+          "name": "funding"
         },
         {
-          "name": "billing_details",
-          "type": "object"
+          "type": "text",
+          "name": "last4"
         },
         {
-          "name": "boleto",
-          "type": "object"
-        },
-        {
-          "name": "card",
-          "type": "object"
-        },
-        {
-          "name": "card_present",
-          "type": "object"
-        },
-        {
-          "name": "created",
-          "type": "number"
-        },
-        {
-          "name": "customer",
-          "type": "text"
-        },
-        {
-          "name": "customer_balance",
-          "type": "object"
-        },
-        {
-          "name": "eps",
-          "type": "object"
-        },
-        {
-          "name": "fpx",
-          "type": "object"
-        },
-        {
-          "name": "giropay",
-          "type": "object"
-        },
-        {
-          "name": "grabpay",
-          "type": "object"
-        },
-        {
-          "name": "id",
-          "type": "text"
-        },
-        {
-          "name": "ideal",
-          "type": "object"
-        },
-        {
-          "name": "interac_present",
-          "type": "object"
-        },
-        {
-          "name": "klarna",
-          "type": "object"
-        },
-        {
-          "name": "konbini",
-          "type": "object"
-        },
-        {
-          "name": "livemode",
-          "type": "boolean"
-        },
-        {
-          "name": "metadata",
-          "type": "object"
-        },
-        {
-          "name": "object",
-          "type": "text"
-        },
-        {
-          "name": "oxxo",
-          "type": "object"
-        },
-        {
-          "name": "p24",
-          "type": "object"
-        },
-        {
-          "name": "paynow",
-          "type": "object"
-        },
-        {
-          "name": "sepa_debit",
-          "type": "object"
-        },
-        {
-          "name": "sofort",
-          "type": "object"
-        },
-        {
-          "name": "type",
-          "type": "text"
-        },
-        {
-          "name": "us_bank_account",
-          "type": "object"
-        },
-        {
-          "name": "wechat_pay",
-          "type": "object"
+          "type": "text",
+          "name": "issuer"
         }
       ],
-      "outputType": "text"
+      "outputType": "array"
     }
   },
   "chooseaddress": {
@@ -474,139 +374,39 @@ dmx.config({
     "repeat_user_cards": {
       "meta": [
         {
-          "name": "acss_debit",
-          "type": "object"
+          "type": "number",
+          "name": "id"
         },
         {
-          "name": "afterpay_clearpay",
-          "type": "object"
+          "type": "text",
+          "name": "stripe_payment_method_id"
         },
         {
-          "name": "alipay",
-          "type": "object"
+          "type": "text",
+          "name": "country"
         },
         {
-          "name": "au_becs_debit",
-          "type": "object"
+          "type": "text",
+          "name": "exp_year"
         },
         {
-          "name": "bacs_debit",
-          "type": "object"
+          "type": "text",
+          "name": "exp_month"
         },
         {
-          "name": "bancontact",
-          "type": "object"
+          "type": "text",
+          "name": "funding"
         },
         {
-          "name": "billing_details",
-          "type": "object"
+          "type": "text",
+          "name": "last4"
         },
         {
-          "name": "boleto",
-          "type": "object"
-        },
-        {
-          "name": "card",
-          "type": "object"
-        },
-        {
-          "name": "card_present",
-          "type": "object"
-        },
-        {
-          "name": "created",
-          "type": "number"
-        },
-        {
-          "name": "customer",
-          "type": "text"
-        },
-        {
-          "name": "customer_balance",
-          "type": "object"
-        },
-        {
-          "name": "eps",
-          "type": "object"
-        },
-        {
-          "name": "fpx",
-          "type": "object"
-        },
-        {
-          "name": "giropay",
-          "type": "object"
-        },
-        {
-          "name": "grabpay",
-          "type": "object"
-        },
-        {
-          "name": "id",
-          "type": "text"
-        },
-        {
-          "name": "ideal",
-          "type": "object"
-        },
-        {
-          "name": "interac_present",
-          "type": "object"
-        },
-        {
-          "name": "klarna",
-          "type": "object"
-        },
-        {
-          "name": "konbini",
-          "type": "object"
-        },
-        {
-          "name": "livemode",
-          "type": "boolean"
-        },
-        {
-          "name": "metadata",
-          "type": "object"
-        },
-        {
-          "name": "object",
-          "type": "text"
-        },
-        {
-          "name": "oxxo",
-          "type": "object"
-        },
-        {
-          "name": "p24",
-          "type": "object"
-        },
-        {
-          "name": "paynow",
-          "type": "object"
-        },
-        {
-          "name": "sepa_debit",
-          "type": "object"
-        },
-        {
-          "name": "sofort",
-          "type": "object"
-        },
-        {
-          "name": "type",
-          "type": "text"
-        },
-        {
-          "name": "us_bank_account",
-          "type": "object"
-        },
-        {
-          "name": "wechat_pay",
-          "type": "object"
+          "type": "text",
+          "name": "issuer"
         }
       ],
-      "outputType": "text"
+      "outputType": "array"
     }
   },
   "customeraddresses": {

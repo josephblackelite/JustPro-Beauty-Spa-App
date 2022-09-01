@@ -22,12 +22,12 @@
         </div>
     </div>
 
-    <dmx-serverconnect id="customerPayments" url="https://api.justpro.me/api/stripe/customerPaymentMethods" site="JustPro-Spa-Backend" dmx-param:stripecustomerid="app.Current_user.data.customer.stripe_customer_id" sockets="true"></dmx-serverconnect>
-    <dmx-scheduler id="check_last_order" dmx-on:tick="run({condition:{if:`((app.customers_orders.data.query[0].id == app.main.checkout.Setup_Intent_ephemeral_key_gen.data.insertOrder.identity) &amp;&amp; app.customers_orders.data.query[0].order_paid)`,then:{steps:{run:{action:`app.Cart.clear();app.main.navigate(\'/orders\',{})`}}},else:{steps:{condition:{if:`((app.customers_orders.data.query[0].id == app.main.checkout.Setup_Intent_ephemeral_key_gen.data.insertOrder.identity) &amp;&amp; !app.customers_orders.data.query[0].order_paid)`,then:{steps:[{run:{action:`app.main.checkout.justpropreloader.hide()`}},{'f7.dialog.alert':{title:'Error',text:'We are unable to process your payment, please confirm that you have sufficient funds in your account or try again with another card.'}}]}}}}}})" noload="true"></dmx-scheduler>
+    <dmx-serverconnect id="customerPaymentMethods" url="https://api.justpro.me/api/stripe/customerPaymentMethods" site="JustPro-Spa-Backend" dmx-param:stripecustomerid="app.Current_user.data.customer.stripe_customer_id" sockets="true" dmx-param:customer_id="app.Current_user.data.customer.id"></dmx-serverconnect>
+    <dmx-scheduler id="check_last_order" dmx-on:tick="run({condition:{if:`((app.customers_orders.data.query[0].id == app.main.checkout.Setup_Intent_ephemeral_key_gen.data.insertOrder.identity) &amp;&amp; app.customers_orders.data.query[0].order_paid)`,then:{steps:{run:{action:`app.Cart.clear();app.main.navigate(\'/orders\',{})`}}},else:{steps:{condition:{if:`((app.customers_orders.data.query[0].id == app.main.checkout.Setup_Intent_ephemeral_key_gen.data.insertOrder.identity) &amp;&amp; !app.customers_orders.data.query[0].order_paid)`,then:{steps:[{run:{action:`app.main.checkout.justpropreloader.hide()`}},{'f7.dialog.alert':{title:'Error',text:'We are unable to process your payment, please confirm that you have sufficient funds in your account or try again with another '}}]}}}}}})" noload="true"></dmx-scheduler>
 
     <div class="toolbar toolbar-bottom toolbar-bottom-md">
         <div class="toolbar-inner justify-content-center" style="padding:10px !important">
-            <a href="/checkout" class="button-large rounded-xl button-6 button-fill text-color-white bg-color-primary" dmx-on:click="run({condition:{if:`!app.Current_user.data.customer.customer_email`,then:{steps:{runJS:{function:'showEnterEmailAddressSheet'}}},else:{steps:{condition:{if:`!app.Current_user.data.customer.phone_number`,then:{steps:{runJS:{function:'showVerifyNumberSheet'}}},else:{steps:{run:{action:`app.main.checkout.Setup_Intent_ephemeral_key_gen.submit()`}}}}}}}})" style="width:100%">Pay Now</a>
+            <a href="/checkout" class="button-large rounded-xl button-6 button-fill text-color-white bg-color-primary" dmx-on:click="run({condition:{if:`!app.Current_user.data.customer.customer_email`,then:{steps:{runJS:{function:'showEnterEmailAddressSheet'}}},else:{steps:{condition:{if:`!app.Current_user.data.customer.phone_number`,then:{steps:{runJS:{function:'showVerifyNumberSheet'}}},else:{steps:{run:{action:`app.main.checkout.Setup_Intent_ephemeral_key_gen.submit()`}}}}}}}})" style="width:100%">Pay with another card</a>
         </div>
     </div>
     <div class="page-content wappler-block">
@@ -43,7 +43,7 @@
                                 <!-- Payment Swiper -->
                                 <div data-space-between="15" data-slides-per-view="auto" data-centered-slides="false" class="swiper-container swiper-init payment-swiper item-swiper">
                                     <div class="swiper-wrapper">
-                                        <div class="swiper-slide" dmx-repeat:repeat_user_cards="app.main.checkout.customerPayments.data.customerPaymentMethods">
+                                        <div class="swiper-slide " dmx-repeat:repeat_user_cards="app.main.checkout.customerPaymentMethods.data.query">
                                             <div class="payment-card">
                                                 <div class="card-media">
                                                     <img src="img/card/card1.png" alt="">
@@ -51,15 +51,18 @@
                                                 </div>
                                                 <div class="card-info">
                                                     <div class="clearfix">
-                                                        <h5 class="card-name">{{card.funding}}</h5>
-                                                        <p class="card-number">{{card.last4}} **** **** ****</p>
+                                                        <h5 class="card-name">{{funding}}</h5>
+                                                        <p class="card-number">{{last4}} **** **** ****</p>
                                                     </div>
                                                     <div class="bottom-info">
-                                                        <p>{{card.exp_month+' / '+card.exp_year}}</p>
-                                                        <p>{{card.brand}}</p>
+                                                        <p>{{exp_month+' / '+exp_year}}</p>
+                                                        <p>{{brand}}</p>
                                                     </div>
                                                 </div>
                                             </div>
+                                            <button class="button-fill button-large bg-color-yellow margin-top display-block rounded-xl text-color-black button-6" dmx-on:click="run({'f7.dialog.confirm':{title:'Pay with attempt',text:`\'Are you sure you want to make this pay with card ending in \'+last4+\' ?\'`,then:{steps:{run:{action:`app.main.checkout.bill_selected_card.selected_payment_method.setValue(stripe_payment_method_id);app.main.checkout.bill_selected_card.submit()`}}}}})">
+                                                Pay with this card
+                                            </button>
                                         </div>
                                         <!-- <div class="swiper-slide">
                                             <div class="payment-card">
@@ -111,6 +114,24 @@
                 <input id="appointment_date" name="appointment_date" type="hidden" dmx-bind:value="$value.appointment_date">
                 <input id="timeSlot_start" name="timeSlot_start" type="hidden" dmx-bind:value="$value.timeSlot_start">
                 <input id="timeSlot_end" name="timeSlot_end" type="hidden" dmx-bind:value="$value.timeSlot_end">
+            </div>
+        </form>
+        <form is="dmx-serverconnect-form" id="bill_selected_card" method="post" action="https://api.justpro.me/api/stripe/bill_customer_card" site="JustPro-Spa-Backend" dmx-on:success="run({run:{action:`app.main.checkout.justpropreloader.show();app.main.checkout.check_last_order.start()`}})">
+            <input id="selected_payment_method" name="selected_payment_method" type="text">
+            <input id="User_id_bill_selected_card" name="user_id1" dmx-bind:value="app.Current_user.data.customer.id" type="hidden">
+            <input id="setUp_bill_selected_card" name="setUp" type="hidden">
+            <input id="customer_id_bill_selected_card" name="customer_id" type="hidden" dmx-bind:value="app.Current_user.data.customer.id"><input id="address_id_bill_selected_card" name="address_id" dmx-bind:value="app.main.checkout.route.params.address_id" type="hidden">
+            <div is="dmx-form-repeat" id="cartRepeat_bill_selected_card" dmx-bind:items="app.Cart.data">
+                <input id="product_id_bill_selected_card" name="product_id" type="hidden" dmx-bind:value="$value.product_id">
+                <input id="product_stripe_id_bill_selected_card" name="product_stripe_id" type="hidden" dmx-bind:value="$value.product_stripe_id">
+                <input id="quantity_bill_selected_card" name="quantity" type="hidden" dmx-bind:value="$value.quantity">
+                <input id="matrix_bill_selected_card" name="matrix" type="hidden" dmx-bind:value="$value.matrix">
+                <input id="amount_bill_selected_card" name="amount" type="hidden" dmx-bind:value="$value.amount">
+                <input id="total_bill_selected_card" name="total" type="hidden" dmx-bind:value="$value.total">
+                <input id="vat_bill_selected_card" name="vat" type="hidden" dmx-bind:value="$value.vat">
+                <input id="appointment_date_bill_selected_card" name="appointment_date" type="hidden" dmx-bind:value="$value.appointment_date">
+                <input id="timeSlot_start_bill_selected_card" name="timeSlot_start" type="hidden" dmx-bind:value="$value.timeSlot_start">
+                <input id="timeSlot_end_bill_selected_card" name="timeSlot_end" type="hidden" dmx-bind:value="$value.timeSlot_end">
             </div>
         </form>
     </div>

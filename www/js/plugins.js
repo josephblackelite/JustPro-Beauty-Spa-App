@@ -75,9 +75,7 @@ async function googleSignIn() {
     $$('#password').val(googleUser.id);
     $$('#var1').val(googleUser.id);
 
-
-    // Submit form
-    // $$('#GoogleSignInForm').submit()
+    dmx.parse("app.main.login.submit_google_login_form.run()")
 
 }
 
@@ -93,8 +91,8 @@ Stripe.initialize({
 
 // be able to get event of PaymentFlow
 Stripe.addListener("paymentFlowLoaded", () => {
-    dmx.parse("app.main.checkout.justpropreloader.hide()")
-    dmx.parse("app.main.billing.justpropreloader.hide()")
+    // dmx.parse("app.main.checkout.justpropreloader.hide()")
+    // dmx.parse("app.main.billing.justpropreloader.hide()")
     $$('#STRIPE_CARD_SETUP').val('Loaded');
 })
 
@@ -105,8 +103,8 @@ Stripe.addListener("paymentFlowOpened", () => {
 })
 
 Stripe.addListener("paymentFlowCreated", () => {
-    dmx.parse("app.main.checkout.justpropreloader.hide()")
-    dmx.parse("app.main.billing.justpropreloader.hide()")
+    // dmx.parse("app.main.checkout.justpropreloader.hide()")
+    // dmx.parse("app.main.billing.justpropreloader.hide()")
     $$('#STRIPE_CARD_SETUP').val('Created');
 })
 
