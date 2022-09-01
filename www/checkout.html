@@ -117,13 +117,13 @@
             </div>
         </form>
         <form is="dmx-serverconnect-form" id="bill_selected_card" method="post" action="https://api.justpro.me/api/stripe/bill_customer_card" site="JustPro-Spa-Backend" dmx-on:success="run({run:{action:`app.main.checkout.justpropreloader.show();app.main.checkout.check_last_order.start()`}})">
-            <input id="selected_payment_method" name="selected_payment_method" type="text">
-            <input id="User_id_bill_selected_card" name="user_id1" dmx-bind:value="app.Current_user.data.customer.id" type="hidden">
+            <input id="selected_payment_method" name="selected_payment_method" type="hidden">
+            <input id="User_id_bill_selected_card" name="user_id" dmx-bind:value="app.Current_user.data.customer.id" type="hidden">
             <input id="setUp_bill_selected_card" name="setUp" type="hidden">
             <input id="customer_id_bill_selected_card" name="customer_id" type="hidden" dmx-bind:value="app.Current_user.data.customer.id"><input id="address_id_bill_selected_card" name="address_id" dmx-bind:value="app.main.checkout.route.params.address_id" type="hidden">
             <div is="dmx-form-repeat" id="cartRepeat_bill_selected_card" dmx-bind:items="app.Cart.data">
                 <input id="product_id_bill_selected_card" name="product_id" type="hidden" dmx-bind:value="$value.product_id">
-                <input id="product_stripe_id_bill_selected_card" name="product_stripe_id" type="hidden" dmx-bind:value="$value.product_stripe_id">
+                <input id="price_id_bill_selected_card" name="price_id" type="hidden" dmx-bind:value="$value.product_stripe_id">
                 <input id="quantity_bill_selected_card" name="quantity" type="hidden" dmx-bind:value="$value.quantity">
                 <input id="matrix_bill_selected_card" name="matrix" type="hidden" dmx-bind:value="$value.matrix">
                 <input id="amount_bill_selected_card" name="amount" type="hidden" dmx-bind:value="$value.amount">
