@@ -3,7 +3,7 @@
 
 <div class="page" id="orderconfirmation" data-name="order_confirmation" path="/order-confirmation">
     <div class="padding-top padding-bottom">
-        <div class="navbar no-hairline no-shadow no-border">
+        <div class="navbar shadow">
             <div class="navbar-inner" style="padding-right:0px !important; padding-left:0px !important; margin-right:0px !important">
                 <div class="left">
                     <a href="#" class="link back">
@@ -23,7 +23,7 @@
         </div>
 
     </div>
-    <div class="toolbar toolbar-bottom toolbar-bottom-md">
+    <div class="toolbar toolbar-bottom toolbar-bottom-md no-shadow">
         <div class="toolbar-inner justify-content-center" style="padding:10px !important">
             <a class="button-large rounded-xl button-6 bg-color-primary text-color-white" style="width:100%" dmx-bind:href="'/appointment-page'" dmx-hide="(app.Cart.data.count() < 1)">Continue &nbsp;<i class="bi-arrow-right-circle-fill"></i></a>
             <a class="button-large rounded-xl button-18 bg-color-primary text-color-white" style="width:100%" dmx-bind:href="'/home'" dmx-show="(app.Cart.data.count() < 1)">Keep Shopping</a>
@@ -36,9 +36,9 @@
         <div class="container" style="margin-bottom:150px !important">
 
             <div class="block text-align-right" dmx-hide="(app.Cart.data.count() < 1)">
-                <p style="margin-bottom:0px !important"><small>Basket Total</small></p>
+                <p style="margin-bottom:0px !important" class="strong">Basket Total</p>
                 <h1 style="margin-top:-5px !important; margin-bottom:-5px !important">{{Cart.data.sum(`total.toNumber()`).formatCurrency('AED', '.', ',', 2)}}</h1>
-                <small>Including VAT {{Cart.data.sum(`vat.toNumber()`).formatCurrency('AED', '.', ',', 2)}}</small>
+                <small>Total price above includes VAT of {{Cart.data.sum(`vat.toNumber()`).formatCurrency('AED', '.', ',', 2)}}</small>
             </div>
 
 
@@ -57,18 +57,18 @@
                     <li class="col-100 mb-20">
                         <div class="wishlist-bx" style="width:100% !important">
                             <div class="dz-media">
-                                <a href="/item-details/"><img dmx-bind:src="app.main.orderconfirmation.repeat1[0].product_avatar"></a>
+                                <a href="/item-details/"><img dmx-bind:src="product_avatar"></a>
                             </div>
                             <div class="dz-info">
                                 <div class="dz-head">
-                                    <h6 class="item-title mb-0" style="margin-bottom:0px !important"><a href="/item-details/">{{name.capitalize()}}</a></h6>
-                                    <p style="margin-top:4px !important">{{quantity}} People <span dmx-show="(matrix == 0)"> {{matrix}} hour</span></p>
+                                    <h4 class="item-title mb-0 tajawal" style="margin-bottom:0px !important">{{name.capitalize()}}</h4>
+                                    <p style="margin-top:4px !important">{{quantity}} People<span dmx-show="name.contains('massage')">, {{matrix}} hour</span></p>
                                 </div>
                                 <div class="row">
                                     <div class="col-70">
                                         <p class="price">{{total.toNumber().formatCurrency('AED', '.', ',', 2)}}</p>
                                     </div>
-                                    <div class="col-30"> <button class="button-18 text-align-center bg-color-primary" style="height:30px !important; width:30px !important; margin-top:10px !important" dmx-on:click="run({'f7.dialog.confirm':{title:'Delete Item?',text:'This item will be removed from your cart.',then:{steps:{run:{action:`app.Cart.delete({product_id: product_id})`}}}}})"><i class="bi bi-trash fa-fw text-color-white margin"></i> </button></div>
+                                    <div class="col-30"> <button class="button-18 text-align-center brand-bg" style="height:30px !important; width:30px !important; margin-top:10px !important" dmx-on:click="run({'f7.dialog.confirm':{title:'Delete Item?',text:'This item will be removed from your cart.',then:{steps:{run:{action:`app.Cart.delete({product_id: product_id})`}}}}})"><i class="bi bi-trash fa-fw text-color-white fa-2w margin"></i> </button></div>
                                 </div>
                                 <!--  <div class="dz-meta">
                                         <ul>

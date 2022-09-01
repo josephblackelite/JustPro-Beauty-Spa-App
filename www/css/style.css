@@ -1774,7 +1774,7 @@ h6, .h6 {
       .card-overlay.style-2 .dz-meta ul li path {
         fill: #fff; }
       .card-overlay.style-2 .dz-meta ul li:last-child {
-        padidng-right: 0; }
+        padding-right: 0; }
 
 .overlay-swiper1 .swiper-slide {
   width: 205px; }
@@ -3783,7 +3783,7 @@ h6, .h6 {
   border-radius: 50px; }
 
 .button-outline {
-  border-width: 1px; }
+  border-width: 2px; }
 
 .button-social {
   text-transform: capitalize; }
@@ -4457,4 +4457,11 @@ margin-bottom:-20px !important;
     background-image: url(/assets/images/bg-style.png);
     background-size:cover;
     background-position:center;
+}
+
+.brand-btn {
+    background-color:#E63C7A !important;
+    color:#fff;
+    font-weight:800;
+    border:#E63C7A !important;
 }
