@@ -1,4 +1,4 @@
-<!-- Wappler include head-page="index.html" is="dmx-app" id="orders" appConnect="local" framework7_6="With App Connect" framework7_icons="local" capacitor="local" components="{dmxSwiper:{}}" -->
+<!-- Wappler include head-page="index.html" is="dmx-app" id="orders" appConnect="local" framework7_6="With App Connect" framework7_icons="local" capacitor="local" components="{dmxSwiper:{},dmxFormatter:{}}" -->
 
 <div class="page">
     <div class="padding-top padding-bottom">
@@ -26,8 +26,37 @@
 
     <div class="page-content content-area pt-120 ">
 
-        <!-- Search backdrop -->
-        <div class="searchbar-backdrop"></div>
+        <div class="container" style="margin-bottom:150px !important">
+            <div class="block text-align-center padding-top padding-bottom" dmx-show="(app.Cart.data.count() < 1)">
+                <h4> Your order history</h4>
+
+            </div>
+
+
+
+            <div class="list search-list mt-0 mb-10 dz-list item-list no-shadow" style="margin-right:20px !important; margin-left:-10px !important">
+                <ul is="dmx-repeat" id="repeat_customer_orders" dmx-bind:repeat="app.customers_orders.data.query">
+                    <li class="col-100 mb-20">
+                        <div class="wishlist-bx" style="width:100% !important">
+                            <div class="dz-info">
+                                <div class="dz-head">
+                                    <h6 class="item-title mb-0" style="margin-bottom:0px !important"><a href="/item-details/"></a></h6>
+                                    <p style="margin-top:4px !important">{{'Order id - '+order_uuid_id}}</p>
+                                </div>
+                                <div class="row">
+                                    <div class="col-70">
+                                        <p class="price">{{items.count()}} items</p>
+                                        <p class="margin-top">
+                                            {{'Booking time - '+appointment_date.Date()+' , '+timeSlot_start+' '+timeSlot_end}}
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </div>
 
 
 

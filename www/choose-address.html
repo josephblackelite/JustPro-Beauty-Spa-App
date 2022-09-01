@@ -73,7 +73,7 @@
                                         <div class="item-inner" style="width:100% !important">
                                             <div class="item-title item-floating-label strong">My Saved Address <i class="bi bi-geo-alt-fill"></i></div>
                                             <div class="item-input-wrap">
-                                                <select id="select_address" class="form-control" dmx-bind:options="app.Current_user.data.customer.customer_addresses" optionvalue="id" optiontext="address_name" placeholder="My Saved Address" style="width:100% !important">
+                                                <select id="select_address" class="form-control" dmx-bind:options="app.Current_user.data.customer.customer_addresses" optionvalue="id" optiontext="address_name" placeholder="My Saved Address" style="width:100% !important" dmx-bind:value="app.local_store.data.customer_last_address_id" dmx-on:changed="app.local_store.set('customer_last_address_id',app.main.chooseaddress.address_select_form.select_address.value)">
                                                     <option value="0">Choose Address</option>
                                                 </select>
                                                 <span class="input-clear-button"></span>

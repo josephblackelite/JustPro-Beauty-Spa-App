@@ -8,6 +8,14 @@ dmx.config({
       {
         "type": "text",
         "name": "not_new_user"
+      },
+      {
+        "type": "text",
+        "name": "customer_las"
+      },
+      {
+        "type": "text",
+        "name": "customer_last_address_id"
       }
     ],
     "Show_proloader": [
@@ -716,6 +724,79 @@ dmx.config({
         {
           "type": "text",
           "name": "full_address"
+        }
+      ],
+      "outputType": "array"
+    }
+  },
+  "orders": {
+    "repeat_cunstomer_orders": {
+      "meta": [
+        {
+          "type": "number",
+          "name": "total_amt"
+        },
+        {
+          "type": "number",
+          "name": "amount_paid"
+        },
+        {
+          "type": "number",
+          "name": "id"
+        },
+        {
+          "type": "boolean",
+          "name": "order_fulfilled"
+        },
+        {
+          "type": "text",
+          "name": "order_uuid_id"
+        },
+        {
+          "type": "boolean",
+          "name": "order_paid"
+        },
+        {
+          "type": "date",
+          "name": "appointment_date"
+        },
+        {
+          "type": "text",
+          "name": "timeSlot_start"
+        },
+        {
+          "type": "text",
+          "name": "timeSlot_end"
+        },
+        {
+          "name": "items",
+          "type": "array",
+          "sub": [
+            {
+              "type": "number",
+              "name": "id"
+            },
+            {
+              "type": "number",
+              "name": "total_amt"
+            },
+            {
+              "type": "number",
+              "name": "amount"
+            },
+            {
+              "type": "number",
+              "name": "quantity"
+            },
+            {
+              "type": "number",
+              "name": "tax_amt"
+            },
+            {
+              "type": "datetime",
+              "name": "order_dateTime"
+            }
+          ]
         }
       ],
       "outputType": "array"
