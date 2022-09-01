@@ -24,6 +24,7 @@
 
     <dmx-serverconnect id="customerPaymentMethods" url="https://api.justpro.me/api/stripe/customerPaymentMethods" site="JustPro-Spa-Backend" dmx-param:stripecustomerid="app.Current_user.data.customer.stripe_customer_id" sockets="true" dmx-param:customer_id="app.Current_user.data.customer.id"></dmx-serverconnect>
     <dmx-scheduler id="check_last_order" dmx-on:tick="run({condition:{if:`((app.customers_orders.data.query[0].id == app.main.checkout.Setup_Intent_ephemeral_key_gen.data.insertOrder.identity) &amp;&amp; app.customers_orders.data.query[0].order_paid)`,then:{steps:{run:{action:`app.Cart.clear();app.main.navigate(\'/orders\',{})`}}},else:{steps:{condition:{if:`((app.customers_orders.data.query[0].id == app.main.checkout.Setup_Intent_ephemeral_key_gen.data.insertOrder.identity) &amp;&amp; !app.customers_orders.data.query[0].order_paid)`,then:{steps:[{run:{action:`app.main.checkout.justpropreloader.hide()`}},{'f7.dialog.alert':{title:'Error',text:'We are unable to process your payment, please confirm that you have sufficient funds in your account or try again with another '}}]}}}}}})" noload="true"></dmx-scheduler>
+    <dmx-scheduler id="check_last_order_for_card" dmx-on:tick="run([{wait:{delay:3000}},{run:{action:`app.customers_orders.load({customer_id: app.local_store.data.user_id})`}},{condition:{if:`((app.customers_orders.data.query[0].id == app.main.checkout.bill_selected_card.insertOrder.identity) &amp;&amp; app.customers_orders.data.query[0].order_paid)`,then:{steps:{run:{action:`app.Cart.clear();app.main.navigate(\'/orders\',{})`}}},else:{steps:{condition:{if:`((app.customers_orders.data.query[0].id == app.main.checkout.bill_selected_card.data.insertOrder.identity) &amp;&amp; !app.customers_orders.data.query[0].order_paid)`,then:{steps:[{run:{action:`app.main.checkout.justpropreloader.hide()`}},{'f7.dialog.alert':{title:'Error',text:'We are unable to process your payment, please confirm that you have sufficient funds in your account or try again with another '}}]}}}}}}])" noload="true"></dmx-scheduler>
 
     <div class="toolbar toolbar-bottom toolbar-bottom-md">
         <div class="toolbar-inner justify-content-center" style="padding:10px !important">
@@ -116,7 +117,7 @@
                 <input id="timeSlot_end" name="timeSlot_end" type="hidden" dmx-bind:value="$value.timeSlot_end">
             </div>
         </form>
-        <form is="dmx-serverconnect-form" id="bill_selected_card" method="post" action="https://api.justpro.me/api/stripe/bill_customer_card" site="JustPro-Spa-Backend" dmx-on:success="run({run:{action:`app.main.checkout.justpropreloader.show();app.main.checkout.check_last_order.start()`}})">
+        <form is="dmx-serverconnect-form" id="bill_selected_card" method="post" action="https://api.justpro.me/api/stripe/bill_customer_card" site="JustPro-Spa-Backend" dmx-on:success="run({run:{action:`app.main.checkout.justpropreloader.show();app.main.checkout.check_last_order_for_card.start()`}})">
             <input id="selected_payment_method" name="selected_payment_method" type="hidden">
             <input id="User_id_bill_selected_card" name="user_id" dmx-bind:value="app.Current_user.data.customer.id" type="hidden">
             <input id="setUp_bill_selected_card" name="setUp" type="hidden">
