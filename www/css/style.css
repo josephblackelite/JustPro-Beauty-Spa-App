@@ -4465,3 +4465,9 @@ margin-bottom:-20px !important;
     font-weight:800;
     border:#E63C7A !important;
 }
+
+.brand-border{
+    border: 2px solid #E63C7A;
+    font-size:14px !important;
+    
+    }
