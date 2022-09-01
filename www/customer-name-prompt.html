@@ -1,23 +1,31 @@
-<!-- Wappler include head-page="index.html" is="dmx-app" id="customernameprompt" appConnect="local" framework7_6="With App Connect" framework7_icons="local" capacitor="local" components="{dmxDropzone:{}}" -->
+<!-- Wappler include head-page="index.html" is="dmx-app" id="customernameprompt" appConnect="local" framework7_6="With App Connect" framework7_icons="local" capacitor="local" components="{dmxDropzone:{},dmxGooglePlaces:{}}" -->
 
 <div class="page profile-wrapper">
-    <div class="navbar padding">
-        <div class="navbar-inner">
+    <div class="padding-top padding-bottom" style="padding-top:30px !important; padding-bottom:40px !important">
+        <div class="navbar no-hairline no-shadow no-border">
+            <div class="navbar-inner" data-name="order-prompt">
 
-            <a href="#" class="link back">
-                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <path d="M0.439312 13.0606L5.75391 18.3752C6.04683 18.6682 6.43069 18.8146 6.81459 18.8146C7.1985 18.8146 7.58236 18.6682 7.87528 18.3752C8.46103 17.7894 8.46103 16.8397 7.87528 16.2539L5.12133 13.5H22.5C23.3284 13.5 24 12.8284 24 12C24 11.1716 23.3284 10.5 22.5 10.5H5.12133L7.87528 7.7461C8.46103 7.1603 8.46103 6.21057 7.87528 5.62477C7.28944 5.03898 6.33975 5.03898 5.75391 5.62477L0.439312 10.9394C-0.146437 11.5251 -0.146437 12.4749 0.439312 13.0606Z" fill="black" />
-                </svg>
-            </a>
-            <div class="right">
-                <a href="#" class="link panel-open" data-panel="left">
-                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <path d="M14 12C14 10.8955 13.1046 10 12 10C10.8954 10 10 10.8955 10 12C10 13.1046 10.8954 14 12 14C13.1046 14 14 13.1046 14 12Z" fill="black" />
-                        <path d="M14 20C14 18.8954 13.1046 18 12 18C10.8954 18 10 18.8954 10 20C10 21.1045 10.8954 22 12 22C13.1046 22 14 21.1045 14 20Z" fill="black" />
-                        <path d="M14 4C14 2.89544 13.1046 2.00001 12 2.00001C10.8954 2.00001 10 2.89544 10 4C10 5.10457 10.8954 6 12 6C13.1046 6 14 5.10457 14 4Z" fill="black" />
-                    </svg>
-                </a>
+                <div class="left">
+                    <img src="assets/images/logo-pages.png">
+
+                </div>
+                <div class="title">
+
+                </div>
+                <div class="right mr-0" style="mr-0">
+                    <a href="#" class="link panel-open icon-only mr-0 pr-0" data-panel="left" style="margin-right:-30px !important; padding-right:-30px !important">
+                        <i class="icon f7-icons">ellipsis_vertical</i>
+                    </a>
+                </div>
             </div>
+        </div>
+    </div>
+    <div class="toolbar toolbar-bottom toolbar-bottom-md no-shadow" dmx-show="app.Cart.data.count()>0">
+        <div class="toolbar-inner justify-content-center" style="padding:10px !important;">
+            <button href="" class="button-6 button-large rounded-lg text-color-white bg-color-primary" dmx-on:click="run({condition:{if:`app.main.f7page.update_profile_form.name.value`,then:{steps:{run:{action:`app.main.f7page.update_profile_form.submit()`}}}}})" dmx-bind:disabled="app.main.f7page.update_profile_form.state.executing"><span dmx-hide="app.main.f7page.update_profile_form.state.executing">Save &amp; Continue &nbsp;<i class="bi-arrow-right-circle-fill"></i></span>
+                <div class="preloader color-purple" dmx-show="app.main.f7page.update_profile_form.state.executing"></div>
+            </button>
+
         </div>
     </div>
     <div class="page-content content-area pt-90">
@@ -26,27 +34,23 @@
                 <form is="dmx-serverconnect-form" method="post" id="update_profile_form" dmx-on:success="run({run:{action:`app.main.navigate(\'/home\',{})`}})" site="JustPro-Spa-Backend" action="https://api.justpro.me/api/security/customer_name_entry_prompt" dmx-on:invalid="run({'f7.dialog.alert':{title:'Error',text:`app.main.f7page.update_profile_form.lastError.response`}})">
                     <input id="user_id" name="id" type="hidden" dmx-bind:value="app.Current_user.data.customer.id">
                     <div class="title-head">
-                        <h2 class="title text-align-center">What's your name</h2>
+                        <h4 class="title text-align-center tajawal">What is your lovely name?</h4>
                     </div>
-                    <div class="list">
-                        <ul class="row">
-                            <li class="item-content col-100 item-input item-input-with-value no-border no-hairline">
+
+
+                    <div class="list no-hairlines-md padding-top">
+                        <ul>
+                            <li class="item-content item-input item-input-outline">
                                 <div class="item-inner">
-                                    <div class="item-title item-label"></div>
-                                    <div class="item-input-wrap">
-                                        <input type="text" placeholder="Type your name" class="Type your name" id="name" name="name" dmx-bind:value="app.Current_user.data.customer.customer_name" />
+                                    <div class="item-title item-floating-label strong"></div>
+                                    <div class="item-input-wrap"><input type="text" placeholder="My lovely name is..." class="form-control" id="name" name="name" dmx-bind:value="app.Current_user.data.customer.customer_name" />
+                                        <span class="input-clear-button"></span>
                                     </div>
                                 </div>
                             </li>
                         </ul>
                     </div>
-                    <div class="clearfix text-align-center pb-30">
-                        <button href="" class="button-large button button-fill rounded-xl button-gray color-purple" dmx-on:click="run({condition:{if:`app.main.f7page.update_profile_form.name.value`,then:{steps:{run:{action:`app.main.f7page.update_profile_form.submit()`}}}}})" dmx-bind:disabled="app.main.f7page.update_profile_form.state.executing"><span dmx-hide="app.main.f7page.update_profile_form.state.executing">Continue</span>
-                            <div class="preloader color-purple" dmx-show="app.main.f7page.update_profile_form.state.executing"></div>
-                        </button>
-                    </div>
                 </form>
-
             </div>
         </div>
     </div>

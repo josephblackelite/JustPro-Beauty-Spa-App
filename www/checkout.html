@@ -56,7 +56,10 @@
 
     <div class="toolbar toolbar-bottom toolbar-bottom-md">
         <div class="toolbar-inner justify-content-center" style="padding:10px !important">
-            <a href="/checkout" class="button-large rounded-xl button-6 button-fill text-color-white bg-color-primary" dmx-on:click="run({condition:{if:`!app.Current_user.data.customer.customer_email`,then:{steps:{runJS:{function:'showEnterEmailAddressSheet'}}},else:{steps:{condition:{if:`!app.Current_user.data.customer.phone_number`,then:{steps:{runJS:{function:'showVerifyNumberSheet'}}},else:{steps:{run:{action:`app.main.checkout.Setup_Intent_ephemeral_key_gen.submit()`}}}}}}}})" style="width:100%">Pay with another card</a>
+            <button class="button-large rounded-xl button-6 button-fill text-color-white bg-color-primary" dmx-on:click="run({condition:{if:`!app.Current_user.data.customer.customer_email`,then:{steps:{runJS:{function:'showEnterEmailAddressSheet'}}},else:{steps:{condition:{if:`!app.Current_user.data.customer.phone_number`,then:{steps:{runJS:{function:'showVerifyNumberSheet'}}},else:{steps:{run:{action:`app.main.checkout.Setup_Intent_ephemeral_key_gen.submit()`}}}}}}}})" style="width:100%">Add Payment Method</button>
+
+
+
         </div>
     </div>
     <div class="page-content wappler-block">
@@ -66,13 +69,14 @@
         <div class="block no-margin">
             <div class="list accordion-list dz-accordion dz-list">
                 <ul class="padding">
+                    <h5 class="tajawal" dmx-show="">Your Payment Cards</h5>
                     <li class="accordion-item accordion-item-opened">
                         <div class="accordion-item-content">
                             <div class="item-content-inner mb-30">
                                 <!-- Payment Swiper -->
                                 <div data-space-between="15" data-slides-per-view="auto" data-centered-slides="false" class="swiper-container swiper-init payment-swiper item-swiper">
                                     <div class="swiper-wrapper">
-                                        <div class="swiper-slide " dmx-repeat:repeat_user_cards="app.main.checkout.customerPaymentMethods.data.query">
+                                        <div class="swiper-slide" dmx-repeat:repeat_user_cards="app.main.checkout.customerPaymentMethods.data.query">
                                             <div class="payment-card">
                                                 <div class="card-media">
                                                     <img src="img/card/card1.png" alt="">

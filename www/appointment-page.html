@@ -1,6 +1,9 @@
 <!-- Wappler include head-page="index.html" is="dmx-app" id="appointmentpage" appConnect="local" framework7_6="With App Connect" framework7_icons="local" capacitor="local" components="{dmxCalendar:{},dmxSwiper:{},dmxFormatter:{},dmxStripe:{}}" -->
 
 <div class="page" path="/appointment-page" data-name="appointment-page" id="appointmentpage">
+    <script is="dmx-flow" id="flow1" type="text/dmx-flow" autorun>{
+  runJS: {function: "runCalendar"}
+}</script>
     <dmx-value id="appointment_timeStart" dmx-bind:value="'9:00 am'"></dmx-value>
     <dmx-value id="appointment_timeEnd" dmx-bind:value="'10:00 am'"></dmx-value>
     <div class="padding-top padding-bottom">
@@ -31,45 +34,52 @@
     </div>
     <div class="page-content content-area wappler-block">
         <div class="container">
+            <!-- Demo cal -->
 
             <form id="form" method="post" is="dmx-serverconnect-form">
 
-                <h4 class="tajawal strong bottom-30">Schedule An Appointment</h4>
+                <h4 class="tajawal-s bottom-20" style="margin-top:50px">When do you need this service? </h4>
+                <div class="block mb-20">
+                    <div id="demo-calendar"></div>
+                </div>
 
-                <ul class="list">
+                <input type="hidden" id="appointmentDate" name="appointmentDate" type="text" placeholder="Select a convenient date" style="width:100%">
 
-                    <li class="item-content item-input item-input-outline">
-
-                        <div class="item-inner">
-                            <div class="item-title item-floating-label strong">Click to choose date</div>
-                            <div class="item-input-wrap"><input id="appointmentDate" name="appointmentDate" type="text" dmx-on:focus="run({runJS:{function:'showStartDate'}})" placeholder="Select a convenient date" style="width:100%">
-                                <span class="input-clear-button"></span>
-                            </div>
-                        </div>
-                    </li>
-                </ul>
 
             </form>
-            <div class="block no-padding">
-                <h4 class="tajawal strong mb-10">Select Time Slot</h4>
+            <div class="block no-padding" style="margin-top:40px !important">
+                <h4 class="tajawal-s mb-10">Select Time Slot <i class="bi bi-chevron-right"></i></h4>
                 <div class="flex-buttons">
 
-                    <div class="flex-shrink-1 margin">
-                        <button class="button button-outline button-round brand-border" dmx-on:click="app.main.appointmentpage.appointment_timeStart.setValue('9:00 am');app.main.appointmentpage.appointment_timeEnd.setValue('10:00 am')" dmx-class:brand-btn="(app.main.appointmentpage.appointment_timeStart.value == '9:00 am')">9:00am - 10:00am</button>
+                    <div data-space-between="0" data-slides-per-view="auto" data-centered-slides="false" class="swiper-container swiper-init tabbar tab-style-1 main-swiper" style="border-top:0px !important; " role="scrollbar">
+                        <div class="swiper-wrapper">
+                            <div class="swiper-slide">
+                                <div class="flex-shrink-1 margin">
+                                    <button class="button button-outline button-round brand-border" dmx-on:click="app.main.appointmentpage.appointment_timeStart.setValue('9:00 am');app.main.appointmentpage.appointment_timeEnd.setValue('10:00 am')" dmx-class:brand-btn="(app.main.appointmentpage.appointment_timeStart.value == '9:00 am')" style="width:100% !important">9:00am - 10:00am</button>
+                                </div>
+                            </div>
+                            <div class="swiper-slide">
+                                <div class="flex-shrink-1 margin">
+                                    <button class="button button-outline button-round brand-border" dmx-on:click="app.main.appointmentpage.appointment_timeStart.setValue('11:00 am');app.main.appointmentpage.appointment_timeEnd.setValue('12:00pm')" dmx-class:brand-btn="(app.main.appointmentpage.appointment_timeStart.value == '11:00 am')">11:00am - 12:00pm</button>
+                                </div>
+                            </div>
+                            <div class="swiper-slide">
+                                <div class="flex-shrink-1 margin">
+                                    <button class="button button-outline button-round brand-border" dmx-on:click="app.main.appointmentpage.appointment_timeStart.setValue('1:00 pm');app.main.appointmentpage.appointment_timeEnd.setValue('2:00pm')" dmx-class:brand-btn="(app.main.appointmentpage.appointment_timeStart.value == '1:00 pm')">1:00pm - 2:00pm</button>
+                                </div>
+                            </div>
+                            <div class="swiper-slide">
+                                <div class="flex-shrink-1 margin">
+                                    <button class="button button-outline button-round brand-border" dmx-on:click="app.main.appointmentpage.appointment_timeStart.setValue('3:00 pm');app.main.appointmentpage.appointment_timeEnd.setValue('4:00pm')" dmx-class:brand-btn="(app.main.appointmentpage.appointment_timeStart.value == '3:00 pm')">3:00pm - 4:00pm</button>
+                                </div>
+                            </div>
+                            <div class="swiper-slide">
+                                <div class="flex-shrink-1 margin">
+                                    <button class="button button-outline button-round brand-border" dmx-on:click="app.main.appointmentpage.appointment_timeStart.setValue('5:00 pm');app.main.appointmentpage.appointment_timeEnd.setValue('6:00pm')" dmx-class:brand-btn="(app.main.appointmentpage.appointment_timeStart.value == '5:00 pm')">4:00pm - 6:00pm</button>
+                                </div>
+                            </div>
+                        </div>
                     </div>
-                    <div class="flex-shrink-1 margin">
-                        <button class="button button-outline button-round brand-border" dmx-on:click="app.main.appointmentpage.appointment_timeStart.setValue('11:00 am');app.main.appointmentpage.appointment_timeEnd.setValue('12:00pm')" dmx-class:brand-btn="(app.main.appointmentpage.appointment_timeStart.value == '11:00 am')">11:00am - 12:00pm</button>
-                    </div>
-                    <div class="flex-shrink-1 margin">
-                        <button class="button button-outline button-round brand-border" dmx-on:click="app.main.appointmentpage.appointment_timeStart.setValue('1:00 pm');app.main.appointmentpage.appointment_timeEnd.setValue('2:00pm')" dmx-class:brand-btn="(app.main.appointmentpage.appointment_timeStart.value == '1:00 pm')">1:00pm - 2:00pm</button>
-                    </div>
-                    <div class="flex-shrink-1 margin">
-                        <button class="button button-outline button-round brand-border" dmx-on:click="app.main.appointmentpage.appointment_timeStart.setValue('3:00 pm');app.main.appointmentpage.appointment_timeEnd.setValue('4:00pm')" dmx-class:brand-btn="(app.main.appointmentpage.appointment_timeStart.value == '3:00 pm')">3:00pm - 4:00pm</button>
-                    </div>
-                    <div class="flex-shrink-1 margin">
-                        <button class="button button-outline button-round brand-border" dmx-on:click="app.main.appointmentpage.appointment_timeStart.setValue('5:00 pm');app.main.appointmentpage.appointment_timeEnd.setValue('6:00pm')" dmx-class:brand-btn="(app.main.appointmentpage.appointment_timeStart.value == '5:00 pm')">4:00pm - 6:00pm</button>
-                    </div>
-
                 </div>
             </div>
         </div>
