@@ -3716,7 +3716,7 @@ h6, .h6 {
     height: 46px;
     background-color: transparent;
     border-radius: 30px;
-    border: 1px solid var(--f7-theme-color);
+    border: 1px solid #B42773;
     color: var(--f7-theme-color);
     margin-left: 4px;
     margin-right: 4px; }
@@ -4470,4 +4470,11 @@ margin-bottom:-20px !important;
     border: 2px solid #E63C7A;
     font-size:14px !important;
     
+    }
+
+
+    .title {
+        color:#B42773 !important;
+        font-weight: 600 !important;
+         font-family: 'Tajawal', sans-serif !important;
     }

@@ -457,6 +457,8 @@ function showAddressSheet() {
     function closeAddressSheet() {
     Framework7.instance.sheet.close(".address-sheet-swipe-to-step", true)
     }
+
+    console.log(window)
     </script>
 
     <script>
@@ -466,6 +468,63 @@ function showAddressSheet() {
       		google.maps.event.addListener(autocomplete, 'place_changed', function() {});
     	}
     
+    </script>
+
+    <script>
+        var today = new Date();
+        var infinite = new Date().setDate(today.getDate() - 999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999);
+        function runCalendar() {
+Framework7.instance.calendar.create({
+containerEl : '#demo-calendar',
+toolbar : true,
+inputEl: '#appointmentDate',
+dateFormat: { weekday: 'long', month: 'long', day: '2-digit', year: 'numeric' },
+disabled: {
+from: infinite,
+to: today
+}
+})
+
+}
+
+
+        
+        // var monthNames = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
+        // calendarInline = $f7.calendar.create({
+        // containerEl: '#demo-calendar-inline-container',
+        // value: [new Date()],
+        // weekHeader: false,
+        // renderToolbar: function () {
+        // return `
+        // <div class="toolbar calendar-custom-toolbar no-shadow">
+        //     <div class="toolbar-inner">
+        //         <div class="left">
+        //             <a href="#" class="link icon-only"><i class="icon icon-back ${$f7.theme === 'md' ? 'color-black' : ''}"></i></a>
+        //         </div>
+        //         <div class="center"></div>
+        //         <div class="right">
+        //             <a href="#" class="link icon-only"><i class="icon icon-forward ${$f7.theme === 'md' ? 'color-black' : ''}"></i></a>
+        //         </div>
+        //     </div>
+        // </div>
+        // `;
+        // },
+        // on: {
+        // init: function (c) {
+        // $('.calendar-custom-toolbar .center').text(monthNames[c.currentMonth] + ', ' + c.currentYear);
+        // $('.calendar-custom-toolbar .left .link').on('click', function () {
+        // calendarInline.prevMonth();
+        // });
+        // $('.calendar-custom-toolbar .right .link').on('click', function () {
+        // calendarInline.nextMonth();
+        // });
+        // },
+        // monthYearChangeStart: function (c) {
+        // $('.calendar-custom-toolbar .center').text(monthNames[c.currentMonth] + ', ' + c.currentYear);
+        // }
+        // }
+        // });
+        // });
     </script>
 </body>
 
