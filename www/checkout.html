@@ -110,7 +110,7 @@
         <div class="block">
             <div class="checkout-total">
                 <h4 class="title tajawal-s">You are about to pay</h4>
-                <h1 class="checkout-total strong" style="margin-bottom:-5px !important">{{Cart.data.sum(`total.toNumber()`).formatCurrency('AED', '.', ',', 2)}}</h1>
+                <h1 class="checkout-total strong no-margin-top" style="margin-bottom:-5px !important">{{Cart.data.sum(`total.toNumber()`).formatCurrency('AED', '.', ',', 2)}}</h1>
                 <small> + 5% VAT of {{Cart.data.sum(`vat.toNumber()`).formatCurrency('AED', '.', ',', 2)}}</small>
             </div>
         </div>
@@ -124,7 +124,7 @@
     </div>
 
 
-    <form is="dmx-serverconnect-form" id="Setup_Intent_ephemeral_key_gen" method="post" action="https://api.justpro.me/api/stripe/create_setup_intent" site="JustPro-Spa-Backend" dmx-on:success="run([{run:{action:`app.main.checkout.last_order_id.setValue(app.main.checkout.Setup_Intent_ephemeral_key_gen.data.insertOrder.identity)`}},{runJS:{function:'createPaymentFlow',args:[`app.main.checkout.Setup_Intent_ephemeral_key_gen.data.client_secret`,`app.main.checkout.Setup_Intent_ephemeral_key_gen.data.customer_id`,`app.main.checkout.Setup_Intent_ephemeral_key_gen.data.ephemeral_key`]}}])"><input id="User_id" name="user_id" dmx-bind:value="app.Current_user.data.customer.id" type="hidden">
+    <form is="dmx-serverconnect-form" id="Setup_Intent_ephemeral_key_gen" method="post" action="https://api.justpro.me/api/stripe/create_setup_intent" site="JustPro-Spa-Backend" dmx-on:success="run([{run:{action:`app.main.checkout.last_order_id.setValue(app.main.checkout.Setup_Intent_ephemeral_key_gen.data.insertOrder.identity)`}},{runJS:{function:'createPaymentFlow',args:[`app.main.checkout.Setup_Intent_ephemeral_key_gen.data.client_secret`,`app.main.checkout.Setup_Intent_ephemeral_key_gen.data.customer_id`,`app.main.checkout.Setup_Intent_ephemeral_key_gen.data.ephemeral_key`]}}])" dmx-on:start="app.showPreloader('purple')" dmx-on:done="app.hidePreloader()"><input id="User_id" name="user_id" dmx-bind:value="app.Current_user.data.customer.id" type="hidden">
         <input id="setUp" name="setUp" type="hidden" value="setUp">
         <input id="customer_id" name="customer_id" type="hidden" dmx-bind:value="app.Current_user.data.customer.id"><input id="address_id" name="address_id" dmx-bind:value="app.main.checkout.route.params.address_id" type="hidden">
         <div is="dmx-form-repeat" id="cartRepeat" dmx-bind:items="app.Cart.data">
@@ -140,7 +140,7 @@
             <input id="timeSlot_end" name="timeSlot_end" type="hidden" dmx-bind:value="$value.timeSlot_end">
         </div>
     </form>
-    <form is="dmx-serverconnect-form" id="bill_selected_card" method="post" action="https://api.justpro.me/api/stripe/bill_customer_card" site="JustPro-Spa-Backend" dmx-on:success="run([{run:{action:`app.main.checkout.last_order_id.setValue(app.main.checkout.bill_selected_card.data.insertOrder.identity)`}},{run:{action:`app.main.checkout.justpropreloader.show()`}},{run:{action:`app.main.checkout.justpropreloader.show();app.main.checkout.check_last_order.run()`}}])">
+    <form is="dmx-serverconnect-form" id="bill_selected_card" method="post" action="https://api.justpro.me/api/stripe/bill_customer_card" site="JustPro-Spa-Backend" dmx-on:success="run([{run:{action:`app.main.checkout.last_order_id.setValue(app.main.checkout.bill_selected_card.data.insertOrder.identity)`}},{run:{action:`app.main.checkout.justpropreloader.show()`}},{run:{action:`app.main.checkout.justpropreloader.show();app.main.checkout.check_last_order.run()`}}])" dmx-on:start="app.showPreloader('purple')" dmx-on:done="app.hidePreloader()">
         <input id="selected_payment_method" name="selected_payment_method" type="hidden">
         <input id="User_id_bill_selected_card" name="user_id" dmx-bind:value="app.Current_user.data.customer.id" type="hidden">
         <input id="setUp_bill_selected_card" name="setUp" type="hidden">
@@ -218,7 +218,7 @@
         </div>
         <div class="sheet-modal-inner">
             <div class="block no-margin-top">
-                <form action="https://api.justpro.me/api/security/collect_user_email_for_checkout" is="dmx-serverconnect-form" method="post" id="enter_email_address" site="JustPro-Spa-Backend" dmx-on:success="run({runJS:{function:'closeEnterEmailAddressSheet'}})" class="no-padding" dmx-on:invalid="run({'f7.dialog.alert':{title:'Error',text:'There is an error'}})"><input id="user__id" name="user_id" type="hidden" dmx-bind:value="app.Current_user.data.customer.id">
+                <form action="https://api.justpro.me/api/security/collect_user_email_for_checkout" is="dmx-serverconnect-form" method="post" id="enter_email_address" site="JustPro-Spa-Backend" dmx-on:success="run([{runJS:{function:'closeEnterEmailAddressSheet'}},{run:{action:`app.main.checkout.Setup_Intent_ephemeral_key_gen.submit()`}}])" class="no-padding" dmx-on:invalid="run({'f7.dialog.alert':{title:'Error',text:'There is an error'}})"><input id="user__id" name="user_id" type="hidden" dmx-bind:value="app.Current_user.data.customer.id">
 
 
                     <div class="list no-hairlines-md no-margin-top no-margin-bottom">
