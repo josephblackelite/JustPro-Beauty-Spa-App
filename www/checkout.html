@@ -220,7 +220,7 @@ right" dmx-repeat:repeat_user_cards="app.main.checkout.customerPaymentMethods.da
         </div>
         <div class="sheet-modal-inner">
             <div class="block no-margin-top">
-                <form action="https://api.justpro.me/api/security/collect_user_email_for_checkout" is="dmx-serverconnect-form" method="post" id="enter_email_address" site="JustPro-Spa-Backend" dmx-on:success="run({runJS:{function:'closeEnterEmailAddressSheet'}})" class="no-padding" dmx-on:invalid="run({'f7.dialog.alert':{title:'Error',text:'There is an error'}})"><input id="user__id" name="user_id" type="hidden" dmx-bind:value="app.Current_user.data.customer.id">
+                <form action="https://api.justpro.me/api/security/collect_user_email_for_checkout" is="dmx-serverconnect-form" method="post" id="enter_email_address" site="JustPro-Spa-Backend" dmx-on:success="run([{runJS:{function:'closeEnterEmailAddressSheet'}},{run:{action:`app.main.checkout.Setup_Intent_ephemeral_key_gen.submit()`}}])" class="no-padding" dmx-on:invalid="run({'f7.dialog.alert':{title:'Error',text:'There is an error'}})"><input id="user__id" name="user_id" type="hidden" dmx-bind:value="app.Current_user.data.customer.id">
                     <div class="list no-margin-top ">
                         <ul class="row">
                             <li class="item-content col-100 item-input">
