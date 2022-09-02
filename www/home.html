@@ -19,10 +19,10 @@
     <div class="padding-top padding-bottom" style="padding-top:30px !important; padding-bottom:40px !important">
         <div class="navbar no-hairline no-shadow no-border">
             <div class="navbar-inner" data-name="order-prompt">
-                <div class="subnavbar justify-content-right brand-bg">
-                    <h4 class="montserrat text-color-white  strong"><a href="/profile" class="link small text-color-white">
+                <div class="subnavbar justify-content-right bg-color-white border-top">
+                    <h4 class="montserrat text-color-white  strong"><a href="/profile" class="link small text-color-black">
                             <small>
-                                {{app.Current_user.data.customer.customer_name.titlecase()}}, howdy?
+                                {{app.Current_user.data.customer.customer_name.titlecase()}}, welcome!
                             </small>
                         </a>
                     </h4>
@@ -111,7 +111,9 @@
         </div>
 
 
-
+        <div class="block" id="delete-later">
+            <a href="/order-tracking">Check Tracking</a>
+        </div>
 
 
 
