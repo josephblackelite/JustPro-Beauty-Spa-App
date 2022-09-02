@@ -1,11 +1,7 @@
 var routes = [
   {
-    "path": "/login",
-    "url": "./login.html"
-  },
-  {
     "path": "/",
-    "url": "./index.html",
+    "url": "./login.html",
     "name": "index"
   },
   {

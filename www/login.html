@@ -1,6 +1,41 @@
 <!-- Wappler include head-page="index.html" is="dmx-app" id="onboarding" appConnect="local" framework7_6="With App Connect" framework7_icons="local" capacitor="local" bootstrap_icons="local" components="{dmxFormatter:{},dmxScheduler:{}}" fontawesome_5="local" -->
 
-<div class="page welcome-screen" data-name="login" path="/login" id="login">
+<div class="page welcome-screen" data-name="login" path="/" id="login">
+    <script is="dmx-flow" id="AddOneSignal_user_id" type="text/dmx-flow">{
+  meta: {
+    $param: [
+      {type: "text", name: "user_id"}
+    ]
+  },
+  exec: {
+    steps: {
+      runJS: {
+        function: "addExternalUserId",
+        args: ["{{app.local_store.data.user_id.toString()}}"]
+      }
+    }
+  }
+}</script>
+    <script is="dmx-flow" id="navigate_to_verify_otp" type="text/dmx-flow">{
+  meta: {
+    $param: [
+      {type: "text", name: "user_id"}
+    ]
+  },
+  exec: {
+    steps: [
+      {
+        runJS: {
+          function: "startOtpWatch",
+          args: ["{{app.local_store.data.user_id.toString()}}"]
+        }
+      },
+      {
+        run: {action: "{{app.main.navigate('/verifyOtp',{})}}"}
+      }
+    ]
+  }
+}</script>
 
     <div class="page-content wappler-block">
         <script is="dmx-flow" id="submit_google_login_form" type="text/dmx-flow">[
@@ -27,7 +62,7 @@
                 <h4 class="ma-0 text-color-primary strong montserrat">Full service mobile salon &amp; spa&nbsp;</h4>
             </div>
             <div class="clearfix pb-30">
-                <form action="https://api.justpro.me/api/security/login_register_with_number" is="dmx-serverconnect-form" method="post" id="login_register_with_number" site="JustPro-Spa-Backend" dmx-on:invalid="run({'f7.dialog.alert':{title:'Error',text:`app.main.login.login_register_with_number.lastError.response`}})" dmx-on:success="run({condition:{if:`app.main.login.login_register_with_number.data.Logged_in_user_id`,then:{steps:[{runJS:{function:'addExternalUserId',args:[`app.main.login.login_register_with_number.data.Logged_in_user_id.toString()`]}},{run:{action:`app.local_store.set(\'user_id\',app.main.login.login_register_with_number.data.Logged_in_user_id)`}},{condition:{if:`(app.main.login.login_register_with_number.data.send_otp_for_login_user.api.data.status == \'open\')`,then:{steps:[{run:{action:`app.otp_id.setValue(app.main.login.login_register_with_number.data.send_otp_for_login_user.api.data.otp_id)`}},{runJS:{function:'startOtpWatch'}},{run:{action:`app.main.navigate(\'/verifyOtp\',{})`}}]},else:{steps:{run:{action:`app.main.navigate(\'/home\',{})`}}}}}]},else:{steps:[{runJS:{function:'addExternalUserId',args:[`app.main.login.login_register_with_number.data.insert.identity.toString()`]}},{run:{action:`app.local_store.set(\'user_id\',app.main.login.login_register_with_number.data.insert.identity)`}},{condition:{if:`(app.main.login.login_register_with_number.data.send_otp_for_new_user.api.data.status== \'open\')`,then:{steps:[{run:{action:`app.otp_id.setValue(app.main.login.login_register_with_number.data.send_otp_for_new_user.api.data.otp_id)`}},{runJS:{function:'startOtpWatch'}},{run:{action:`app.main.navigate(\'/verifyOtp\',{})`}}]},else:{steps:{run:{action:`app.main.navigate(\'/home\',{})`}}}}}]}}})">
+                <form action="https://api.justpro.me/api/security/login_register_with_number" is="dmx-serverconnect-form" method="post" id="login_register_with_number" site="JustPro-Spa-Backend" dmx-on:invalid="run({'f7.dialog.alert':{title:'Error',text:`app.main.login.login_register_with_number.lastError.response`}})" dmx-on:success="run({condition:{if:`app.main.login.login_register_with_number.data.Logged_in_user_id`,then:{steps:[{run:{action:`app.local_store.set(\'user_id\',app.main.login.login_register_with_number.data.Logged_in_user_id)`}},{run:{action:`app.main.login.AddOneSignal_user_id.run()`}},{condition:{if:`(app.main.login.login_register_with_number.data.send_otp_for_login_user.api.data.status == \'open\')`,then:{steps:[{run:{action:`app.otp_id.setValue(app.main.login.login_register_with_number.data.send_otp_for_login_user.api.data.otp_id)`}},{run:{action:`app.main.login.navigate_to_verify_otp.run()`}}]},else:{steps:{run:{action:`app.main.navigate(\'/home\',{})`}}}}}]},else:{steps:[{run:{action:`app.local_store.set(\'user_id\',app.main.login.login_register_with_number.data.insert.identity)`}},{run:{action:`app.main.login.AddOneSignal_user_id.run()`}},{condition:{if:`(app.main.login.login_register_with_number.data.send_otp_for_new_user.api.data.status== \'open\')`,then:{steps:[{run:{action:`app.otp_id.setValue(app.main.login.login_register_with_number.data.send_otp_for_new_user.api.data.otp_id)`}},{run:{action:`app.main.login.navigate_to_verify_otp.run()`}}]},else:{steps:{run:{action:`app.main.navigate(\'/home\',{})`}}}}}]}}})">
                     <div class="list">
                         <ul class="row">
                             <li class="item-content item-input col-100">
