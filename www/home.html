@@ -1,4 +1,4 @@
-<!-- Wappler include head-page="index.html" is="dmx-app" id="orderprompt" appConnect="local" framework7_6="With App Connect" framework7_icons="local" capacitor="local" components="{dmxSwiper:{},dmxFormatter:{},dmxSockets:{},dmxPreloader:{}}" bootstrap_icons="local" fontawesome_5="local" -->
+<!-- Wappler include head-page="index.html" is="dmx-app" id="orderprompt" appConnect="local" framework7_6="With App Connect" framework7_icons="local" capacitor="local" components="{dmxSwiper:{},dmxFormatter:{},dmxSockets:{},dmxPreloader:{},dmxAnimateCSS:{}}" bootstrap_icons="local" fontawesome_5="local" -->
 
 <div class="page page-home" path="/order-prompt" data-name="order-prompt" id="orderprompt">
     <dmx-datetime id="var1"></dmx-datetime>
@@ -78,7 +78,7 @@
         <!-- Search backdrop -->
         <div class="searchbar-backdrop" style="border-bottom:0px !important"></div>
 
-        <div class="container up-50 bottom-20">
+        <div class="container up-50 bottom-20" dmx-animate-enter="">
 
             <h6 class="montserrat">Book A Service <i class="bi bi-chevron-right"></i></h6>
             <div data-space-between="12" data-slides-per-view="auto" data-centered-slides="false" class="swiper-container swiper-init tabbar tab-style-1 main-swiper" style="border-top:0px !important; margin-top:-20px !important" role="scrollbar">
@@ -135,7 +135,7 @@
 
                     <!-- start card demo -->
                     <div class="row">
-                        <div class="col-100 medium-50 large-25" is="dmx-repeat" id="repeat_massage_services" dmx-bind:repeat="app.main.orderprompt.queryServices.data.queryServices" dmx-hide="app.main.orderprompt.queryServices.state.processing">
+                        <div class="col-100 medium-50 large-25" is="dmx-repeat" id="repeat_massage_services" dmx-bind:repeat="app.main.orderprompt.queryServices.data.queryServices" dmx-hide="app.main.orderprompt.queryServices.state.processing" dmx-animate-enter.delay:300="pulse">
                             <div class="card demo-card-header-pic no-shadow card-outline border-10">
                                 <div class="card-header align-items-flex-end" dmx-style:background-image="'url(' + product_avatar + ')'">
                                     <span style="font-size:22px; text-transform:capitalize; strong" class="tajawal"> {{product_name.capitalize()}}</span>
@@ -164,7 +164,7 @@
                     <!-- start card demo -->
 
                     <div class="row">
-                        <div class="col-100 medium-50 large-25" is="dmx-repeat" id="repeat_makeup_services" dmx-bind:repeat="app.main.orderprompt.queryServices.data.queryServices" dmx-hide="app.main.orderprompt.queryServices.state.processing">
+                        <div class="col-100 medium-50 large-25" is="dmx-repeat" id="repeat_makeup_services" dmx-bind:repeat="app.main.orderprompt.queryServices.data.queryServices" dmx-hide="app.main.orderprompt.queryServices.state.processing" dmx-animate-enter.delay:300="pulse">
                             <div class="card demo-card-header-pic no-shadow card-outline border-10">
                                 <div class="card-header align-items-flex-end" dmx-style:background-image="'url(' + product_avatar + ')'">
                                     <span style="font-size:22px; text-transform:capitalize; strong" class="tajawal"> {{product_name.capitalize()}}</span>
@@ -190,7 +190,7 @@
 
                     <!-- start card demo -->
                     <div class="row">
-                        <div class="col-100 medium-50 large-25" is="dmx-repeat" id="repeat_cosmetic_services" dmx-bind:repeat="app.main.orderprompt.queryServices.data.queryServices" dmx-hide="app.main.orderprompt.queryServices.state.processing">
+                        <div class="col-100 medium-50 large-25" is="dmx-repeat" id="repeat_cosmetic_services" dmx-bind:repeat="app.main.orderprompt.queryServices.data.queryServices" dmx-hide="app.main.orderprompt.queryServices.state.processing" dmx-animate-enter.delay:300="pulse">
                             <div class="card demo-card-header-pic no-shadow card-outline border-10">
                                 <div class="card-header align-items-flex-end" dmx-style:background-image="'url(' + product_avatar + ')'">
                                     <span style="font-size:22px; text-transform:capitalize; strong" class="tajawal"> {{product_name.capitalize()}}</span>
@@ -214,7 +214,7 @@
 
                     <!-- start card demo -->
                     <div class="row">
-                        <div class="col-100 medium-50 large-25" is="dmx-repeat" id="repeat_henna_services" dmx-bind:repeat="app.main.orderprompt.queryServices.data.queryServices" dmx-hide="app.main.orderprompt.queryServices.state.processing">
+                        <div class="col-100 medium-50 large-25" is="dmx-repeat" id="repeat_henna_services" dmx-bind:repeat="app.main.orderprompt.queryServices.data.queryServices" dmx-hide="app.main.orderprompt.queryServices.state.processing" dmx-animate-enter.delay:300="pulse">
                             <div class="card demo-card-header-pic no-shadow card-outline border-10">
                                 <div class="card-header align-items-flex-end" dmx-style:background-image="'url(' + product_avatar + ')'">
                                     <span style="font-size:22px; text-transform:capitalize; strong" class="tajawal"> {{product_name.capitalize()}}</span>
@@ -238,7 +238,7 @@
 
                     <!-- start card demo -->
                     <div class="row">
-                        <div class="col-100 medium-50 large-25" is="dmx-repeat" id="repeat_hair_services" dmx-bind:repeat="app.main.orderprompt.queryServices.data.queryServices" dmx-hide="app.main.orderprompt.queryServices.state.processing">
+                        <div class="col-100 medium-50 large-25" is="dmx-repeat" id="repeat_hair_services" dmx-bind:repeat="app.main.orderprompt.queryServices.data.queryServices" dmx-hide="app.main.orderprompt.queryServices.state.processing" dmx-animate-enter.delay:300="pulse">
                             <div class="card demo-card-header-pic no-shadow card-outline border-10">
                                 <div class="card-header align-items-flex-end" dmx-style:background-image="'url(' + product_avatar + ')'">
                                     <span style="font-size:22px; text-transform:capitalize; strong" class="tajawal"> {{product_name.capitalize()}}</span>
@@ -263,7 +263,7 @@
                     <!-- start card demo -->
                     <div class="row">
 
-                        <div class="col-100 medium-50 large-25" is="dmx-repeat" id="repeat_nails_services" dmx-bind:repeat="app.main.orderprompt.queryServices.data.queryServices" dmx-hide="app.main.orderprompt.queryServices.state.processing">
+                        <div class="col-100 medium-50 large-25" is="dmx-repeat" id="repeat_nails_services" dmx-bind:repeat="app.main.orderprompt.queryServices.data.queryServices" dmx-hide="app.main.orderprompt.queryServices.state.processing" dmx-animate-enter.delay:300="pulse">
                             <div class="card demo-card-header-pic no-shadow card-outline border-10">
                                 <div class="card-header align-items-flex-end" dmx-style:background-image="'url(' + product_avatar + ')'">
                                     <span style="font-size:22px; text-transform:capitalize; strong" class="tajawal"> {{product_name.capitalize()}}</span>
@@ -287,7 +287,7 @@
 
                     <!-- start card demo -->
                     <div class="row">
-                        <div class="col-100 medium-50 large-25" is="dmx-repeat" id="repeat_waxing_services" dmx-bind:repeat="app.main.orderprompt.queryServices.data.queryServices" dmx-hide="app.main.orderprompt.queryServices.state.processing">
+                        <div class="col-100 medium-50 large-25" is="dmx-repeat" id="repeat_waxing_services" dmx-bind:repeat="app.main.orderprompt.queryServices.data.queryServices" dmx-hide="app.main.orderprompt.queryServices.state.processing" dmx-animate-enter.delay:300="pulse">
                             <div class="card demo-card-header-pic no-shadow card-outline border-10">
                                 <div class="card-header align-items-flex-end" dmx-style:background-image="'url(' + product_avatar + ')'">
                                     <span style="font-size:22px; text-transform:capitalize; strong" class="tajawal"> {{product_name.capitalize()}}</span>
@@ -311,7 +311,7 @@
 
                     <!-- start card demo -->
                     <div class="row">
-                        <div class="col-100 medium-50 large-25" is="dmx-repeat" id="repeat_threading_services" dmx-bind:repeat="app.main.orderprompt.queryServices.data.queryServices" dmx-hide="app.main.orderprompt.queryServices.state.processing">
+                        <div class="col-100 medium-50 large-25" is="dmx-repeat" id="repeat_threading_services" dmx-bind:repeat="app.main.orderprompt.queryServices.data.queryServices" dmx-hide="app.main.orderprompt.queryServices.state.processing" dmx-animate-enter.delay:300="pulse">
                             <div class="card demo-card-header-pic no-shadow card-outline border-10">
                                 <div class="card-header align-items-flex-end" dmx-style:background-image="'url(' + product_avatar + ')'">
                                     <span style="font-size:22px; text-transform:capitalize; strong" class="tajawal"> {{product_name.capitalize()}}</span>

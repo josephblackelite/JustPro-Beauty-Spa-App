@@ -58,12 +58,12 @@
     <div class="page-content bg-gray pt-0">
         <dmx-preloader id="justpropreloader" spinner="pulse" color="#ff6600"></dmx-preloader>
 
-        <div class="slideshow-container">
+        <div class="slideshow-container" style="height:256px !important">
 
             <div class="mySlides fade" dmx-repeat:repeat_service_images="app.main.product_info.service_info.data.queryServices.services_photos">
                 <div class="numbertext">{{($index + 1)+' / '+app.main.product_info.service_info.data.queryServices.services_photos.count()}}</div>
-                <img src="assets/images/joel-mott-dQBkIZzyM-4-unsplash.jpg" style="width:100%" dmx-bind:src="avatar_url" height="256">
-                <div class="text">Caption Text</div>
+                <img style="width:100%" dmx-bind:src="avatar_url" height="256">
+                <div class="text">{{app.main.product_info.service_info.data.queryServices.product_name.titlecase()}}</div>
             </div>
 
             <a class="prev" onclick="plusSlides(-1)">❮</a>
