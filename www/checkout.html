@@ -33,9 +33,16 @@
     condition: {
       if: "{{((app.main.checkout.last_order_id.value == app.main.checkout.lastOrder.data.queryLastOrder.id) && (app.main.checkout.lastOrder.data.queryLastOrder.order_paid == 1))}}",
       then: {
-        steps: {
-          run: {action: "{{app.main.navigate('/order-tracking',{})}}"}
-        }
+        steps: [
+          {
+            run: {action: "{{app.main.checkout.clear_cart.run()}}"}
+          },
+          {
+            run: {
+              action: "{{app.main.navigate('/order-tracking',{reloadAll: true, history: false})}}"
+            }
+          }
+        ]
       },
       else: {
         steps: {
@@ -53,10 +60,13 @@
     }
   }
 ]</script>
+    <script is="dmx-flow" id="clear_cart" type="text/dmx-flow">{
+  run: {action: "{{app.Cart.clear()}}"}
+}</script>
 
     <div class="toolbar toolbar-bottom toolbar-bottom-md">
         <div class="toolbar-inner justify-content-center" style="padding:10px !important">
-            <button class="button-large rounded-xl button-6 button-fill text-color-white bg-color-primary" dmx-on:click="run({condition:{if:`!app.Current_user.data.customer.customer_email`,then:{steps:{runJS:{function:'showEnterEmailAddressSheet'}}},else:{steps:{condition:{if:`!app.Current_user.data.customer.phone_number`,then:{steps:{runJS:{function:'showVerifyNumberSheet'}}},else:{steps:{run:{action:`app.main.checkout.Setup_Intent_ephemeral_key_gen.submit()`}}}}}}}})" style="width:100%">Add Payment Method</button>
+            <button class="button-large rounded-xl button-6 button-fill text-color-white bg-color-primary" dmx-on:click="run({condition:{if:`!app.Current_user.data.customer.customer_email`,then:{steps:{runJS:{function:'showEnterEmailAddressSheet'}}},else:{steps:{condition:{if:`!app.Current_user.data.customer.phone_number`,then:{steps:{runJS:{function:'showVerifyNumberSheet'}}},else:{steps:[{run:{action:`app.main.checkout.justpropreloader.show()`}},{run:{action:`app.main.checkout.Setup_Intent_ephemeral_key_gen.submit()`}}]}}}}}})" style="width:100%">Add Payment Method</button>
 
 
 
@@ -76,7 +86,8 @@
                                 <!-- Payment Swiper -->
                                 <div data-space-between="15" data-slides-per-view="auto" data-centered-slides="false" class="swiper-container swiper-init payment-swiper item-swiper">
                                     <div class="swiper-wrapper">
-                                        <div class="swiper-slide" dmx-repeat:repeat_user_cards="app.main.checkout.customerPaymentMethods.data.query">
+                                        <div class="swiper-slide margin-
+right" dmx-repeat:repeat_user_cards="app.main.checkout.customerPaymentMethods.data.query">
                                             <div class="payment-card">
                                                 <div class="card-media">
                                                     <img src="img/card/card1.png" alt="">
@@ -85,7 +96,7 @@
                                                 <div class="card-info">
                                                     <div class="clearfix">
                                                         <h5 class="card-name">{{funding}}</h5>
-                                                        <p class="card-number">{{last4}} **** **** ****</p>
+                                                        <p class="card-number">**** **** **** {{last4}}</p>
                                                     </div>
                                                     <div class="bottom-info">
                                                         <p>{{exp_month+' / '+exp_year}}</p>
@@ -117,7 +128,7 @@
         </div>
 
         <form is="dmx-serverconnect-form" id="Setup_Intent_ephemeral_key_gen" method="post" action="https://api.justpro.me/api/stripe/create_setup_intent" site="JustPro-Spa-Backend" dmx-on:success="run([{run:{action:`app.main.checkout.last_order_id.setValue(app.main.checkout.Setup_Intent_ephemeral_key_gen.data.insertOrder.identity)`}},{runJS:{function:'createPaymentFlow',args:[`app.main.checkout.Setup_Intent_ephemeral_key_gen.data.client_secret`,`app.main.checkout.Setup_Intent_ephemeral_key_gen.data.customer_id`,`app.main.checkout.Setup_Intent_ephemeral_key_gen.data.ephemeral_key`]}}])"><input id="User_id" name="user_id" dmx-bind:value="app.Current_user.data.customer.id" type="hidden">
-            <input id="setUp" name="setUp" type="hidden">
+            <input id="setUp" name="setUp" type="hidden" value="setUp">
             <input id="customer_id" name="customer_id" type="hidden" dmx-bind:value="app.Current_user.data.customer.id"><input id="address_id" name="address_id" dmx-bind:value="app.main.checkout.route.params.address_id" type="hidden">
             <div is="dmx-form-repeat" id="cartRepeat" dmx-bind:items="app.Cart.data">
                 <input id="product_id" name="product_id" type="hidden" dmx-bind:value="$value.product_id">
