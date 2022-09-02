@@ -87,5 +87,9 @@ var routes = [
   {
     "path": "/customer-name-prompt",
     "url": "./customer-name-prompt.html"
+  },
+  {
+    "path": "/thank-you-page",
+    "url": "./thank-you-page.html"
   }
 ]

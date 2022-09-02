@@ -40,7 +40,7 @@
       else: {
         steps: {
           f7.dialog.confirm: {
-            text: "We are unable to process your payment, please confirm that you have enough money in your account and try again?",
+            text: "We are unable to process your payment, please confirm that you have enough money in your account and try again.",
             title: "Payment can't be processed",
             then: {
               steps: {
@@ -93,8 +93,8 @@
                                                     </div>
                                                 </div>
                                             </div>
-                                            <button class="button-fill button-large bg-color-yellow margin-top display-block rounded-xl text-color-black button-6" dmx-on:click="run({'f7.dialog.confirm':{title:'Pay with attempt',text:`\'Are you sure you want to make this pay with card ending in \'+last4+\' ?\'`,then:{steps:{run:{action:`app.main.checkout.bill_selected_card.selected_payment_method.setValue(stripe_payment_method_id);app.main.checkout.bill_selected_card.submit()`}}}}})">
-                                                Pay with this card
+                                            <button class="button-fill button-large bg-color-yellow margin-top display-block rounded-xl text-color-black button-6" dmx-on:click="run({'f7.dialog.confirm':{title:'Pay with attempt',text:`\'Are you sure you want to make this pay with card ending in \'+last4+\' ?\'`,then:{steps:{run:{action:`app.main.checkout.bill_selected_card.selected_payment_method.setValue(stripe_payment_method_id);app.main.checkout.bill_selected_card.submit()`}}}}})" dmx-bind:disabled="(app.main.checkout.bill_selected_card.state.executing &amp;&amp; (app.main.checkout.bill_selected_card.selected_payment_method.value == stripe_payment_method_id))"><span dmx-hide="(app.main.checkout.bill_selected_card.state.executing &amp;&amp; (app.main.checkout.bill_selected_card.selected_payment_method.value == stripe_payment_method_id))">Pay with this card</span>
+                                                <div class="preloader color-white" dmx-show="(app.main.checkout.bill_selected_card.state.executing &amp;&amp; (app.main.checkout.bill_selected_card.selected_payment_method.value == stripe_payment_method_id))"></div>
                                             </button>
                                         </div>
                                     </div>
@@ -132,7 +132,7 @@
                 <input id="timeSlot_end" name="timeSlot_end" type="hidden" dmx-bind:value="$value.timeSlot_end">
             </div>
         </form>
-        <form is="dmx-serverconnect-form" id="bill_selected_card" method="post" action="https://api.justpro.me/api/stripe/bill_customer_card" site="JustPro-Spa-Backend" dmx-on:success="run([{run:{action:`app.main.checkout.last_order_id.setValue(app.main.checkout.bill_selected_card.data.insertOrder.identity)`}},{run:{action:`app.main.checkout.justpropreloader.show();app.main.checkout.check_last_order.run()`}}])">
+        <form is="dmx-serverconnect-form" id="bill_selected_card" method="post" action="https://api.justpro.me/api/stripe/bill_customer_card" site="JustPro-Spa-Backend" dmx-on:success="run([{run:{action:`app.main.checkout.last_order_id.setValue(app.main.checkout.bill_selected_card.data.insertOrder.identity)`}},{run:{action:`app.main.checkout.justpropreloader.show()`}},{run:{action:`app.main.checkout.justpropreloader.show();app.main.checkout.check_last_order.run()`}}])">
             <input id="selected_payment_method" name="selected_payment_method" type="hidden">
             <input id="User_id_bill_selected_card" name="user_id" dmx-bind:value="app.Current_user.data.customer.id" type="hidden">
             <input id="setUp_bill_selected_card" name="setUp" type="hidden">
