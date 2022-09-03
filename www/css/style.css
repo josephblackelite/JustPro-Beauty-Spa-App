@@ -4460,9 +4460,17 @@ margin-bottom:-20px !important;
     
     }
 
+    .brand-text {
+        color:#E73C7A;
+    }
+
 
     .title {
         color:#B42773 !important;
         font-weight: 600 !important;
          font-family: 'Tajawal', sans-serif !important;
+    }
+
+    .slant {
+        font-family: 'Arizonia', cursive;
     }

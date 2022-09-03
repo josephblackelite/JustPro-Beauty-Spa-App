@@ -624,6 +624,122 @@ dmx.config({
         }
       ],
       "outputType": "array"
+    },
+    "repeat1": {
+      "meta": [
+        {
+          "type": "number",
+          "name": "id"
+        },
+        {
+          "type": "number",
+          "name": "total_amt"
+        },
+        {
+          "type": "number",
+          "name": "amount"
+        },
+        {
+          "type": "number",
+          "name": "quantity"
+        },
+        {
+          "type": "number",
+          "name": "tax_amt"
+        },
+        {
+          "type": "datetime",
+          "name": "order_dateTime"
+        },
+        {
+          "type": "text",
+          "name": "product_name"
+        },
+        {
+          "type": "text",
+          "name": "product_avatar"
+        }
+      ],
+      "outputType": "array"
+    },
+    "repeat2": {
+      "meta": [
+        {
+          "type": "number",
+          "name": "total_amt"
+        },
+        {
+          "type": "number",
+          "name": "amount_paid"
+        },
+        {
+          "type": "number",
+          "name": "id"
+        },
+        {
+          "type": "boolean",
+          "name": "order_fulfilled"
+        },
+        {
+          "type": "text",
+          "name": "order_uuid_id"
+        },
+        {
+          "type": "boolean",
+          "name": "order_paid"
+        },
+        {
+          "type": "date",
+          "name": "appointment_date"
+        },
+        {
+          "type": "text",
+          "name": "timeSlot_start"
+        },
+        {
+          "type": "text",
+          "name": "timeSlot_end"
+        },
+        {
+          "name": "items",
+          "type": "array",
+          "sub": [
+            {
+              "type": "number",
+              "name": "id"
+            },
+            {
+              "type": "number",
+              "name": "total_amt"
+            },
+            {
+              "type": "number",
+              "name": "amount"
+            },
+            {
+              "type": "number",
+              "name": "quantity"
+            },
+            {
+              "type": "number",
+              "name": "tax_amt"
+            },
+            {
+              "type": "datetime",
+              "name": "order_dateTime"
+            },
+            {
+              "type": "text",
+              "name": "product_name"
+            },
+            {
+              "type": "text",
+              "name": "product_avatar"
+            }
+          ]
+        }
+      ],
+      "outputType": "array"
     }
   }
 });
