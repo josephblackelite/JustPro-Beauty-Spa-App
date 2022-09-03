@@ -1,0 +1,407 @@
+<!-- Wappler include head-page="index.html" is="dmx-app" id="orderprompt" appConnect="local" framework7_6="With App Connect" framework7_icons="local" capacitor="local" components="{dmxSwiper:{},dmxFormatter:{},dmxSockets:{},dmxPreloader:{},dmxAnimateCSS:{}}" bootstrap_icons="local" fontawesome_5="local" -->
+
+<div class="page page-home" path="/order-prompt" data-name="order-prompt" id="orderprompt">
+    <dmx-datetime id="var1"></dmx-datetime>
+    <dmx-serverconnect id="queryServices" url="https://api.justpro.me/api/services/query_services" site="JustPro-Spa-Backend" dmx-param:category="app.service_category.value" sockets="true" dmx-on:start="app.showPreloader('deeporange')" dmx-on:done="app.hidePreloader()"></dmx-serverconnect>
+    <dmx-value id="popover_title"></dmx-value>
+    <dmx-value id="popover_description"></dmx-value>
+    <style>
+        .strong {
+            font-weight: 600 !important;
+        }
+
+        .custom-font {
+            font-family: 'Maven Pro', sans-serif !important;
+        }
+    </style>
+
+
+    <div class="padding-top padding-bottom" style="padding-top:30px !important; padding-bottom:40px !important">
+        <div class="navbar no-hairline no-shadow no-border">
+            <div class="navbar-inner" data-name="order-prompt">
+                <div class="subnavbar justify-content-right bg-color-white border-top">
+                    <h4 class="tajawal text-color-white  strong"><a href="/profile" class="link small text-color-black">
+                            <small>
+                                Marhaba, {{app.Current_user.data.customer.customer_name.titlecase()}}
+                            </small>
+                        </a>
+                    </h4>
+                </div>
+                <div class="left">
+                    <img src="assets/images/logo-pages.png">
+
+                </div>
+                <div class="title">
+
+                </div>
+                <div class="right mr-0" style="mr-0">
+
+                    <div class="media" dmx-show="app.Cart.data.count()>0">
+                        <a href="/order-confirmation"> <i class="bi bi-basket-fill text-color-primary"></i> <sup>{{app.Cart.data.count()}}</sup></a>
+                    </div>
+
+                    <a href="#" class="link panel-open icon-only mr-0 pr-0" data-panel="left" style="margin-right:-30px !important; padding-right:-30px !important">
+                        <i class="icon f7-icons">ellipsis_vertical</i>
+                    </a>
+                </div>
+
+
+
+            </div>
+        </div>
+
+    </div>
+
+
+
+    <div class="toolbar toolbar-bottom toolbar-bottom-md no-shadow" dmx-show="app.Cart.data.count()>0">
+        <div class="toolbar-inner justify-content-center" style="padding:10px !important;">
+            <a href="/order-confirmation" class="button-6 button-large rounded-lg text-color-white bg-color-primary" style="width:100%">
+                {{app.Cart.data.count()}} &nbsp;<i class="bi bi-basket"></i> &nbsp; Checkout &nbsp;<i class="bi-arrow-right-circle-fill"></i></a>
+        </div>
+    </div>
+
+
+    <!-- Cart Fab -->
+    <!-- <div class="fab fab-right-bottom fab-extended fab-morph" data-morph-to=".toolbar" style="border-radius:100% !important; padding:10px; display: hidden" dmx-show="app.Cart.data.count()>=1">
+
+        <a href="#" class="">
+            <i class="icon f7-icons size-70">cart <span class="badge color-white text-color-black">{{app.Cart.data.count()}}</span></i>
+        </a>
+
+    </div> -->
+
+
+    <div class="page-content location-wraper newbg">
+        <dmx-preloader id="justpropreloader" spinner="pulse" color="#ff6600"></dmx-preloader>
+
+        <!-- Search backdrop -->
+        <div class="searchbar-backdrop" style="border-bottom:0px !important"></div>
+
+        <div class="container up-50 bottom-20">
+
+            <h6 class="montserrat"> Click below to book a service <i class="bi bi-chevron-right"></i></h6>
+            <!--  <div data-space-between="12" data-slides-per-view="auto" data-centered-slides="false" class="swiper-container swiper-init tabbar tab-style-1 main-swiper" style="border-top:0px !important; margin-top:-20px !important" role="scrollbar">
+                <div class="swiper-wrapper">
+                    <div class="swiper-slide">
+                        <a href="#Massage" class="tab-link tab-link-active button-small button button-4" dmx-on:click="app.service_category.setValue('massage')" style="height:40px !important">Massage
+                        </a>
+                    </div>
+                    <div class="swiper-slide">
+                        <a href="#Hair" class="tab-link smallfont button-small button button-4" dmx-on:click="app.service_category.setValue('hair')" style="height:40px !important">Hair
+                        </a>
+                    </div>
+                    <div class="swiper-slide">
+                        <a href="#Nails" class="tab-link smallfont button-small button button-4" dmx-on:click="app.service_category.setValue('nails')" style="height:40px !important">Mani Pedi</a>
+                    </div>
+                    <div class="swiper-slide">
+                        <a href="#Makeup" class="tab-link smallfont button-small button button-4" dmx-on:click="app.service_category.setValue('makeup')" style="height:40px !important">Face
+                        </a>
+                    </div>
+                    <div class="swiper-slide">
+                        <a href="#Cosmetic" class="tab-link smallfont button-small button button-4" dmx-on:click="app.service_category.setValue('cosmetic')" style="height:40px !important">Cosmetic</a>
+                    </div>
+                    <div class="swiper-slide">
+                        <a href="#Henna" class="tab-link smallfont button-small button button-4" dmx-on:click="app.service_category.setValue('henna')" style="height:40px !important">Henna
+                        </a>
+                    </div>
+
+                    <div class="swiper-slide">
+                        <a href="#Waxing" class="tab-link smallfont button-small button button-4" dmx-on:click="app.service_category.setValue('waxing')" style="height:40px !important">Waxing</a>
+                    </div>
+                    <div class="swiper-slide">
+                        <a href="#Threading" class="tab-link smallfont button-small button button-4" dmx-on:click="app.service_category.setValue('threading')" style="height:40px !important;">Threading</a>
+                    </div>
+
+                </div>
+            </div>-->
+
+
+        </div>
+
+
+
+
+        <div class="block">
+
+
+            <div class="list">
+                <ul>
+                    <li>
+                        <a class="item-link">
+                            <select class="button-6 brand-btn text-color-white" style="width:100%">
+                                <option value="massage">Massage Services</option>
+                                <option value="hair">Hair Stylist</option>
+                                <option value="Nails">Pedicure &amp Manicure</option>
+                                <option value="makeup">Makeup &amp Facials</option>
+                                <option value="cosmetic">Cosmetic Procedures</option>
+                                <option value="henna">Henna Art</option>
+                                <option value="waxing">Waxing Services</option>
+                                <option value="threading">Threading Services</option>
+                            </select>
+
+                        </a>
+                    </li>
+                </ul>
+            </div>
+
+            <input type="hidden" class="tablink" value="#" dmx-bind:value="'#'+app.main.orderprompt.f7select.value">
+
+
+            <!--
+            <div is="dmx-swiper" id="swiper1" slides-per-view="auto">
+                <div class="swiper-slide button-small button button-6 brand-bg text-color-white button-rounded rounded-xl">
+                    <a href="#Massage" class="tab-link text-color-white" dmx-on:click="app.service_category.setValue('massage')" style="height:40px !important">Massage Services
+                    </a>
+                </div>
+                <div class="swiper-slide">
+                    <a href="#Hair" class="tab-link smallfont button-small button-4" dmx-on:click="app.service_category.setValue('hair')" style="height:40px !important">Hair
+                    </a>
+                </div>
+                <div class="swiper-slide">
+                    <a href="#Nails" class="tab-link smallfont button-small button button-4" dmx-on:click="app.service_category.setValue('nails')" style="height:40px !important">Mani Pedi</a>
+                </div>
+                <div class="swiper-slide">
+                    <a href="#Makeup" class="tab-link smallfont button-small button button-4" dmx-on:click="app.service_category.setValue('makeup')" style="height:40px !important">Face
+                    </a>
+                </div>
+                <div class="swiper-slide">
+                    <a href="#Cosmetic" class="tab-link smallfont button-small button button-4" dmx-on:click="app.service_category.setValue('cosmetic')" style="height:40px !important">Cosmetic</a>
+                </div>
+                <div class="swiper-slide">
+                    <a href="#Henna" class="tab-link smallfont button-small button button-4" dmx-on:click="app.service_category.setValue('henna')" style="height:40px !important">Henna
+                    </a>
+                </div>
+
+                <div class="swiper-slide">
+                    <a href="#Waxing" class="tab-link smallfont button-small button button-4" dmx-on:click="app.service_category.setValue('waxing')" style="height:40px !important">Waxing</a>
+                </div>
+                <div class="swiper-slide">
+                    <a href="#Threading" class="tab-link smallfont button-small button button-4" dmx-on:click="app.service_category.setValue('threading')" style="height:40px !important;">Threading</a>
+                </div>
+            </div>
+
+        </div>
+-->
+
+
+
+
+
+            <div class="tabs-swipeable-wrap tabs-height-auto">
+                <div class="tabs" style="margin-bottom:130px !important">
+                    <div id="Massage" class="tab tab-active">
+
+
+                        <div class="block mb-0" dmx-hide="app.main.orderprompt.queryServices.state.processing">
+                            <h4 class="montserrat smallfont">{{app.service_category.value.titlecase()}} Services</h4>
+                        </div>
+
+                        <!-- start card demo -->
+                        <div class="row">
+                            <div class="col-100 medium-50 large-25" is="dmx-repeat" id="repeat_massage_services" dmx-bind:repeat="app.main.orderprompt.queryServices.data.queryServices" dmx-hide="app.main.orderprompt.queryServices.state.processing">
+                                <div class="card demo-card-header-pic no-shadow card-outline border-10">
+                                    <div class="card-header align-items-flex-end" dmx-style:background-image="'url(' + product_avatar + ')'" style="height:256px; background-position:bottom">
+                                        <span style="font-size:22px; text-transform:capitalize; strong" class="tajawal"> {{product_name.capitalize()}}</span>
+                                        <br>
+                                        <button class="button-4 btn-dir bg-color-yellow popover-open text-align-center justify-content-center" title="This product is nice" data-popover="#popover1" dmx-on:click="app.main.orderprompt.popover_title.setValue(product_name.capitalize());app.main.orderprompt.popover_description.setValue(product_description.capitalize())" style="border-radius:50% !important; height:40px; width:40px;display:block !important; padding:0px !important; border:0px !important">
+                                            <i class="bi bi-info-circle-fill fa-2x fa-fw"></i>
+                                        </button>
+                                    </div>
+                                    <div class="card-footer no-border" style="padding-top:-210px !important">
+                                        <h4 class="strong tajawal"> {{product_amt.toNumber().formatCurrency('AED', '.', ',', 2)}} <small dmx-show="amount_matrix">/ {{amount_matrix}} </small>
+                                        </h4> <a class="link button-4 bg-color-primary text-color-white" dmx-on:click="app.main.navigate('/product-info/'+id,{})">Book Now</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+
+                    </div>
+
+
+                    <div id="Makeup" class="tab" dmx-hide="app.main.orderprompt.queryServices.state.processing">
+                        <div class="block mb-0">
+                            <h4 class="montserrat smallfont">{{app.service_category.value.titlecase()}} Services</h4>
+                        </div>
+
+                        <!-- start card demo -->
+
+                        <div class="row">
+                            <div class="col-100 medium-50 large-25" is="dmx-repeat" id="repeat_makeup_services" dmx-bind:repeat="app.main.orderprompt.queryServices.data.queryServices" dmx-hide="app.main.orderprompt.queryServices.state.processing">
+                                <div class="card demo-card-header-pic no-shadow card-outline border-10">
+                                    <div class="card-header align-items-flex-end" dmx-style:background-image="'url(' + product_avatar + ')'" style="height:256px">
+                                        <span style="font-size:22px; text-transform:capitalize; strong" class="tajawal"> {{product_name.capitalize()}}</span>
+                                        <br>
+                                        <button class="button-4 btn-dir bg-color-yellow popover-open text-align-center justify-content-center" title="This product is nice" data-popover="#popover1" dmx-on:click="app.main.orderprompt.popover_title.setValue(product_name.capitalize());app.main.orderprompt.popover_description.setValue(product_description.capitalize())" style="border-radius:50% !important; height:40px; width:40px;display:block !important; padding:0px !important; border:0px !important">
+                                            <i class="bi bi-info-circle-fill fa-2x fa-fw"></i>
+                                        </button>
+                                    </div>
+                                    <div class="card-footer no-border" style="padding-top:-210px !important">
+                                        <h4 class="strong tajawal"> {{product_amt.toNumber().formatCurrency('AED', '.', ',', 2)}} <small dmx-show="amount_matrix">/ {{amount_matrix}} </small>
+                                        </h4> <a class="link button-4 bg-color-primary text-color-white" dmx-on:click="app.main.navigate('/product-info/'+id,{})">Book Now</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+
+                    </div>
+                    <div id="Cosmetic" class="tab">
+                        <div class="block mb-0" dmx-hide="app.main.orderprompt.queryServices.state.processing">
+                            <h4 class="montserrat smallfont">{{app.service_category.value.titlecase()}} Services</h4>
+                        </div>
+
+                        <!-- start card demo -->
+                        <div class="row">
+                            <div class="col-100 medium-50 large-25" is="dmx-repeat" id="repeat_cosmetic_services" dmx-bind:repeat="app.main.orderprompt.queryServices.data.queryServices" dmx-hide="app.main.orderprompt.queryServices.state.processing">
+                                <div class="card demo-card-header-pic no-shadow card-outline border-10">
+                                    <div class="card-header align-items-flex-end" dmx-style:background-image="'url(' + product_avatar + ')'" style="height:256px">
+                                        <span style="font-size:22px; text-transform:capitalize; strong" class="tajawal"> {{product_name.capitalize()}}</span>
+                                        <br>
+                                        <button class="button-4 btn-dir bg-color-yellow popover-open text-align-center justify-content-center" title="This product is nice" data-popover="#popover1" dmx-on:click="app.main.orderprompt.popover_title.setValue(product_name.capitalize());app.main.orderprompt.popover_description.setValue(product_description.capitalize())" style="border-radius:50% !important; height:40px; width:40px;display:block !important; padding:0px !important; border:0px !important">
+                                            <i class="bi bi-info-circle-fill fa-2x fa-fw"></i>
+                                        </button>
+                                    </div>
+                                    <div class="card-footer no-border" style="padding-top:-210px !important">
+                                        <h4 class="strong tajawal"> {{product_amt.toNumber().formatCurrency('AED', '.', ',', 2)}} <small dmx-show="amount_matrix">/ {{amount_matrix}} </small>
+                                        </h4> <a class="link button-4 bg-color-primary text-color-white" dmx-on:click="app.main.navigate('/product-info/'+id,{})">Book Now</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div id="Henna" class="tab">
+                        <div class="block mb-0" dmx-hide="app.main.orderprompt.queryServices.state.processing">
+                            <h4 class="montserrat smallfont">{{app.service_category.value.titlecase()}} Services</h4>
+                        </div>
+
+                        <!-- start card demo -->
+                        <div class="row">
+                            <div class="col-100 medium-50 large-25" is="dmx-repeat" id="repeat_henna_services" dmx-bind:repeat="app.main.orderprompt.queryServices.data.queryServices" dmx-hide="app.main.orderprompt.queryServices.state.processing">
+                                <div class="card demo-card-header-pic no-shadow card-outline border-10">
+                                    <div class="card-header align-items-flex-end" dmx-style:background-image="'url(' + product_avatar + ')'" style="height:256px">
+                                        <span style="font-size:22px; text-transform:capitalize; strong" class="tajawal"> {{product_name.capitalize()}}</span>
+                                        <br>
+                                        <button class="button-4 btn-dir bg-color-yellow popover-open text-align-center justify-content-center" title="This product is nice" data-popover="#popover1" dmx-on:click="app.main.orderprompt.popover_title.setValue(product_name.capitalize());app.main.orderprompt.popover_description.setValue(product_description.capitalize())" style="border-radius:50% !important; height:40px; width:40px;display:block !important; padding:0px !important; border:0px !important">
+                                            <i class="bi bi-info-circle-fill fa-2x fa-fw"></i>
+                                        </button>
+                                    </div>
+                                    <div class="card-footer no-border" style="padding-top:-210px !important">
+                                        <h4 class="strong tajawal"> {{product_amt.toNumber().formatCurrency('AED', '.', ',', 2)}} <small dmx-show="amount_matrix">/ {{amount_matrix}} </small>
+                                        </h4> <a class="link button-4 bg-color-primary text-color-white" dmx-on:click="app.main.navigate('/product-info/'+id,{})">Book Now</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div id="Hair" class="tab">
+                        <div class="block mb-0" dmx-hide="app.main.orderprompt.queryServices.state.processing">
+                            <h4 class="montserrat smallfont">{{app.service_category.value.titlecase()}} Services</h4>
+                        </div>
+
+                        <!-- start card demo -->
+                        <div class="row">
+                            <div class="col-100 medium-50 large-25" is="dmx-repeat" id="repeat_hair_services" dmx-bind:repeat="app.main.orderprompt.queryServices.data.queryServices" dmx-hide="app.main.orderprompt.queryServices.state.processing">
+                                <div class="card demo-card-header-pic no-shadow card-outline border-10">
+                                    <div class="card-header align-items-flex-end" dmx-style:background-image="'url(' + product_avatar + ')'" style="height:256px">
+                                        <span style="font-size:22px; text-transform:capitalize; strong" class="tajawal"> {{product_name.capitalize()}}</span>
+                                        <br>
+                                        <button class="button-4 btn-dir bg-color-yellow popover-open text-align-center justify-content-center" title="This product is nice" data-popover="#popover1" dmx-on:click="app.main.orderprompt.popover_title.setValue(product_name.capitalize());app.main.orderprompt.popover_description.setValue(product_description.capitalize())" style="border-radius:50% !important; height:40px; width:40px;display:block !important; padding:0px !important; border:0px !important">
+                                            <i class="bi bi-info-circle-fill fa-2x fa-fw"></i>
+                                        </button>
+                                    </div>
+                                    <div class="card-footer no-border" style="padding-top:-210px !important">
+                                        <h4 class="strong tajawal"> {{product_amt.toNumber().formatCurrency('AED', '.', ',', 2)}} <small dmx-show="amount_matrix">/ {{amount_matrix}} </small>
+                                        </h4> <a class="link button-4 bg-color-primary text-color-white" dmx-on:click="app.main.navigate('/product-info/'+id,{})">Book Now</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div id="Nails" class="tab">
+                        <div class="block mb-0" dmx-hide="app.main.orderprompt.queryServices.state.processing">
+                            <h4 class="montserrat smallfont">{{app.service_category.value.titlecase()}} Services</h4>
+                        </div>
+
+                        <!-- start card demo -->
+                        <div class="row">
+
+                            <div class="col-100 medium-50 large-25" is="dmx-repeat" id="repeat_nails_services" dmx-bind:repeat="app.main.orderprompt.queryServices.data.queryServices" dmx-hide="app.main.orderprompt.queryServices.state.processing">
+                                <div class="card demo-card-header-pic no-shadow card-outline border-10">
+                                    <div class="card-header align-items-flex-end" dmx-style:background-image="'url(' + product_avatar + ')'" style="height:256px">
+                                        <span style="font-size:22px; text-transform:capitalize; strong" class="tajawal"> {{product_name.capitalize()}}</span>
+                                        <br>
+                                        <button class="button-4 btn-dir bg-color-yellow popover-open text-align-center justify-content-center" title="This product is nice" data-popover="#popover1" dmx-on:click="app.main.orderprompt.popover_title.setValue(product_name.capitalize());app.main.orderprompt.popover_description.setValue(product_description.capitalize())" style="border-radius:50% !important; height:40px; width:40px;display:block !important; padding:0px !important; border:0px !important">
+                                            <i class="bi bi-info-circle-fill fa-2x fa-fw"></i>
+                                        </button>
+                                    </div>
+                                    <div class="card-footer no-border" style="padding-top:-210px !important">
+                                        <h4 class="strong tajawal"> {{product_amt.toNumber().formatCurrency('AED', '.', ',', 2)}} <small dmx-show="amount_matrix">/ {{amount_matrix}} </small>
+                                        </h4> <a class="link button-4 bg-color-primary text-color-white" dmx-on:click="app.main.navigate('/product-info/'+id,{})">Book Now</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div id="Waxing" class="tab">
+                        <div class="block mb-0" dmx-hide="app.main.orderprompt.queryServices.state.processing">
+                            <h4 class="montserrat smallfont">{{app.service_category.value.titlecase()}} Services</h4>
+                        </div>
+
+                        <!-- start card demo -->
+                        <div class="row">
+                            <div class="col-100 medium-50 large-25" is="dmx-repeat" id="repeat_waxing_services" dmx-bind:repeat="app.main.orderprompt.queryServices.data.queryServices" dmx-hide="app.main.orderprompt.queryServices.state.processing">
+                                <div class="card demo-card-header-pic no-shadow card-outline border-10">
+                                    <div class="card-header align-items-flex-end" dmx-style:background-image="'url(' + product_avatar + ')'" style="height:256px">
+                                        <span style="font-size:22px; text-transform:capitalize; strong" class="tajawal"> {{product_name.capitalize()}}</span>
+                                        <br>
+                                        <button class="button-4 btn-dir bg-color-yellow popover-open text-align-center justify-content-center" title="This product is nice" data-popover="#popover1" dmx-on:click="app.main.orderprompt.popover_title.setValue(product_name.capitalize());app.main.orderprompt.popover_description.setValue(product_description.capitalize())" style="border-radius:50% !important; height:40px; width:40px;display:block !important; padding:0px !important; border:0px !important">
+                                            <i class="bi bi-info-circle-fill fa-2x fa-fw"></i>
+                                        </button>
+                                    </div>
+                                    <div class="card-footer no-border" style="padding-top:-210px !important">
+                                        <h4 class="strong tajawal"> {{product_amt.toNumber().formatCurrency('AED', '.', ',', 2)}} <small dmx-show="amount_matrix">/ {{amount_matrix}} </small>
+                                        </h4> <a class="link button-4 bg-color-primary text-color-white" dmx-on:click="app.main.navigate('/product-info/'+id,{})">Book Now</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div id="Threading" class="tab">
+                        <div class="block mb-0" dmx-hide="app.main.orderprompt.queryServices.state.processing">
+                            <h4 class="montserrat smallfont">{{app.service_category.value.titlecase()}} Services</h4>
+                        </div>
+
+                        <!-- start card demo -->
+                        <div class="row">
+                            <div class="col-100 medium-50 large-25" is="dmx-repeat" id="repeat_threading_services" dmx-bind:repeat="app.main.orderprompt.queryServices.data.queryServices" dmx-hide="app.main.orderprompt.queryServices.state.processing">
+                                <div class="card demo-card-header-pic no-shadow card-outline border-10">
+                                    <div class="card-header align-items-flex-end" dmx-style:background-image="'url(' + product_avatar + ')'" style="height:256px">
+                                        <span style="font-size:22px; text-transform:capitalize; strong" class="tajawal"> {{product_name.capitalize()}}</span>
+                                        <br>
+                                        <button class="button-4 btn-dir bg-color-yellow popover-open text-align-center justify-content-center" title="This product is nice" data-popover="#popover1" dmx-on:click="app.main.orderprompt.popover_title.setValue(product_name.capitalize());app.main.orderprompt.popover_description.setValue(product_description.capitalize())" style="border-radius:50% !important; height:40px; width:40px;display:block !important; padding:0px !important; border:0px !important">
+                                            <i class="bi bi-info-circle-fill fa-2x fa-fw"></i>
+                                        </button>
+                                    </div>
+                                    <div class="card-footer no-border" style="padding-top:-210px !important">
+                                        <h4 class="strong tajawal"> {{product_amt.toNumber().formatCurrency('AED', '.', ',', 2)}} <small dmx-show="amount_matrix">/ {{amount_matrix}} </small>
+                                        </h4> <a class="link button-4 bg-color-primary text-color-white" dmx-on:click="app.main.navigate('/product-info/'+id,{})">Book Now</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="popover" id="popover1">
+                        <div class="popover-inner">
+                            <div class="block">
+                                <p>{{app.main.orderprompt.popover_title.value.capitalize()}}</p>
+                                <p>{{app.main.orderprompt.popover_description.value.capitalize()}}</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
