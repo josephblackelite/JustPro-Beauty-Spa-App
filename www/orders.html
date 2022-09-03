@@ -1,6 +1,6 @@
 <!-- Wappler include head-page="index.html" is="dmx-app" id="orders" appConnect="local" framework7_6="With App Connect" framework7_icons="local" capacitor="local" components="{dmxSwiper:{},dmxFormatter:{}}" -->
 
-<div class="page">
+<div class="page" id="orders" data-name="orders" path="/orders">
     <div class="padding-top padding-bottom">
         <div class="navbar no-hairline no-shadow no-border">
             <div class="navbar-inner" style="padding-right:0px !important; padding-left:0px !important; margin-right:0px !important">
@@ -29,13 +29,50 @@
         <div class="container" style="margin-bottom:150px !important">
             <div class="block text-align-center padding-top padding-bottom" dmx-show="(app.Cart.data.count() < 1)">
                 <h4> Your order history</h4>
-
             </div>
 
 
 
+            <div class="card" dmx-repeat:repeat2="app.customers_orders.data.query">
+                <div class="card-header">{{app.main.orders.repeat2[0].appointment_date}} </div>
+                <div class="card-content">
+                    <div class="list media-list no-ios-edges" dmx-repeat:repeat1="app.main.orders.repeat2[0].items">
+                        <ul>
+                            <li class="item-content">
+                                <div class="item-media">
+                                    <img dmx-bind:src="product_avatar" />
+                                </div>
+                                <div class="item-inner">
+                                    <div class="item-title-row">
+                                        <div class="item-title">{{app.main.orders.repeat2[0].order_uuid_id}}</div>
+                                    </div>
+                                    <div class="item-subtitle">Beatles</div>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
             <div class="list search-list mt-0 mb-10 dz-list item-list no-shadow" style="margin-right:20px !important; margin-left:-10px !important">
-                <ul is="dmx-repeat" id="repeat_customer_orders" dmx-bind:repeat="app.customers_orders.data.query">
+                <ul>
                     <li class="col-100 mb-20">
                         <div class="wishlist-bx" style="width:100% !important">
                             <div class="dz-info">

@@ -59,7 +59,6 @@
 
                     <h2 class="logo-name"><img src="assets/images/login-logo.png"></h2>
                 </div>
-                <h4 class="ma-0 text-color-primary strong montserrat">Full service mobile salon &amp; spa&nbsp;</h4>
             </div>
             <div class="clearfix pb-30">
                 <form action="https://api.justpro.me/api/security/login_register_with_number" is="dmx-serverconnect-form" method="post" id="login_register_with_number" site="JustPro-Spa-Backend" dmx-on:invalid="run({'f7.dialog.alert':{title:'Error',text:`app.main.login.login_register_with_number.lastError.response`}})" dmx-on:success="run({condition:{if:`app.main.login.login_register_with_number.data.Logged_in_user_id`,then:{steps:[{run:{action:`app.local_store.set(\'user_id\',app.main.login.login_register_with_number.data.Logged_in_user_id)`}},{run:{action:`app.main.login.AddOneSignal_user_id.run()`}},{condition:{if:`(app.main.login.login_register_with_number.data.send_otp_for_login_user.api.data.status == \'open\')`,then:{steps:[{run:{action:`app.otp_id.setValue(app.main.login.login_register_with_number.data.send_otp_for_login_user.api.data.otp_id)`}},{run:{action:`app.main.login.navigate_to_verify_otp.run()`}}]},else:{steps:{run:{action:`app.main.navigate(\'/home\',{})`}}}}}]},else:{steps:[{run:{action:`app.local_store.set(\'user_id\',app.main.login.login_register_with_number.data.insert.identity)`}},{run:{action:`app.main.login.AddOneSignal_user_id.run()`}},{condition:{if:`(app.main.login.login_register_with_number.data.send_otp_for_new_user.api.data.status== \'open\')`,then:{steps:[{run:{action:`app.otp_id.setValue(app.main.login.login_register_with_number.data.send_otp_for_new_user.api.data.otp_id)`}},{run:{action:`app.main.login.navigate_to_verify_otp.run()`}}]},else:{steps:{run:{action:`app.main.navigate(\'/home\',{})`}}}}}]}}})">
@@ -73,7 +72,9 @@
                                             <select id="country_code" class="form-control" name="country_code" dmx-bind:options="app.countryList.data" optiontext="code+' '+dial_code" optionvalue="code" dmx-bind:value="'AE'">
                                             </select>
                                         </div>
-                                        <div class="col-70"><input type="number" placeholder="052 xxx xxxx" class="form-control" id="mobile_number" dmx-bind:value="app.Current_user.data.customer.phone_number" name="mobile_number" /></div>
+                                        <div class="col-70">
+                                            <input type="number" placeholder="052 xxx xxxx" class="form-control" id="mobile_number" dmx-bind:value="app.Current_user.data.customer.phone_number" name="mobile_number" />
+                                        </div>
                                     </div>
                                 </div>
                             </li>

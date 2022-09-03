@@ -1,7 +1,6 @@
 <!-- Wappler include head-page="index.html" is="dmx-app" id="orderprompt" appConnect="local" framework7_6="With App Connect" framework7_icons="local" capacitor="local" components="{dmxSwiper:{},dmxFormatter:{},dmxSockets:{},dmxPreloader:{}}" bootstrap_icons="local" fontawesome_5="local" -->
 
 <div class="page page-home" path="/order-prompt" data-name="order-prompt" id="orderprompt">
-    <link href="css/animate.css">
     <dmx-datetime id="var1"></dmx-datetime>
     <dmx-serverconnect id="queryServices" url="https://api.justpro.me/api/services/query_services" site="JustPro-Spa-Backend" dmx-param:category="app.main.orderprompt.selector.value" sockets="true" dmx-on:start="app.showPreloader('deeporange')" dmx-on:done="app.hidePreloader()"></dmx-serverconnect>
     <dmx-value id="popover_title"></dmx-value>
@@ -137,6 +136,14 @@
                         <div class="card-footer no-border" style="padding-top:-210px !important">
                             <h4 class="strong tajawal"> {{product_amt.toNumber().formatCurrency('AED', '.', ',', 2)}} <small dmx-show="amount_matrix">/ {{amount_matrix}} </small>
                             </h4> <a class="link button-4 bg-color-primary text-color-white" dmx-on:click="app.main.navigate('/product-info/'+id,{})">Book Now</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="popover" id="popover1">
+                    <div class="popover-inner">
+                        <div class="block">
+                            <p>{{app.main.orderprompt.popover_title.value.capitalize()}}</p>
+                            <p>{{app.main.orderprompt.popover_description.value.capitalize()}}</p>
                         </div>
                     </div>
                 </div>
