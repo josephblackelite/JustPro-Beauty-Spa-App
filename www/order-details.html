@@ -76,11 +76,11 @@
                 </ul>
             </div>
 
-            <div class="block">
-                <h5 class="tajawal mt-10 mb-10">Appointment Details</h5>
+            <div class="col-100">
+                <h5 class="tajawal mt-10 mb-10 block">Appointment Details</h5>
                 <div class="list">
                     <ul>
-                        <li dmx-repeat:repeat1="app.main.orderdetails.orderchildren.data.query">
+                        <li dmx-repeat:fullinfo="app.main.orderdetails.orderchildren.data.query">
                             <div class="item-content">
                                 <div class="item-media"><img width="60px" height="60px" style="border-radius:50%" dmx-bind:src="item_image"></div>
                                 <div class="item-inner">
@@ -92,30 +92,6 @@
                     </ul>
                 </div>
             </div>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
         </div>
     </div>
     <!-- Toolbar -->
