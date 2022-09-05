@@ -19,13 +19,14 @@
     <div class="padding-top padding-bottom" style="padding-top:30px !important; padding-bottom:40px !important">
         <div class="navbar no-hairline no-shadow no-border">
             <div class="navbar-inner" data-name="order-prompt">
-                <div class="subnavbar justify-content-right border-top">
+                <div class="subnavbar justify-content-right border-top" style="border-top:2px solid #ccc">
 
                     <div class="list" style="width:100%">
                         <ul>
                             <li>
-                                <a class="item-link smart-select smart-select-init text-color-black " data-open-in="sheet" style="color:#fff !important;">
-                                    <select class="text-color-black tajawal-s" style="width:100%;" name="selector" id="selector" dmx-on:changed="app.local_store.set('state',app.main.orderprompt.selector.value)" dmx-bind:value="app.local_store.data.state">
+                                <a class="item-link smart-select smart-select-init text-color-black" data-open-in="sheet">
+                                    <select class="text-color-black custom-font" style="width:100%;" name="selector" id="selector" dmx-on:changed="app.local_store.set('state',app.main.orderprompt.selector.value)" dmx-bind:value="app.local_store.data.state">
+                                        <option value=""></option>
                                         <option value="massage">Massage Services</option>
                                         <option value="hair">Hair Stylist</option>
                                         <option value="nails">Pedicure &amp Manicure</option>
