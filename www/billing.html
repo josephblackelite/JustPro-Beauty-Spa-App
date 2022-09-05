@@ -2,10 +2,10 @@
 
 <div class="page" path="/billing" data-name="billing" id="billing">
     <dmx-serverconnect id="customerPaymentMethods" url="https://api.justpro.me/api/stripe/customerPaymentMethods" site="JustPro-Spa-Backend" dmx-param:stripecustomerid="app.Current_user.data.customer.stripe_customer_id" dmx-param:customer_id="app.Current_user.data.customer.id" sockets="true"></dmx-serverconnect>
-    <form is="dmx-serverconnect-form" id="Setup_Intent_ephemeral_key_gen" method="post" action="https://api.justpro.me/api/stripe/create_setup_intent" site="JustPro-Spa-Backend" dmx-on:success="run({runJS:{function:'createPaymentFlow',args:[`app.main.billing.Setup_Intent_ephemeral_key_gen.data.client_secret`,`app.main.billing.Setup_Intent_ephemeral_key_gen.data.customer_id`,`app.main.billing.Setup_Intent_ephemeral_key_gen.data.ephemeral_key`]}})"><input id="User_id" name="user_id" dmx-bind:value="app.Current_user.data.customer.id" type="hidden">
+    <form is="dmx-serverconnect-form" id="Setup_Intent_ephemeral_key_gen" method="post" action="https://api.justpro.me/api/stripe/create_setup_intent" site="JustPro-Spa-Backend" dmx-on:success="run({runJS:{function:'createPaymentFlow',args:[`app.main.billing.Setup_Intent_ephemeral_key_gen.data.client_secret`,`app.main.billing.Setup_Intent_ephemeral_key_gen.data.customer_id`,`app.main.billing.Setup_Intent_ephemeral_key_gen.data.ephemeral_key`]}})" dmx-on:start="app.showPreloader('purple')" dmx-on:done="app.hidePreloader()"><input id="User_id" name="user_id" dmx-bind:value="app.Current_user.data.customer.id" type="hidden">
         <input id="setUp" name="setUp" type="hidden" value="setUp">
     </form>
-    <form id="remove_Payment_method" is="dmx-serverconnect-form" method="post" action="https://api.justpro.me/api/stripe/remove_customer_card" site="JustPro-Spa-Backend">
+    <form id="remove_Payment_method" is="dmx-serverconnect-form" method="post" action="https://api.justpro.me/api/stripe/remove_customer_card" site="JustPro-Spa-Backend" dmx-on:start="app.showPreloader('purple')" dmx-on:done="app.hidePreloader()">
         <input id="payment_Method_id" name="payment_Method_id" type="hidden">
     </form>
     <div class="padding-top padding-bottom">
@@ -36,8 +36,14 @@
     </div>
     <div class="page-content wappler-block">
         <dmx-preloader id="justpropreloader" spinner="pulse" color="#ff6600"></dmx-preloader>
-        <div class="block" dmx-show="app.main.billing.customerPayments.data.customerPaymentMethods">
-            <h4 class="padding-bottom">My Cards</h4>
+        <div class="col-100">
+            <div class="block text-align-center padding-top padding-bottom" dmx-hide="app.main.billing.customerPaymentMethods.data.query[0].id">
+                <h5 class="custom-font"> You do not have any payment card(s) stored.</h5>
+
+            </div>
+        </div>
+        <div class="block" dmx-show="app.main.billing.customerPaymentMethods.data.query[0].id">
+            <h4 class="pb-10">My Cards</h4>
         </div>
         <div class="block no-margin">
             <div class="list accordion-list dz-accordion dz-list">
