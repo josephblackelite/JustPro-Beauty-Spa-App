@@ -1,6 +1,28 @@
 <!-- Wappler include head-page="index.html" is="dmx-app" id="orders" appConnect="local" framework7_6="With App Connect" framework7_icons="local" capacitor="local" components="{dmxSwiper:{},dmxFormatter:{}}" -->
 
 <div class="page" id="orderdetails" data-name="ordersdetails" path="/orders-details">
+    <div id="popup1" class="popup">
+        <div class="view navbar-fixed">
+            <div class="pages navbar-through toolbar-through">
+                <div class="page">
+                    <div class="navbar">
+                        <div class="navbar-bg"></div>
+                        <div class="navbar-inner">
+                            <div class="center">Popup Title</div>
+                            <div class="right"><a href="#" class="link popup-close">Done</a></div>
+                        </div>
+                    </div>
+                    <div class="page-content">
+                        <div class="block">
+                            <form is="dmx-serverconnect-form" id="cancle_order_form" method="post">
+                                <input id="order_uuid" name="order_uuid" type="text">
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
     <div class="padding-top padding-bottom">
         <div class="navbar no-hairline no-shadow no-border">
             <div class="navbar-inner" style="padding-right:0px !important; padding-left:0px !important; margin-right:0px !important">
@@ -20,7 +42,7 @@
     </div>
     <div class="toolbar toolbar-bottom toolbar-bottom-md">
         <div class="toolbar-inner justify-content-center" style="padding:10px !important">
-            <a class="button-large rounded-xl button-6 bg-color-primary button-fill text-color-white" style="width:100%" href="#!">Cancel Appointment</a>
+            <a class="button-large rounded-xl button-6 bg-color-primary button-fill text-color-white" style="width:100%" href="#!" dmx-on:click="app.main.orderdetails.popup1.open()">Cancel Appointment</a>
         </div>
     </div>
 
