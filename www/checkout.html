@@ -165,7 +165,7 @@
             <input id="item_name" name="item_name" type="hidden" dmx-bind:value="$value.name">
         </div>
     </form>
-    <form is="dmx-serverconnect-form" id="delete_incomplete_orders" method="post" action="http://localhost:8100/api/customer_orders/remove_incomplete_orders" site="JustPro-Spa-Backend">
+    <form is="dmx-serverconnect-form" id="delete_incomplete_orders" method="post" action="https://api.justpro.me/api/customer_orders/remove_incomplete_orders" site="JustPro-Spa-Backend">
         <input id="order_id" name="id" type="text" dmx-bind:value="app.main.checkout.bill_selected_card.data.insertOrder.identity">
     </form>
 
