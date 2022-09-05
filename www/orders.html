@@ -9,7 +9,7 @@
                         <i class="icon f7-icons">arrow_left</i>
                     </a>
                 </div>
-                <div class="title">My Orders</div>
+                <div class="title">Appointments</div>
                 <div class="right">
                     <a href="#" class="link panel-open icon-only" data-panel="left">
                         <i class="icon f7-icons">ellipsis_vertical</i>
@@ -24,82 +24,28 @@
         </div>
     </div>
 
-    <div class="page-content content-area pt-120 ">
-
-        <div class="container" style="margin-bottom:150px !important">
-            <div class="block text-align-center padding-top padding-bottom" dmx-show="(app.Cart.data.count() < 1)">
-                <h4> Your order history</h4>
-            </div>
-
-
-
+    <div class="page-content content-area">
+        <div class="col-100 block mt-20" style="margin-bottom:150px !important">
             <div class="card" dmx-repeat:repeat2="app.customers_orders.data.query">
-                <div class="card-header">{{app.main.orders.repeat2[0].appointment_date}} </div>
-                <div class="card-content">
-                    <div class="list media-list no-ios-edges" dmx-repeat:repeat1="app.main.orders.repeat2[0].items">
+                <div class="card-header">{{appointment_date.formatDate('dd MMM yy')}} / {{timeSlot_start+' '+timeSlot_end}} </div>
+                <div class="card-content" dmx-on:click="app.main.navigate('/order-details/'+id,{})">
+                    <div class="list media-list no-ios-edges" dmx-repeat:repeat1="items">
                         <ul>
                             <li class="item-content">
                                 <div class="item-media">
-                                    <img dmx-bind:src="product_avatar" />
+                                    <img dmx-bind:src="product_avatar" width="50" height="50" />
                                 </div>
                                 <div class="item-inner">
                                     <div class="item-title-row">
-                                        <div class="item-title">{{app.main.orders.repeat2[0].order_uuid_id}}</div>
+                                        <div class="item-title">{{product_name.titlecase()}}</div>
                                     </div>
-                                    <div class="item-subtitle">Beatles</div>
+                                    <div class="item-subtitle">{{total_amt.toNumber().formatCurrency('AED', '.', ',', 2)}}</div>
                                 </div>
                             </li>
                         </ul>
                     </div>
                 </div>
             </div>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-            <div class="list search-list mt-0 mb-10 dz-list item-list no-shadow" style="margin-right:20px !important; margin-left:-10px !important">
-                <ul>
-                    <li class="col-100 mb-20">
-                        <div class="wishlist-bx" style="width:100% !important">
-                            <div class="dz-info">
-                                <div class="dz-head">
-                                    <h6 class="item-title mb-0" style="margin-bottom:0px !important"><a href="/item-details/"></a></h6>
-                                    <p style="margin-top:4px !important">{{'Order id - '+order_uuid_id}}</p>
-                                </div>
-                                <div class="row">
-                                    <div class="col-70">
-                                        <p class="price">{{items.count()}} items</p>
-                                        <p class="margin-top">
-                                            {{'Booking time - '+appointment_date.Date()+' , '+timeSlot_start+' '+timeSlot_end}}
-                                        </p>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </li>
-                </ul>
-            </div>
         </div>
-
-
-
     </div>
-
-    <!-- Toolbar -->
-
-
 </div>

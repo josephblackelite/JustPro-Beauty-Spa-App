@@ -31,7 +31,7 @@
     </div>
     <div class="toolbar toolbar-bottom toolbar-bottom-md">
         <div class="toolbar-inner justify-content-center" style="padding:10px !important">
-            <a href="" dmx-on:click="run({condition:{if:`app.Current_user.data.customer.customer_email`,then:{steps:[{run:{action:`app.main.billing.Setup_Intent_ephemeral_key_gen.submit()`}},{run:{action:`app.main.billing.justpropreloader.show()`}}]},else:{steps:{runJS:{function:'showEnterEmailAddressSheet'}}}}})" class="button-6 button-large bg-color-primary text-color-white rounded-lg text-align-center" style="width:100% !important"><i class="bi bi-credit-card"></i> &nbsp; Manage cards</a>
+            <a href="" dmx-on:click="run({condition:{if:`app.Current_user.data.customer.customer_email`,then:{steps:[{run:{action:`app.main.billing.Setup_Intent_ephemeral_key_gen.submit()`}},{run:{action:`app.main.billing.justpropreloader.show()`}}]},else:{steps:{runJS:{function:'showEnterEmailAddressSheet'}}}}})" class="button-6 button-large bg-color-primary text-color-white rounded-lg text-align-center" style="width:100% !important"> &nbsp; Manage cards &nbsp;</a>
         </div>
     </div>
     <div class="page-content wappler-block">

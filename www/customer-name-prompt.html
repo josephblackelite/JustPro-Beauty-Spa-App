@@ -34,7 +34,7 @@
                 <form is="dmx-serverconnect-form" method="post" id="update_profile_form" dmx-on:success="run({run:{action:`app.main.navigate(\'/home\',{})`}})" site="JustPro-Spa-Backend" action="https://api.justpro.me/api/security/customer_name_entry_prompt" dmx-on:invalid="run({'f7.dialog.alert':{title:'Error',text:`app.main.f7page.update_profile_form.lastError.response`}})">
                     <input id="user_id" name="id" type="hidden" dmx-bind:value="app.Current_user.data.customer.id">
                     <div class="title-head">
-                        <h4 class="title text-align-center tajawal">What is your lovely name?</h4>
+                        <h4 class="title text-align-center tajawal-s">What is your lovely name?</h4>
                     </div>
 
 

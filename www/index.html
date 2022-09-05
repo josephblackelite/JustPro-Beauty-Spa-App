@@ -21,6 +21,7 @@
 
     <script src="dmxAppConnect/dmxSwiper/dmxSwiper.js" defer></script>
     <script src="dmxAppConnect/dmxSwiper/swiper.min.js" defer></script>
+    <link rel="stylesheet" href="dmxAppConnect/dmxSlideshow/dmxSlideshow.css" />
     <link rel="stylesheet" href="dmxAppConnect/dmxSwiper/themes/default.css" />
 
 
@@ -82,6 +83,9 @@
     <script src="dmxAppConnect/dmxStripe/dmxStripe.js" defer></script>
     <script src="https://cdn.jsdelivr.net/npm/sortablejs@1/Sortable.min.js"></script>
 
+
+    <script src="dmxAppConnect/dmxSlideshow/dmxSlideshow.js" defer></script>
+    <link rel="stylesheet" href="dmxAppConnect/dmxSlideshow/themes/default.css" />
 </head>
 
 <body is="dmx-app" id="index">
@@ -221,7 +225,7 @@
                                 <li>
                                     <a class="item-link" dmx-on:click="run([{run:{action:`app.main.navigate(\'/orders\',{});app.panelLinkClassToggle.setValue(\'orders\')`}},{runJS:{function:'hidePanel'}}])" dmx-class:item-selected="(panelLinkClassToggle.value == 'orders')">
                                         <i class="bi bi-person-fill"></i>
-                                        <span class="">My Orders</span>
+                                        <span class="">Appointments</span>
                                     </a>
                                 </li>
 

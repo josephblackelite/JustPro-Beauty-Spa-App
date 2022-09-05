@@ -1,5 +1,9 @@
 var routes = [
   {
+    "path": "/order-details/:id",
+    "url": "./order-details.html"
+  },
+  {
     "path": "/",
     "url": "./login.html",
     "name": "index"

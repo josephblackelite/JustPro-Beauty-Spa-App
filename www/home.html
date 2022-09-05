@@ -96,7 +96,7 @@
                 <ul>
                     <li>
                         <a class="item-link">
-                            <select class="button-6 brand-btn text-color-white text-align-center" style="width:100%" name="selector" id="selector">
+                            <select class="button-6 brand-btn text-color-white text-align-center justify-content-center align-items-center" style="width:100%" name="selector" id="selector">
                                 <option value="massage" selected>Massage Services</option>
                                 <option value="hair">Hair Stylist</option>
                                 <option value="nails">Pedicure &amp Manicure</option>
@@ -138,15 +138,16 @@
                             </h4> <a class="link button-4 bg-color-primary text-color-white" dmx-on:click="app.main.navigate('/product-info/'+id,{})">Book Now</a>
                         </div>
                     </div>
-                </div>
-                <div class="popover" id="popover1">
-                    <div class="popover-inner">
-                        <div class="block">
-                            <p>{{app.main.orderprompt.popover_title.value.capitalize()}}</p>
-                            <p>{{app.main.orderprompt.popover_description.value.capitalize()}}</p>
+                    <div class="popover" id="popover1">
+                        <div class="popover-inner">
+                            <div class="block">
+                                <p>{{app.main.orderprompt.popover_title.value.capitalize()}}</p>
+                                <p>{{app.main.orderprompt.popover_description.value.capitalize()}}</p>
+                            </div>
                         </div>
                     </div>
                 </div>
+
             </div>
         </div>
 

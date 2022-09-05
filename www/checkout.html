@@ -47,8 +47,8 @@
                 else: {
                     steps: {
                     f7.dialog.confirm: {
-                        text: "We are unable to process your payment, please confirm that you have enough money in your account and try again.",
-                        title: "Payment can't be processed",
+                        text: "We are unable to process your payment, please confirm that you have sufficient funds in this card or try a different card.",
+                        title: "Payment Failed",
                         then: {
                         steps: {
                             run: {action: "{{app.main.checkout.justpropreloader.hide()}}"}
