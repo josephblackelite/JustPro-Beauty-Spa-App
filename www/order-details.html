@@ -25,10 +25,10 @@
     </div>
 
     <div class="page-content content-area">
-        <dmx-serverconnect id="orderinfo" url="https://api.justpro.me/api/customer_orders/order_details" site="JustPro-Spa-Backend" dmx-param:order_id="app.main.orderdetails.route.params.id"></dmx-serverconnect>
-        <dmx-serverconnect id="serverconnect1"></dmx-serverconnect>
+        <dmx-serverconnect id="orderinfo" url="https://api.justpro.me/api/customer_orders/order_details" site="JustPro-Spa-Backend" dmx-param:order_id="app.main.orderdetails.route.params.id" dmx-on:start="app.showPreloader('purple')" dmx-on:done="app.hidePreloader()"></dmx-serverconnect>
+        <dmx-serverconnect id="orderchildren" url="https://api.justpro.me/api/customer_orders/order_items_details" site="JustPro-Spa-Backend" dmx-param:order_uuid="app.main.orderdetails.route.params.uuid" dmx-on:start="app.showPreloader('purple')" dmx-on:done="app.hidePreloader()"></dmx-serverconnect>
 
-        <div class="col-100 mt-20" style="margin-bottom:150px !important">
+        <div class="col-100" style="margin-bottom:150px !important">
 
 
 
@@ -54,7 +54,7 @@
                             </div>
                             <div class="item-inner">
                                 <div class="item-title">
-                                    <div class="item-header">Time</div>{{app.main.orderdetails.orderinfo.data.query.timeSlot_start}} - {{app.main.orderdetails.orderinfo.data.query.timeSlot_start}}
+                                    <div class="item-header">Time</div>{{app.main.orderdetails.orderinfo.data.query.timeSlot_start}} - {{app.main.orderdetails.orderinfo.data.query.timeSlot_end}}
                                 </div>
                                 <div class="item-after">&nbsp;</div>
                             </div>
@@ -76,22 +76,22 @@
                 </ul>
             </div>
 
-
-
-            <div class="list">
-                <ul>
-                    <li>
-                        <div class="item-content">
-                            <div class="item-media"><i class="icon icon-f7"></i></div>
-                            <div class="item-inner">
-                                <div class="item-title">Ivan Petrov</div>
-                                <div class="item-after">CEO</div>
+            <div class="block">
+                <h5 class="tajawal mt-10 mb-10">Appointment Details</h5>
+                <div class="list">
+                    <ul>
+                        <li dmx-repeat:repeat1="app.main.orderdetails.orderchildren.data.query">
+                            <div class="item-content">
+                                <div class="item-media"><img width="60px" height="60px" style="border-radius:50%" dmx-bind:src="item_image"></div>
+                                <div class="item-inner">
+                                    <div class="item-title">{{product_name.titlecase()}}</div>
+                                    <div class="item-after">{{total_amt.toNumber().formatCurrency('AED', '.', ',', 2)}}</div>
+                                </div>
                             </div>
-                        </div>
-                    </li>
-                </ul>
+                        </li>
+                    </ul>
+                </div>
             </div>
-
 
 
 

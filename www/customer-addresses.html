@@ -43,13 +43,16 @@
                         <div class="wishlist-bx" style="width:100% !important">
                             <div class="dz-info">
                                 <div class="dz-head">
-                                    <p style="margin-top:4px !important">{{full_address+', '+apartment+', '+building+', '+city+', '+state+', '+country+'.'}}</p>
-                                </div>
-                                <div class="row">
                                     <div class="col-70 display-flex align-items-center justify-content-start">
                                         <p class="price">{{address_name.capitalize()}}</p>
                                     </div>
                                     <div class="col-30 display-flex align-items-center justify-content-center"> <button class="button-18 text-align-center bg-color-primary" style="height:30px !important; width:30px !important;" dmx-on:click="run({'f7.dialog.confirm':{title:'Delete Address?',text:'This address will be removed from your addresses.',then:{steps:{run:{action:`app.main.customerAddresses.delete_address.address_id.setValue(id);app.main.customerAddresses.delete_address.submit()`}}}}})"><i class="bi bi-trash fa-fw text-color-white margin"></i> </button></div>
+
+                                </div>
+                                <div class="row">
+                                    <div class="col-100">
+                                        <p class="custom-font" style="margin-top:4px !important">{{full_address+', '+apartment+', '+building+', '+city+', '+state+', '+country+'.'}}</p>
+                                    </div>
                                 </div>
 
                             </div>

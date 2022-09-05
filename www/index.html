@@ -145,7 +145,7 @@
   }
 }</script>
         <dmx-serverconnect id="Current_user" url="https://api.justpro.me/api/security/logged_in_user_data" site="JustPro-Spa-Backend" dmx-param:user_id="local_store.data.user_id" sockets="true"></dmx-serverconnect>
-        <dmx-serverconnect id="customers_orders" url="https://api.justpro.me/api/customer_orders/list_orders" site="JustPro-Spa-Backend" dmx-param:customer_id="Current_user.data.customer.id" sockets="true"></dmx-serverconnect>
+        <dmx-serverconnect id="customers_orders" url="https://api.justpro.me/api/customer_orders/list_orders" site="JustPro-Spa-Backend" dmx-param:customer_id="Current_user.data.customer.id" sockets="true" dmx-on:start="app.showPreloader('purple')" dmx-on:done="app.hidePreloader()"></dmx-serverconnect>
         <dmx-datastore id="Cart"></dmx-datastore>
 
 

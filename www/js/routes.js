@@ -1,6 +1,6 @@
 var routes = [
   {
-    "path": "/order-details/:id",
+    "path": "/order-details/:id/:uuid",
     "url": "./order-details.html"
   },
   {

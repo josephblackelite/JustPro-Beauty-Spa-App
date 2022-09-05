@@ -30,8 +30,8 @@
     "capacitor": {
       "checked": true
     },
-    "platform": "ios",
-    "target": "",
+    "platform": "android",
+    "target": "Resizable_Edited_API_33",
     "device": null,
     "deviceId": null
   }

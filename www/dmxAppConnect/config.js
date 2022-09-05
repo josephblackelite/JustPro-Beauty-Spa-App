@@ -629,11 +629,15 @@ dmx.config({
       "meta": [
         {
           "type": "number",
-          "name": "id"
+          "name": "customer_id"
+        },
+        {
+          "type": "text",
+          "name": "order_uuid_id"
         },
         {
           "type": "number",
-          "name": "total_amt"
+          "name": "service_id"
         },
         {
           "type": "number",
@@ -648,16 +652,52 @@ dmx.config({
           "name": "tax_amt"
         },
         {
+          "type": "number",
+          "name": "total_amt"
+        },
+        {
+          "type": "number",
+          "name": "discount_amt"
+        },
+        {
+          "type": "number",
+          "name": "discount_percent"
+        },
+        {
+          "type": "text",
+          "name": "order_status"
+        },
+        {
           "type": "datetime",
           "name": "order_dateTime"
         },
         {
-          "type": "text",
-          "name": "product_name"
+          "type": "datetime",
+          "name": "last_updated"
+        },
+        {
+          "type": "number",
+          "name": "provider_id"
         },
         {
           "type": "text",
-          "name": "product_avatar"
+          "name": "matrix"
+        },
+        {
+          "type": "number",
+          "name": "related_order_id"
+        },
+        {
+          "type": "text",
+          "name": "stripe_invoice_item_id"
+        },
+        {
+          "type": "text",
+          "name": "item_image"
+        },
+        {
+          "type": "text",
+          "name": "product_name"
         }
       ],
       "outputType": "array"
