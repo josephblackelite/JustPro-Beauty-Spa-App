@@ -36,7 +36,13 @@
     </div>
     <div class="page-content wappler-block">
         <dmx-preloader id="justpropreloader" spinner="pulse" color="#ff6600"></dmx-preloader>
-        <div class="block" dmx-show="app.main.billing.customerPayments.data.customerPaymentMethods">
+        <div class="col-100">
+            <div class="block text-align-center padding-top padding-bottom" dmx-show="app.main.billing.customerPaymentMethods.data.query[0].id">
+                <h5 class="custom-font"> You do not have any payment card(s) stored.</h5>
+
+            </div>
+        </div>
+        <div class="block" dmx-show="app.main.billing.customerPaymentMethods.data.query[0].id">
             <h4 class="padding-bottom">My Cards</h4>
         </div>
         <div class="block no-margin">
