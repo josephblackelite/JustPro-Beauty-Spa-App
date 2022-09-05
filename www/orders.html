@@ -28,13 +28,13 @@
 
         <div class="col-100">
             <div class="block text-align-center padding-top padding-bottom" dmx-show="(app.customers_orders.data.query.count() < 1)">
-                <h4> You have not created any appointment</h4>
+                <h5 class="custom-font"> You have not created any appointment</h5>
 
             </div>
         </div>
         <div class="col-100 block mt-20" style="margin-bottom:150px !important">
             <div class="card no-shadow card-outline" dmx-repeat:repeat2="app.customers_orders.data.query">
-                <div class="card-header">{{appointment_date.formatDate('dd MMM yy')}} / {{timeSlot_start+' '+timeSlot_end}} </div>
+                <div class="card-header brand-bg text-color-white">{{appointment_date.formatDate('dd MMM yy')}} / {{timeSlot_start+' - '+timeSlot_end}} </div>
                 <div class="card-content" dmx-on:click="app.main.navigate('/order-details/'+id+'/'+order_uuid_id,{})">
                     <div class="list media-list no-ios-edges" dmx-repeat:repeat1="items">
                         <ul>

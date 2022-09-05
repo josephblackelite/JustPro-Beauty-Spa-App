@@ -16,6 +16,10 @@ dmx.config({
       {
         "type": "text",
         "name": "customer_last_address_id"
+      },
+      {
+        "type": "text",
+        "name": "state"
       }
     ],
     "Show_proloader": [

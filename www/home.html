@@ -2,7 +2,7 @@
 
 <div class="page page-home" path="/order-prompt" data-name="order-prompt" id="orderprompt">
     <dmx-datetime id="var1"></dmx-datetime>
-    <dmx-serverconnect id="queryServices" url="https://api.justpro.me/api/services/query_services" site="JustPro-Spa-Backend" dmx-param:category="app.main.orderprompt.selector.value" sockets="true" dmx-on:start="app.showPreloader('deeporange')" dmx-on:done="app.hidePreloader()"></dmx-serverconnect>
+    <dmx-serverconnect id="queryServices" url="https://api.justpro.me/api/services/query_services" site="JustPro-Spa-Backend" dmx-param:category="app.local_store.data.state" sockets="true" dmx-on:start="app.showPreloader('deeporange')" dmx-on:done="app.hidePreloader()"></dmx-serverconnect>
     <dmx-value id="popover_title"></dmx-value>
     <dmx-value id="popover_description"></dmx-value>
     <style>
@@ -20,12 +20,33 @@
         <div class="navbar no-hairline no-shadow no-border">
             <div class="navbar-inner" data-name="order-prompt">
                 <div class="subnavbar justify-content-right bg-color-white border-top">
-                    <h4 class="tajawal text-color-white  strong"><a href="/profile" class="link small text-color-black">
-                            <small>
-                                Marhaba, {{app.Current_user.data.customer.customer_name.titlecase()}}
-                            </small>
-                        </a>
-                    </h4>
+
+                    <div class="list" style="width:100%">
+                        <ul>
+                            <li>
+                                <a class="item-link smart-select smart-select-init text-color-black " data-open-in="sheet" style="color:#fff !important;">
+                                    <select class="text-color-black tajawal-s" style="width:100%;" name="selector" id="selector" dmx-on:changed="app.local_store.set('state',app.main.orderprompt.selector.value)" dmx-bind:value="app.local_store.data.state">
+                                        <option value="massage">Massage Services</option>
+                                        <option value="hair">Hair Stylist</option>
+                                        <option value="nails">Pedicure &amp Manicure</option>
+                                        <option value="makeup">Makeup &amp Facials</option>
+                                        <option value="cosmetic">Cosmetic Procedures</option>
+                                        <option value="henna">Henna Art</option>
+                                        <option value="waxing">Waxing Services</option>
+                                        <option value="threading">Threading Services</option>
+                                    </select>
+                                    <div class="item-content">
+                                        <div class="item-inner">
+                                            <div class="item-title text-color-black tajawal-s"><i class="bi bi-search"></i> Search Services</div>
+                                        </div>
+                                    </div>
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+
+
+
                 </div>
                 <div class="left">
                     <img src="assets/images/logo-pages.png">
@@ -78,46 +99,16 @@
         <!-- Search backdrop -->
         <div class="searchbar-backdrop" style="border-bottom:0px !important"></div>
 
-        <div class="container">
 
-
-
-
-
-        </div>
-
-
-
-
-        <div class="block">
+        <div class="block up-30">
             <!--  <h6 class="montserrat up-50 bottom-20"> Click to search services <i class="bi bi-chevron-right"></i></h6>-->
+            <h4 class="tajawal text-color-white  strong"><a href="/profile" class="link small text-color-black">
+                    <small>
+                        Marhaba, {{app.Current_user.data.customer.customer_name.titlecase()}}
+                    </small>
+                </a>
+            </h4>
 
-            <div class="list animate__animated animate__bounce up-50">
-                <ul>
-                    <li>
-                        <a class="item-link smart-select smart-select-init button-6 text-color-white brand-bg" data-open-in="sheet">
-                            <select class="text-color-white" style="width:100%; color:#fff !important" name="selector" id="selector">
-                                <option value="massage" selected style="color:#fff">Massage Services</option>
-                                <option value="hair">Hair Stylist</option>
-                                <option value="nails">Pedicure &amp Manicure</option>
-                                <option value="makeup">Makeup &amp Facials</option>
-                                <option value="cosmetic">Cosmetic Procedures</option>
-                                <option value="henna">Henna Art</option>
-                                <option value="waxing">Waxing Services</option>
-                                <option value="threading">Threading Services</option>
-                            </select>
-                            <div class="item-content">
-                                <div class="item-inner">
-                                    <div class="item-title"><i class="bi bi-search"></i> Search</div>
-                                </div>
-                            </div>
-                        </a>
-                    </li>
-
-
-
-                </ul>
-            </div>
 
         </div>
 
@@ -126,7 +117,7 @@
         <div id="services" style="margin-bottom:130px !important">
 
             <div class="block mb-0" dmx-hide="app.main.orderprompt.queryServices.state.processing">
-                <h4 class="montserrat smallfont">{{app.main.orderprompt.queryServices.data.queryServices.count()}} {{app.main.orderprompt.selector.value.titlecase()}} Services Available</h4>
+                <h4 class="montserrat smallfont">{{app.main.orderprompt.queryServices.data.queryServices.count()}} {{app.local_store.data.state.titlecase()}} Services Available</h4>
             </div>
 
             <!-- start card demo -->
