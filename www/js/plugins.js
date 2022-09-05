@@ -75,7 +75,10 @@ async function googleSignIn() {
     $$('#password').val(googleUser.id);
     $$('#var1').val(googleUser.id);
 
-    dmx.parse("app.main.login.submit_google_login_form.run()")
+    if ($$('#email').val()) {
+        dmx.parse("app.main.login.submit_google_login_form.run()")
+    }
+
 
 }
 
