@@ -69,7 +69,7 @@
                                 <div class="item-title">
                                     <div class="item-header">Amount</div>{{app.main.orderdetails.orderinfo.data.query.total_amt.toNumber().formatCurrency('AED', '.', ',', 2)}}
                                 </div>
-                                <div class="item-after">&nbsp;</div>
+                                <div class="item-after"><span class="badge color-green" dmx-show="app.main.orderdetails.orderinfo.data.query.order_paid">Paid</span></div>
                             </div>
                         </a>
                     </li>
