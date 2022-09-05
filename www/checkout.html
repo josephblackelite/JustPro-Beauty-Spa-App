@@ -26,40 +26,45 @@
     <dmx-serverconnect id="customerPaymentMethods" url="https://api.justpro.me/api/stripe/customerPaymentMethods" site="JustPro-Spa-Backend" dmx-param:stripecustomerid="app.Current_user.data.customer.stripe_customer_id" sockets="true" dmx-param:customer_id="app.Current_user.data.customer.id"></dmx-serverconnect>
     <dmx-serverconnect id="lastOrder" url="https://api.justpro.me/api/customer_orders/last_order" site="JustPro-Spa-Backend" dmx-param:stripecustomerid="app.Current_user.data.customer.stripe_customer_id" sockets="true" dmx-param:customer_id="app.Current_user.data.customer.id"></dmx-serverconnect>
     <script is="dmx-flow" id="check_last_order" type="text/dmx-flow">[
-            {
-                wait: {delay: 10000}
-            },
-            {
-                condition: {
-                if: "{{((app.main.checkout.last_order_id.value == app.main.checkout.lastOrder.data.queryLastOrder.id) && (app.main.checkout.lastOrder.data.queryLastOrder.order_paid == 1))}}",
-                then: {
-                    steps: [
-                    {
-                        run: {action: "{{app.main.checkout.clear_cart.run()}}"}
-                    },
-                    {
-                        run: {
-                        action: "{{app.main.navigate('/order-tracking',{reloadAll: true, history: false})}}"
-                        }
-                    }
-                    ]
-                },
-                else: {
-                    steps: {
-                    f7.dialog.confirm: {
-                        text: "We are unable to process your payment, please confirm that you have sufficient funds in this card or try a different card.",
-                        title: "Payment Failed",
-                        then: {
-                        steps: {
-                            run: {action: "{{app.main.checkout.justpropreloader.hide()}}"}
-                        }
-                        }
-                    }
-                    }
-                }
-                }
+  {
+    wait: {delay: 10000}
+  },
+  {
+    condition: {
+      if: "{{((app.main.checkout.last_order_id.value == app.main.checkout.lastOrder.data.queryLastOrder.id) && (app.main.checkout.lastOrder.data.queryLastOrder.order_paid == 1))}}",
+      then: {
+        steps: [
+          {
+            run: {action: "{{app.main.checkout.clear_cart.run()}}"}
+          },
+          {
+            run: {
+              action: "{{app.main.navigate('/order-tracking',{reloadAll: true, history: false})}}"
             }
-            ]</script>
+          }
+        ]
+      },
+      else: {
+        steps: {
+          f7.dialog.confirm: {
+            text: "We are unable to process your payment, please confirm that you have sufficient funds in this card or try a different card.",
+            title: "Payment Failed",
+            then: {
+              steps: [
+                {
+                  run: {action: "{{app.main.checkout.delete_incomplete_orders.submit()}}"}
+                },
+                {
+                  run: {action: "{{app.main.checkout.justpropreloader.hide()}}"}
+                }
+              ]
+            }
+          }
+        }
+      }
+    }
+  }
+]</script>
     <script is="dmx-flow" id="clear_cart" type="text/dmx-flow">{
     run: {action: "{{app.Cart.clear()}}"}
     }</script>
@@ -157,7 +162,11 @@
             <input id="timeSlot_start_bill_selected_card" name="timeSlot_start" type="hidden" dmx-bind:value="$value.timeSlot_start">
             <input id="timeSlot_end_bill_selected_card" name="timeSlot_end" type="hidden" dmx-bind:value="$value.timeSlot_end">
             <input id="item_img" name="item_img" type="hidden" dmx-bind:value="$value.product_avatar">
+            <input id="item_name" name="item_name" type="hidden" dmx-bind:value="$value.name">
         </div>
+    </form>
+    <form is="dmx-serverconnect-form" id="delete_incomplete_orders" method="post" action="https://api.justpro.me/api/customer_orders/remove_incomplete_orders" site="JustPro-Spa-Backend">
+        <input id="order_id" name="id" type="text" dmx-bind:value="app.main.checkout.bill_selected_card.data.insertOrder.identity">
     </form>
 
 

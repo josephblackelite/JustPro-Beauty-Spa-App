@@ -11,12 +11,12 @@ install! 'cocoapods', :disable_input_output_paths => true
 def capacitor_pods
   pod 'Capacitor', :path => '../../node_modules/@capacitor/ios'
   pod 'CapacitorCordova', :path => '../../node_modules/@capacitor/ios'
-  pod 'CapacitorCommunityFacebookLogin', :path => '..\..\node_modules\@capacitor-community\facebook-login'
-  pod 'CapacitorCommunityStripe', :path => '..\..\node_modules\@capacitor-community\stripe'
-  pod 'CapacitorApp', :path => '..\..\node_modules\@capacitor\app'
-  pod 'CapacitorLocalNotifications', :path => '..\..\node_modules\@capacitor\local-notifications'
-  pod 'CapacitorSplashScreen', :path => '..\..\node_modules\@capacitor\splash-screen'
-  pod 'CodetrixStudioCapacitorGoogleAuth', :path => '..\..\node_modules\@codetrix-studio\capacitor-google-auth'
+  pod 'CapacitorCommunityFacebookLogin', :path => '../../node_modules/@capacitor-community/facebook-login'
+  pod 'CapacitorCommunityStripe', :path => '../../node_modules/@capacitor-community/stripe'
+  pod 'CapacitorApp', :path => '../../node_modules/@capacitor/app'
+  pod 'CapacitorLocalNotifications', :path => '../../node_modules/@capacitor/local-notifications'
+  pod 'CapacitorSplashScreen', :path => '../../node_modules/@capacitor/splash-screen'
+  pod 'CodetrixStudioCapacitorGoogleAuth', :path => '../../node_modules/@codetrix-studio/capacitor-google-auth'
   pod 'CordovaPluginsStatic', :path => '../capacitor-cordova-ios-plugins'
 end
 
