@@ -29,7 +29,7 @@ var routes = [
     "url": "./order-tracking.html"
   },
   {
-    "path": "/choose-professional",
+    "path": "/choose-professional/:service_id/:provider_type/:customer_address_id?",
     "url": "./choose-professional.html"
   },
   {
@@ -65,7 +65,7 @@ var routes = [
     "url": "./message-list.html"
   },
   {
-    "path": "/appointment-page",
+    "path": "/appointment-page/:provider_id",
     "url": "./appointment-page.html"
   },
   {

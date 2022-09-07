@@ -94,6 +94,10 @@ dmx.config({
       {
         "type": "text",
         "name": "customer_id"
+      },
+      {
+        "type": "text",
+        "name": "provider_id"
       }
     ]
   },
@@ -781,6 +785,66 @@ dmx.config({
               "name": "product_avatar"
             }
           ]
+        }
+      ],
+      "outputType": "array"
+    }
+  },
+  "chooseprofessional": {
+    "repeat_providers": {
+      "meta": [
+        {
+          "name": "id",
+          "type": "number"
+        },
+        {
+          "name": "staff_name",
+          "type": "text"
+        },
+        {
+          "name": "provider_full_address",
+          "type": "text"
+        },
+        {
+          "name": "provider_address_longitude",
+          "type": "number"
+        },
+        {
+          "name": "provider_address_latitude",
+          "type": "number"
+        },
+        {
+          "name": "provider_avatar",
+          "type": "text"
+        },
+        {
+          "name": "distance",
+          "type": "text",
+          "sub": [
+            {
+              "name": "Distance",
+              "type": "text"
+            }
+          ]
+        }
+      ],
+      "outputType": "array"
+    }
+  },
+  "appointmentpage": {
+    "repeat_available_time_slot": {
+      "meta": [
+        {
+          "type": "number",
+          "name": "id"
+        },
+        {
+          "type": "number",
+          "name": "time_slot_start"
+        },
+        {
+          "type": "number",
+          "name": "time_slot_end"
         }
       ],
       "outputType": "array"

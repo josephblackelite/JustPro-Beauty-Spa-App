@@ -1,15 +1,19 @@
-<!-- Wappler include head-page="index.html" is="dmx-app" id="chooseprofessional" appConnect="local" framework7_6="With App Connect" framework7_icons="local" capacitor="local" components="{dmxSwiper:{}}" fontawesome_5="local" -->
+<!-- Wappler include head-page="index.html" is="dmx-app" id="chooseprofessional" appConnect="local" framework7_6="With App Connect" framework7_icons="local" capacitor="local" components="{dmxSwiper:{},dmxSockets:{},dmxFormatter:{}}" fontawesome_5="local" -->
 
-<div class="page welcome-screen">
-    <div class="navbar" style="margin-top:20px !important">
+<div class="page welcome-screen" path="/choose-professional/:service_id/:provider_type/:customer_address_id?" data-name="choose-professional" id="chooseprofessional">
+    <dmx-serverconnect id="list_providers" url="https://api.justpro.me/api/provider/list_providers" site="JustPro-Spa-Backend" dmx-param:service_id="app.main.chooseprofessional.route.params.service_id" dmx-param:provider_type="app.main.chooseprofessional.route.params.provider_type" dmx-param:customer_address_id="app.main.chooseprofessional.search_by_name.value" sockets="true" dmx-param:search_by_name="app.main.chooseprofessional.search_by_name.value"></dmx-serverconnect>
+    <div class="navbar" style="">
         <div class="navbar-inner">
+            <div class="left">
+                <a href="#" class="link back">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M0.439312 13.0606L5.75391 18.3752C6.04683 18.6682 6.43069 18.8146 6.81459 18.8146C7.1985 18.8146 7.58236 18.6682 7.87528 18.3752C8.46103 17.7894 8.46103 16.8397 7.87528 16.2539L5.12133 13.5H22.5C23.3284 13.5 24 12.8284 24 12C24 11.1716 23.3284 10.5 22.5 10.5H5.12133L7.87528 7.7461C8.46103 7.1603 8.46103 6.21057 7.87528 5.62477C7.28944 5.03898 6.33975 5.03898 5.75391 5.62477L0.439312 10.9394C-0.146437 11.5251 -0.146437 12.4749 0.439312 13.0606Z" fill="black" />
+                    </svg>
+                </a>
+            </div>
 
-            <a href="#" class="link back">
-                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <path d="M0.439312 13.0606L5.75391 18.3752C6.04683 18.6682 6.43069 18.8146 6.81459 18.8146C7.1985 18.8146 7.58236 18.6682 7.87528 18.3752C8.46103 17.7894 8.46103 16.8397 7.87528 16.2539L5.12133 13.5H22.5C23.3284 13.5 24 12.8284 24 12C24 11.1716 23.3284 10.5 22.5 10.5H5.12133L7.87528 7.7461C8.46103 7.1603 8.46103 6.21057 7.87528 5.62477C7.28944 5.03898 6.33975 5.03898 5.75391 5.62477L0.439312 10.9394C-0.146437 11.5251 -0.146437 12.4749 0.439312 13.0606Z" fill="black" />
-                </svg>
-            </a>
-            <div class="title">Choose your professional</div>
+
+            <p class="title text-align-center">Choose provider</p>
             <div class="right">
                 <a href="#" class="link panel-open" data-panel="left">
                     <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -27,99 +31,45 @@
         <div class="container">
 
             <div class="block">
-                <p>Select the professional you will like to work on you.</p>
+                <div class="list no-hairlines-md padding-top">
+                    <ul>
+
+                        <li class="item-content item-input item-input-outline">
+
+                            <div class="item-inner" style="width:100% !important">
+                                <div class="item-title item-floating-label strong">Search professional name</div>
+                                <div class="item-input-wrap" style="width:100% !important">
+                                    <input type="text" placeholder="Search by name" class="form-control" id="search_by_name" name="search_by_name" style="width:100% !important" />
+                                    <span class="input-clear-button"></span>
+                                </div>
+                            </div>
+                        </li>
+
+
+
+                    </ul>
+
+
+                </div>
+                <p>Select a professional that you prefer.</p>
             </div>
 
 
             <div class="block">
                 <div class="row">
-                    <div class="col-auto  padding" dmx-on:click="app.main.navigate('/schedule',{})">
-                        <div class="card-overlay style-1 bg-primary">
-                            <div class="dz-media display-flex justify-content-space-between">
-                                <img src="assets/images/prince-akachi-J1OScm_uHUQ-unsplash.jpg" alt="">
-                                <div class="rating-info">
-                                    <h2 class="rating-text">4.0</h2>
-                                    <ul class="rating-list">
-                                        <li class="rating-star"><i class="fas fa-star"></i></li>
+                    <div class="col-auto padding elevation-1" dmx-repeat:repeat_providers="app.main.chooseprofessional.list_providers.data.repeat_providers">
+                        <div class="style-1">
+                            <div class="display-flex">
+                                <img src="assets/images/prince-akachi-J1OScm_uHUQ-unsplash.jpg" alt="" width="100" height="100" dmx-bind:src="provider_avatar">
+                                <div class="margin-left">
+                                    <p>{{staff_name.capitalize()}}</p>
+                                    <div class="display-flex align-items-center">
+                                        <p class="margin-right" dmx-show="distance.Distance">{{distance.Distance.floor()+' km'}}</p>
+                                        <button class="button button-small rounded-xl text-color-white bg-primary" dmx-on:click="run([{run:{action:`app.Cart.update({product_id: app.main.chooseprofessional.route.params.service_id.toNumber()},{provider_id: id})`}},{run:{action:`app.main.navigate(\'/appointment-page/\'+id,{})`}}])">Book</button>
+                                    </div>
+                                </div>
+                            </div>
 
-                                    </ul>
-                                </div>
-
-                            </div>
-                            <div class="dz-info">
-                                <h5 class="item-title title text-color-white">SANDRA</h5>
-                                <div class="dz-meta">
-                                    <ul>
-                                        <li class="price">Available tommorrow </li>
-                                    </ul>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-auto  padding" dmx-on:click="app.main.navigate('/schedule',{})">
-                        <div class="card-overlay style-1 bg-primary">
-                            <div class="dz-media display-flex justify-content-space-between">
-                                <img src="assets/images/stefan-stefancik-QXevDflbl8A-unsplash.jpg" alt="">
-                                <div class="rating-info">
-                                    <h2 class="rating-text">4.0</h2>
-                                    <ul class="rating-list">
-                                        <li class="rating-star"><i class="fas fa-star"></i></li>
-
-                                    </ul>
-                                </div>
-                            </div>
-                            <div class="dz-info">
-                                <h5 class="item-title title text-color-white">ANNISTEN</h5>
-                                <div class="dz-meta">
-                                    <ul>
-                                        <li class="price">Available today </li>
-                                    </ul>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-auto  padding" dmx-on:click="app.main.navigate('/schedule',{})">
-                        <div class="card-overlay style-1 bg-primary">
-                            <div class="dz-media display-flex justify-content-space-between">
-                                <img src="assets/images/albert-dera-ILip77SbmOE-unsplash.jpg" alt="">
-                                <div class="rating-info">
-                                    <h2 class="rating-text">4.0</h2>
-                                    <ul class="rating-list">
-                                        <li class="rating-star"><i class="fas fa-star"></i></li>
-
-                                    </ul>
-                                </div>
-                            </div>
-                            <div class="dz-info">
-                                <h5 class="item-title title text-color-white">JOHN DEEN</h5>
-                                <div class="dz-meta">
-                                    <ul>
-                                        <li class="price">Available today </li>
-                                    </ul>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-auto  padding" dmx-on:click="app.main.navigate('/schedule',{})">
-                        <div class="card-overlay style-1 bg-primary">
-                            <div class="dz-media display-flex justify-content-space-between">
-                                <img src="assets/images/aiony-haust-3TLl_97HNJo-unsplash.jpg" alt="">
-                                <div class="rating-info">
-                                    <h2 class="rating-text">4.0</h2>
-                                    <ul class="rating-list">
-                                        <li class="rating-star"><i class="fas fa-star"></i></li>
-
-                                    </ul>
-                                </div>
-                            </div>
-                            <div class="dz-info">
-                                <h5 class="item-title title text-color-white">Priscilla</h5>
-                                <div class="dz-meta">
-                                    <ul>
-                                        <li class="price">5.8 </li>
-                                    </ul>
-                                </div>
-                            </div>
                         </div>
                     </div>
                 </div>

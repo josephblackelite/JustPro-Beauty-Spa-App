@@ -52,7 +52,7 @@
     </div>
     <div class="toolbar toolbar-bottom toolbar-bottom-md no-shadow">
         <div class="toolbar-inner justify-content-center" style="padding:10px !important">
-            <a href="#!" class="item-link list-button button-large rounded-xl button-18 bg-color-primary button-fill text-color-white" dmx-on:click="run({condition:{if:`(app.main.product_info.qty_form.quantity.value >= 1)`,then:{steps:[{run:{action:`app.Cart.upsert({product_id: app.main.product_info.service_info.data.queryServices.id},{product_id: app.main.product_info.service_info.data.queryServices.id, product_stripe_id: app.main.product_info.service_info.data.queryServices.stripe_price_id, product_name: app.main.product_info.service_info.data.queryServices.product_name.capitalize(), product_quantity: product_quantity+app.main.product_info.varQty.value.toNumber(), product_amt: app.main.product_info.service_info.data.queryServices.product_amt, name: app.main.product_info.service_info.data.queryServices.product_name, quantity: app.main.product_info.qty_form.quantity.value.toNumber(), amount: app.main.product_info.service_info.data.queryServices.product_amt, matrix: app.main.product_info.qty_form.matrix.value, total: app.main.product_info.overall_total.value, vat: app.main.product_info.vat_amount.value, product_avatar: app.main.product_info.service_info.data.queryServices.product_avatar, customer_id: app.Current_user.data.customer.id})`}},{run:{action:`app.main.navigate(\'/order-prompt\',{})`}}]},else:{steps:{'f7.dialog.alert':{text:'Please select the number of people that need this service.',title:'How many people?'}}}}})" dmx-show="app.main.product_info.service_info.data.queryServices" style="width:100%">Add to Cart</a>
+            <a href="#!" class="item-link list-button button-large rounded-xl button-18 bg-color-primary button-fill text-color-white" dmx-on:click="run({condition:{if:`(app.main.product_info.qty_form.quantity.value >= 1)`,then:{steps:[{run:{action:`app.Cart.upsert({product_id: app.main.product_info.service_info.data.queryServices.id},{product_id: app.main.product_info.service_info.data.queryServices.id, product_stripe_id: app.main.product_info.service_info.data.queryServices.stripe_price_id, product_name: app.main.product_info.service_info.data.queryServices.product_name.capitalize(), product_quantity: product_quantity+app.main.product_info.varQty.value.toNumber(), product_amt: app.main.product_info.service_info.data.queryServices.product_amt, name: app.main.product_info.service_info.data.queryServices.product_name, quantity: app.main.product_info.qty_form.quantity.value.toNumber(), amount: app.main.product_info.service_info.data.queryServices.product_amt, matrix: app.main.product_info.qty_form.matrix.value, total: app.main.product_info.overall_total.value, vat: app.main.product_info.vat_amount.value, product_avatar: app.main.product_info.service_info.data.queryServices.product_avatar, customer_id: app.Current_user.data.customer.id})`}},{run:{action:`app.main.navigate(\'/choose-professional/\'+app.main.product_info.service_info.data.queryServices.id+\'/\'+app.main.product_info.qty_form.provider_type.value,{})`}}]},else:{steps:{'f7.dialog.alert':{text:'Please select the number of people that need this service.',title:'How many people?'}}}}})" dmx-show="app.main.product_info.service_info.data.queryServices" style="width:100%">Show providers</a>
         </div>
     </div>
     <div class="page-content bg-gray pt-0 mr-0 ml-0">
@@ -153,6 +153,21 @@
                                         <div class="item-content">
                                             <div class="item-inner">
                                                 <div class="item-title strong">Duration?</div>
+                                            </div>
+                                        </div>
+                                    </a>
+                                </li>
+                            </ul>
+                            <ul>
+                                <li>
+                                    <a class="item-link smart-select smart-select-init" data-open-in="sheet">
+                                        <select name="provider_type" id="provider_type" required="" data-msg-required="Please select quantity">
+                                            <option selected="" value="home">Home</option>
+                                            <option value="salon">Salon</option>
+                                        </select>
+                                        <div class="item-content">
+                                            <div class="item-inner">
+                                                <div class="item-title strong">Where do you want this service?</div>
                                             </div>
                                         </div>
                                     </a>
