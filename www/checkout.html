@@ -79,8 +79,8 @@
             <h4 class="tajawal strong mb-0" dmx-show="app.main.checkout.customerPaymentMethods.data.query[0].id">Your Payment Cards</h4>
             <p class="mt-0"><small>Swipe right to reveal all cards</small></p>
         </div>
-        <div is="dmx-swiper" id="cardreader" dmx-bind:slides="app.main.checkout.customerPaymentMethods.data.query" class="mb-50" slides-per-view="2">
-            <div class="swiper-slide margin-right" dmx-repeat:repeat_user_cards="app.main.checkout.customerPaymentMethods.data.query" style="margin-right:20px !important">
+        <div is="dmx-swiper" id="cardreader" dmx-bind:slides="app.main.checkout.customerPaymentMethods.data.query" class="mb-50" space-between="15" centered-slides="true">
+            <div class="swiper-slide margin-right margin-left" style="margin-right:30px !important; margin-left:30px !important">
                 <div class="payment-card">
                     <div class="card-media">
                         <img src="img/card/card1.png" alt="">

@@ -1,8 +1,8 @@
-<!-- Wappler include head-page="index.html" is="dmx-app" id="appointmentpage" appConnect="local" framework7_6="With App Connect" framework7_icons="local" capacitor="local" components="{dmxCalendar:{},dmxSwiper:{},dmxFormatter:{},dmxStripe:{},dmxSockets:{}}" -->
+<!-- Wappler include head-page="index.html" is="dmx-app" id="appointmentpage" appConnect="local" framework7_6="With App Connect" framework7_icons="local" capacitor="local" components="{dmxCalendar:{},dmxSwiper:{},dmxFormatter:{},dmxStripe:{},dmxSockets:{},dmxPreloader:{}}" -->
 
 <div class="page" path="/appointment-page/:provider_id" data-name="appointment-page" id="appointmentpage">
     <dmx-serverconnect id="queryProvider_booking_dates" url="https://api.justpro.me/api/provider/query_appointment" site="JustPro-Spa-Backend" dmx-param:date_time="app.main.appointmentpage.form.appointmentDate.value.toDate()" dmx-param:provider_id="app.main.appointmentpage.route.params.provider_id" sockets="true"></dmx-serverconnect>
-    <dmx-serverconnect id="query_time_slots" url="https://api.justpro.me/api/provider/available_time_slots" site="JustPro-Spa-Backend" dmx-param:date_time="app.main.appointmentpage.form.appointmentDate.value.toDate()" dmx-param:provider_last_time_slot_end="app.main.appointmentpage.queryProvider_booking_dates.data.provider_last_booking_time_slot.time_start" sockets="true"></dmx-serverconnect>
+    <dmx-serverconnect id="query_time_slots" url="https://api.justpro.me/api/provider/available_time_slots" site="JustPro-Spa-Backend" dmx-param:date_time="app.main.appointmentpage.form.appointmentDate.value.toDate()" dmx-param:provider_last_time_slot_end="app.main.appointmentpage.queryProvider_booking_dates.data.provider_last_booking_time_slot.time_start" sockets="true" dmx-on:start="app.showPreloader('deeporange')" dmx-on:done="app.hidePreloader()"></dmx-serverconnect>
     <script is="dmx-flow" id="flow1" type="text/dmx-flow" autorun>{
   runJS: {function: "runCalendar"}
 }</script>
@@ -31,12 +31,15 @@
     </div>
     <div class="toolbar toolbar-bottom toolbar-bottom-md no-shadow">
         <div class="toolbar-inner justify-content-center" style="padding:10px !important">
-            <a class="item-link list-button button-large rounded-xl button-6 bg-color-black button-fill text-color-white margin-right" style="width:100%" dmx-on:click="run({condition:{if:`app.main.appointmentpage.form.appointmentDate.value.toDate()`,then:{steps:[{run:{action:`app.Cart.update({customer_id: app.Current_user.data.customer.id},{appointment_date: app.main.appointmentpage.form.appointmentDate.value.toDate(), timeSlot_start: app.main.appointmentpage.appointment_timeStart.value, timeSlot_end: app.main.appointmentpage.appointment_timeEnd.value})`}},{run:{action:`app.main.navigate(\'/home\',{})`}}]},else:{steps:{'f7.dialog.alert':{title:'Appointment Date',text:'Please select an appointment date.'}}}}})">Continue shopping</a>
+            <a class="item-link list-button button-large rounded-xl button-6 bg-color-black button-fill text-color-white margin-right" style="width:100%" dmx-on:click="run({condition:{if:`app.main.appointmentpage.form.appointmentDate.value.toDate()`,then:{steps:[{run:{action:`app.Cart.update({customer_id: app.Current_user.data.customer.id},{appointment_date: app.main.appointmentpage.form.appointmentDate.value.toDate(), timeSlot_start: app.main.appointmentpage.appointment_timeStart.value, timeSlot_end: app.main.appointmentpage.appointment_timeEnd.value})`}},{run:{action:`app.main.navigate(\'/home\',{})`}}]},else:{steps:{'f7.dialog.alert':{title:'Appointment Date',text:'Please select an appointment date.'}}}}})" dmx-hide="!app.main.appointmentpage.query_time_slots.data.query_slots">Add More</a>
 
-            <a class="item-link list-button button-large rounded-xl button-6 bg-color-primary button-fill text-color-white" style="width:100%" dmx-on:click="run({condition:{if:`app.main.appointmentpage.form.appointmentDate.value.toDate()`,then:{steps:[{run:{action:`app.Cart.update({customer_id: app.Current_user.data.customer.id},{appointment_date: app.main.appointmentpage.form.appointmentDate.value.toDate(), timeSlot_start: app.main.appointmentpage.appointment_timeStart.value, timeSlot_end: app.main.appointmentpage.appointment_timeEnd.value})`}},{run:{action:`app.main.navigate(\'/choose-address\',{})`}}]},else:{steps:{'f7.dialog.alert':{title:'Appointment Date',text:'Please select an appointment date.'}}}}})">Proceed to check &nbsp;<i class="bi-arrow-right-circle-fill"></i></a>
+            <a class="item-link list-button button-large rounded-xl button-6 bg-color-black button-fill text-color-white margin-right" style="width:100%" dmx-show="!app.main.appointmentpage.query_time_slots.data.query_slots" href="" dmx-on:click="run({runJS:{function:'back'}})">Change Provider</a>
+
+            <a class="item-link list-button button-large rounded-xl button-6 bg-color-primary button-fill text-color-white" style="width:100%" dmx-on:click="run({condition:{if:`app.main.appointmentpage.form.appointmentDate.value.toDate()`,then:{steps:[{run:{action:`app.Cart.update({customer_id: app.Current_user.data.customer.id},{appointment_date: app.main.appointmentpage.form.appointmentDate.value.toDate(), timeSlot_start: app.main.appointmentpage.appointment_timeStart.value, timeSlot_end: app.main.appointmentpage.appointment_timeEnd.value})`}},{run:{action:`app.main.navigate(\'/order-confirmation\',{})`}}]},else:{steps:{'f7.dialog.alert':{title:'Appointment Date',text:'Please select an appointment date.'}}}}})" dmx-hide="!app.main.appointmentpage.query_time_slots.data.query_slots">Checkout &nbsp;<i class="bi-arrow-right-circle-fill"></i></a>
         </div>
     </div>
     <div class="page-content content-area wappler-block">
+        <dmx-preloader id="justpropreloader" spinner="pulse" color="#ff6600"></dmx-preloader>
         <div class="container">
             <!-- Demo cal -->
 
@@ -64,7 +67,9 @@
                             </div>
                         </div>
                     </div>
-                    <P dmx-show="!app.main.appointmentpage.query_time_slots.data.query_slots">Sorry this provider is overbooked on this date</P>
+                    <p dmx-show="!app.main.appointmentpage.query_time_slots.data.query_slots" dmx-hide="">
+                    <h5>Unfortunately, this provider is fully booked for {{app.main.appointmentpage.form.appointmentDate.value.formatDate('dd MMMM y')}}. You can select another date or pick another professional </h5>
+                    </p>
                 </div>
             </div>
         </div>

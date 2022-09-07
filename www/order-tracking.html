@@ -27,8 +27,8 @@
         </div>
     </div>
     <div class="toolbar toolbar-bottom toolbar-bottom-md no-shadow">
-        <div class="toolbar-inner justify-content-center" style="padding:10px !important;" dmx-on:click="app.main.navigate('/home',{reloadAll: true, clearPreviousHistory: true})">
-            <button class="button-6 button-large rounded-lg text-color-white bg-color-primary" style="width:100%">Back to Home &nbsp;<i class="bi-arrow-right-circle-fill"></i></button>
+        <div class="toolbar-inner justify-content-center" style="padding:10px !important;">
+            <button class="button-6 button-large rounded-lg text-color-white bg-color-primary" style="width:100%" dmx-on:click="app.main.navigate('/orders',{reloadAll: true, clearPreviousHistory: true})">My Appointments &nbsp;<i class="bi bi-alarm-fill"></i></button>
         </div>
     </div>
     <div class="page-content wappler-block pt-0">
@@ -39,7 +39,7 @@
 
         <div class="bottom-wraper">
             <div class="container track-content">
-                <div class="map-dir">
+                <div class="map-dir bg-color-white">
                     <p class="ma-0">Your booking is confirmed.</p>
                     <h4 class="ma-0">{{app.main.thankyou.lastOrder.data.queryLastOrder.appointment_date.formatDate('dd MMM y')}}</h4>
                 </div>
