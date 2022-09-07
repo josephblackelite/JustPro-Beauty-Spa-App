@@ -814,6 +814,10 @@ dmx.config({
           "type": "number"
         },
         {
+          "name": "provider_avatar",
+          "type": "text"
+        },
+        {
           "name": "distance",
           "type": "text",
           "sub": [

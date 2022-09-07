@@ -65,7 +65,7 @@ var routes = [
     "url": "./message-list.html"
   },
   {
-    "path": "/appointment-page",
+    "path": "/appointment-page/:provider_id",
     "url": "./appointment-page.html"
   },
   {
