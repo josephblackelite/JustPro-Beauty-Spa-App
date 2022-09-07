@@ -785,5 +785,42 @@ dmx.config({
       ],
       "outputType": "array"
     }
+  },
+  "chooseprofessional": {
+    "repeat_providers": {
+      "meta": [
+        {
+          "name": "id",
+          "type": "number"
+        },
+        {
+          "name": "staff_name",
+          "type": "text"
+        },
+        {
+          "name": "provider_full_address",
+          "type": "text"
+        },
+        {
+          "name": "provider_address_longitude",
+          "type": "number"
+        },
+        {
+          "name": "provider_address_latitude",
+          "type": "number"
+        },
+        {
+          "name": "distance",
+          "type": "text",
+          "sub": [
+            {
+              "name": "Distance",
+              "type": "text"
+            }
+          ]
+        }
+      ],
+      "outputType": "array"
+    }
   }
 });

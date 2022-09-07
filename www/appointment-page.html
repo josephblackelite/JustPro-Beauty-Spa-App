@@ -1,6 +1,8 @@
 <!-- Wappler include head-page="index.html" is="dmx-app" id="appointmentpage" appConnect="local" framework7_6="With App Connect" framework7_icons="local" capacitor="local" components="{dmxCalendar:{},dmxSwiper:{},dmxFormatter:{},dmxStripe:{}}" -->
 
 <div class="page" path="/appointment-page" data-name="appointment-page" id="appointmentpage">
+    <dmx-serverconnect id="queryProvider_booking_dates" url="https://api.justpro.me/api/provider/query_appointment" site="JustPro-Spa-Backend" dmx-param:date_time="app.main.appointmentpage.form.appointmentDate.value.toDate()"></dmx-serverconnect>
+    <dmx-serverconnect id="query_time_slots" url="https://api.justpro.me/api/provider/available_time_slots" site="JustPro-Spa-Backend" dmx-param:date_time="app.main.appointmentpage.form.appointmentDate.value.toDate()"></dmx-serverconnect>
     <script is="dmx-flow" id="flow1" type="text/dmx-flow" autorun>{
   runJS: {function: "runCalendar"}
 }</script>
