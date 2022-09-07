@@ -1,7 +1,7 @@
 <!-- Wappler include head-page="index.html" is="dmx-app" id="otpPage" appConnect="local" framework7_6="With App Connect" framework7_icons="local" capacitor="local" components="{dmxValidator:{}}" -->
 
 <div class="page account-area" path="/verifyOtp/:checkout?" data-name="verifyOtp" id="verifyOtp">
-    <form is="dmx-serverconnect-form" method="post" id="resend_otp" action="https://api.justpro.me/api/security/resend_otp" site="JustPro-Spa-Backend" dmx-on:success="run([{run:{action:`app.otp_id.setValue(app.main.verifyOtp.resend_otp.data.resend_otp.data.otp_id)`}},{runJS:{function:'createNotication',args:[`\'New otp code sent!\'`,`\'Check your sms inbox for new otp code.\'`]}}])">
+    <form is="dmx-serverconnect-form" method="post" id="resend_otp" action="https://api.justpro.me/api/security/resend_otp" site="JustPro-Spa-Backend" dmx-on:success="run([{run:{action:`app.otp_id.setValue(app.main.verifyOtp.resend_otp.data.resend_otp.data.otp_id)`}},{runJS:{function:'createNotication',args:[`\'New otp code sent!\'`,`\'Check your sms inbox for new otp code.\'`]}},{'f7.dialog.alert':{text:'OTP Code sent',title:'We\'ve sent a new OTP code. If you entered the wrong number, please close and reopen the app to try with  a new number.'}}])" dmx-on:start="app.showPreloader('purple')" dmx-on:done="app.hidePreloader()">
         <input id="resend_otp_id" name="otp_id" type="hidden" dmx-bind:value="app.otp_id.value">
     </form>
     <div class="page-content wappler-block">
