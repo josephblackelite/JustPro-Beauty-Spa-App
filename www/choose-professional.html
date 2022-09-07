@@ -1,4 +1,4 @@
-<!-- Wappler include head-page="index.html" is="dmx-app" id="chooseprofessional" appConnect="local" framework7_6="With App Connect" framework7_icons="local" capacitor="local" components="{dmxSwiper:{},dmxSockets:{}}" fontawesome_5="local" -->
+<!-- Wappler include head-page="index.html" is="dmx-app" id="chooseprofessional" appConnect="local" framework7_6="With App Connect" framework7_icons="local" capacitor="local" components="{dmxSwiper:{},dmxSockets:{},dmxFormatter:{}}" fontawesome_5="local" -->
 
 <div class="page welcome-screen" path="/choose-professional/:service_id/:provider_type/:customer_address_id?" data-name="choose-professional" id="chooseprofessional">
     <dmx-serverconnect id="list_providers" url="https://api.justpro.me/api/provider/list_providers" site="JustPro-Spa-Backend" dmx-param:service_id="app.main.chooseprofessional.route.params.service_id" dmx-param:provider_type="app.main.chooseprofessional.route.params.provider_type" dmx-param:customer_address_id="app.main.chooseprofessional.search_by_name.value" sockets="true" dmx-param:search_by_name="app.main.chooseprofessional.search_by_name.value"></dmx-serverconnect>
@@ -65,7 +65,7 @@
                                     <p>{{staff_name.capitalize()}}</p>
                                     <div class="display-flex align-items-center">
                                         <p class="margin-right" dmx-show="distance.Distance">{{distance.Distance.floor()+' km'}}</p>
-                                        <button class="button button-small rounded-xl text-color-white bg-primary" dmx-on:click="run([{run:{action:`app.Cart.update({product_id: app.main.chooseprofessional.route.params.service_id},{provider_id: id})`}},{run:{action:`app.main.navigate(\'/appointment-page/\'+id,{})`}}])">Book</button>
+                                        <button class="button button-small rounded-xl text-color-white bg-primary" dmx-on:click="run([{run:{action:`app.Cart.update({product_id: app.main.chooseprofessional.route.params.service_id.toNumber()},{provider_id: id})`}},{run:{action:`app.main.navigate(\'/appointment-page/\'+id,{})`}}])">Book</button>
                                     </div>
                                 </div>
                             </div>
