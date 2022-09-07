@@ -50,14 +50,9 @@
             text: "We are unable to process your payment, please confirm that you have sufficient funds in this card or try a different card.",
             title: "Payment Failed",
             then: {
-              steps: [
-                {
-                  run: {action: "{{app.main.checkout.delete_incomplete_orders.submit()}}"}
-                },
-                {
-                  run: {action: "{{app.main.checkout.justpropreloader.hide()}}"}
-                }
-              ]
+              steps: {
+                run: {action: "{{app.main.checkout.justpropreloader.hide()}}"}
+              }
             }
           }
         }
@@ -78,7 +73,6 @@
         </div>
     </div>
     <div class="page-content wappler-block">
-        <dmx-serverconnect id="serverconnect1"></dmx-serverconnect>
         <dmx-preloader id="justpropreloader" spinner="pulse" color="#ff6600"></dmx-preloader>
 
         <div class="block">
@@ -165,9 +159,6 @@
             <input id="item_img" name="item_img" type="hidden" dmx-bind:value="$value.product_avatar">
             <input id="item_name" name="item_name" type="hidden" dmx-bind:value="$value.name">
         </div>
-    </form>
-    <form is="dmx-serverconnect-form" id="delete_incomplete_orders" method="post" action="https://api.justpro.me/api/customer_orders/remove_incomplete_orders" site="JustPro-Spa-Backend">
-        <input id="order_id" name="id" type="text" dmx-bind:value="app.main.checkout.bill_selected_card.data.insertOrder.identity">
     </form>
 
 

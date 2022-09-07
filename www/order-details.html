@@ -1,28 +1,6 @@
-<!-- Wappler include head-page="index.html" is="dmx-app" id="orders" appConnect="local" framework7_6="With App Connect" framework7_icons="local" capacitor="local" components="{dmxSwiper:{},dmxFormatter:{}}" -->
+<!-- Wappler include head-page="index.html" is="dmx-app" id="orders" appConnect="local" framework7_6="With App Connect" framework7_icons="local" capacitor="local" components="{dmxSwiper:{},dmxFormatter:{},dmxSockets:{}}" -->
 
-<div class="page" id="orderdetails" data-name="ordersdetails" path="/orders-details">
-    <div id="popup1" class="popup">
-        <div class="view navbar-fixed">
-            <div class="pages navbar-through toolbar-through">
-                <div class="page">
-                    <div class="navbar">
-                        <div class="navbar-bg"></div>
-                        <div class="navbar-inner">
-                            <div class="center">Popup Title</div>
-                            <div class="right"><a href="#" class="link popup-close">Done</a></div>
-                        </div>
-                    </div>
-                    <div class="page-content">
-                        <div class="block">
-                            <form is="dmx-serverconnect-form" id="cancle_order_form" method="post">
-                                <input id="order_uuid" name="order_uuid" type="text">
-                            </form>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
+<div class="page" id="orderdetails" data-name="ordersdetails" path="/order-details/:id/:uuid">
     <div class="padding-top padding-bottom">
         <div class="navbar no-hairline no-shadow no-border">
             <div class="navbar-inner" style="padding-right:0px !important; padding-left:0px !important; margin-right:0px !important">
@@ -42,13 +20,13 @@
     </div>
     <div class="toolbar toolbar-bottom toolbar-bottom-md">
         <div class="toolbar-inner justify-content-center" style="padding:10px !important">
-            <a class="button-large rounded-xl button-6 bg-color-primary button-fill text-color-white" style="width:100%" href="#!" dmx-on:click="app.main.orderdetails.popup1.open()">Cancel Appointment</a>
+            <a class="button-large rounded-xl button-6 bg-color-primary button-fill text-color-white" style="width:100%" href="#!" dmx-on:click="app.main.navigate('/cancel-appointment/'+app.main.orderdetails.route.params.id+'/'+app.main.orderdetails.route.params.uuid,{})" dmx-show="(app.main.orderdetails.orderinfo.data.query.order_status == 'pending')">Cancel Appointment</a>
         </div>
     </div>
 
     <div class="page-content content-area">
-        <dmx-serverconnect id="orderinfo" url="https://api.justpro.me/api/customer_orders/order_details" site="JustPro-Spa-Backend" dmx-param:order_id="app.main.orderdetails.route.params.id" dmx-on:start="app.showPreloader('purple')" dmx-on:done="app.hidePreloader()"></dmx-serverconnect>
-        <dmx-serverconnect id="orderchildren" url="https://api.justpro.me/api/customer_orders/order_items_details" site="JustPro-Spa-Backend" dmx-param:order_uuid="app.main.orderdetails.route.params.uuid" dmx-on:start="app.showPreloader('purple')" dmx-on:done="app.hidePreloader()"></dmx-serverconnect>
+        <dmx-serverconnect id="orderinfo" url="https://api.justpro.me/api/customer_orders/order_details" site="JustPro-Spa-Backend" dmx-param:order_id="app.main.orderdetails.route.params.id" dmx-on:start="app.showPreloader('purple')" dmx-on:done="app.hidePreloader()" sockets="true"></dmx-serverconnect>
+        <dmx-serverconnect id="orderchildren" url="https://api.justpro.me/api/customer_orders/order_items_details" site="JustPro-Spa-Backend" dmx-param:order_uuid="app.main.orderdetails.route.params.uuid" dmx-on:start="app.showPreloader('purple')" dmx-on:done="app.hidePreloader()" sockets="true"></dmx-serverconnect>
 
         <div class="col-100" style="margin-bottom:150px !important">
 
@@ -102,7 +80,7 @@
                 <h5 class="tajawal mt-10 mb-10 block">Appointment Details</h5>
                 <div class="list">
                     <ul>
-                        <li dmx-repeat:fullinfo="app.main.orderdetails.orderchildren.data.query">
+                        <li dmx-repeat:fullinfo="app.main.orderdetails.orderchildren.data.query" dmx-on:click="app.main.navigate('/review-service/'+service_id,{})">
                             <div class="item-content">
                                 <div class="item-media"><img width="60px" height="60px" style="border-radius:50%" dmx-bind:src="item_image"></div>
                                 <div class="item-inner">
