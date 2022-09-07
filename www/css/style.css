@@ -20,7 +20,14 @@ Table of Sass Contents
 6. Preloader
 
 /* Custom color theme */
+:root {
+  --f7-theme-color: #FF9F00;
+  --f7-theme-color-rgb: 255, 159, 0;
+  --f7-theme-color-shade: #d68600;
+  --f7-theme-color-tint: #ffae29;
+}
 
+/*
 :root {
   --f7-theme-color: #A11F71;
   --f7-theme-color-rgb: 161, 31, 113;
@@ -30,6 +37,7 @@ Table of Sass Contents
   --f7-theme-color-white: #fff;
   --border-color: #F3F3F3; 
 }
+*/
 /*:root {
   --f7-theme-color: #6ab04c;
   --f7-theme-color-rgb: 106, 176, 76;
@@ -3479,11 +3487,13 @@ h6, .h6 {
   --f7-theme-color-light: #D9EDE6; }
   */
 
-  --f7-theme-color: #A11F71;
-  --f7-theme-color-rgb: 161, 31, 113;
-  --f7-theme-color-shade: #7f1859;
-  --f7-theme-color-tint: #c32689;
+
+  --f7-theme-color: #F05742;
+  --f7-theme-color-rgb: 240, 87, 66;
+  --f7-theme-color-shade: #ed351c;
+  --f7-theme-color-tint: #f37968;
 }
+
 
 .color-theme-red {
   --f7-theme-color: #ff3b30;
@@ -4442,16 +4452,16 @@ margin-bottom:-20px !important;
 }
 
 .brand-bg {
-    background-image: url(/assets/images/bg-style.png);
+    background-image: url(/assets/images/bg-style.png) !important;
     background-size:cover;
     background-position:center;
 }
 
 .brand-btn {
-    background-color:#E63C7A !important;
+    background-color:#2D171B !important;
     color:#fff;
     font-weight:800;
-    border:#E63C7A !important;
+    border:#2D171B !important;
 }
 
 .brand-border{
@@ -4466,7 +4476,7 @@ margin-bottom:-20px !important;
 
 
     .title {
-        color:#B42773 !important;
+        color:#440000 !important;
         font-weight: 600 !important;
          font-family: 'Tajawal', sans-serif !important;
     }

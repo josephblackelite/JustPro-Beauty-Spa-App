@@ -78,7 +78,7 @@
 
     <div class="toolbar toolbar-bottom toolbar-bottom-md no-shadow" dmx-show="app.Cart.data.count()>0">
         <div class="toolbar-inner justify-content-center" style="padding:10px !important;">
-            <a href="/order-confirmation" class="button-6 button-large rounded-lg text-color-white bg-color-primary" style="width:100%">
+            <a href="/order-confirmation" class="button-6 button-large rounded-lg text-color-white brand-bg" style="width:100%">
                 {{app.Cart.data.count()}} &nbsp;<i class="bi bi-basket"></i> &nbsp; Checkout &nbsp;<i class="bi-arrow-right-circle-fill"></i></a>
         </div>
     </div>
@@ -122,31 +122,40 @@
             </div>
 
             <!-- start card demo -->
-            <div class="row">
-                <div class="col-100 medium-50 large-25" is="dmx-repeat" id="repeat_massage_services" dmx-bind:repeat="app.main.orderprompt.queryServices.data.queryServices" dmx-hide="app.main.orderprompt.queryServices.state.processing">
-                    <div class="card demo-card-header-pic no-shadow card-outline border-10">
+            <div class="row no-gap">
+                <div class="col-50" dmx-hide="app.main.orderprompt.queryServices.state.processing" dmx-repeat:repeat1="app.main.orderprompt.queryServices.data.queryServices">
+                    <div class="card demo-card-header-pic no-shadow card-outline border-10" dmx-on:click="app.main.navigate('/product-info/'+id,{})">
                         <div class="card-header align-items-flex-end" dmx-style:background-image="'url(' + product_avatar + ')'" style="height:256px; background-position:bottom">
                             <span style="font-size:22px; text-transform:capitalize; strong" class="tajawal"> {{product_name.capitalize()}}</span>
-                            <br>
-                            <button class="button-4 btn-dir bg-color-yellow popover-open text-align-center justify-content-center" title="This product is nice" data-popover="#popover1" dmx-on:click="app.main.orderprompt.popover_title.setValue(product_name.capitalize());app.main.orderprompt.popover_description.setValue(product_description.capitalize())" style="border-radius:50% !important; height:40px; width:40px;display:block !important; padding:0px !important; border:0px !important">
-                                <i class="bi bi-info-circle-fill fa-2x fa-fw"></i>
-                            </button>
+                            <!--<br>
+                            <button class="button-4 btn-dir bg-color-yellow popover-open text-align-center justify-content-center" title="This product is nice" data-popover="#popover1" dmx-on:click="app.main.orderprompt.popover_title.setValue(product_name.capitalize());app.main.orderprompt.popover_description.setValue(product_description.capitalize())" style="border-radius:50% !important; height:20px; width:20px;display:block !important; padding:0px !important; border:0px !important;">
+                                <i class="bi bi-info-circle-fill fa-fw"></i>
+                            </button>-->
                         </div>
-                        <div class="card-footer no-border" style="padding-top:-210px !important">
-                            <h4 class="strong tajawal"> {{product_amt.toNumber().formatCurrency('AED', '.', ',', 2)}} <small dmx-show="amount_matrix">/ {{amount_matrix}} </small>
-                            </h4> <a class="link button-4 bg-color-primary text-color-white" dmx-on:click="app.main.navigate('/product-info/'+id,{})">Book Now</a>
-                        </div>
-                    </div>
-                    <div class="popover" id="popover1">
-                        <div class="popover-inner">
-                            <div class="block">
-                                <p>{{app.main.orderprompt.popover_title.value.capitalize()}}</p>
-                                <p>{{app.main.orderprompt.popover_description.value.capitalize()}}</p>
+                        <div class="card-footer no-border bg-transparent" style="padding-top:-210px !important; height:40px !important">
+                            <div class="row">
+                                <div class="col-100">
+                                    <h4 class="strong tajawal text-color-black"> {{product_amt.toNumber().formatCurrency('AED', '.', ',', 2)}} <small dmx-show="amount_matrix" class="smallfont"> {{amount_matrix}} </small>
+                                    </h4>
+                                </div>
+                                <!-- <div class="col-100">
+                                    <a class="link button-4 brand-bg text-color-white" dmx-on:click="app.main.navigate('/product-info/'+id,{})">Book Now</a>
+                                </div> -->
                             </div>
+
                         </div>
                     </div>
+
                 </div>
 
+            </div>
+        </div>
+        <div class="popover" id="popover1">
+            <div class="popover-inner">
+                <div class="block">
+                    <p>{{app.main.orderprompt.popover_title.value.capitalize()}}</p>
+                    <p>{{app.main.orderprompt.popover_description.value.capitalize()}}</p>
+                </div>
             </div>
         </div>
 
