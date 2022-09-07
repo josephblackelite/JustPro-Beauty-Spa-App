@@ -14,7 +14,7 @@
                 </div>
             </div>
             <div class="tab tab-active form-elements tabs">
-                <form class="tab tab-active" id="verifyOtp_form" is="dmx-serverconnect-form" method="post" action="https://api.justpro.me/api/security/verify_otp" site="JustPro-Spa-Backend" dmx-on:success="run({condition:{if:`app.main.verifyOtp.route.params.checkout`,then:{steps:{run:{action:`app.main.navigate(\'/checkout\',{})`}}},else:{steps:{condition:{if:`app.Current_user.data.customer.customer_name`,then:{steps:{run:{action:`app.main.navigate(\'/home\',{})`}}},else:{steps:{run:{action:`app.main.navigate(\'/customer-name-prompt\',{})`}}}}}}}})">
+                <form class="tab tab-active" id="verifyOtp_form" is="dmx-serverconnect-form" method="post" action="https://api.justpro.me/api/security/verify_otp" site="JustPro-Spa-Backend" dmx-on:success="run({condition:{if:`app.main.verifyOtp.route.params.checkout`,then:{steps:{run:{action:`app.main.navigate(\'/checkout\',{})`}}},else:{steps:{condition:{if:`app.Current_user.data.customer.customer_name`,then:{steps:{run:{action:`app.main.navigate(\'/home\',{})`}}},else:{steps:{run:{action:`app.main.navigate(\'/customer-name-prompt\',{})`}}}}}}}})" dmx-on:start="app.showPreloader('purple')" dmx-on:done="app.hidePreloader()">
                     <input id="otp_id" name="otp_id" dmx-bind:value="app.otp_id.value" type="hidden">
                     <input id="mobile_number" name="mobile_number" dmx-bind:value="app.Current_user.data.customer.phone_number" type="hidden">
                     <div class="title-head">
@@ -48,7 +48,7 @@
                         <a href="" class="button-large button rounded-xl button-fill" dmx-on:click="run({condition:{if:`app.main.verifyOtp.verifyOtp_form.otp_code.value`,then:{steps:{run:{action:`app.main.verifyOtp.verifyOtp_form.submit()`}}}}})"><span dmx-hide="app.main.verifyOtp.verifyOtp_form.state.executing">Verify number</span>
                             <div class="preloader color-white" dmx-show="app.main.verifyOtp.verifyOtp_form.state.executing"></div>
                         </a>
-                        <p class="form-text text-align-center"><a href="" class="tab-link ml-5" dmx-on:click="app.main.verifyOtp.resend_otp.submit()">Get a new code</a></p>
+                        <p class="form-text text-align-center">Didn't receive a code? <br> <a href="" class="tab-link ml-5" dmx-on:click="app.main.verifyOtp.resend_otp.submit()">Get a new code</a></p>
                     </div>
 
                 </form>
