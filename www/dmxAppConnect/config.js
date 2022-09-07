@@ -848,6 +848,23 @@ dmx.config({
         }
       ],
       "outputType": "array"
+    },
+    "time_slot_start_array": {
+      "meta": [
+        {
+          "type": "number",
+          "name": "booking_date_id"
+        },
+        {
+          "type": "number",
+          "name": "time_start"
+        },
+        {
+          "type": "number",
+          "name": "time_end"
+        }
+      ],
+      "outputType": "array"
     }
   }
 });

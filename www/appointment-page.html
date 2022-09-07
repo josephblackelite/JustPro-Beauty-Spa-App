@@ -2,7 +2,7 @@
 
 <div class="page" path="/appointment-page/:provider_id" data-name="appointment-page" id="appointmentpage">
     <dmx-serverconnect id="queryProvider_booking_dates" url="https://api.justpro.me/api/provider/query_appointment" site="JustPro-Spa-Backend" dmx-param:date_time="app.main.appointmentpage.form.appointmentDate.value.toDate()" dmx-param:provider_id="app.main.appointmentpage.route.params.provider_id" sockets="true"></dmx-serverconnect>
-    <dmx-serverconnect id="query_time_slots" url="https://api.justpro.me/api/provider/available_time_slots" site="JustPro-Spa-Backend" dmx-param:date_time="app.main.appointmentpage.form.appointmentDate.value.toDate()" dmx-param:provider_last_time_slot_end="app.main.appointmentpage.queryProvider_booking_dates.data.provider_last_booking_time_slot.time_start" sockets="true"></dmx-serverconnect>
+    <dmx-serverconnect id="query_time_slots" url="https://api.justpro.me/api/provider/available_time_slots" site="JustPro-Spa-Backend" dmx-param:date_time="app.main.appointmentpage.form.appointmentDate.value.toDate()" dmx-param:provider_last_time_slot_end="app.main.appointmentpage.queryProvider_booking_dates.data.provider_last_booking_time_slot.time_start" dmx-param:provider_time_slot_start_4_date="" dmx-param:date_id="app.main.appointmentpage.queryProvider_booking_dates.data.query_provider_appointment.id" sockets="true"></dmx-serverconnect>
     <script is="dmx-flow" id="flow1" type="text/dmx-flow" autorun>{
   runJS: {function: "runCalendar"}
 }</script>
@@ -64,7 +64,7 @@
                             </div>
                         </div>
                     </div>
-                    <P dmx-show="!app.main.appointmentpage.query_time_slots.data.query_slots">Sorry this provider is overbooked on this date</P>
+                    <P dmx-show="(app.main.appointmentpage.query_time_slots.data.query_slots.count() < 1)">Sorry this provider is overbooked on this date</P>
                 </div>
             </div>
         </div>
