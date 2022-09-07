@@ -94,6 +94,10 @@ dmx.config({
       {
         "type": "text",
         "name": "customer_id"
+      },
+      {
+        "type": "text",
+        "name": "provider_id"
       }
     ]
   },
@@ -818,6 +822,25 @@ dmx.config({
               "type": "text"
             }
           ]
+        }
+      ],
+      "outputType": "array"
+    }
+  },
+  "appointmentpage": {
+    "repeat_available_time_slot": {
+      "meta": [
+        {
+          "type": "number",
+          "name": "id"
+        },
+        {
+          "type": "number",
+          "name": "time_slot_start"
+        },
+        {
+          "type": "number",
+          "name": "time_slot_end"
         }
       ],
       "outputType": "array"
