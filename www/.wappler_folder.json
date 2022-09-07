@@ -90,5 +90,13 @@
   "thank-you-page.html": {
     "layoutPage": "",
     "description": ""
+  },
+  "cancel-appointment.html": {
+    "layoutPage": "",
+    "description": ""
+  },
+  "review-service.html": {
+    "layoutPage": "",
+    "description": ""
   }
 }

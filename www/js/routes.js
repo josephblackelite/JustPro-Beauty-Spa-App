@@ -95,5 +95,13 @@ var routes = [
   {
     "path": "/thank-you-page",
     "url": "./thank-you-page.html"
+  },
+  {
+    "path": "/cancel-appointment/:id/:order_uuid",
+    "url": "./cancel-appointment.html"
+  },
+  {
+    "path": "/review-service/:service_id",
+    "url": "./review-service.html"
   }
 ]
