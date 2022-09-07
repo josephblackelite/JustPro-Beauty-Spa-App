@@ -76,8 +76,40 @@
         <dmx-preloader id="justpropreloader" spinner="pulse" color="#ff6600"></dmx-preloader>
 
         <div class="block">
-            <h4 class="tajawal strong" dmx-show="app.main.checkout.customerPaymentMethods.data.query[0].id">Your Payment Cards</h4>
+            <h4 class="tajawal strong mb-0" dmx-show="app.main.checkout.customerPaymentMethods.data.query[0].id">Your Payment Cards</h4>
+            <p class="mt-0"><small>Swipe right to reveal all cards</small></p>
         </div>
+        <div is="dmx-swiper" id="cardreader" dmx-bind:slides="app.main.checkout.customerPaymentMethods.data.query" class="mb-50" space-between="15" centered-slides="true">
+            <div class="swiper-slide margin-right margin-left" style="margin-right:30px !important; margin-left:30px !important">
+                <div class="payment-card">
+                    <div class="card-media">
+                        <img src="img/card/card1.png" alt="">
+                        <img src="img/card/card2.png" alt="">
+                    </div>
+                    <div class="card-info">
+                        <div class="clearfix">
+                            <h5 class="card-name">{{funding}}</h5>
+                            <p class="card-number">**** **** **** {{last4}}</p>
+                        </div>
+                        <div class="bottom-info">
+                            <p>{{exp_month+' / '+exp_year}}</p>
+                            <p>{{brand}}</p>
+                        </div>
+                    </div>
+                </div>
+                <button class="brand-bg text-color-white button-6 margin-top custom-font smallfont" dmx-on:click="run({'f7.dialog.confirm':{title:'Ready to pay?',text:`\'You are about to pay with your card ending in \'+last4+\' ?\'`,then:{steps:{run:{action:`app.main.checkout.bill_selected_card.selected_payment_method.setValue(stripe_payment_method_id);app.main.checkout.bill_selected_card.submit()`}}}}})" dmx-bind:disabled="(app.main.checkout.bill_selected_card.state.executing &amp;&amp; (app.main.checkout.bill_selected_card.selected_payment_method.value == stripe_payment_method_id))" style="width:285px !important"><span dmx-hide="(app.main.checkout.bill_selected_card.state.executing &amp;&amp; (app.main.checkout.bill_selected_card.selected_payment_method.value == stripe_payment_method_id))" class="smallfont">Click to Pay with this card</span>
+                    <span class="preloader color-white" dmx-show="(app.main.checkout.bill_selected_card.state.executing &amp;&amp; (app.main.checkout.bill_selected_card.selected_payment_method.value == stripe_payment_method_id))"></span>
+                </button>
+
+
+            </div>
+        </div>
+
+
+
+
+
+        <!--
         <div class="block">
             <div data-space-between="15" data-slides-per-view="1" data-centered-slides="false" class="swiper-container swiper-init payment-swiper item-swiper">
                 <div class="swiper-wrapper">
@@ -105,7 +137,7 @@
                     </div>
                 </div>
             </div>
-        </div>
+        </div> -->
 
         <div class="block">
             <div class="checkout-total">

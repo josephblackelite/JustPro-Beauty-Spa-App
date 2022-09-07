@@ -98,6 +98,10 @@ dmx.config({
       {
         "type": "text",
         "name": "provider_id"
+      },
+      {
+        "type": "text",
+        "name": "service_type"
       }
     ]
   },

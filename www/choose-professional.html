@@ -1,31 +1,30 @@
-<!-- Wappler include head-page="index.html" is="dmx-app" id="chooseprofessional" appConnect="local" framework7_6="With App Connect" framework7_icons="local" capacitor="local" components="{dmxSwiper:{},dmxSockets:{},dmxFormatter:{}}" fontawesome_5="local" -->
+<!-- Wappler include head-page="index.html" is="dmx-app" id="chooseprofessional" appConnect="local" framework7_6="With App Connect" framework7_icons="local" capacitor="local" components="{dmxSwiper:{},dmxSockets:{},dmxFormatter:{},dmxPreloader:{}}" fontawesome_5="local" -->
 
 <div class="page welcome-screen" path="/choose-professional/:service_id/:provider_type/:customer_address_id?" data-name="choose-professional" id="chooseprofessional">
     <dmx-serverconnect id="list_providers" url="https://api.justpro.me/api/provider/list_providers" site="JustPro-Spa-Backend" dmx-param:service_id="app.main.chooseprofessional.route.params.service_id" dmx-param:provider_type="app.main.chooseprofessional.route.params.provider_type" dmx-param:customer_address_id="app.main.chooseprofessional.search_by_name.value" sockets="true" dmx-param:search_by_name="app.main.chooseprofessional.search_by_name.value"></dmx-serverconnect>
-    <div class="navbar" style="">
-        <div class="navbar-inner">
-            <div class="left">
-                <a href="#" class="link back">
-                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <path d="M0.439312 13.0606L5.75391 18.3752C6.04683 18.6682 6.43069 18.8146 6.81459 18.8146C7.1985 18.8146 7.58236 18.6682 7.87528 18.3752C8.46103 17.7894 8.46103 16.8397 7.87528 16.2539L5.12133 13.5H22.5C23.3284 13.5 24 12.8284 24 12C24 11.1716 23.3284 10.5 22.5 10.5H5.12133L7.87528 7.7461C8.46103 7.1603 8.46103 6.21057 7.87528 5.62477C7.28944 5.03898 6.33975 5.03898 5.75391 5.62477L0.439312 10.9394C-0.146437 11.5251 -0.146437 12.4749 0.439312 13.0606Z" fill="black" />
-                    </svg>
-                </a>
-            </div>
+    <div class="padding-top padding-bottom">
+        <div class="navbar shadow">
+            <div class="navbar-inner" style="padding-right:0px !important; padding-left:0px !important; margin-right:0px !important">
+                <div class="left">
+                    <a href="#" class="link back">
+                        <i class="icon f7-icons">arrow_left</i>
+                    </a>
 
+                </div>
 
-            <p class="title text-align-center">Choose provider</p>
-            <div class="right">
-                <a href="#" class="link panel-open" data-panel="left">
-                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <path d="M14 12C14 10.8955 13.1046 10 12 10C10.8954 10 10 10.8955 10 12C10 13.1046 10.8954 14 12 14C13.1046 14 14 13.1046 14 12Z" fill="black" />
-                        <path d="M14 20C14 18.8954 13.1046 18 12 18C10.8954 18 10 18.8954 10 20C10 21.1045 10.8954 22 12 22C13.1046 22 14 21.1045 14 20Z" fill="black" />
-                        <path d="M14 4C14 2.89544 13.1046 2.00001 12 2.00001C10.8954 2.00001 10 2.89544 10 4C10 5.10457 10.8954 6 12 6C13.1046 6 14 5.10457 14 4Z" fill="black" />
-                    </svg>
-                </a>
+                <div class="title">Choose Provider</div>
+                <div class="right">
+                    <a href="#" class="link panel-open icon-only" data-panel="left">
+
+                        <i class="icon f7-icons">ellipsis_vertical</i>
+                    </a>
+                </div>
             </div>
         </div>
+
     </div>
     <div class="page-content wappler-block">
+        <dmx-preloader id="justpropreloader" spinner="pulse" color="#ff6600"></dmx-preloader>
 
 
         <div class="container">
@@ -37,7 +36,7 @@
                         <li class="item-content item-input item-input-outline">
 
                             <div class="item-inner" style="width:100% !important">
-                                <div class="item-title item-floating-label strong">Search professional name</div>
+                                <div class="item-title item-floating-label strong"><i class="bi bi-search"></i> &nbsp; Find professional by name</div>
                                 <div class="item-input-wrap" style="width:100% !important">
                                     <input type="text" placeholder="Search by name" class="form-control" id="search_by_name" name="search_by_name" style="width:100% !important" />
                                     <span class="input-clear-button"></span>
@@ -65,7 +64,7 @@
                                     <p>{{staff_name.capitalize()}}</p>
                                     <div class="display-flex align-items-center">
                                         <p class="margin-right" dmx-show="distance.Distance">{{distance.Distance.floor()+' km'}}</p>
-                                        <button class="button button-small rounded-xl text-color-white bg-primary" dmx-on:click="run([{run:{action:`app.Cart.update({product_id: app.main.chooseprofessional.route.params.service_id.toNumber()},{provider_id: id})`}},{run:{action:`app.main.navigate(\'/appointment-page/\'+id,{})`}}])">Book</button>
+                                        <button class="button button-small rounded-xl text-color-white bg-primary" dmx-on:click="run([{run:{action:`app.Cart.update({product_id: app.main.chooseprofessional.route.params.service_id.toNumber()},{provider_id: id})`}},{run:{action:`app.main.navigate(\'/appointment-page/\'+id,{})`}}])">Select</button>
                                     </div>
                                 </div>
                             </div>

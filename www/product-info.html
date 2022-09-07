@@ -52,7 +52,7 @@
     </div>
     <div class="toolbar toolbar-bottom toolbar-bottom-md no-shadow">
         <div class="toolbar-inner justify-content-center" style="padding:10px !important">
-            <a href="#!" class="item-link list-button button-large rounded-xl button-18 bg-color-primary button-fill text-color-white" dmx-on:click="run({condition:{if:`(app.main.product_info.qty_form.quantity.value >= 1)`,then:{steps:[{run:{action:`app.Cart.upsert({product_id: app.main.product_info.service_info.data.queryServices.id},{product_id: app.main.product_info.service_info.data.queryServices.id, product_stripe_id: app.main.product_info.service_info.data.queryServices.stripe_price_id, product_name: app.main.product_info.service_info.data.queryServices.product_name.capitalize(), product_quantity: product_quantity+app.main.product_info.varQty.value.toNumber(), product_amt: app.main.product_info.service_info.data.queryServices.product_amt, name: app.main.product_info.service_info.data.queryServices.product_name, quantity: app.main.product_info.qty_form.quantity.value.toNumber(), amount: app.main.product_info.service_info.data.queryServices.product_amt, matrix: app.main.product_info.qty_form.matrix.value, total: app.main.product_info.overall_total.value, vat: app.main.product_info.vat_amount.value, product_avatar: app.main.product_info.service_info.data.queryServices.product_avatar, customer_id: app.Current_user.data.customer.id})`}},{run:{action:`app.main.navigate(\'/choose-professional/\'+app.main.product_info.service_info.data.queryServices.id+\'/\'+app.main.product_info.qty_form.provider_type.value,{})`}}]},else:{steps:{'f7.dialog.alert':{text:'Please select the number of people that need this service.',title:'How many people?'}}}}})" dmx-show="app.main.product_info.service_info.data.queryServices" style="width:100%">Show providers</a>
+            <a href="#!" class="item-link list-button button-large rounded-xl button-6 bg-color-primary button-fill text-color-white" dmx-on:click="run({condition:{if:`(app.main.product_info.qty_form.quantity.value >= 1)`,then:{steps:[{run:{action:`app.Cart.upsert({product_id: app.main.product_info.service_info.data.queryServices.id},{product_id: app.main.product_info.service_info.data.queryServices.id, product_stripe_id: app.main.product_info.service_info.data.queryServices.stripe_price_id, product_name: app.main.product_info.service_info.data.queryServices.product_name.capitalize(), product_quantity: product_quantity+app.main.product_info.varQty.value.toNumber(), product_amt: app.main.product_info.service_info.data.queryServices.product_amt, name: app.main.product_info.service_info.data.queryServices.product_name, quantity: app.main.product_info.qty_form.quantity.value.toNumber(), amount: app.main.product_info.service_info.data.queryServices.product_amt, matrix: app.main.product_info.qty_form.matrix.value, total: app.main.product_info.overall_total.value, vat: app.main.product_info.vat_amount.value, product_avatar: app.main.product_info.service_info.data.queryServices.product_avatar, customer_id: app.Current_user.data.customer.id, service_type: app.main.product_info.qty_form.provider_type.value})`}},{run:{action:`app.main.navigate(\'/choose-professional/\'+app.main.product_info.service_info.data.queryServices.id+\'/\'+app.main.product_info.qty_form.provider_type.value,{})`}}]},else:{steps:{'f7.dialog.alert':{text:'Please select the number of people that need this service.',title:'How many people?'}}}}})" dmx-show="app.main.product_info.service_info.data.queryServices" style="width:100%">Show providers</a>
         </div>
     </div>
     <div class="page-content bg-gray pt-0 mr-0 ml-0">
@@ -98,9 +98,9 @@
                     -->
 
             <div class="col-100" style="margin-top:70px">
-                <h3 class="title text-align-center strong">{{app.main.product_info.service_info.data.queryServices.product_name.titlecase()}}</h3>
+                <h3 class="title text-align-center strong mb-10">{{app.main.product_info.service_info.data.queryServices.product_name.titlecase()}}</h3>
                 <div class="text-align-center">
-                    <h2 class="strong"> {{app.main.product_info.overall_total.value.toNumber().formatCurrency('AED', '.', ',', 2)}}</h2>
+                    <h2 class="strong mt-0"> {{app.main.product_info.overall_total.value.toNumber().formatCurrency('AED', '.', ',', 2)}}</h2>
                     <p class="text-align-center" style="margin-top:-25px"><small>5% VAT Included </small></p>
                     <input type="hidden" name="vat_amount" id="vat_amount" dmx-bind:value="app.main.product_info.working_total.value.toNumber().per(5)">
 
@@ -111,11 +111,14 @@
             </div>
 
         </div>
-        <div class="mb-50" style="margin-top:-20px !important">
+        <div class="mb-50" style="margin-top:-40px !important">
             <div class="row">
 
+                <div class="col-100 mt-10 mb-0 ml-10" style="margin-bottom:0px !important">
+                    <h4 class="custom-font mb-0" style="margin-bottom:0px !important; color:#c5c5c5"> Book Now <i class="bi bi-chevron-down"></i></h4>
+                </div>
 
-                <div class="col-100">
+                <div class="col-100 mt-0" style="margin-top:-30px !important">
 
                     <form action="" id="qty_form">
                         <div class="list inline-labels">
@@ -124,8 +127,7 @@
                                 <li>
                                     <a class="item-link smart-select smart-select-init" data-open-in="sheet">
                                         <select name="quantity" id="quantity" required="" data-msg-required="Please select quantity">
-                                            <option value="" selected>0 Person</option>
-                                            <option value="1">1 Person</option>
+                                            <option value="1" selected>Just me</option>
                                             <option value="2">2 People</option>
                                             <option value="3">3 People</option>
                                             <option value="4">4 People</option>
@@ -134,7 +136,7 @@
                                         </select>
                                         <div class="item-content">
                                             <div class="item-inner">
-                                                <div class="item-title strong">How many People?</div>
+                                                <div class="item-title strong">Booking for?</div>
                                             </div>
                                         </div>
                                     </a>
