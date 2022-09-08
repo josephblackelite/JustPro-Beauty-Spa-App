@@ -929,6 +929,47 @@ dmx.config({
         }
       ],
       "outputType": "array"
+    },
+    "stafflist": {
+      "meta": [
+        {
+          "name": "$index",
+          "type": "number"
+        },
+        {
+          "name": "$key",
+          "type": "text"
+        },
+        {
+          "name": "$value",
+          "type": "object"
+        },
+        {
+          "type": "number",
+          "name": "id"
+        },
+        {
+          "type": "text",
+          "name": "staff_name"
+        },
+        {
+          "type": "text",
+          "name": "provider_full_address"
+        },
+        {
+          "type": "number",
+          "name": "provider_address_longitude"
+        },
+        {
+          "type": "number",
+          "name": "provider_address_latitude"
+        },
+        {
+          "type": "text",
+          "name": "provider_avatar"
+        }
+      ],
+      "outputType": "array"
     }
   },
   "appointmentpage": {
