@@ -1,7 +1,11 @@
 <!-- Wappler include head-page="index.html" is="dmx-app" id="chooseprofessional" appConnect="local" framework7_6="With App Connect" framework7_icons="local" capacitor="local" components="{dmxSwiper:{},dmxSockets:{},dmxFormatter:{},dmxPreloader:{}}" fontawesome_5="local" -->
 
 <div class="page welcome-screen" path="/choose-professional/:service_id/:provider_type/:customer_address_id?" data-name="choose-professional" id="chooseprofessional">
+<<<<<<< HEAD
     <dmx-serverconnect id="list_providers" url="https://api.justpro.me/api/provider/list_providers" site="JustPro-Spa-Backend" dmx-param:service_id="app.main.chooseprofessional.route.params.service_id" dmx-param:provider_type="app.main.chooseprofessional.route.params.provider_type" dmx-param:customer_address_id="app.main.chooseprofessional.search_by_name.value" dmx-param:search_by_name="app.main.chooseprofessional.search_by_name.value"></dmx-serverconnect>
+=======
+    <dmx-serverconnect id="list_providers" url="https://api.justpro.me/api/provider/list_providers" site="JustPro-Spa-Backend" dmx-param:service_id="app.main.chooseprofessional.route.params.service_id" dmx-param:provider_type="app.local_store.data.service_location" dmx-param:customer_address_id="app.main.chooseprofessional.search_by_name.value" sockets="true" dmx-param:search_by_name="app.main.chooseprofessional.search_by_name.value"></dmx-serverconnect>
+>>>>>>> 3194131e2698d985359d07e42af117192215eee9
     <div class="padding-top padding-bottom">
         <div class="navbar shadow">
             <div class="navbar-inner" style="padding-right:0px !important; padding-left:0px !important; margin-right:0px !important">
