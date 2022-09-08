@@ -2,7 +2,7 @@
 
 <div class="page page-home" path="/home" data-name="home" id="home">
     <dmx-datetime id="var1"></dmx-datetime>
-    <dmx-serverconnect id="queryServices" url="https://api.justpro.me/api/services/query_services" site="JustPro-Spa-Backend" dmx-param:category="app.local_store.data.state" sockets="true" dmx-on:start="app.showPreloader('deeporange')" dmx-on:done="app.hidePreloader()"></dmx-serverconnect>
+    <dmx-serverconnect id="queryServices" url="https://api.justpro.me/api/services/query_services" site="JustPro-Spa-Backend" dmx-param:category="app.local_store.data.state" sockets="true" dmx-on:start="app.showPreloader('deeporange')" dmx-on:done="app.hidePreloader()" dmx-param:product_delivery="app.main.home.providers.value"></dmx-serverconnect>
     <dmx-value id="popover_title"></dmx-value>
     <dmx-value id="popover_description"></dmx-value>
     <style>
