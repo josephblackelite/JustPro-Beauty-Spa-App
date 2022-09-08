@@ -833,6 +833,59 @@ dmx.config({
         }
       ],
       "outputType": "array"
+    },
+    "repeat_staff": {
+      "meta": [
+        {
+          "type": "number",
+          "name": "id"
+        },
+        {
+          "type": "text",
+          "name": "staff_name"
+        },
+        {
+          "type": "text",
+          "name": "provider_avatar"
+        },
+        {
+          "type": "number",
+          "name": "provider_availability"
+        },
+        {
+          "type": "text",
+          "name": "provider_email"
+        },
+        {
+          "type": "text",
+          "name": "provider_phone_number"
+        },
+        {
+          "type": "number",
+          "name": "skill_rating"
+        },
+        {
+          "type": "text",
+          "name": "job_title"
+        },
+        {
+          "type": "text",
+          "name": "provider_type"
+        },
+        {
+          "type": "text",
+          "name": "provider_full_address"
+        },
+        {
+          "type": "number",
+          "name": "provider_address_longitude"
+        },
+        {
+          "type": "number",
+          "name": "provider_address_latitude"
+        }
+      ],
+      "outputType": "array"
     }
   },
   "appointmentpage": {
