@@ -589,10 +589,41 @@ to: today
 });
 }
 
-
-
-
     </script>
+
+    <script>
+        var tourSteps = [
+        {
+        step: 0,
+        header: '1st Tour Step',
+        message: 'This is our first tour step.<br />Please click "next" or "back" to move forward and backwards respectively',
+        element: "body > div.views > div > div.toolbar > div > a:nth-child(1)",
+        action: function () {
+        console.log('Started guided tour');
+        console.log('Step 0');
+        }
+        },
+        {
+        step: 1,
+        header: '2nd Tour Step',
+        message: 'Congratulations! You have finished your Tour Guide tutorial. Enjoy it :D',
+        element: "body > div.views > div > div.navbar > div > div.right > a",
+        action: function () {
+        console.log('Step 1');
+        }
+        },
+        {
+        step: 2,
+        header: '3rd and Final Step',
+        message: 'Congratulations! You have finished your Tour Guide tutorial. Enjoy it :D',
+        element: "body > div.views > div > div.navbar > div > div.right > a",
+        action: function () {
+        console.log('Step 2');
+        console.log('Last step on guided tour');
+        }
+        }];
+    </script>
+
 </body>
 
 </html>

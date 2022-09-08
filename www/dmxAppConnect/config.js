@@ -20,6 +20,10 @@ dmx.config({
       {
         "type": "text",
         "name": "state"
+      },
+      {
+        "type": "text",
+        "name": "service_location"
       }
     ],
     "Show_proloader": [

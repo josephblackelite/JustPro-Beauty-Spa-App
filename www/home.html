@@ -1,6 +1,23 @@
 <!-- Wappler include head-page="index.html" is="dmx-app" id="orderprompt" appConnect="local" framework7_6="With App Connect" framework7_icons="local" capacitor="local" components="{dmxSwiper:{},dmxFormatter:{},dmxSockets:{},dmxPreloader:{}}" bootstrap_icons="local" fontawesome_5="local" -->
 
 <div class="page page-home" path="/home" data-name="home" id="home">
+    <script is="dmx-flow" id="check_location" type="text/dmx-flow" autorun>[
+  {
+    wait: {delay: 2000}
+  },
+  {
+    condition: {
+      if: "{{!app.local_store.data.service_location}}",
+      then: {
+        steps: {
+          run: {
+            action: "{{app.local_store.set('service_location',app.main.home.providers.value)}}"
+          }
+        }
+      }
+    }
+  }
+]</script>
     <dmx-datetime id="var1"></dmx-datetime>
     <dmx-serverconnect id="queryServices" url="https://api.justpro.me/api/services/query_services" site="JustPro-Spa-Backend" dmx-param:category="app.local_store.data.state" sockets="true" dmx-on:start="app.showPreloader('deeporange')" dmx-on:done="app.hidePreloader()" dmx-param:product_delivery="app.main.home.providers.value"></dmx-serverconnect>
     <dmx-value id="popover_title"></dmx-value>
@@ -19,7 +36,7 @@
     <div class="padding-top padding-bottom" style="padding-top:30px !important; padding-bottom:40px !important">
         <div class="navbar no-hairline no-shadow no-border">
             <div class="navbar-inner" data-name="order-prompt">
-                <div class="subnavbar justify-content-right border-top" style="border-top:2px solid #ccc">
+                <div class="subnavbar justify-content-right border-top" style="border-top:2px solid #ccc" data-intro="Filter Services" data-title="Welcome!">
 
                     <div class="list" style="width:100%">
                         <ul>
@@ -111,17 +128,19 @@
             </h4>
         </div>
 
+
         <div class="list mt-0 up-20">
             <ul>
                 <li>
+                    <p class="mb-0 mt-0 small text-color-black block smallfont bottom-10">Where do you want to be served?</p>
                     <a class="item-link smart-select smart-select-init" data-open-in="sheet">
-                        <select name="providers" id="providers">
+                        <select name="providers" id="providers" dmx-on:changed="app.local_store.set('service_location',app.main.home.providers.value)" dmx-bind:value="app.local_store.data.service_location">
                             <option value="home" selected>Home</option>
                             <option value="salon">Salon</option>
                         </select>
                         <div class="item-content">
                             <div class="item-inner">
-                                <div class="item-title strong">Where do you want to be serviced?</div>
+                                <div class="item-title strong">Service Location</div>
                             </div>
                         </div>
                     </a>
@@ -132,9 +151,8 @@
 
 
         <div id="services" style="margin-bottom:130px !important">
-
             <div class="block mb-0" dmx-hide="app.main.home.queryServices.state.processing">
-                <h4 class="montserrat smallfont">{{app.main.home.queryServices.data.queryServices.count()}} {{app.local_store.data.state.titlecase()}} Services Available</h4>
+                <h4 class="montserrat smallfont">{{app.main.home.queryServices.data.queryServices.count()}} {{app.local_store.data.state.titlecase()}} Services offered <span dmx-show="(app.local_store.data.service_location == 'salon')">in</span><span dmx-show="(app.local_store.data.service_location == 'home')">at</span> {{app.main.home.providers.value.titlecase()}}</h4>
             </div>
 
             <!-- start card demo -->
@@ -180,4 +198,5 @@
 
 
     </div>
+
 </div>
