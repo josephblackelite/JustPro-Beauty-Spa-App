@@ -98,5 +98,9 @@
   "review-service.html": {
     "layoutPage": "",
     "description": ""
+  },
+  "provider-services-page.html": {
+    "layoutPage": "",
+    "description": ""
   }
 }
