@@ -32,7 +32,7 @@
         <div class="container">
 
             <div class="block">
-                <div class="list no-hairlines-md padding-top">
+                <div class="list no-hairlines-md up-20">
                     <ul>
 
                         <li class="item-content item-input item-input-outline">
@@ -58,7 +58,7 @@
 
             <div class="block">
                 <div class="row">
-                    <div class="col-auto padding elevation-1 margin-bottom" dmx-repeat:repeat_providers="app.main.chooseprofessional.list_providers.data.repeat_providers" dmx-show="(app.main.chooseprofessional.route.params.provider_type == 'home')">
+                    <div class="col-auto padding elevation-1 margin-bottom" dmx-repeat:repeat_providers="app.main.chooseprofessional.list_providers.data.repeat_providers" dmx-show="(app.local_store.data.service_location == 'home')">
                         <div class="style-1">
                             <div class="display-flex">
                                 <img src="assets/images/prince-akachi-J1OScm_uHUQ-unsplash.jpg" alt="" width="100" height="100" dmx-bind:src="provider_avatar">
@@ -73,7 +73,7 @@
 
                         </div>
                     </div>
-                    <div class="col-auto margin-bottom" dmx-repeat:repeat_providers="app.main.chooseprofessional.list_providers.data.repeat_providers" dmx-show="(app.main.chooseprofessional.route.params.provider_type == 'salon')">
+                    <div class="col-auto margin-bottom" dmx-repeat:repeat_providers="app.main.chooseprofessional.list_providers.data.repeat_providers" dmx-show="(app.local_store.data.service_location == 'salon')">
                         <div class="list accordion-list no-margin">
                             <ul is="dmx-repeat" id="repeat_staff" dmx-bind:repeat="list_salon_staff ">
                                 <li class="accordion-item">
