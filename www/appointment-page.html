@@ -35,7 +35,7 @@
 
             <a class="item-link list-button button-large rounded-xl button-6 bg-color-black button-fill text-color-white margin-right" style="width:100%" dmx-show="!app.main.appointmentpage.query_time_slots.data.query_slots" href="" dmx-on:click="run({runJS:{function:'back'}})">Change Provider</a>
 
-            <a class="item-link list-button button-large rounded-xl button-6 bg-color-primary button-fill text-color-white" style="width:100%" dmx-on:click="run({condition:{if:`app.main.appointmentpage.form.appointmentDate.value.toDate()`,then:{steps:[{run:{action:`app.Cart.update({provider_service_id: app.main.appointmentpage.route.params.provider_service_id},{appointment_date: app.main.appointmentpage.form.appointmentDate.value.toDate(), timeSlot_start: app.main.appointmentpage.appointment_timeStart.value, timeSlot_end: app.main.appointmentpage.appointment_timeEnd.value})`}},{run:{action:`app.main.navigate(\'/order-confirmation\',{})`}}]},else:{steps:{'f7.dialog.alert':{title:'Appointment Date',text:'Please select an appointment date.'}}}}})" dmx-hide="!app.main.appointmentpage.query_time_slots.data.query_slots">Checkout &nbsp;<i class="bi-arrow-right-circle-fill"></i></a>
+            <a class="item-link list-button button-large rounded-xl button-6 bg-color-primary button-fill text-color-white" style="width:100%" dmx-on:click="run({condition:{if:`app.main.appointmentpage.form.appointmentDate.value.toDate()`,then:{steps:[{run:{action:`app.Cart.update({provider_service_id: app.main.appointmentpage.route.params.provider_service_id.toNumber()},{appointment_date: app.main.appointmentpage.form.appointmentDate.value.toDate(), timeSlot_start: app.main.appointmentpage.appointment_timeStart.value, timeSlot_end: app.main.appointmentpage.appointment_timeEnd.value})`}},{run:{action:`app.main.navigate(\'/order-confirmation\',{})`}}]},else:{steps:{'f7.dialog.alert':{title:'Appointment Date',text:'Please select an appointment date.'}}}}})" dmx-hide="!app.main.appointmentpage.query_time_slots.data.query_slots">Checkout &nbsp;<i class="bi-arrow-right-circle-fill"></i></a>
         </div>
     </div>
     <div class="page-content content-area wappler-block">
@@ -67,8 +67,8 @@
                             </div>
                         </div>
                     </div>
-                    <p dmx-show="!app.main.appointmentpage.query_time_slots.data.query_slots">
-                    <h5>Unfortunately, this provider is fully booked for {{app.main.appointmentpage.form.appointmentDate.value.formatDate('dd MMMM y')}}. You can select another date or pick another professional </h5>
+                    <p>
+                    <h5 dmx-show="(!app.main.appointmentpage.query_time_slots.data.query_slots &amp;&amp; app.main.appointmentpage.form.appointmentDate.value)">Unfortunately, this provider is fully booked for {{app.main.appointmentpage.form.appointmentDate.value.formatDate('dd MMMM y')}}. You can select another date or pick another professional </h5>
                     </p>
                 </div>
             </div>

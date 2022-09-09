@@ -1,6 +1,6 @@
 <!-- Wappler include head-page="index.html" is="dmx-app" id="providerservicespage" appConnect="local" framework7_6="With App Connect" framework7_icons="local" capacitor="local" -->
 
-<div class="page" path="/provider-services-page/:provider_id/:category" data-name="provider-services-page" id="providerservicespage">
+<div class="page" path="/provider-services-page/:provider_id/:provider_name/:category?" data-name="provider-services-page" id="providerservicespage">
     <dmx-serverconnect id="queryProviderServices" url="https://api.justpro.me/api/provider/list_provider_services_4_category" site="JustPro-Spa-Backend" dmx-param:provider_id="app.main.providerservicespage.route.params.provider_id" dmx-param:category="app.main.providerservicespage.route.params.category"></dmx-serverconnect>
     <div class="padding-top padding-bottom">
         <div class="navbar shadow">
@@ -12,7 +12,7 @@
 
                 </div>
 
-                <div class="title" dmx-text="app.main.providerservicespage.route.params.category.capitalize()+' Providers'">Appointment</div>
+                <div class="title" dmx-text="app.main.providerservicespage.route.params.provider_name.capitalize()">Appointment</div>
                 <div class="right">
                     <a href="#" class="link panel-open icon-only" data-panel="left">
 

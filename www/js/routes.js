@@ -105,7 +105,7 @@ var routes = [
     "url": "./review-service.html"
   },
   {
-    "path": "/provider-services-page/:provider_id/:category?",
+    "path": "/provider-services-page/:provider_id/:provider_name/:category?",
     "url": "./provider-services-page.html"
   },
   {
