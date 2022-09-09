@@ -1,0 +1,60 @@
+<!-- Wappler include head-page="index.html" is="dmx-app" id="provideremployee4service" appConnect="local" framework7_6="With App Connect" framework7_icons="local" capacitor="local" components="{dmxSockets:{}}" -->
+
+<div class="page" path="/provider-employee-4-service/:service_id/:parent_provider_id" data-name="provider-employee-4-service" id="provideremployee4service">
+  <dmx-serverconnect id="list_employees" url="https://api.justpro.me/api/provider/list_provider_employees_4_service" site="JustPro-Spa-Backend" dmx-param:service_id="app.main.provideremployee4service.route.params.service_id" dmx-param:parent_provider_id="app.main.provideremployee4service.route.params.parent_provider_id" sockets="true"></dmx-serverconnect>
+  <div class="padding-top padding-bottom">
+    <div class="navbar shadow">
+      <div class="navbar-inner" style="padding-right:0px !important; padding-left:0px !important; margin-right:0px !important">
+        <div class="left">
+          <a href="#" class="link back">
+            <i class="icon f7-icons">arrow_left</i>
+          </a>
+
+        </div>
+
+        <div class="title">Services</div>
+        <div class="right">
+          <a href="#" class="link panel-open icon-only" data-panel="left">
+
+            <i class="icon f7-icons">ellipsis_vertical</i>
+          </a>
+        </div>
+      </div>
+    </div>
+
+  </div>
+  <div class="page-content location-wraper newbg">
+    <div id="services" style="margin-bottom:130px !important">
+      <div class="block mb-0" dmx-hide="app.main.home.queryServices.state.processing">
+        <h4 class="montserrat smallfont">Choose a professional</h4>
+      </div>
+
+      <!-- start card demo -->
+      <div class="row no-gap">
+        <div class="col-50" dmx-hide="app.main.provideremployee4service.list_employees.state.processing" dmx-repeat:repeat_provider_employees="app.main.provideremployee4service.list_employees.data.queryEmployees">
+          <div class="card demo-card-header-pic no-shadow card-outline border-10" dmx-on:click="app.main.navigate('/provider-employee-4-service/'+service_id+'/'+app.main.providerservicespage.route.params.provider_id,{})">
+            <div class="card-header align-items-flex-end" dmx-style:background-image="'url('+provider_avatar+')'" style="height:256px; background-position:bottom">
+              <span style="font-size:22px; text-transform:capitalize; strong" class="tajawal"> {{staff_name.capitalize()}}</span>
+
+            </div>
+            <div class="card-footer no-border bg-transparent" style="padding-top:-210px !important; height:40px !important">
+              <div class="row">
+                <div class="col-100">
+                  <h4 class="strong tajawal text-color-black"> {{staff_name.capitalize()}}
+                    <!--<small dmx-show="amount_matrix" class="smallfont"> {{amount_matrix}} </small>-->
+                  </h4>
+                </div>
+                <!-- <div class="col-100">
+                                              <a class="link button-4 brand-bg text-color-white" dmx-on:click="app.main.navigate('/product-info/'+id,{})">Book Now</a>
+                                          </div> -->
+              </div>
+
+            </div>
+          </div>
+
+        </div>
+
+      </div>
+    </div>
+  </div>
+</div>

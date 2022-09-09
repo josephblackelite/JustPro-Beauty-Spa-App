@@ -1026,5 +1026,44 @@ dmx.config({
       ],
       "outputType": "array"
     }
+  },
+  "provideremployee4service": {
+    "repeat_provider_employee": {
+      "meta": [
+        {
+          "type": "text",
+          "name": "staff_name"
+        },
+        {
+          "type": "text",
+          "name": "provider_avatar"
+        },
+        {
+          "type": "number",
+          "name": "provider_availability"
+        },
+        {
+          "type": "text",
+          "name": "provider_email"
+        },
+        {
+          "type": "text",
+          "name": "provider_phone_number"
+        },
+        {
+          "type": "number",
+          "name": "skill_rating"
+        },
+        {
+          "type": "text",
+          "name": "job_title"
+        },
+        {
+          "type": "number",
+          "name": "id"
+        }
+      ],
+      "outputType": "array"
+    }
   }
 });

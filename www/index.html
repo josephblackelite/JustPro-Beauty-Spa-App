@@ -2,124 +2,124 @@
 <html dir="ltr">
 
 <head>
-    <script src="dmxAppConnect/dmxAppConnect.js"></script>
-    <meta charset="UTF-8">
-    <title>Untitled Document</title>
-    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.22.2/moment.min.js" integrity="sha256-CutOzxCRucUsn6C6TcEYsauvvYilEniTXldPa6/wu0k=" crossorigin="anonymous"></script>
-    <script src="https://api.justpro.me/socket.io/socket.io.js" defer></script>
-    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no, viewport-fit=cover">
-    <meta name="mobile-web-app-capable" content="yes">
-    <meta name="apple-mobile-web-app-capable" content="yes">
-    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-    <meta name="format-detection" content="telephone=no">
-    <meta name="msapplication-tap-highlight" content="no">
-    <meta http-equiv="Content-Security-Policy" content="default-src * 'self' 'unsafe-inline' 'unsafe-eval' data: gap: content:">
-    <link rel="stylesheet" href="dmxFramework7_icons/css/framework7-icons.css" />
+  <script src="dmxAppConnect/dmxAppConnect.js"></script>
+  <meta charset="UTF-8">
+  <title>Untitled Document</title>
+  <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.22.2/moment.min.js" integrity="sha256-CutOzxCRucUsn6C6TcEYsauvvYilEniTXldPa6/wu0k=" crossorigin="anonymous"></script>
+  <script src="https://api.justpro.me/socket.io/socket.io.js" defer></script>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no, viewport-fit=cover">
+  <meta name="mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="format-detection" content="telephone=no">
+  <meta name="msapplication-tap-highlight" content="no">
+  <meta http-equiv="Content-Security-Policy" content="default-src * 'self' 'unsafe-inline' 'unsafe-eval' data: gap: content:">
+  <link rel="stylesheet" href="dmxFramework7_icons/css/framework7-icons.css" />
 
-    <script src="capacitor.js"></script>
+  <script src="capacitor.js"></script>
 
-    <script src="dmxAppConnect/dmxSwiper/dmxSwiper.js" defer></script>
-    <script src="dmxAppConnect/dmxSwiper/swiper.min.js" defer></script>
-    <link rel="stylesheet" href="dmxAppConnect/dmxSlideshow/dmxSlideshow.css" />
-    <link rel="stylesheet" href="dmxAppConnect/dmxSwiper/themes/default.css" />
-
-
-    <!-- Google sign in -->
-    <meta name="google-signin-client_id" content="907397645441-ojrqmb5i4ujgjg1gi9ps16juujlmt37o.apps.googleusercontent.com" />
-    <meta name="google-signin-scope" content="profile email" />
+  <script src="dmxAppConnect/dmxSwiper/dmxSwiper.js" defer></script>
+  <script src="dmxAppConnect/dmxSwiper/swiper.min.js" defer></script>
+  <link rel="stylesheet" href="dmxAppConnect/dmxSlideshow/dmxSlideshow.css" />
+  <link rel="stylesheet" href="dmxAppConnect/dmxSwiper/themes/default.css" />
 
 
-    <link rel="stylesheet" href="dmxAppConnect/dmxDatePicker/daterangepicker.min.css" />
-    <script src="dmxAppConnect/dmxDatePicker/daterangepicker.min.js" defer></script>
-    <link rel="stylesheet" href="dmxAppConnect/dmxDatePicker/dmxDatePicker.css" />
-    <script src="dmxAppConnect/dmxDatePicker/dmxDatePicker.js" defer></script>
+  <!-- Google sign in -->
+  <meta name="google-signin-client_id" content="907397645441-ojrqmb5i4ujgjg1gi9ps16juujlmt37o.apps.googleusercontent.com" />
+  <meta name="google-signin-scope" content="profile email" />
 
 
-    <link rel="stylesheet" href="../dmxAppConnect/dmxDatePicker/bgthemes/dark-calendar.css" />
-    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDLjn3oBBJGgvLSneVWJtOnk5e5CA4UGVQ&amp;libraries=places"></script>
-    <script src="dmxAppConnect/dmxGoogleMaps/dmxGoogleMaps.js" defer></script>
-    <script src="dmxAppConnect/dmxStateManagement/dmxStateManagement.js" defer></script>
-    <script src="dmxAppConnect/dmxFormatter/dmxFormatter.js" defer></script>
-
-    <script src="socket.io/socket.io.js" defer></script>
-    <script src="dmxAppConnect/dmxSockets/dmxSockets.js" defer></script>
-    <script src="dmxAppConnect/dmxScheduler/dmxScheduler.js" defer></script>
-    <link rel="stylesheet" href="dmxAppConnect/dmxValidator/dmxValidator.css" />
-    <script src="dmxAppConnect/dmxValidator/dmxValidator.js" defer></script>
-    <!-- Google Fonts -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Arizonia&family=Maven+Pro&family=Montserrat&family=Tajawal:wght@200;300;400;500&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="Framework7/6/css/framework7-bundle.min.css" />
-    <script src="Framework7/6/js/framework7-bundle.min.js"></script>
-    <script src="js/routes.js"></script>
-    <script src="dmxAppConnect/dmxFramework7_6/dmxFramework7_6.js" defer></script>
-    <link rel="stylesheet" href="css/bootstrap-icons.css" />
-    <link rel="stylesheet" href="fontawesome5/css/all.min.css" />
-    <!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.0.1/css/bootstrap.min.css" integrity="sha512-Ez0cGzNzHR1tYAv56860NLspgUGuQw16GiOOp/I2LuTmpSK9xDXlgJz3XN4cnpXWDmkNBKXR/VDMTCnAaEooxA==" crossorigin="anonymous" referrerpolicy="no-referrer" /> -->
-    <!-- Style css -->
-    <link rel="stylesheet" href="css/perfect-scrollbar.css">
-    <link rel="stylesheet" href="css/line-awesome/css/line-awesome.min.css">
-    <link rel="stylesheet" href="css/app.css">
-    <link rel="stylesheet" href="css/style.css" />
-    <script src="dmxAppConnect/dmxLazyLoad/dmxLazyLoad.js" defer></script>
-    <script src="dmxAppConnect/dmxLazyLoad/lazysizes.min.js" defer></script>
-    <script src="dmxAppConnect/dmxGooglePlaces/dmxGooglePlaces.js" defer></script>
-    <link rel="stylesheet" href="dmxAppConnect/dmxDropzone/dmxDropzone.css" />
-    <script src="dmxAppConnect/dmxDropzone/dmxDropzone.js" defer></script>
-    <script src="dmxAppConnect/dmxDatastore/dmxDatastore.js" defer></script>
-    <link rel="stylesheet" href="dmxAppConnect/dmxPreloader/dmxPreloader.css" />
-    <script src="dmxAppConnect/dmxPreloader/dmxPreloader.js" defer></script>
-    <link rel="stylesheet" href="https://unpkg.com/@fullcalendar/core@4.4.2/main.min.css" />
-    <script src="https://unpkg.com/@fullcalendar/core@4.4.2/main.min.js" defer></script>
-    <script src="https://unpkg.com/@fullcalendar/core@4.4.2/locales-all.min.js" defer></script>
-    <script src="https://unpkg.com/@fullcalendar/interaction@4.4.2/main.min.js" defer></script>
-    <script src="https://unpkg.com/@fullcalendar/daygrid@4.4.2/main.min.js" defer></script>
-    <script src="dmxAppConnect/dmxCalendar/dmxCalendar.js" defer></script>
-    <script src="https://unpkg.com/@fullcalendar/google-calendar@4.4.2/main.min.js" defer></script>
-    <script src="dmxAppConnect/dmxFormRepeat/dmxFormRepeat.js" defer></script>
-    <script src="https://js.stripe.com/v3/" defer></script>
-    <script src="dmxAppConnect/dmxStripe/dmxStripe.js" defer></script>
-    <script src="https://cdn.jsdelivr.net/npm/sortablejs@1/Sortable.min.js"></script>
+  <link rel="stylesheet" href="dmxAppConnect/dmxDatePicker/daterangepicker.min.css" />
+  <script src="dmxAppConnect/dmxDatePicker/daterangepicker.min.js" defer></script>
+  <link rel="stylesheet" href="dmxAppConnect/dmxDatePicker/dmxDatePicker.css" />
+  <script src="dmxAppConnect/dmxDatePicker/dmxDatePicker.js" defer></script>
 
 
-    <script src="dmxAppConnect/dmxSlideshow/dmxSlideshow.js" defer></script>
-    <link rel="stylesheet" href="dmxAppConnect/dmxSlideshow/themes/default.css" />
+  <link rel="stylesheet" href="../dmxAppConnect/dmxDatePicker/bgthemes/dark-calendar.css" />
+  <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDLjn3oBBJGgvLSneVWJtOnk5e5CA4UGVQ&amp;libraries=places"></script>
+  <script src="dmxAppConnect/dmxGoogleMaps/dmxGoogleMaps.js" defer></script>
+  <script src="dmxAppConnect/dmxStateManagement/dmxStateManagement.js" defer></script>
+  <script src="dmxAppConnect/dmxFormatter/dmxFormatter.js" defer></script>
+
+  <script src="socket.io/socket.io.js" defer></script>
+  <script src="dmxAppConnect/dmxSockets/dmxSockets.js" defer></script>
+  <script src="dmxAppConnect/dmxScheduler/dmxScheduler.js" defer></script>
+  <link rel="stylesheet" href="dmxAppConnect/dmxValidator/dmxValidator.css" />
+  <script src="dmxAppConnect/dmxValidator/dmxValidator.js" defer></script>
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Arizonia&family=Maven+Pro&family=Montserrat&family=Tajawal:wght@200;300;400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="Framework7/6/css/framework7-bundle.min.css" />
+  <script src="Framework7/6/js/framework7-bundle.min.js"></script>
+  <script src="js/routes.js"></script>
+  <script src="dmxAppConnect/dmxFramework7_6/dmxFramework7_6.js" defer></script>
+  <link rel="stylesheet" href="css/bootstrap-icons.css" />
+  <link rel="stylesheet" href="fontawesome5/css/all.min.css" />
+  <!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.0.1/css/bootstrap.min.css" integrity="sha512-Ez0cGzNzHR1tYAv56860NLspgUGuQw16GiOOp/I2LuTmpSK9xDXlgJz3XN4cnpXWDmkNBKXR/VDMTCnAaEooxA==" crossorigin="anonymous" referrerpolicy="no-referrer" /> -->
+  <!-- Style css -->
+  <link rel="stylesheet" href="css/perfect-scrollbar.css">
+  <link rel="stylesheet" href="css/line-awesome/css/line-awesome.min.css">
+  <link rel="stylesheet" href="css/app.css">
+  <link rel="stylesheet" href="css/style.css" />
+  <script src="dmxAppConnect/dmxLazyLoad/dmxLazyLoad.js" defer></script>
+  <script src="dmxAppConnect/dmxLazyLoad/lazysizes.min.js" defer></script>
+  <script src="dmxAppConnect/dmxGooglePlaces/dmxGooglePlaces.js" defer></script>
+  <link rel="stylesheet" href="dmxAppConnect/dmxDropzone/dmxDropzone.css" />
+  <script src="dmxAppConnect/dmxDropzone/dmxDropzone.js" defer></script>
+  <script src="dmxAppConnect/dmxDatastore/dmxDatastore.js" defer></script>
+  <link rel="stylesheet" href="dmxAppConnect/dmxPreloader/dmxPreloader.css" />
+  <script src="dmxAppConnect/dmxPreloader/dmxPreloader.js" defer></script>
+  <link rel="stylesheet" href="https://unpkg.com/@fullcalendar/core@4.4.2/main.min.css" />
+  <script src="https://unpkg.com/@fullcalendar/core@4.4.2/main.min.js" defer></script>
+  <script src="https://unpkg.com/@fullcalendar/core@4.4.2/locales-all.min.js" defer></script>
+  <script src="https://unpkg.com/@fullcalendar/interaction@4.4.2/main.min.js" defer></script>
+  <script src="https://unpkg.com/@fullcalendar/daygrid@4.4.2/main.min.js" defer></script>
+  <script src="dmxAppConnect/dmxCalendar/dmxCalendar.js" defer></script>
+  <script src="https://unpkg.com/@fullcalendar/google-calendar@4.4.2/main.min.js" defer></script>
+  <script src="dmxAppConnect/dmxFormRepeat/dmxFormRepeat.js" defer></script>
+  <script src="https://js.stripe.com/v3/" defer></script>
+  <script src="dmxAppConnect/dmxStripe/dmxStripe.js" defer></script>
+  <script src="https://cdn.jsdelivr.net/npm/sortablejs@1/Sortable.min.js"></script>
+
+
+  <script src="dmxAppConnect/dmxSlideshow/dmxSlideshow.js" defer></script>
+  <link rel="stylesheet" href="dmxAppConnect/dmxSlideshow/themes/default.css" />
 </head>
 
 <body is="dmx-app" id="index">
 
 
-    <style>
-        @import url('https://fonts.googleapis.com/css2?family=Maven+Pro&display=swap');
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Maven+Pro&display=swap');
 
-        body {
-            font-family: 'Maven Pro', sans-serif !important;
-        }
+    body {
+      font-family: 'Maven Pro', sans-serif !important;
+    }
 
-        .bg-color-primary {
-            background-image: url(assets/images/bg-style.png);
-            background-size: cover !important;
-        }
-    </style>
-
-
+    .bg-color-primary {
+      background-image: url(assets/images/bg-style.png);
+      background-size: cover !important;
+    }
+  </style>
 
 
 
 
 
 
-    <div id="app" is="dmx-f7-app" theme="md">
-
-        <!-- Statusbar overlay -->
 
 
-        <dmx-local-manager id=" local_store">
-        </dmx-local-manager>
+  <div id="app" is="dmx-f7-app" theme="md">
 
-        <script is="dmx-flow" id="Redirect_to_login_or_home" type="text/dmx-flow" autorun>{
+    <!-- Statusbar overlay -->
+
+
+    <dmx-local-manager id=" local_store">
+    </dmx-local-manager>
+
+    <script is="dmx-flow" id="Redirect_to_login_or_home" type="text/dmx-flow" autorun>{
   condition: {
     if: "{{local_store.data.user_id}}",
     then: {
@@ -144,19 +144,19 @@
     }
   }
 }</script>
-        <dmx-serverconnect id="Current_user" url="https://api.justpro.me/api/security/logged_in_user_data" site="JustPro-Spa-Backend" dmx-param:user_id="local_store.data.user_id" sockets="true"></dmx-serverconnect>
-        <dmx-serverconnect id="customers_orders" url="https://api.justpro.me/api/customer_orders/list_orders" site="JustPro-Spa-Backend" dmx-param:customer_id="Current_user.data.customer.id" sockets="true" dmx-on:start="app.showPreloader('purple')" dmx-on:done="app.hidePreloader()"></dmx-serverconnect>
-        <dmx-datastore id="Cart"></dmx-datastore>
+    <dmx-serverconnect id="Current_user" url="https://api.justpro.me/api/security/logged_in_user_data" site="JustPro-Spa-Backend" dmx-param:user_id="local_store.data.user_id" sockets="true"></dmx-serverconnect>
+    <dmx-serverconnect id="customers_orders" url="https://api.justpro.me/api/customer_orders/list_orders" site="JustPro-Spa-Backend" dmx-param:customer_id="Current_user.data.customer.id" sockets="true" dmx-on:start="app.showPreloader('purple')" dmx-on:done="app.hidePreloader()"></dmx-serverconnect>
+    <dmx-datastore id="Cart"></dmx-datastore>
 
 
-        <dmx-json-datasource id="countryList" is="dmx-serverconnect" url="countryList.json"></dmx-json-datasource>
-        <dmx-value id="service_category" dmx-bind:value="'massage'"></dmx-value>
-        <dmx-value id="panelLinkClassToggle" dmx-bind:value="'home'"></dmx-value>
-        <dmx-value id="otp_id"></dmx-value>
+    <dmx-json-datasource id="countryList" is="dmx-serverconnect" url="countryList.json"></dmx-json-datasource>
+    <dmx-value id="service_category" dmx-bind:value="'massage'"></dmx-value>
+    <dmx-value id="panelLinkClassToggle" dmx-bind:value="'home'"></dmx-value>
+    <dmx-value id="otp_id"></dmx-value>
 
 
-        <dmx-value id="cartQtyVal" dmx-bind:value="0"></dmx-value><input id="STRIPE_CARD_SETUP" name="text1" type="hidden">
-        <script is="dmx-flow" id="App_notifcation" type="text/dmx-flow">{
+    <dmx-value id="cartQtyVal" dmx-bind:value="0"></dmx-value><input id="STRIPE_CARD_SETUP" name="text1" type="hidden">
+    <script is="dmx-flow" id="App_notifcation" type="text/dmx-flow">{
           meta: {
             $param: [
               {type: "text", name: "title"},
@@ -176,7 +176,7 @@
           }
         }</script>
 
-        <script is="dmx-flow" id="Show_proloader" type="text/dmx-flow">{
+    <script is="dmx-flow" id="Show_proloader" type="text/dmx-flow">{
   meta: {
     $param: [
       {type: "text", name: "title"},
@@ -192,62 +192,62 @@
     }
   }
 }</script>
-        <script is="dmx-flow" id="hideSplashScreen" type="text/dmx-flow">{
+    <script is="dmx-flow" id="hideSplashScreen" type="text/dmx-flow">{
   runJS: {function: "hideSplashScreen"}
 }</script>
-        <div class="statusbar"></div>
+    <div class="statusbar"></div>
 
-        <!-- Sidebar Nav -->
-        <div class="panel panel-left panel-resizable panel-init sidebar-left panel-reveal bg-color-white">
-            <div class="page bg-color-white">
-                <div class="page-content bg-color-white">
-                    <div class="sidebar-menu">
-                        <div class="main-logo left">
+    <!-- Sidebar Nav -->
+    <div class="panel panel-left panel-resizable panel-init sidebar-left panel-reveal bg-color-white">
+      <div class="page bg-color-white">
+        <div class="page-content bg-color-white">
+          <div class="sidebar-menu">
+            <div class="main-logo left">
 
-                            <div class="logo-content">
-                                <h2 class="logo-name"><img src="assets/images/logo.png"></h2>
-                            </div>
-                        </div>
-                        <a href="#" class="panel-close">
-                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                <rect x="2" y="18.7509" width="23.6893" height="3.55339" rx="1.7767" transform="rotate(-45 2 18.7509)" fill="#5F5F5F" />
-                                <rect width="23.6893" height="3.55339" rx="1.7767" transform="matrix(-0.707107 -0.707107 -0.707107 0.707107 21.2634 18.7509)" fill="#5F5F5F" />
-                            </svg>
-                        </a>
-                        <div class="nav-bar list menu-list dz-list">
-                            <ul>
-                                <li>
-                                    <a class="item-link" dmx-on:click="run([{run:{action:`app.main.navigate(\'/home\',{});app.panelLinkClassToggle.setValue(\'home\')`}},{runJS:{function:'hidePanel'}}])" dmx-class:item-selected="(panelLinkClassToggle.value == 'home')">
-                                        <i class="bi bi-house-fill"></i>
-                                        <span>Home</span>
-                                    </a>
-                                </li>
-                                <li>
-                                    <a class="item-link" dmx-on:click="run([{run:{action:`app.main.navigate(\'/orders\',{});app.panelLinkClassToggle.setValue(\'orders\')`}},{runJS:{function:'hidePanel'}}])" dmx-class:item-selected="(panelLinkClassToggle.value == 'orders')">
-                                        <i class="bi bi-person-fill"></i>
-                                        <span class="">Appointments</span>
-                                    </a>
-                                </li>
+              <div class="logo-content">
+                <h2 class="logo-name"><img src="assets/images/logo.png"></h2>
+              </div>
+            </div>
+            <a href="#" class="panel-close">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <rect x="2" y="18.7509" width="23.6893" height="3.55339" rx="1.7767" transform="rotate(-45 2 18.7509)" fill="#5F5F5F" />
+                <rect width="23.6893" height="3.55339" rx="1.7767" transform="matrix(-0.707107 -0.707107 -0.707107 0.707107 21.2634 18.7509)" fill="#5F5F5F" />
+              </svg>
+            </a>
+            <div class="nav-bar list menu-list dz-list">
+              <ul>
+                <li>
+                  <a class="item-link" dmx-on:click="run([{run:{action:`app.main.navigate(\'/home\',{});app.panelLinkClassToggle.setValue(\'home\')`}},{runJS:{function:'hidePanel'}}])" dmx-class:item-selected="(panelLinkClassToggle.value == 'home')">
+                    <i class="bi bi-house-fill"></i>
+                    <span>Home</span>
+                  </a>
+                </li>
+                <li>
+                  <a class="item-link" dmx-on:click="run([{run:{action:`app.main.navigate(\'/orders\',{});app.panelLinkClassToggle.setValue(\'orders\')`}},{runJS:{function:'hidePanel'}}])" dmx-class:item-selected="(panelLinkClassToggle.value == 'orders')">
+                    <i class="bi bi-person-fill"></i>
+                    <span class="">Appointments</span>
+                  </a>
+                </li>
 
-                                <li>
-                                    <a class="item-link" dmx-on:click="run([{run:{action:`app.main.navigate(\'/profile\',{});app.panelLinkClassToggle.setValue(\'profile\')`}},{runJS:{function:'hidePanel'}}])" dmx-class:item-selected="(panelLinkClassToggle.value == 'profile')">
-                                        <i class="bi bi-person-fill"></i>
-                                        <span>Profile</span>
-                                    </a>
-                                </li>
-                                <li>
-                                    <a class="item-link" dmx-on:click="run([{run:{action:`app.main.navigate(\'/billing\',{});app.panelLinkClassToggle.setValue(\'billing\')`}},{runJS:{function:'hidePanel'}}])" dmx-class:item-selected="(panelLinkClassToggle.value == 'billing')">
-                                        <i class="bi bi-credit-card"></i>
-                                        <span>Payments</span>
-                                    </a>
-                                </li>
-                                <li>
-                                    <a class="item-link" dmx-on:click="run([{run:{action:`app.main.navigate(\'/customer-addresses\',{});app.panelLinkClassToggle.setValue(\'customer-addresses\')`}},{runJS:{function:'hidePanel'}}])" dmx-class:item-selected="(panelLinkClassToggle.value == 'customer-addresses')">
-                                        <i class="bi bi-geo-alt-fill"></i>
-                                        <span>My Address(es)</span>
-                                    </a>
-                                </li>
-                                <!-- <li>
+                <li>
+                  <a class="item-link" dmx-on:click="run([{run:{action:`app.main.navigate(\'/profile\',{});app.panelLinkClassToggle.setValue(\'profile\')`}},{runJS:{function:'hidePanel'}}])" dmx-class:item-selected="(panelLinkClassToggle.value == 'profile')">
+                    <i class="bi bi-person-fill"></i>
+                    <span>Profile</span>
+                  </a>
+                </li>
+                <li>
+                  <a class="item-link" dmx-on:click="run([{run:{action:`app.main.navigate(\'/billing\',{});app.panelLinkClassToggle.setValue(\'billing\')`}},{runJS:{function:'hidePanel'}}])" dmx-class:item-selected="(panelLinkClassToggle.value == 'billing')">
+                    <i class="bi bi-credit-card"></i>
+                    <span>Payments</span>
+                  </a>
+                </li>
+                <li>
+                  <a class="item-link" dmx-on:click="run([{run:{action:`app.main.navigate(\'/customer-addresses\',{});app.panelLinkClassToggle.setValue(\'customer-addresses\')`}},{runJS:{function:'hidePanel'}}])" dmx-class:item-selected="(panelLinkClassToggle.value == 'customer-addresses')">
+                    <i class="bi bi-geo-alt-fill"></i>
+                    <span>My Address(es)</span>
+                  </a>
+                </li>
+                <!-- <li>
                                     <a class="item-link" dmx-on:click="run([{run:{action:`app.main.navigate(\'/message-list\',{});app.panelLinkClassToggle.setValue(\'message-list\')`}},{runJS:{function:'hidePanel'}}])" dmx-class:item-selected="(panelLinkClassToggle.value == 'message-list')">
                                         <svg height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
                                             <path d="m12 22a9.941 9.941 0 0 0 4.924-1.3l3.76 1.253a.987.987 0 0 0 .316.047 1 1 0 0 0 .948-1.316l-1.248-3.76a9.995 9.995 0 1 0 -8.7 5.076zm0-18a7.989 7.989 0 0 1 6.757 12.269 1 1 0 0 0 -.1.851l.766 2.3-2.3-.766a.991.991 0 0 0 -.851.1 8 8 0 1 1 -4.272-14.754z" />
@@ -257,43 +257,43 @@
                                         <span>Message</span>
                                     </a>
                                 </li>-->
-                                <li>
+                <li>
 
-                                </li>
-                            </ul>
-                        </div>
-                    </div>
-                    <div class="sidebar-footer">
-                        <!-- <h5 class="name">Ombe Coffee App</h5> -->
-                        <p>App Version 1.1.0</p>
-                        <a href="" class="button rounded-xl button-fill color-red margin-top" dmx-on:click="run([{run:{action:`local_store.remove(\'user_id\')`}},{run:{action:`main.navigate(\'/\',{})`}},{runJS:{function:'hidePanel'}}])">Log out</a>
-                    </div>
-                </div>
+                </li>
+              </ul>
             </div>
+          </div>
+          <div class="sidebar-footer">
+            <!-- <h5 class="name">Ombe Coffee App</h5> -->
+            <p>App Version 1.1.0</p>
+            <a href="" class="button rounded-xl button-fill color-red margin-top" dmx-on:click="run([{run:{action:`local_store.remove(\'user_id\')`}},{run:{action:`main.navigate(\'/\',{})`}},{runJS:{function:'hidePanel'}}])">Log out</a>
+          </div>
         </div>
-        <!-- View Main -->
-        <div class="view view-main view-init safe-areas" id="main">
-            <div class="row no-gutters vh-100 overlay-secondary-dark loader-screen" style="background-image: url(assets/images/bg2.png);" dmx-on:click="">
-                <div class="col align-self-center text-white text-align-center">
-                    <div id="loading-area">
-                        <div class="logo-icon">
+      </div>
+    </div>
+    <!-- View Main -->
+    <div class="view view-main view-init safe-areas" id="main">
+      <div class="row no-gutters vh-100 overlay-secondary-dark loader-screen" style="background-image: url(assets/images/bg2.png);" dmx-on:click="">
+        <div class="col align-self-center text-white text-align-center">
+          <div id="loading-area">
+            <div class="logo-icon">
 
-                        </div>
-                        <h2 class="load-text">
-                            <span>j</span>
-                            <span>u</span>
-                            <span>s</span>
-                            <span>t</span>
-                            <span>p</span>
-                            <span>r</span>
-                            <span>o</span>
-                        </h2>
-                    </div>
-                </div>
             </div>
+            <h2 class="load-text">
+              <span>j</span>
+              <span>u</span>
+              <span>s</span>
+              <span>t</span>
+              <span>p</span>
+              <span>r</span>
+              <span>o</span>
+            </h2>
+          </div>
+        </div>
+      </div>
 
-            <div class="page welcome-screen" data-name="login" path="/" id="login">
-                <script is="dmx-flow" id="AddOneSignal_user_id" type="text/dmx-flow">{
+      <div class="page welcome-screen" data-name="login" path="/" id="login">
+        <script is="dmx-flow" id="AddOneSignal_user_id" type="text/dmx-flow">{
               meta: {
                 $param: [
                   {type: "text", name: "user_id"}
@@ -308,7 +308,7 @@
                 }
               }
             }</script>
-                <script is="dmx-flow" id="navigate_to_verify_otp" type="text/dmx-flow">{
+        <script is="dmx-flow" id="navigate_to_verify_otp" type="text/dmx-flow">{
               meta: {
                 $param: [
                   {type: "text", name: "user_id"}
@@ -329,7 +329,7 @@
               }
             }</script>
 
-                <!--  <script is="dmx-flow" id="submit_google_login_form" type="text/dmx-flow">[
+        <!--  <script is="dmx-flow" id="submit_google_login_form" type="text/dmx-flow">[
               {
                 wait: {delay: 2000}
               },
@@ -344,53 +344,53 @@
                 }
               }
             ]</script>-->
-                <div class="page-content wappler-block">
+        <div class="page-content wappler-block">
 
-                    <div class="container welcome-inner">
-                        <div class="text-align-center">
-                            <div class="main-logo center mb-10">
+          <div class="container welcome-inner">
+            <div class="text-align-center">
+              <div class="main-logo center mb-10">
 
-                                <h2 class="logo-name"><img src="assets/images/login-logo.png"></h2>
-                            </div>
-                            <h4 class="ma-0 text-color-primary strong montserrat">Full service mobile salon &amp; spa&nbsp;</h4>
-                        </div>
-                        <div class="clearfix pb-30">
-                            <form action="https://api.justpro.me/api/security/login_register_with_number" is="dmx-serverconnect-form" method="post" id="login_register_with_number" site="JustPro-Spa-Backend" dmx-on:invalid="run({'f7.dialog.alert':{title:'Error',text:`app.main.login.login_register_with_number.lastError.response`}})" dmx-on:success="run({condition:{if:`app.main.login.login_register_with_number.data.Logged_in_user_id`,then:{steps:[{run:{action:`app.local_store.set(\'user_id\',app.main.login.login_register_with_number.data.Logged_in_user_id)`}},{run:{action:`app.main.login.AddOneSignal_user_id.run()`}},{condition:{if:`(app.main.login.login_register_with_number.data.send_otp_for_login_user.api.data.status == \'open\')`,then:{steps:[{run:{action:`app.otp_id.setValue(app.main.login.login_register_with_number.data.send_otp_for_login_user.api.data.otp_id)`}},{run:{action:`app.main.login.navigate_to_verify_otp.run()`}}]},else:{steps:{run:{action:`app.main.navigate(\'/home\',{})`}}}}}]},else:{steps:[{run:{action:`app.local_store.set(\'user_id\',app.main.login.login_register_with_number.data.insert.identity)`}},{run:{action:`app.main.login.AddOneSignal_user_id.run()`}},{condition:{if:`(app.main.login.login_register_with_number.data.send_otp_for_new_user.api.data.status== \'open\')`,then:{steps:[{run:{action:`app.otp_id.setValue(app.main.login.login_register_with_number.data.send_otp_for_new_user.api.data.otp_id)`}},{run:{action:`app.main.login.navigate_to_verify_otp.run()`}}]},else:{steps:{run:{action:`app.main.navigate(\'/home\',{})`}}}}}]}}})">
-                                <div class="list">
-                                    <ul class="row">
-                                        <li class="item-content item-input col-100">
-                                            <div class="item-inner">
-                                                <div class="item-title item-label">Mobile number</div>
-                                                <div class="item-input-wrap row">
-                                                    <div class="col-30">
-                                                        <select id="country_code" class="form-control" name="country_code" dmx-bind:options="app.countryList.data" optiontext="code+' '+dial_code" optionvalue="code" dmx-bind:value="'AE'">
-                                                        </select>
-                                                    </div>
-                                                    <div class="col-70"><input type="number" placeholder="052 xxx xxxx" class="form-control" id="mobile_number" dmx-bind:value="app.Current_user.data.customer.phone_number" name="mobile_number" /></div>
-                                                </div>
-                                            </div>
-                                        </li>
-                                    </ul>
-                                </div>
-                                <button href="" class="button-large button-18 button-social rounded-xl button-fill mb-40" dmx-on:click="app.main.login.login_register_with_number.submit()" dmx-bind:disabled="app.main.login.login_register_with_number.state.executing" style="width:100% !important"><i class="bi-telephone-fill text-color-white" dmx-hide="app.main.login.login_register_with_number.state.executing"></i> <span dmx-hide="app.main.login.login_register_with_number.state.executing">Login With Mobile Number</span>
-                                    <div class="preloader color-white" dmx-show="app.main.login.login_register_with_number.state.executing"></div>
-
-                                </button>
-                            </form>
-                            <!-- dmx-on:click="run({runJS:{function:'loginWithFb'}})"-->
-                            <a href="/home" class="button-large button-18 button-social rounded-xl button-fill facebook" style="width:100% !important"><img src="img/social/facebook.png" alt=""> <span>Login with facebook</span></a>
-                            <form id="GoogleSignInForm" is="dmx-serverconnect-form" method="post" action="https://api.justpro.me/api/security/login_with_google" site="JustPro-Spa-Backend" dmx-on:success="run({condition:{if:`app.main.Login.GoogleSignInForm.data.set_new_user_id`,then:{steps:[{run:{action:`app.local_store.set(\'user_id\',app.main.login.GoogleSignInForm.data.set_new_user_id)`}},{run:{action:`app.main.login.AddOneSignal_user_id.run()`}},{run:{action:`app.main.navigate(\'/home\',{})`}}]},else:{steps:[{run:{action:`app.local_store.set(\'user_id\',app.main.login.GoogleSignInForm.data.set_login_user_id)`}},{run:{action:`app.main.login.AddOneSignal_user_id.run()`}},{run:{action:`app.main.navigate(\'/home\',{})`}}]}}})" dmx-on:error="run({'f7.dialog.alert':{title:'Error',text:'User not found, try other login methods.'}})"><input id="first_name" name="first_name" type="hidden"><input id="last_name" name="last_name" type="hidden"><input id="email" name="email" type="hidden"><input id="googleImgUrl" name="googleImgUrl" type="hidden"><input id="password" name="password" type="hidden">
-                                <input id="GoogleSignInFormLong" name="long" type="hidden" dmx-bind:value="geoLocation.coords.longitude">
-                                <input id="GoogleSignInFormLat" name="lat" type="hidden" dmx-bind:value="geoLocation.coords.latitude">
-                            </form>
-                            <button class="button-large button-18 button-social bg-color-white text-color-black rounded-xl button-outline google mt-15" dmx-on:click="run({runJS:{function:'googleSignIn'}})" dmx-bind:disabled="app.main.login.GoogleSignInForm.state.executing" style="width:100% !important"><img src="img/social/google-mail.png" alt="" dmx-hide="app.main.login.GoogleSignInForm.state.executing"> <span dmx-hide="app.main.login.GoogleSignInForm.state.executing">Login with Google</span>
-                                <div class="preloader color-purple" dmx-show="app.main.login.GoogleSignInForm.state.executing"></div>
-                            </button>
-                        </div>
-                    </div>
-                </div>
+                <h2 class="logo-name"><img src="assets/images/login-logo.png"></h2>
+              </div>
+              <h4 class="ma-0 text-color-primary strong montserrat">Full service mobile salon &amp; spa&nbsp;</h4>
             </div>
-            <!-- <div class="page page-onboading" data-name="index" path="/somepage" id="indexPage">
+            <div class="clearfix pb-30">
+              <form action="https://api.justpro.me/api/security/login_register_with_number" is="dmx-serverconnect-form" method="post" id="login_register_with_number" site="JustPro-Spa-Backend" dmx-on:invalid="run({'f7.dialog.alert':{title:'Error',text:`app.main.login.login_register_with_number.lastError.response`}})" dmx-on:success="run({condition:{if:`app.main.login.login_register_with_number.data.Logged_in_user_id`,then:{steps:[{run:{action:`app.local_store.set(\'user_id\',app.main.login.login_register_with_number.data.Logged_in_user_id)`}},{run:{action:`app.main.login.AddOneSignal_user_id.run()`}},{condition:{if:`(app.main.login.login_register_with_number.data.send_otp_for_login_user.api.data.status == \'open\')`,then:{steps:[{run:{action:`app.otp_id.setValue(app.main.login.login_register_with_number.data.send_otp_for_login_user.api.data.otp_id)`}},{run:{action:`app.main.login.navigate_to_verify_otp.run()`}}]},else:{steps:{run:{action:`app.main.navigate(\'/home\',{})`}}}}}]},else:{steps:[{run:{action:`app.local_store.set(\'user_id\',app.main.login.login_register_with_number.data.insert.identity)`}},{run:{action:`app.main.login.AddOneSignal_user_id.run()`}},{condition:{if:`(app.main.login.login_register_with_number.data.send_otp_for_new_user.api.data.status== \'open\')`,then:{steps:[{run:{action:`app.otp_id.setValue(app.main.login.login_register_with_number.data.send_otp_for_new_user.api.data.otp_id)`}},{run:{action:`app.main.login.navigate_to_verify_otp.run()`}}]},else:{steps:{run:{action:`app.main.navigate(\'/home\',{})`}}}}}]}}})">
+                <div class="list">
+                  <ul class="row">
+                    <li class="item-content item-input col-100">
+                      <div class="item-inner">
+                        <div class="item-title item-label">Mobile number</div>
+                        <div class="item-input-wrap row">
+                          <div class="col-30">
+                            <select id="country_code" class="form-control" name="country_code" dmx-bind:options="app.countryList.data" optiontext="code+' '+dial_code" optionvalue="code" dmx-bind:value="'AE'">
+                            </select>
+                          </div>
+                          <div class="col-70"><input type="number" placeholder="052 xxx xxxx" class="form-control" id="mobile_number" dmx-bind:value="app.Current_user.data.customer.phone_number" name="mobile_number" /></div>
+                        </div>
+                      </div>
+                    </li>
+                  </ul>
+                </div>
+                <button href="" class="button-large button-18 button-social rounded-xl button-fill mb-40" dmx-on:click="app.main.login.login_register_with_number.submit()" dmx-bind:disabled="app.main.login.login_register_with_number.state.executing" style="width:100% !important"><i class="bi-telephone-fill text-color-white" dmx-hide="app.main.login.login_register_with_number.state.executing"></i> <span dmx-hide="app.main.login.login_register_with_number.state.executing">Login With Mobile Number</span>
+                  <div class="preloader color-white" dmx-show="app.main.login.login_register_with_number.state.executing"></div>
+
+                </button>
+              </form>
+              <!-- dmx-on:click="run({runJS:{function:'loginWithFb'}})"-->
+              <a href="/home" class="button-large button-18 button-social rounded-xl button-fill facebook" style="width:100% !important"><img src="img/social/facebook.png" alt=""> <span>Login with facebook</span></a>
+              <form id="GoogleSignInForm" is="dmx-serverconnect-form" method="post" action="https://api.justpro.me/api/security/login_with_google" site="JustPro-Spa-Backend" dmx-on:success="run({condition:{if:`app.main.Login.GoogleSignInForm.data.set_new_user_id`,then:{steps:[{run:{action:`app.local_store.set(\'user_id\',app.main.login.GoogleSignInForm.data.set_new_user_id)`}},{run:{action:`app.main.login.AddOneSignal_user_id.run()`}},{run:{action:`app.main.navigate(\'/home\',{})`}}]},else:{steps:[{run:{action:`app.local_store.set(\'user_id\',app.main.login.GoogleSignInForm.data.set_login_user_id)`}},{run:{action:`app.main.login.AddOneSignal_user_id.run()`}},{run:{action:`app.main.navigate(\'/home\',{})`}}]}}})" dmx-on:error="run({'f7.dialog.alert':{title:'Error',text:'User not found, try other login methods.'}})"><input id="first_name" name="first_name" type="hidden"><input id="last_name" name="last_name" type="hidden"><input id="email" name="email" type="hidden"><input id="googleImgUrl" name="googleImgUrl" type="hidden"><input id="password" name="password" type="hidden">
+                <input id="GoogleSignInFormLong" name="long" type="hidden" dmx-bind:value="geoLocation.coords.longitude">
+                <input id="GoogleSignInFormLat" name="lat" type="hidden" dmx-bind:value="geoLocation.coords.latitude">
+              </form>
+              <button class="button-large button-18 button-social bg-color-white text-color-black rounded-xl button-outline google mt-15" dmx-on:click="run({runJS:{function:'googleSignIn'}})" dmx-bind:disabled="app.main.login.GoogleSignInForm.state.executing" style="width:100% !important"><img src="img/social/google-mail.png" alt="" dmx-hide="app.main.login.GoogleSignInForm.state.executing"> <span dmx-hide="app.main.login.GoogleSignInForm.state.executing">Login with Google</span>
+                <div class="preloader color-purple" dmx-show="app.main.login.GoogleSignInForm.state.executing"></div>
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- <div class="page page-onboading" data-name="index" path="/somepage" id="indexPage">
                 <div class="page-content" style="background-image:url(assets/images/bg.jpg)">
                     <div class="started-swiper-box">
                         <div data-pagination='{"el": ".swiper-pagination", "hideOnClick": true}' class="swiper-container swiper-init swiper-container-initialized swiper-container-horizontal get-started">
@@ -440,18 +440,18 @@
                 </div>
 
             </div> -->
-        </div>
-
-
-
-        <!-- Your main view, should have "view-main" class -->
     </div>
-    <script src="js/app.js"></script>
-    <script src="js/plugins.js"></script>
-    <script src="js/oneSignal.js"></script>
 
-    <script>
-        $$ = Dom7
+
+
+    <!-- Your main view, should have "view-main" class -->
+  </div>
+  <script src="js/app.js"></script>
+  <script src="js/plugins.js"></script>
+  <script src="js/oneSignal.js"></script>
+
+  <script>
+    $$ = Dom7
         console.log(window)
         // Create notification
         function createNotification(title, text) {
@@ -481,9 +481,9 @@
 function back() {
     Framework7.instance.views.main.router.back()
 }
-    </script>
-    <script>
-        let slideIndex = 1;
+  </script>
+  <script>
+    let slideIndex = 1;
         showSlides(slideIndex);
 
 function plusSlides(n) {
@@ -562,19 +562,19 @@ function showAddressSheet() {
     }
 
     console.log(window)
-    </script>
+  </script>
 
-    <script>
-        window.initAutoComplete = function() {
+  <script>
+    window.initAutoComplete = function() {
       		var acInputs = document.getElementById("inp_location");
       		var autocomplete = new google.maps.places.Autocomplete(acInputs);
       		google.maps.event.addListener(autocomplete, 'place_changed', function() {});
     	}
     
-    </script>
+  </script>
 
-    <script>
-        var today = new Date();
+  <script>
+    var today = new Date();
         var infinite = new Date().setDate(today.getDate() - 999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999);
         function runCalendar() {
 Framework7.instance.calendar.create({
@@ -589,10 +589,10 @@ to: today
 });
 }
 
-    </script>
+  </script>
 
-    <script>
-        var tourSteps = [
+  <script>
+    var tourSteps = [
         {
         step: 0,
         header: '1st Tour Step',
@@ -622,7 +622,7 @@ to: today
         console.log('Last step on guided tour');
         }
         }];
-    </script>
+  </script>
 
 </body>
 
