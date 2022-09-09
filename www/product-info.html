@@ -5,10 +5,10 @@
         font-weight: 600 !important;
     }
 </style>
-<div class="page" path="/product-info/:id" data-name="product-info" id="product_info">
+<div class="page" path="/product-info/:service_offered_id" data-name="product-info" id="product_info">
 
     <dmx-value id="varQty" dmx-bind:value="app.main.product_info.qty_form.quantity.value"></dmx-value>
-    <dmx-serverconnect id="service_info" url="https://api.justpro.me/api/services/service_info" site="JustPro-Spa-Backend" dmx-param:service_id="app.main.product_info.route.params.id" sockets="true"></dmx-serverconnect>
+    <dmx-serverconnect id="service_info" url="https://api.justpro.me/api/services/service_info" site="JustPro-Spa-Backend" dmx-param:service_id="app.main.product_info.route.params.id" sockets="true" dmx-param:service_offered_id="app.main.product_info.route.params.service_offered_id"></dmx-serverconnect>
 
 
     <script is="dmx-flow" id="ShowSlides" type="text/dmx-flow" autorun>[
@@ -52,7 +52,7 @@
     </div>
     <div class="toolbar toolbar-bottom toolbar-bottom-md no-shadow">
         <div class="toolbar-inner justify-content-center" style="padding:10px !important">
-            <a href="#!" class="item-link list-button button-large rounded-xl button-6 strong bg-color-primary button-fill text-color-white" dmx-on:click="run({condition:{if:`(app.main.product_info.qty_form.quantity.value >= 1)`,then:{steps:[{run:{action:`app.Cart.upsert({product_id: app.main.product_info.service_info.data.queryServices.id},{product_id: app.main.product_info.service_info.data.queryServices.id, product_stripe_id: app.main.product_info.service_info.data.queryServices.stripe_price_id, product_name: app.main.product_info.service_info.data.queryServices.product_name.capitalize(), product_quantity: product_quantity+app.main.product_info.varQty.value.toNumber(), product_amt: app.main.product_info.service_info.data.queryServices.product_amt, name: app.main.product_info.service_info.data.queryServices.product_name, quantity: app.main.product_info.qty_form.quantity.value.toNumber(), amount: app.main.product_info.service_info.data.queryServices.product_amt, matrix: app.main.product_info.qty_form.matrix.value, total: app.main.product_info.overall_total.value, vat: app.main.product_info.vat_amount.value, product_avatar: app.main.product_info.service_info.data.queryServices.product_avatar, customer_id: app.Current_user.data.customer.id, service_type: app.local_store.data.service_location})`}},{run:{action:`app.main.navigate(\'/choose-professional/\'+app.main.product_info.service_info.data.queryServices.id+\'/\'+app.local_store.data.service_location,{})`}}]},else:{steps:{'f7.dialog.alert':{text:'Please select the number of people that need this service.',title:'How many people?'}}}}})" dmx-show="app.main.product_info.service_info.data.queryServices" style="width:100%">Show providers</a>
+            <a href="#!" class="item-link list-button button-large rounded-xl button-6 strong bg-color-primary button-fill text-color-white" dmx-on:click="run({condition:{if:`(app.main.product_info.qty_form.quantity.value &gt;= 1)`,then:{steps:[{run:{action:`app.Cart.upsert({product_id: app.main.product_info.service_info.data.queryServices.id, provider_service_id: app.main.product_info.service_info.data.queryServices.provider_service_id},{product_id: app.main.product_info.service_info.data.queryServices.id, product_stripe_id: app.main.product_info.service_info.data.queryServices.stripe_price_id, product_name: app.main.product_info.service_info.data.queryServices.product_name.capitalize(), product_quantity: product_quantity+app.main.product_info.varQty.value.toNumber(), product_amt: app.main.product_info.service_info.data.queryServices.product_amt, name: app.main.product_info.service_info.data.queryServices.product_name, quantity: app.main.product_info.qty_form.quantity.value.toNumber(), amount: app.main.product_info.service_info.data.queryServices.product_amt, matrix: app.main.product_info.qty_form.matrix.value, total: app.main.product_info.overall_total.value, vat: app.main.product_info.vat_amount.value, product_avatar: app.main.product_info.service_info.data.queryServices.product_avatar, customer_id: app.Current_user.data.customer.id, service_type: app.local_store.data.service_location, product_price_id: app.main.product_info.service_info.data.queryServices.stripe_price_id})`}},{run:{action:`app.main.navigate(\'/choose-professional/\'+app.main.product_info.service_info.data.queryServices.id+\'/\'+app.main.product_info.service_info.data.queryServices.parent_provider_id+\'/\'+app.main.product_info.route.params.service_offered_id,{})`}}]},else:{steps:{'f7.dialog.alert':{text:'Please select the number of people that need this service.',title:'How many people?'}}}}})" dmx-show="app.main.product_info.service_info.data.queryServices" style="width:100%">Show providers</a>
         </div>
     </div>
     <div class="page-content bg-gray pt-0 mr-0 ml-0">
@@ -88,7 +88,7 @@
                     <input type="hidden" name="vat_amount" id="vat_amount" dmx-bind:value="app.main.product_info.working_total.value.toNumber().per(5)">
 
                     <input type="hidden" name="working_total" id="working_total" dmx-bind:value="(app.main.product_info.service_info.data.queryServices.product_amt.toNumber() * (app.main.product_info.qty_form.quantity.value * app.main.product_info.qty_form.matrix.value))">
-                    <input type="hidden" name="overall_total" id="overall_total" dmx-bind:value="(app.main.product_info.working_total.value.toNumber() + app.main.product_info.vat_amount.value.toNumber())">
+                    <input type="hidden" name="overall_total" id="overall_total" dmx-bind:value="app.main.product_info.working_total.value.toNumber()">
                 </div>
 
             </div>

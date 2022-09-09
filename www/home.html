@@ -159,7 +159,7 @@
             <!-- start card demo -->
             <div class="row no-gap" dmx-show="(app.main.home.providers.value == 'home')">
                 <div class="col-50" dmx-hide="app.main.home.queryServices.state.processing" dmx-repeat:repeat1="app.main.home.queryServices.data.queryServices">
-                    <div class="card demo-card-header-pic no-shadow card-outline border-10" dmx-on:click="app.main.navigate('/product-info/'+id,{})">
+                    <div class="card demo-card-header-pic no-shadow card-outline border-10" dmx-on:click="app.main.navigate('/product-info/'+services_offered_id,{})">
                         <div class="card-header align-items-flex-end" dmx-style:background-image="'url(' + product_avatar + ')'" style="height:256px; background-position:bottom">
                             <span style="font-size:22px; text-transform:capitalize; strong" class="tajawal"> {{product_name.capitalize()}}</span>
                             <!--<br>
@@ -187,7 +187,7 @@
             </div>
             <div class="row no-gap" dmx-show="(app.main.home.providers.value == 'salon')">
                 <div class="col-50" dmx-hide="app.main.home.querySalons.state.processing" dmx-repeat:repeat_salons="app.main.home.querySalons.data.repeat_providers">
-                    <div class="card demo-card-header-pic no-shadow card-outline border-10" dmx-on:click="app.main.navigate('/provider-services-page/'+id,{})">
+                    <div class="card demo-card-header-pic no-shadow card-outline border-10" dmx-on:click="app.main.navigate('/provider-services-page/'+id+'/'+app.main.home.selector.value,{})">
                         <div class="card-header align-items-flex-end" dmx-style:background-image="'url('+provider_avatar+')'" style="height:256px; background-position:bottom">
                             <span style="font-size:22px; text-transform:capitalize; strong" class="tajawal">
                                 <!--{{}}-->

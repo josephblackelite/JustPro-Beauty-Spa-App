@@ -45,11 +45,15 @@ dmx.config({
     "Cart": [
       {
         "type": "text",
-        "name": "product_id"
+        "name": "provider_service_id"
       },
       {
         "type": "text",
-        "name": "product_stripe_id"
+        "name": "product_price_id"
+      },
+      {
+        "type": "text",
+        "name": "employee_id"
       },
       {
         "type": "text",
@@ -101,7 +105,7 @@ dmx.config({
       },
       {
         "type": "text",
-        "name": "provider_id"
+        "name": "parent_provider_id"
       },
       {
         "type": "text",
