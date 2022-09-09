@@ -153,7 +153,14 @@
 
         <div id="services" style="margin-bottom:130px !important">
             <div class="block mb-0" dmx-hide="app.main.home.queryServices.state.processing">
-                <h4 class="montserrat smallfont">{{app.main.home.queryServices.data.queryServices.count()}} {{app.local_store.data.state.titlecase()}} Services offered <span dmx-show="(app.local_store.data.service_location == 'salon')">in</span><span dmx-show="(app.local_store.data.service_location == 'home')">at</span> {{app.main.home.providers.value.titlecase()}}</h4>
+                <h4 class="montserrat smallfont">
+
+
+                    <span dmx-show="(app.local_store.data.service_location == 'salon')"> {{app.main.home.querySalons.data.repeat_providers.count()}} Salons offering {{app.local_store.data.state.titlecase()}} services.
+                    </span>
+                    <span dmx-show="(app.local_store.data.service_location == 'home')">
+                        {{app.main.home.queryServices.data.queryServices.count()}} {{app.local_store.data.state.titlecase()}} Services offered at home</span>
+                </h4>
             </div>
 
             <!-- start card demo -->

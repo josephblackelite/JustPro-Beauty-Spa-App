@@ -12,7 +12,7 @@
 
                 </div>
 
-                <div class="title" dmx-text="app.main.providerservicespage.route.params.category.capitalize()+' Providers'">Appointment</div>
+                <div class="title" dmx-text="app.main.providerservicespage.route.params.category.capitalize()+' Providers'"> Appointment</div>
                 <div class="right">
                     <a href="#" class="link panel-open icon-only" data-panel="left">
 
@@ -32,7 +32,7 @@
             <!-- start card demo -->
             <div class="row no-gap">
                 <div class="col-50" dmx-hide="app.main.providerservicespage.queryProviderServices.state.processing" dmx-repeat:repeat_provider_services="app.main.providerservicespage.queryProviderServices.data.queryServices">
-                    <div class="card demo-card-header-pic no-shadow card-outline border-10" dmx-on:click="app.main.navigate('/product-info/'+app.main.providerservicespage.repeat_provider_services[0].service_offered_id,{})">
+                    <div class="card demo-card-header-pic no-shadow card-outline border-10" dmx-on:click="app.main.navigate('/product-info/'+service_offered_id,{})">
                         <div class="card-header align-items-flex-end" dmx-style:background-image="'url(' + product_avatar + ')'" style="height:256px; background-position:bottom">
                             <span style="font-size:22px; text-transform:capitalize; strong" class="tajawal"> {{product_name.capitalize()}}</span>
 
