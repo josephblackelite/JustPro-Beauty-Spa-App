@@ -20,6 +20,7 @@
 ]</script>
     <dmx-datetime id="var1"></dmx-datetime>
     <dmx-serverconnect id="queryServices" url="https://api.justpro.me/api/services/query_services" site="JustPro-Spa-Backend" dmx-param:category="app.local_store.data.state" sockets="true" dmx-on:start="app.showPreloader('deeporange')" dmx-on:done="app.hidePreloader()" dmx-param:product_delivery="app.main.home.providers.value"></dmx-serverconnect>
+    <dmx-serverconnect id="querySalons" url="https://api.justpro.me/api/provider/all_salons" site="JustPro-Spa-Backend" dmx-param:category="app.main.home.selector.value" dmx-on:start="app.showPreloader('deeporange')" dmx-on:done="app.hidePreloader()" dmx-param:product_delivery="app.main.home.providers.value"></dmx-serverconnect>
     <dmx-value id="popover_title"></dmx-value>
     <dmx-value id="popover_description"></dmx-value>
     <style>
@@ -156,7 +157,7 @@
             </div>
 
             <!-- start card demo -->
-            <div class="row no-gap">
+            <div class="row no-gap" dmx-show="(app.main.home.providers.value == 'home')">
                 <div class="col-50" dmx-hide="app.main.home.queryServices.state.processing" dmx-repeat:repeat1="app.main.home.queryServices.data.queryServices">
                     <div class="card demo-card-header-pic no-shadow card-outline border-10" dmx-on:click="app.main.navigate('/product-info/'+id,{})">
                         <div class="card-header align-items-flex-end" dmx-style:background-image="'url(' + product_avatar + ')'" style="height:256px; background-position:bottom">
@@ -170,6 +171,36 @@
                             <div class="row">
                                 <div class="col-100">
                                     <h4 class="strong tajawal text-color-black"> {{product_amt.toNumber().formatCurrency('AED', '.', ',', 2)}}
+                                        <!--<small dmx-show="amount_matrix" class="smallfont"> {{amount_matrix}} </small>-->
+                                    </h4>
+                                </div>
+                                <!-- <div class="col-100">
+                                    <a class="link button-4 brand-bg text-color-white" dmx-on:click="app.main.navigate('/product-info/'+id,{})">Book Now</a>
+                                </div> -->
+                            </div>
+
+                        </div>
+                    </div>
+
+                </div>
+
+            </div>
+            <div class="row no-gap" dmx-show="(app.main.home.providers.value == 'salon')">
+                <div class="col-50" dmx-hide="app.main.home.querySalons.state.processing" dmx-repeat:repeat_salons="app.main.home.querySalons.data.repeat_providers">
+                    <div class="card demo-card-header-pic no-shadow card-outline border-10" dmx-on:click="app.main.navigate('/provider-services-page/'+id,{})">
+                        <div class="card-header align-items-flex-end" dmx-style:background-image="'url('+provider_avatar+')'" style="height:256px; background-position:bottom">
+                            <span style="font-size:22px; text-transform:capitalize; strong" class="tajawal">
+                                <!--{{}}-->
+                            </span>
+                            <!--<br>
+                            <button class="button-4 btn-dir bg-color-yellow popover-open text-align-center justify-content-center" title="This product is nice" data-popover="#popover1" dmx-on:click="app.main.home.popover_title.setValue(product_name.capitalize());app.main.home.popover_description.setValue(product_description.capitalize())" style="border-radius:50% !important; height:20px; width:20px;display:block !important; padding:0px !important; border:0px !important;">
+                                <i class="bi bi-info-circle-fill fa-fw"></i>
+                            </button>-->
+                        </div>
+                        <div class="card-footer no-border bg-transparent" style="padding-top:-210px !important; height:40px !important">
+                            <div class="row">
+                                <div class="col-100">
+                                    <h4 class="strong tajawal text-color-black"> {{staff_name.capitalize()}}
                                         <!--<small dmx-show="amount_matrix" class="smallfont"> {{amount_matrix}} </small>-->
                                     </h4>
                                 </div>
