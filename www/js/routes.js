@@ -29,7 +29,7 @@ var routes = [
     "url": "./order-tracking.html"
   },
   {
-    "path": "/choose-professional/:service_id/:parent_provider_id",
+    "path": "/choose-professional/:service_id/:parent_provider_id/:provider_service_id",
     "url": "./choose-professional.html"
   },
   {
