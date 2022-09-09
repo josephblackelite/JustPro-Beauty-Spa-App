@@ -21,7 +21,7 @@ var routes = [
     "url": "./order-confirmation.html"
   },
   {
-    "path": "/product-info/:id",
+    "path": "/product-info/:service_offered_id",
     "url": "./product-info.html"
   },
   {
@@ -29,7 +29,7 @@ var routes = [
     "url": "./order-tracking.html"
   },
   {
-    "path": "/choose-professional/:service_id/:provider_type/:customer_address_id?",
+    "path": "/choose-professional/:service_id/:parent_provider_id",
     "url": "./choose-professional.html"
   },
   {
@@ -105,7 +105,7 @@ var routes = [
     "url": "./review-service.html"
   },
   {
-    "path": "/provider-services-page/:provider_id/:category",
+    "path": "/provider-services-page/:provider_id/:category?",
     "url": "./provider-services-page.html"
   },
   {
