@@ -10,7 +10,7 @@
 <div class="page" path="/review-service/:service_id" data-name="review-service" id="reviewservice">
 
     <dmx-value id="varQty" dmx-bind:value="app.main.reviewservice.qty_form.quantity.value"></dmx-value>
-    <dmx-serverconnect id="service_info" url="https://api.justpro.me/api/services/service_info" site="JustPro-Spa-Backend" dmx-param:service_id="app.main.reviewservice.route.params.service_id" sockets="true"></dmx-serverconnect>
+    <dmx-serverconnect id="service_info" url="https://api.justpro.me/api/services/service_info" site="JustPro-Spa-Backend" dmx-param:service_id="app.main.reviewservice.route.params.service_id" sockets="true" dmx-param:service_offered_id="app.main.reviewservice.route.params.service_id"></dmx-serverconnect>
     <dmx-serverconnect id="review" url="https://api.justpro.me/api/services/query_item_review" site="JustPro-Spa-Backend" dmx-param:service_id="app.main.reviewservice.route.params.service_id" sockets="true" dmx-param:customer_id="app.Current_user.data.customer.id" credentials></dmx-serverconnect>
 
 

@@ -6,8 +6,8 @@
     <script is="dmx-flow" id="flow1" type="text/dmx-flow" autorun>{
   runJS: {function: "runCalendar"}
 }</script>
-    <dmx-value id="appointment_timeStart" dmx-bind:value="'9:00 am'"></dmx-value>
-    <dmx-value id="appointment_timeEnd" dmx-bind:value="'10:00 am'"></dmx-value>
+    <dmx-value id="appointment_timeStart" dmx-bind:value="8"></dmx-value>
+    <dmx-value id="appointment_timeEnd" dmx-bind:value="9"></dmx-value>
     <div class="padding-top padding-bottom">
         <div class="navbar shadow">
             <div class="navbar-inner" style="padding-right:0px !important; padding-left:0px !important; margin-right:0px !important">
@@ -35,7 +35,7 @@
 
             <a class="item-link list-button button-large rounded-xl button-6 bg-color-black button-fill text-color-white margin-right" style="width:100%" dmx-show="!app.main.appointmentpage.query_time_slots.data.query_slots" href="" dmx-on:click="run({runJS:{function:'back'}})">Change Provider</a>
 
-            <a class="item-link list-button button-large rounded-xl button-6 bg-color-primary button-fill text-color-white" style="width:100%" dmx-on:click="run({condition:{if:`app.main.appointmentpage.form.appointmentDate.value.toDate()`,then:{steps:[{run:{action:`app.Cart.update({provider_service_id: app.main.appointmentpage.route.params.provider_service_id.toNumber()},{appointment_date: app.main.appointmentpage.form.appointmentDate.value.toDate(), timeSlot_start: app.main.appointmentpage.appointment_timeStart.value, timeSlot_end: app.main.appointmentpage.appointment_timeEnd.value})`}},{run:{action:`app.main.navigate(\'/order-confirmation\',{})`}}]},else:{steps:{'f7.dialog.alert':{title:'Appointment Date',text:'Please select an appointment date.'}}}}})" dmx-hide="!app.main.appointmentpage.query_time_slots.data.query_slots">Checkout &nbsp;<i class="bi-arrow-right-circle-fill"></i></a>
+            <a class="item-link list-button button-large rounded-xl button-6 bg-color-primary button-fill text-color-white" style="width:100%" dmx-on:click="run({condition:{if:`app.main.appointmentpage.form.appointmentDate.value.toDate()`,then:{steps:[{run:{action:`app.Cart.upsert({provider_service_id: app.cart_preFill.data.provider_service_id},{provider_service_id: app.cart_preFill.data.provider_service_id, product_price_id: app.cart_preFill.data.product_price_id, employee_id: app.cart_preFill.data.employee_id, name: app.cart_preFill.data.name, quantity: app.cart_preFill.data.quantity, amount: app.cart_preFill.data.amount, matrix: app.cart_preFill.data.matrix, total: app.cart_preFill.data.total, vat: app.cart_preFill.data.vat, product_avatar: app.cart_preFill.data.product_avatar, address_id: app.cart_preFill.data.address_id, appointment_date: app.main.appointmentpage.form.appointmentDate.value.toDate(), timeSlot_start: app.main.appointmentpage.appointment_timeStart.value.toNumber(), timeSlot_end: app.main.appointmentpage.appointment_timeEnd.value.toNumber(), customer_id: app.cart_preFill.data.customer_id, parent_provider_id: app.cart_preFill.data.parent_provider_id, service_type: app.cart_preFill.data.service_type})`}},{run:{action:`app.main.navigate(\'/order-confirmation\',{})`}}]},else:{steps:{'f7.dialog.alert':{title:'Appointment Date',text:'Please select an appointment date.'}}}}})" dmx-hide="!app.main.appointmentpage.query_time_slots.data.query_slots">Checkout &nbsp;<i class="bi-arrow-right-circle-fill"></i></a>
         </div>
     </div>
     <div class="page-content content-area wappler-block">

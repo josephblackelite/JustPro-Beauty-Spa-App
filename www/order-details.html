@@ -34,7 +34,7 @@
 
             <div class="list">
                 <ul>
-                    <li>
+                    <!-- <li>
                         <a href="#" class="item-link item-content">
                             <div class="item-media">
                                 <i class="bi bi-calendar-date"></i>
@@ -59,7 +59,7 @@
                                 <div class="item-after">&nbsp;</div>
                             </div>
                         </a>
-                    </li>
+                    </li> -->
                     <li>
                         <a href="#" class="item-link item-content">
                             <div class="item-media">
@@ -80,7 +80,7 @@
                 <h5 class="tajawal mt-10 mb-10 block">Appointment Details</h5>
                 <div class="list">
                     <ul>
-                        <li dmx-repeat:fullinfo="app.main.orderdetails.orderchildren.data.query" dmx-on:click="app.main.navigate('/review-service/'+service_id,{})">
+                        <li dmx-repeat:fullinfo="app.main.orderdetails.orderchildren.data.query" dmx-on:click="app.main.navigate('/review-service/'+provider_service_id,{})">
                             <div class="item-content">
                                 <div class="item-media"><img width="60px" height="60px" style="border-radius:50%" dmx-bind:src="item_image"></div>
                                 <div class="item-inner">

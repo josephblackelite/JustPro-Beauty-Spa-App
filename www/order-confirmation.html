@@ -68,7 +68,7 @@
                                     <div class="col-70">
                                         <p class="price">{{total.toNumber().formatCurrency('AED', '.', ',', 2)}}</p>
                                     </div>
-                                    <div class="col-30"> <button class="button-18 text-align-center brand-bg" style="height:30px !important; width:30px !important; margin-top:10px !important" dmx-on:click="run({'f7.dialog.confirm':{title:'Delete Item?',text:'This item will be removed from your cart.',then:{steps:{run:{action:`app.Cart.delete({product_id: product_id, provider_service_id: provider_service_id})`}}}}})"><i class="bi bi-trash fa-fw text-color-white fa-2w margin"></i> </button></div>
+                                    <div class="col-30"> <button class="button-18 text-align-center brand-bg" style="height:30px !important; width:30px !important; margin-top:10px !important" dmx-on:click="run({'f7.dialog.confirm':{title:'Delete Item?',text:'This item will be removed from your cart.',then:{steps:{run:{action:`app.Cart.delete({provider_service_id: provider_service_id})`}}}}})"><i class="bi bi-trash fa-fw text-color-white fa-2w margin"></i> </button></div>
                                 </div>
                                 <div class="row">
                                     <div class="col-100">
