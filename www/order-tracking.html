@@ -1,7 +1,7 @@
 <!-- Wappler include head-page="index.html" is="dmx-app" id="ordertracking" appConnect="local" framework7_6="With App Connect" framework7_icons="local" capacitor="local" components="{dmxFormatter:{}}" -->
 
 <div class="page location-tracking" id="thankyou" data-name="thankyou" path="/tracking">
-    <dmx-serverconnect id="lastOrder" url="https://api.justpro.me/api/customer_orders/last_order" site="JustPro-Spa-Backend" dmx-param:stripecustomerid="app.Current_user.data.customer.stripe_customer_id" sockets="true" dmx-param:customer_id="app.Current_user.data.customer.id"></dmx-serverconnect>
+    <dmx-serverconnect id="lastOrder" url="https://api.justpro.me/api/customer_orders/last_order" site="JustPro-Spa-Backend" sockets="true" dmx-param:customer_id="app.Current_user.data.customer.id"></dmx-serverconnect>
     <div class="padding-top padding-bottom" style="padding-top:30px !important; padding-bottom:40px !important">
         <div class="navbar no-hairline no-shadow no-border">
             <div class="navbar-inner" data-name="order-prompt">
@@ -41,7 +41,7 @@
             <div class="container track-content">
                 <div class="map-dir bg-color-white">
                     <p class="ma-0">Your booking is confirmed.</p>
-                    <h4 class="ma-0">{{app.main.thankyou.lastOrder.data.queryLastOrder.appointment_date.formatDate('dd MMM y')}}</h4>
+                    <h4 class="ma-0">{{app.main.thankyou.lastOrder.data.queryLastOrder.items[0].booking_time_slot[0].date.formatDate('dd MMM y')}}</h4>
                 </div>
             </div>
             <!--  <div class="delivery-man container bg-primary">

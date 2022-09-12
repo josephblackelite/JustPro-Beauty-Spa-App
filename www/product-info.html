@@ -52,7 +52,7 @@
     </div>
     <div class="toolbar toolbar-bottom toolbar-bottom-md no-shadow">
         <div class="toolbar-inner justify-content-center" style="padding:10px !important">
-            <a href="#!" class="item-link list-button button-large rounded-xl button-6 strong bg-color-primary button-fill text-color-white" dmx-on:click="run({condition:{if:`(app.main.product_info.qty_form.quantity.value &gt;= 1)`,then:{steps:[{run:{action:`app.Cart.upsert({provider_service_id: app.main.product_info.service_info.data.queryServices.provider_service_id},{product_price_id: app.main.product_info.service_info.data.queryServices.stripe_price_id, name: app.main.product_info.service_info.data.queryServices.product_name, quantity: app.main.product_info.qty_form.quantity.value.toNumber(), amount: app.main.product_info.service_info.data.queryServices.product_amt, matrix: app.main.product_info.qty_form.matrix.value, total: app.main.product_info.overall_total.value, vat: app.main.product_info.vat_amount.value, product_avatar: app.main.product_info.service_info.data.queryServices.product_avatar, customer_id: app.Current_user.data.customer.id, service_type: app.local_store.data.service_location, provider_service_id: app.main.product_info.service_info.data.queryServices.provider_service_id})`}},{run:{action:`app.main.navigate(\'/choose-professional/\'+app.main.product_info.service_info.data.queryServices.id+\'/\'+app.main.product_info.service_info.data.queryServices.parent_provider_id+\'/\'+app.main.product_info.route.params.service_offered_id,{})`}}]},else:{steps:{'f7.dialog.alert':{text:'Please select the number of people that need this service.',title:'How many people?'}}}}})" dmx-show="app.main.product_info.service_info.data.queryServices" style="width:100%">Show providers</a>
+            <a href="#!" class="item-link list-button button-large rounded-xl button-6 strong bg-color-primary button-fill text-color-white" dmx-on:click="run({condition:{if:`(app.main.product_info.qty_form.quantity.value &gt;= 1)`,then:{steps:[{run:{action:`app.cart_preFill.set(\'provider_service_id\',app.main.product_info.service_info.data.queryServices.provider_service_id);app.cart_preFill.set(\'product_price_id\',app.main.product_info.service_info.data.queryServices.stripe_price_id);app.cart_preFill.set(\'name\',app.main.product_info.service_info.data.queryServices.product_name);app.cart_preFill.set(\'quantity\',app.main.product_info.qty_form.quantity.value.toNumber());app.cart_preFill.set(\'amount\',app.main.product_info.service_info.data.queryServices.product_amt);app.cart_preFill.set(\'matrix\',app.main.product_info.qty_form.matrix.value);app.cart_preFill.set(\'total\',app.main.product_info.overall_total.value);app.cart_preFill.set(\'vat\',app.main.product_info.vat_amount.value);app.cart_preFill.set(\'product_avatar\',app.main.product_info.service_info.data.queryServices.product_avatar);app.cart_preFill.set(\'customer_id\',app.Current_user.data.customer.id);app.cart_preFill.set(\'service_type\',app.local_store.data.service_location)`}},{run:{action:`app.main.navigate(\'/choose-professional/\'+app.main.product_info.service_info.data.queryServices.id+\'/\'+app.main.product_info.service_info.data.queryServices.parent_provider_id+\'/\'+app.main.product_info.route.params.service_offered_id,{})`}}]},else:{steps:{'f7.dialog.alert':{text:'Please select the number of people that need this service.',title:'How many people?'}}}}})" dmx-show="app.main.product_info.service_info.data.queryServices" style="width:100%">Show providers</a>
         </div>
     </div>
     <div class="page-content bg-gray pt-0 mr-0 ml-0">
@@ -109,7 +109,7 @@
                             <ul>
                                 <li>
                                     <p class="mb-0 mt-0 small text-color-black block smallfont bottom-10">How many people are you booking for?</p>
-                                    <a class="item-link smart-select smart-select-init" data-open-in="popover">
+                                    <a class="item-link smart-select smart-select-init" data-open-in="sheet">
                                         <select name="quantity" id="quantity" required="" data-msg-required="Please select quantity">
                                             <option value="1" selected>Just me</option>
                                             <option value="2">2 People</option>
@@ -131,7 +131,7 @@
                             <ul dmx-show="app.main.product_info.service_info.data.queryServices.amount_matrix">
                                 <li>
                                     <p class="mb-0 mt-0 small text-color-black block smallfont bottom-10">How long do you need?</p>
-                                    <a class="item-link smart-select smart-select-init" data-open-in="popover">
+                                    <a class="item-link smart-select smart-select-init" data-open-in="sheet">
                                         <select name="matrix" id="matrix" required="" data-msg-required="Please select quantity">
                                             <option value="1" selected>60 Minutes </option>
                                             <option value="2">120 Minutes </option>

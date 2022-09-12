@@ -38,9 +38,7 @@
             run: {action: "{{app.main.checkout.clear_cart.run()}}"}
           },
           {
-            run: {
-              action: "{{app.main.navigate('/order-tracking',{reloadAll: true, history: false})}}"
-            }
+            run: {action: "{{app.main.navigate('/order-tracking',{})}}"}
           }
         ]
       },
@@ -178,8 +176,10 @@
         <input id="setUp_bill_selected_card" name="setUp" type="hidden">
         <input id="customer_id_bill_selected_card" name="customer_id" type="hidden" dmx-bind:value="app.Current_user.data.customer.id"><input id="address_id_bill_selected_card" name="address_id" dmx-bind:value="app.main.checkout.route.params.address_id" type="hidden">
         <div is="dmx-form-repeat" id="cartRepeat_bill_selected_card" dmx-bind:items="app.Cart.data">
-            <input id="product_id_bill_selected_card" name="product_id" type="hidden" dmx-bind:value="$value.product_id">
-            <input id="price_id_bill_selected_card" name="price_id" type="hidden" dmx-bind:value="$value.product_stripe_id">
+            <input id="provider_service_id_bill_selected_card" name="provider_service_id" type="hidden" dmx-bind:value="$value.provider_service_id">
+            <input id="product_price_id_bill_selected_card" name="product_price_id" type="hidden" dmx-bind:value="$value.product_price_id">
+            <input id="employee_id_bill_selected_card" name="employee_id" type="hidden" dmx-bind:value="$value.employee_id">
+            <input id="parent_provider_id_bill_selected_card" name="parent_provider_id" type="hidden" dmx-bind:value="$value.parent_provider_id">
             <input id="quantity_bill_selected_card" name="quantity" type="hidden" dmx-bind:value="$value.quantity">
             <input id="matrix_bill_selected_card" name="matrix" type="hidden" dmx-bind:value="$value.matrix">
             <input id="amount_bill_selected_card" name="amount" type="hidden" dmx-bind:value="$value.amount">
@@ -190,7 +190,6 @@
             <input id="timeSlot_end_bill_selected_card" name="timeSlot_end" type="hidden" dmx-bind:value="$value.timeSlot_end">
             <input id="item_img" name="item_img" type="hidden" dmx-bind:value="$value.product_avatar">
             <input id="item_name" name="item_name" type="hidden" dmx-bind:value="$value.name">
-            <input id="provider_id" name="provider_id" type="hidden" dmx-bind:value="$value.provider_id">
         </div>
     </form>
 

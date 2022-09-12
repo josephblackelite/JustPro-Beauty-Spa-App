@@ -111,6 +111,76 @@ dmx.config({
         "type": "text",
         "name": "service_type"
       }
+    ],
+    "sessionStorage": [
+      {
+        "type": "text",
+        "name": "provider_service_id"
+      },
+      {
+        "type": "text",
+        "name": "product_price_id"
+      },
+      {
+        "type": "text",
+        "name": "employee_id"
+      },
+      {
+        "type": "text",
+        "name": "name"
+      },
+      {
+        "type": "text",
+        "name": "quantity"
+      },
+      {
+        "type": "text",
+        "name": "amount"
+      },
+      {
+        "type": "text",
+        "name": "matrix"
+      },
+      {
+        "type": "text",
+        "name": "total"
+      },
+      {
+        "type": "text",
+        "name": "vat"
+      },
+      {
+        "type": "text",
+        "name": "product_avatar"
+      },
+      {
+        "type": "text",
+        "name": "address_id"
+      },
+      {
+        "type": "text",
+        "name": "appointment_date"
+      },
+      {
+        "type": "text",
+        "name": "timeSlot_start"
+      },
+      {
+        "type": "text",
+        "name": "timeSlot_end"
+      },
+      {
+        "type": "text",
+        "name": "customer_id"
+      },
+      {
+        "type": "text",
+        "name": "parent_provider_id"
+      },
+      {
+        "type": "text",
+        "name": "service_type"
+      }
     ]
   },
   "onboarding": {
@@ -764,40 +834,40 @@ dmx.config({
     "repeat2": {
       "meta": [
         {
-          "type": "number",
-          "name": "total_amt"
+          "name": "total_amt",
+          "type": "number"
         },
         {
-          "type": "number",
-          "name": "amount_paid"
+          "name": "amount_paid",
+          "type": "number"
         },
         {
-          "type": "number",
-          "name": "id"
+          "name": "id",
+          "type": "number"
         },
         {
-          "type": "boolean",
-          "name": "order_fulfilled"
+          "name": "order_fulfilled",
+          "type": "boolean"
         },
         {
-          "type": "text",
-          "name": "order_uuid_id"
+          "name": "order_uuid_id",
+          "type": "text"
         },
         {
-          "type": "boolean",
-          "name": "order_paid"
+          "name": "order_paid",
+          "type": "boolean"
         },
         {
-          "type": "date",
-          "name": "appointment_date"
+          "name": "appointment_date",
+          "type": "date"
         },
         {
-          "type": "text",
-          "name": "timeSlot_start"
+          "name": "timeSlot_start",
+          "type": "text"
         },
         {
-          "type": "text",
-          "name": "timeSlot_end"
+          "name": "timeSlot_end",
+          "type": "text"
         },
         {
           "name": "items",
@@ -805,11 +875,11 @@ dmx.config({
           "sub": [
             {
               "type": "number",
-              "name": "id"
+              "name": "customer_id"
             },
             {
-              "type": "number",
-              "name": "total_amt"
+              "type": "text",
+              "name": "order_uuid_id"
             },
             {
               "type": "number",
@@ -824,16 +894,44 @@ dmx.config({
               "name": "tax_amt"
             },
             {
+              "type": "number",
+              "name": "total_amt"
+            },
+            {
+              "type": "text",
+              "name": "order_status"
+            },
+            {
               "type": "datetime",
               "name": "order_dateTime"
+            },
+            {
+              "type": "datetime",
+              "name": "last_updated"
+            },
+            {
+              "type": "text",
+              "name": "item_image"
             },
             {
               "type": "text",
               "name": "product_name"
             },
             {
-              "type": "text",
-              "name": "product_avatar"
+              "type": "number",
+              "name": "time_start"
+            },
+            {
+              "type": "number",
+              "name": "time_end"
+            },
+            {
+              "type": "datetime",
+              "name": "date"
+            },
+            {
+              "type": "number",
+              "name": "id"
             }
           ]
         }

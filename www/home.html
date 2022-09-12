@@ -42,7 +42,7 @@
                     <div class="list" style="width:100%">
                         <ul>
                             <li>
-                                <a class="item-link smart-select smart-select-init text-color-black" data-open-in="popover">
+                                <a class="item-link smart-select smart-select-init text-color-black" data-open-in="sheet">
                                     <select class="text-color-black custom-font" style="width:100%;" name="selector" id="selector" dmx-on:changed="app.local_store.set('state',app.main.home.selector.value)" dmx-bind:value="app.local_store.data.state">
                                         <option value="">All Services</option>
                                         <option value="massage">Massage Services</option>
@@ -134,9 +134,9 @@
             <ul>
                 <li>
                     <p class="mb-0 mt-0 small text-color-black block smallfont bottom-10">Where do you want to be served?</p>
-                    <a class="item-link smart-select smart-select-init" data-open-in="popover">
+                    <a class="item-link smart-select smart-select-init" data-open-in="sheet">
                         <select name="providers" id="providers" dmx-on:changed="app.local_store.set('service_location',app.main.home.providers.value)" dmx-bind:value="app.local_store.data.service_location">
-                            <option value="home" selected>Home</option>
+                            <option value="home">Home</option>
                             <option value="salon">Salon</option>
                         </select>
                         <div class="item-content">
