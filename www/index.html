@@ -86,6 +86,8 @@
 
   <script src="dmxAppConnect/dmxSlideshow/dmxSlideshow.js" defer></script>
   <link rel="stylesheet" href="dmxAppConnect/dmxSlideshow/themes/default.css" />
+  <script src="dmxAppConnect/dmxGeolocation/dmxGeolocation.js" defer></script>
+  <script src="dmxAppConnect/dmxGoogleDirections/dmxGoogleDirections.js" defer></script>
 </head>
 
 <body is="dmx-app" id="index">
@@ -202,6 +204,7 @@
     <script is="dmx-flow" id="hideSplashScreen" type="text/dmx-flow">{
   runJS: {function: "hideSplashScreen"}
 }</script>
+    <dmx-geolocation id="geo" tracking="true"></dmx-geolocation>
     <div class="statusbar"></div>
 
     <!-- Sidebar Nav -->
@@ -670,6 +673,18 @@ to: today
         console.log('Last step on guided tour');
         }
         }];
+
+
+        function backFromOrderConfirmation() {
+        let histories = Framework7.instance.view.main.history
+
+            if (histories[3].includes("/provider-services-page")) {
+              Framework7.instance.views.main.router.back(histories[3], {force:true})
+            }else {
+              Framework7.instance.views.main.router.back("/home", {force:true})
+        }
+        } 
+
   </script>
 
 </body>

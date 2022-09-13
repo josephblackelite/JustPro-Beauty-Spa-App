@@ -20,9 +20,10 @@
 ]</script>
     <dmx-datetime id="var1"></dmx-datetime>
     <dmx-serverconnect id="queryServices" url="https://api.justpro.me/api/services/query_services" site="JustPro-Spa-Backend" dmx-param:category="app.local_store.data.state" sockets="true" dmx-on:start="app.showPreloader('deeporange')" dmx-on:done="app.hidePreloader()" dmx-param:product_delivery="app.main.home.providers.value"></dmx-serverconnect>
-    <dmx-serverconnect id="querySalons" url="https://api.justpro.me/api/provider/all_salons" site="JustPro-Spa-Backend" dmx-param:category="app.main.home.selector.value" dmx-on:start="app.showPreloader('deeporange')" dmx-on:done="app.hidePreloader()" dmx-param:product_delivery="app.main.home.providers.value"></dmx-serverconnect>
+    <dmx-serverconnect id="querySalons" url="https://api.justpro.me/api/provider/all_salons" site="JustPro-Spa-Backend" dmx-param:category="app.main.home.selector.value" dmx-on:start="app.showPreloader('deeporange')" dmx-on:done="app.hidePreloader()" dmx-param:product_delivery="app.main.home.providers.value" dmx-param:customer_lat="app.main.home.selected_address_data.data.query.latitude" dmx-param:customer_long="app.main.home.selected_address_data.data.query.logitude"></dmx-serverconnect>
     <dmx-value id="popover_title"></dmx-value>
     <dmx-value id="popover_description"></dmx-value>
+    <dmx-serverconnect id="selected_address_data" url="https://api.justpro.me/api/customer_address_actions/selected_address_data" site="JustPro-Spa-Backend" dmx-param:address_id="app.main.chooseaddress.address_select_form.select_address.value" sockets="true"></dmx-serverconnect>
     <style>
         .strong {
             font-weight: 600 !important;
@@ -148,8 +149,28 @@
                 </li>
             </ul>
         </div>
+        <!-- Locations select -->
+        <div class="block">
+            <form action="" is="dmx-serverconnect-form" method="post" id="address_select_form">
+                <div class="list" style="margin-top:-20px !important">
+                    <ul class="row">
+                        <li class="item-content item-input item-input-outline" style="width:100% !important">
 
-
+                            <div class="item-inner" style="width:100% !important">
+                                <div class="item-title item-floating-label strong">My Saved Address <i class="bi bi-geo-alt-fill"></i></div>
+                                <div class="item-input-wrap">
+                                    <select id="select_address" class="form-control" dmx-bind:options="app.Current_user.data.customer.customer_addresses" optionvalue="id" optiontext="address_name" placeholder="My Saved Address" style="width:100% !important" dmx-bind:value="app.local_store.data.customer_last_address_id" dmx-on:changed="app.local_store.set('customer_last_address_id',app.main.chooseaddress.address_select_form.select_address.value)">
+                                        <option value="0">Choose Address</option>
+                                    </select>
+                                    <span class="input-clear-button"></span>
+                                </div>
+                            </div>
+                            <i class="bi-shuffle" dmx-on:click="app.main.navigate('/create-new-address',{})"></i>
+                        </li>
+                    </ul>
+                </div>
+            </form>
+        </div>
 
         <div id="services" style="margin-bottom:130px !important">
             <div class="block mb-0" dmx-hide="app.main.home.queryServices.state.processing">
@@ -193,7 +214,7 @@
 
             </div>
             <div class="row no-gap" dmx-show="(app.main.home.providers.value == 'salon')">
-                <div class="col-100" dmx-hide="app.main.home.querySalons.state.processing" dmx-repeat:repeat_salons="app.main.home.querySalons.data.repeat_providers">
+                <div class="col-100" dmx-hide="app.main.home.querySalons.state.processing" dmx-repeat:repeat_salons="app.main.home.querySalons.data.repeat_providers.sort(`distance.Distance`)">
                     <div class="card demo-card-header-pic no-shadow card-outline border-10" dmx-on:click="app.main.navigate('/provider-services-page/'+id+'/'+staff_name+'/'+app.main.home.selector.value,{})">
                         <div class="card-header align-items-flex-end" dmx-style:background-image="'url('+ provider_avatar +')'" style="height:256px; background-position:bottom">
                             <span style="font-size:26px; text-transform:capitalize; strong" class="tajawal">
@@ -208,7 +229,7 @@
                             <div class="row">
                                 <div class="col-100">
                                     <h4 class="strong tajawal text-color-black">
-                                        <!--<small dmx-show="amount_matrix" class="smallfont"> {{amount_matrix}} </small>-->{{distance}} km away
+                                        <!--<small dmx-show="amount_matrix" class="smallfont"> {{amount_matrix}} </small>-->{{distance.Distance.floor()}} km away
                                     </h4>
                                 </div>
                                 <!-- <div class="col-100">
