@@ -19,7 +19,7 @@
   }
 ]</script>
     <dmx-datetime id="var1"></dmx-datetime>
-    <dmx-serverconnect id="queryServices" url="https://api.justpro.me/api/services/query_services" site="JustPro-Spa-Backend" dmx-param:category="app.local_store.data.state" sockets="true" dmx-on:start="app.showPreloader('deeporange')" dmx-on:done="app.hidePreloader()" dmx-param:product_delivery="app.main.home.providers.value"></dmx-serverconnect>
+    <dmx-serverconnect id="queryServices" url="https://api.justpro.me/api/services/query_services" site="JustPro-Spa-Backend" dmx-param:category="app.local_store.data.state" sockets="true" dmx-on:start="app.showPreloader('deeporange')" dmx-on:done="app.hidePreloader()" dmx-param:product_delivery="app.local_store.data.service_location"></dmx-serverconnect>
     <dmx-serverconnect id="querySalons" url="https://api.justpro.me/api/provider/all_salons" site="JustPro-Spa-Backend" dmx-param:category="app.main.home.selector.value" dmx-on:start="app.showPreloader('deeporange')" dmx-on:done="app.hidePreloader()" dmx-param:product_delivery="app.main.home.providers.value" dmx-param:customer_lat="app.main.home.selected_address_data.data.query.latitude" dmx-param:customer_long="app.main.home.selected_address_data.data.query.logitude"></dmx-serverconnect>
     <dmx-value id="popover_title"></dmx-value>
     <dmx-value id="popover_description"></dmx-value>
@@ -43,7 +43,7 @@
                     <div class="list" style="width:100%">
                         <ul>
                             <li>
-                                <a class="item-link smart-select smart-select-init text-color-black" data-open-in="sheet">
+                                <a class="item-link smart-select smart-select-init text-color-black" data-open-in="popup" data-searchbar="true" data-searchbar-placeholder="Search Services">
                                     <select class="text-color-black custom-font" style="width:100%;" name="selector" id="selector" dmx-on:changed="app.local_store.set('state',app.main.home.selector.value)" dmx-bind:value="app.local_store.data.state">
                                         <option value="">All Services</option>
                                         <option value="massage">Massage Services</option>
@@ -69,8 +69,10 @@
 
                 </div>
                 <div class="left">
-                    <img src="assets/images/logo-pages.png">
+                    <!--  <img src="assets/images/logo-pages.png">-->
 
+                    <!--<p style="font-size:10px !important; margin-bottom:0px !important">Hello</p>-->
+                    <h2 class="mt-0 bold">{{app.Current_user.data.customer.customer_name.titlecase()}}</h2>
                 </div>
                 <div class="title">
 
@@ -120,19 +122,18 @@
         <div class="searchbar-backdrop" style="border-bottom:0px !important"></div>
 
 
-        <div class="block up-30 text-align-right">
-            <!--  <h6 class="montserrat up-50 bottom-20"> Click to search services <i class="bi bi-chevron-right"></i></h6>-->
+        <!--    <div class="block up-30 text-align-right">
             <h4 class="tajawal text-color-white  strong"><a href="/profile" class="link small text-color-black">
                     <small>
                         Marhaba, {{app.Current_user.data.customer.customer_name.titlecase()}}
                     </small>
                 </a>
             </h4>
-        </div>
+        </div> -->
 
 
         <div class="list mt-0 up-20">
-            <ul>
+            <!--  <ul>
                 <li>
                     <p class="mb-0 mt-0 small text-color-black block smallfont bottom-10">Where do you want to be served?</p>
                     <a class="item-link smart-select smart-select-init" data-open-in="sheet">
@@ -147,7 +148,12 @@
                         </div>
                     </a>
                 </li>
-            </ul>
+            </ul> -->
+            <p class="segmented segmented-strong up-30">
+                <button class="button" dmx-on:click="app.local_store.set('service_location','home')" dmx-class:button-active="(app.local_store.data.service_location == 'home')">Home Service</button>
+                <button class="button" dmx-on:click="app.local_store.set('service_location','salon')" dmx-class:button-active="(app.local_store.data.service_location == 'salon')">Salon</button>
+                <span class="segmented-highlight"></span>
+            </p>
         </div>
         <!-- Locations select -->
         <div class="block">
@@ -159,7 +165,7 @@
                             <div class="item-inner" style="width:100% !important">
                                 <div class="item-title item-floating-label strong">My Saved Address <i class="bi bi-geo-alt-fill"></i></div>
                                 <div class="item-input-wrap">
-                                    <select id="select_address" class="form-control" dmx-bind:options="app.Current_user.data.customer.customer_addresses" optionvalue="id" optiontext="address_name" placeholder="My Saved Address" style="width:100% !important" dmx-bind:value="app.local_store.data.customer_last_address_id" dmx-on:changed="app.local_store.set('customer_last_address_id',app.main.chooseaddress.address_select_form.select_address.value)">
+                                    <select id="select_address" class="form-control" dmx-bind:options="app.Current_user.data.customer.customer_addresses" optionvalue="id" optiontext="address_name" placeholder="My Saved Address" style="width:100% !important; border:0px !important;" dmx-bind:value="app.local_store.data.customer_last_address_id" dmx-on:changed="app.local_store.set('customer_last_address_id',app.main.chooseaddress.address_select_form.select_address.value)">
                                         <option value="0">Choose Address</option>
                                     </select>
                                     <span class="input-clear-button"></span>
@@ -177,7 +183,7 @@
                 <h4 class="montserrat smallfont">
 
 
-                    <span dmx-show="(app.local_store.data.service_location == 'salon')"> {{app.main.home.querySalons.data.repeat_providers.count()}} Salons offering {{app.local_store.data.state.titlecase()}} services.
+                    <span dmx-show="(app.local_store.data.service_location == 'salon')"> {{app.main.home.querySalons.data.repeat_providers.count()}} <span dmx-show="app.local_store.data.state">Salons offering {{app.local_store.data.state.titlecase()}} services. </span> <span dmx-hide="app.local_store.data.state">Salons Nearby</span>
                     </span>
                     <span dmx-show="(app.local_store.data.service_location == 'home')">
                         {{app.main.home.queryServices.data.queryServices.count()}} {{app.local_store.data.state.titlecase()}} Services offered at home</span>
@@ -185,7 +191,7 @@
             </div>
 
             <!-- start card demo -->
-            <div class="row no-gap" dmx-show="(app.main.home.providers.value == 'home')">
+            <div class="row no-gap" dmx-show="(app.local_store.data.service_location == 'home')">
                 <div class="col-50" dmx-hide="app.main.home.queryServices.state.processing" dmx-repeat:repeat1="app.main.home.queryServices.data.queryServices">
                     <div class="card demo-card-header-pic no-shadow card-outline border-10" dmx-on:click="app.main.navigate('/product-info/'+services_offered_id,{})">
                         <div class="card-header align-items-flex-end" dmx-style:background-image="'url(' + product_avatar + ')'" style="height:256px; background-position:bottom">
@@ -213,7 +219,7 @@
                 </div>
 
             </div>
-            <div class="row no-gap" dmx-show="(app.main.home.providers.value == 'salon')">
+            <div class="row no-gap" dmx-show="(app.local_store.data.service_location == 'salon')">
                 <div class="col-100" dmx-hide="app.main.home.querySalons.state.processing" dmx-repeat:repeat_salons="app.main.home.querySalons.data.repeat_providers.sort(`distance.Distance`)">
                     <div class="card demo-card-header-pic no-shadow card-outline border-10" dmx-on:click="app.main.navigate('/provider-services-page/'+id+'/'+staff_name+'/'+app.main.home.selector.value,{})">
                         <div class="card-header align-items-flex-end" dmx-style:background-image="'url('+ provider_avatar +')'" style="height:256px; background-position:bottom">
