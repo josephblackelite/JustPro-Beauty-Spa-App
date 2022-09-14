@@ -41,7 +41,7 @@ var routes = [
     "url": "./choose-address.html"
   },
   {
-    "path": "/checkout/:address_id",
+    "path": "/checkout/:address_id?",
     "url": "./checkout.html"
   },
   {
