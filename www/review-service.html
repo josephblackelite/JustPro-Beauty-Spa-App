@@ -55,105 +55,90 @@
     </div>
     <div class="toolbar toolbar-bottom toolbar-bottom-md no-shadow">
         <div class="toolbar-inner justify-content-center" style="padding:10px !important">
-            <a href="#!" class="item-link list-button button-large rounded-xl button-18 bg-color-primary button-fill text-color-back" dmx-on:click="run({condition:{if:`(app.main.reviewservice.rate_service.rating.value > 0)`,then:{steps:{run:{action:`app.main.reviewservice.rate_service.submit()`}}},else:{steps:{'f7.dialog.alert':{title:'Did not rate service?',text:'Click one of the rating buttons to continue '}}}}})" style="width:100%">Rate this service</a>
+            <button class="item-link list-button button-large rounded-xl button-6 bg-color-primary button-fill text-color-white" dmx-on:click="run({condition:{if:`(app.main.reviewservice.rate_service.rating.value > 0)`,then:{steps:{run:{action:`app.main.reviewservice.rate_service.submit()`}}},else:{steps:{'f7.dialog.alert':{title:'Did not rate service?',text:'Click one of the rating buttons to continue '}}}}})" style="width:100%">Submit Review</button>
         </div>
     </div>
     <div class="page-content bg-gray pt-0 mr-0 ml-0">
-        <dmx-preloader id="justpropreloader" spinner="pulse" color="#ff6600">
-
-
-
-
-        </dmx-preloader>
-        <form is="dmx-serverconnect-form" id="rate_service" method="post" action="https://api.justpro.me/api/services/rate_services" site="JustPro-Spa-Backend" dmx-on:success="run({runJS:{function:'back'}})">
-            <input id="review_id" name="review_id" type="hidden" dmx-bind:value="app.main.reviewservice.review.data.query.id">
-            <input id="rating" name="rating" value="0" type="hidden" dmx-bind:value="app.main.reviewservice.review.data.query.rating_number"><input id="customer_id" name="customer_id" type="hidden" dmx-bind:value="app.Current_user.data.customer.id"><input id="service_id" name="service_id" type="hidden" dmx-bind:value="app.main.reviewservice.route.params.service_id">
-        </form>
-
+        <dmx-preloader id="justpropreloader" spinner="pulse" color="#ff6600"></dmx-preloader>
 
         <div class="row">
             <div class="col-100" style="height:256px !important">
                 <dmx-slideshow id="productreview" dmx-bind:slides="app.main.reviewservice.service_info.data.queryServices.services_photos" slide-url="avatar_url">
                 </dmx-slideshow>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                <!--       <div class="slideshow-container" style="height:256px !important; margin-right:-50px !important; margin-left:0px !important; padding-right:-50px !important; padding-left:0px !important; right:-60 !important">
-
-                    <div class="mySlides fade mr-0 ml-0">
-                        <div class="numbertext">{{($index + 1)+' / '+app.main.reviewservice.service_info.data.queryServices.services_photos.count()}}</div>
-                        <img style="width:100%" dmx-bind:src="avatar_url" height="256">
-                        <div class="text">{{app.main.reviewservice.service_info.data.queryServices.product_name.titlecase()}}</div>
-                    </div>
-                    <a class="prev" onclick="plusSlides(-1)">❮</a>
-                    <a class="next" onclick="plusSlides(1)">❯</a>
-                </div> -->
             </div>
-
-            <!--<div style="text-align:center">
-                        <span class="dot" dmx-repeat:repeat_dots="app.main.reviewservice.service_info.data.queryServices.services_photos" dmx-on:click="run({runJS:{function:'currentSlide',args:[`($index + 1)`]}})"></span>
-                    </div>
-                    -->
-
-            <div class="col-100" style="margin-top:70px">
+            <div class="col-100 block" style="margin-top:50px">
                 <h3 class="title text-align-center strong">{{app.main.reviewservice.service_info.data.queryServices.product_name.titlecase()}}</h3>
                 <div class="text-align-center">
                     <input type="hidden" name="vat_amount" id="vat_amount" dmx-bind:value="app.main.reviewservice.working_total.value.toNumber().per(5)">
-
                     <input type="hidden" name="working_total" id="working_total" dmx-bind:value="(app.main.reviewservice.service_info.data.queryServices.product_amt.toNumber() * (app.main.reviewservice.qty_form.quantity.value * app.main.reviewservice.qty_form.matrix.value))">
                     <input type="hidden" name="overall_total" id="overall_total" dmx-bind:value="(app.main.reviewservice.working_total.value.toNumber() + app.main.reviewservice.vat_amount.value.toNumber())">
                 </div>
+            </div>
+            <div class="col-100 block up-50">
+                <div class="row">
+                    <div class="col-100">
+                        <div class="">
+                            <div class="reviews-head text-align-center">
+                                <p class="text-black">Please take a minute to provide us feedback about your experience. It will help other users understand the quality of service to expect.</p>
+                            </div>
+
+                            <div class="col-lg-100 text-align-center justify-content-center">
+                                <span class="fa fa-star fa-2x text-color-yellow" dmx-on:click="app.main.reviewservice.rate_service.rating.setValue(1)" dmx-class:checked="(app.main.reviewservice.rate_service.rating.value &gt; 0)"></span>
+                                <span class="fa fa-star fa-2x text-color-yellow" dmx-on:click="app.main.reviewservice.rate_service.rating.setValue(2)" dmx-class:checked="(app.main.reviewservice.rate_service.rating.value &gt; 1)"></span>
+                                <span class="fa fa-star fa-2x text-color-yellow" dmx-on:click="app.main.reviewservice.rate_service.rating.setValue(3)" dmx-class:checked="(app.main.reviewservice.rate_service.rating.value &gt; 2)"></span>
+                                <span class="fa fa-star fa-2x text-color-yellow" dmx-on:click="app.main.reviewservice.rate_service.rating.setValue(4)" dmx-class:checked="(app.main.reviewservice.rate_service.rating.value &gt; 3)"></span>
+                                <span class="fa fa-star fa-2x text-color-yellow" dmx-on:click="app.main.reviewservice.rate_service.rating.setValue(5)" dmx-class:checked="(app.main.reviewservice.rate_service.rating.value &gt; 4)"></span>
+                            </div>
+
+
+
+                            <!--  <div class="rating-info">
+
+
+
+
+
+
+                                <ul class="rating-list">
+                                    <li class="rating-star small"><i class="fas fa-star"></i></li>
+                                    <li class="rating-star"><i class="fas fa-star"></i></li>
+                                    <li class="rating-star"><i class="fas fa-star"></i></li>
+                                    <li class="rating-star"><i class="fas fa-star"></i></li>
+                                    <li class="rating-star"><i class="fas fa-star"></i></li>
+                                </ul>
+                            </div> -->
+                        </div>
+                    </div>
+
+                    <div class="col-100 up-10">
+                        <form is="dmx-serverconnect-form" id="rate_service" method="post" action="https://api.justpro.me/api/services/rate_services" site="JustPro-Spa-Backend" dmx-on:success="run({runJS:{function:'back'}})">
+
+                            <div class="list no-hairlines-md">
+                                <ul>
+                                    <li class="item-content item-input item-input-with-info">
+                                        <div class="item-inner">
+                                            <div class="item-input-wrap">
+                                                <textarea type="text" id="comment" name="comment" placeholder="Type Review"></textarea>
+                                                <span class="input-clear-button"></span>
+                                                <div class="item-input-info">What was your experience?</div>
+                                            </div>
+                                        </div>
+                                    </li>
+                                </ul>
+                            </div>
+                            <input type="hidden" name="employee_id" id="employee_id" dmx-bind:value="app.main.reviewservice.service_info.data.queryServices.provider_service_id">
+                            <input type="hidden" name="company_id" id="company_id" dmx-bind:value="app.main.reviewservice.service_info.data.queryServices.parent_provider_id">
+
+                            <input id="review_id" name="review_id" type="hidden" dmx-bind:value="app.main.reviewservice.review.data.query.id">
+                            <input id="rating" name="rating" value="0" type="hidden" dmx-bind:value="app.main.reviewservice.review.data.query.rating_number"><input id="customer_id" name="customer_id" type="hidden" dmx-bind:value="app.Current_user.data.customer.id"><input id="service_id" name="service_id" type="hidden" dmx-bind:value="app.main.reviewservice.route.params.service_id">
+                        </form>
+                    </div>
+                </div>
 
             </div>
-
         </div>
         <div class="mb-50" style="margin-top:-20px !important">
-            <div class="row">
 
-
-
-                <div class="block mt-0">
-                    <div>
-                        <small class="strong">Service Description</small>
-                    </div>
-                    <div class="col">
-                        <p>{{app.main.reviewservice.service_info.data.queryServices.product_description.titlecase()}}</p>
-                    </div>
-                </div>
-
-                <div class="col-100">
-                    <div class="write-reviews-box container margin-bottom">
-                        <div class="reviews-head text-align-center">
-                            <p class="text-black ma-0">Rate this service to the help people choose the services on our platform</p>
-                        </div>
-                        <div class="rating-info">
-                            <ul class="rating-list">
-                                <li class="rating-star" dmx-on:click="app.main.reviewservice.rate_service.rating.setValue(1)"><i class="fas fa-star" dmx-class:text-color-black="(app.main.reviewservice.rate_service.rating.value > 0)"></i></li>
-                                <li class="rating-star" dmx-on:click="app.main.reviewservice.rate_service.rating.setValue(2)"><i class="fas fa-star" dmx-class:text-color-black="(app.main.reviewservice.rate_service.rating.value > 1)"></i></li>
-                                <li class="rating-star" dmx-on:click="app.main.reviewservice.rate_service.rating.setValue(3)"><i class="fas fa-star" dmx-class:text-color-black="(app.main.reviewservice.rate_service.rating.value > 2)"></i></li>
-                                <li class="rating-star" dmx-on:click="app.main.reviewservice.rate_service.rating.setValue(4)"><i class="fas fa-star" dmx-class:text-color-black="(app.main.reviewservice.rate_service.rating.value > 3)"></i></li>
-                                <li class="rating-star" dmx-on:click="app.main.reviewservice.rate_service.rating.setValue(5)"><i class="fas fa-star" dmx-class:text-color-black="(app.main.reviewservice.rate_service.rating.value > 4)"></i></li>
-                            </ul>
-                        </div>
-
-                    </div>
-
-                </div>
-            </div>
         </div>
     </div>
 

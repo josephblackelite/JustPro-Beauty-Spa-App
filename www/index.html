@@ -113,6 +113,10 @@
     .bold {
       font-family: 'Archivo Black', sans-serif;
     }
+
+    .checked {
+      color: #D0021B !important;
+    }
   </style>
 
 
@@ -208,7 +212,7 @@
     <script is="dmx-flow" id="hideSplashScreen" type="text/dmx-flow">{
   runJS: {function: "hideSplashScreen"}
 }</script>
-    <dmx-geolocation id="geo" tracking="true"></dmx-geolocation>
+    <dmx-geolocation id="geo" tracking="true" dmx-on:permissiondenied="geo.getCurrentPosition()"></dmx-geolocation>
     <div class="statusbar"></div>
 
     <!-- Sidebar Nav -->

@@ -18,6 +18,9 @@
             </div>
         </div>
     </div>
+    <style>
+        box-shadow: 10px 5px;
+    </style>
     <div class="toolbar toolbar-bottom toolbar-bottom-md">
         <div class="toolbar-inner justify-content-center" style="padding:10px !important">
             <a class="button-large rounded-xl button-6 bg-color-primary button-fill text-color-white" style="width:100%" dmx-bind:href="'/order-prompt'">Book Appointment</a>
@@ -28,32 +31,51 @@
 
         <div class="col-100">
             <div class="block text-align-center padding-top padding-bottom" dmx-show="(app.customers_orders.data.query.count() < 1)">
-                <h5 class="custom-font"> You have not created any appointment</h5>
+                <h5 class="custom-font"> You have not booked any home or salon appointment</h5>
 
             </div>
         </div>
-        <div class="col-100 block mt-20" style="margin-bottom:150px !important">
-            <div class="card no-shadow card-outline" dmx-repeat:repeat2="app.customers_orders.data.repeatOrders">
-                <div class="card-header brand-bg text-color-white">{{($index + 1)}}</div>
-                <div class="card-content" dmx-on:click="app.main.navigate('/order-details/'+id+'/'+order_uuid_id,{})">
-                    <div class="list media-list no-ios-edges" dmx-repeat:repeat1="items">
-                        <ul>
-                            <li class="item-content">
+        <div class="col-100 up-30" style="margin-bottom:150px !important">
+            <style>
+                .cancelled {
+                    background-color: #FEF6F6 !important;
+                }
+
+                .completed {
+                    background-color: #FAFCF3 !important;
+                }
+            </style>
+
+            <div class="list box-shadow inset" dmx-repeat:repeat2="app.customers_orders.data.repeatOrders" style="border:1px solid #CCCCCC">
+                <div class="list-group media-list" dmx-on:click="app.main.navigate('/order-details/'+id+'/'+order_uuid_id,{})" style="cursor">
+                    <ul dmx-repeat:repeat1="items">
+                        <li class="list-group-title bg-color-white">
+                            {{parent_provider_name.titlecase()}} - {{provider_type.titlecase()}} Visit &nbsp; &nbsp;
+
+                        </li>
+                        <li>
+                            <a class="item-content text-color-black" dmx-class:cancelled="(order_status == 'rejected')" dmx-class:completed="(order_status == 'completed')">
                                 <div class="item-media">
-                                    <img dmx-bind:src="item_image" width="50" height="50" />
+                                    <img dmx-bind:src="item_image" width="60" height="60" style="border-radius:50%" />
                                 </div>
                                 <div class="item-inner">
                                     <div class="item-title-row">
-                                        <div class="item-title">{{product_name.titlecase()}}</div>
+                                        <div class="item-title"> {{product_name.titlecase()}}</div>
                                     </div>
                                     <div class="item-subtitle">{{total_amt.toNumber().formatCurrency('AED', '.', ',', 2)}}</div>
-                                    <div class="item-subtitle">{{date.formatDate('dd MMM y')+', '+time_start.replace(".", ":")+' - '+time_end.replace(".", ":")}}</div>
+                                    <div class="item-subtitle">
+                                        <span class="badge color-red float-right" dmx-show="(order_status == 'rejected')">Rejected</span>
+                                        <span class="badge color-green float-right" dmx-show="(order_status == 'completed')">Completed</span>
+                                        <span dmx-show="(order_status == 'pending')"> {{date.formatDate('dd MMM y')+', '+time_start.replace(".", ":")+' - '+time_end.replace(".", ":")}}</span>
+                                    </div>
                                 </div>
-                            </li>
-                        </ul>
-                    </div>
+                            </a>
+                        </li>
+
+                    </ul>
                 </div>
             </div>
+
         </div>
     </div>
 </div>

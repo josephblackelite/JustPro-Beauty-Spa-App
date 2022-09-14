@@ -20,7 +20,7 @@
 ]</script>
     <dmx-datetime id="var1"></dmx-datetime>
     <dmx-serverconnect id="queryServices" url="https://api.justpro.me/api/services/query_services" site="JustPro-Spa-Backend" dmx-param:category="app.local_store.data.state" sockets="true" dmx-on:start="app.showPreloader('deeporange')" dmx-on:done="app.hidePreloader()" dmx-param:product_delivery="app.local_store.data.service_location"></dmx-serverconnect>
-    <dmx-serverconnect id="querySalons" url="https://api.justpro.me/api/provider/all_salons" site="JustPro-Spa-Backend" dmx-param:category="app.main.home.selector.value" dmx-on:start="app.showPreloader('deeporange')" dmx-on:done="app.hidePreloader()" dmx-param:product_delivery="app.main.home.providers.value" dmx-param:customer_lat="app.main.home.selected_address_data.data.query.latitude" dmx-param:customer_long="app.main.home.selected_address_data.data.query.logitude"></dmx-serverconnect>
+    <dmx-serverconnect id="querySalons" url="https://api.justpro.me/api/provider/all_salons" site="JustPro-Spa-Backend" dmx-param:category="app.main.home.selector.value" dmx-on:start="app.showPreloader('deeporange')" dmx-on:done="app.hidePreloader()" dmx-param:product_delivery="app.main.home.providers.value" dmx-param:customer_lat="app.geo.coords.latitude" dmx-param:customer_long="app.geo.coords.longitude"></dmx-serverconnect>
     <dmx-value id="popover_title"></dmx-value>
     <dmx-value id="popover_description"></dmx-value>
     <dmx-serverconnect id="selected_address_data" url="https://api.justpro.me/api/customer_address_actions/selected_address_data" site="JustPro-Spa-Backend" dmx-param:address_id="app.main.home.address_select_form.select_address.value" sockets="true"></dmx-serverconnect>
@@ -72,13 +72,7 @@
                 <div class="left">
                     <img src="assets/images/logo-pages.png">
 
-<<<<<<< HEAD
-                    <!--<p style="font-size:10px !important; margin-bottom:0px !important">Hello</p>
-                    <h2 class="mt-0 bold">{{app.Current_user.data.customer.customer_name.titlecase()}}</h2>-->
-=======
-                    <!--<p style="font-size:10px !important; margin-bottom:0px !important">Hello</p>-->
-                    <!-- <h2 class="mt-0 bold">{{app.Current_user.data.customer.customer_name.titlecase()}}</h2> -->
->>>>>>> 88d5d124f273c1da63095e2781e63f17f6f2d42f
+
                 </div>
                 <div class="title">
 
@@ -111,14 +105,7 @@
     </div>
 
 
-    <!-- Cart Fab -->
-    <!-- <div class="fab fab-right-bottom fab-extended fab-morph" data-morph-to=".toolbar" style="border-radius:100% !important; padding:10px; display: hidden" dmx-show="app.Cart.data.count()>=1">
 
-        <a href="#" class="">
-            <i class="icon f7-icons size-70">cart <span class="badge color-white text-color-black">{{app.Cart.data.count()}}</span></i>
-        </a>
-
-    </div> -->
 
 
     <div class="page-content location-wraper newbg">
@@ -155,13 +142,13 @@
                     </a>
                 </li>
             </ul> -->
-            <p class="segmented segmented-strong up-30">
-                <button class="button" dmx-on:click="app.local_store.set('service_location','home')" dmx-class:button-active="(app.local_store.data.service_location == 'home')">Home Service</button>
-                <button class="button" dmx-on:click="app.local_store.set('service_location','salon')" dmx-class:button-active="(app.local_store.data.service_location == 'salon')">Salon</button>
+            <p class="segmented segmented-strong up-40">
+                <button class="button strong text-color-primary" dmx-on:click="app.local_store.set('service_location','home')" dmx-class:button-active="(app.local_store.data.service_location == 'home')">Home Service</button>
+                <button class="button strong text-color-primary" dmx-on:click="app.local_store.set('service_location','salon')" dmx-class:button-active="(app.local_store.data.service_location == 'salon')">Salon Visit</button>
                 <span class="segmented-highlight"></span>
             </p>
         </div>
-<<<<<<< HEAD
+
         <!-- Locations select 
         
 =======
@@ -189,9 +176,9 @@
             </form>
 <<<<<<< HEAD
        -->
-=======
-        </div> -->
->>>>>>> 88d5d124f273c1da63095e2781e63f17f6f2d42f
+
+
+
 
         <div id="services" style="margin-bottom:130px !important">
             <div class="block mb-0" dmx-hide="app.main.home.queryServices.state.processing">
