@@ -181,7 +181,6 @@
             <div class="block mb-0 mt-0" dmx-hide="app.main.home.queryServices.state.processing">
 
                 <h4 class="custom-font" style="font-size:15px !important">
-
                     <span dmx-show="(app.local_store.data.service_location == 'salon')"> {{app.main.home.querySalons.data.repeat_providers.count()}} <span dmx-show="app.local_store.data.state">Salons offering {{app.local_store.data.state.titlecase()}} services. </span> <span dmx-hide="app.local_store.data.state">Salons Nearby</span>
                     </span>
                     <span dmx-show="(app.local_store.data.service_location == 'home')">
