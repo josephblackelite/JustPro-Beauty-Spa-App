@@ -676,10 +676,12 @@ to: today
         function backFromOrderConfirmation() {
         let histories = Framework7.instance.view.main.history
 
-            if (histories[3].includes("/provider-services-page")) {
-              Framework7.instance.views.main.router.back(histories[3], {force:true})
+            if (histories[2].includes("/provider-services-page")) {
+              Framework7.instance.views.main.router.back(histories[2], {force: true})
+            }else if (histories[3].includes("/provider-services-page")) {
+                Framework7.instance.views.main.router.back(histories[3], {force: true})
             }else {
-              Framework7.instance.views.main.router.back("/home", {force:true})
+              Framework7.instance.views.main.router.back("/home", {force: true})
         }
         } 
 

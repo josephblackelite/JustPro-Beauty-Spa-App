@@ -24,6 +24,7 @@
     <dmx-value id="popover_title"></dmx-value>
     <dmx-value id="popover_description"></dmx-value>
     <dmx-serverconnect id="selected_address_data" url="https://api.justpro.me/api/customer_address_actions/selected_address_data" site="JustPro-Spa-Backend" dmx-param:address_id="app.main.home.address_select_form.select_address.value" sockets="true"></dmx-serverconnect>
+    <dmx-serverconnect id="available_categories" url="https://api.justpro.me/api/services/query_available_categories" site="JustPro-Spa-Backend" dmx-param:address_id="app.main.home.address_select_form.select_address.value" sockets="true" dmx-param:product_delivery="app.local_store.data.service_location"></dmx-serverconnect>
     <style>
         .strong {
             font-weight: 600 !important;
@@ -44,16 +45,16 @@
                         <ul>
                             <li>
                                 <a class="item-link smart-select smart-select-init text-color-black" data-open-in="popup" data-searchbar="true" data-searchbar-placeholder="Search Services">
-                                    <select class="text-color-black custom-font" style="width:100%;" name="selector" id="selector" dmx-on:changed="app.local_store.set('state',app.main.home.selector.value)" dmx-bind:value="app.local_store.data.state">
+                                    <select class="text-color-black custom-font" style="width:100%;" name="selector" id="selector" dmx-on:changed="app.local_store.set('state',app.main.home.selector.value)" dmx-bind:value="app.local_store.data.state" dmx-bind:options="app.main.home.available_categories.data.query_available_categories" optiontext="category.capitalize()" optionvalue="category">
                                         <option value="">All Services</option>
-                                        <option value="massage">Massage Services</option>
+                                        <!-- <option value="massage">Massage Services</option>
                                         <option value="hair">Hair Stylist</option>
                                         <option value="nails">Pedicure &amp; Manicure</option>
                                         <option value="makeup">Makeup &amp; Facials</option>
                                         <option value="cosmetic">Cosmetic Procedures</option>
                                         <option value="henna">Henna Art</option>
                                         <option value="waxing">Waxing Services</option>
-                                        <option value="threading">Threading Services</option>
+                                        <option value="threading">Threading Services</option> -->
                                     </select>
                                     <div class="item-content">
                                         <div class="item-inner">
