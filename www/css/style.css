@@ -3635,7 +3635,7 @@ h6, .h6 {
     left: 50%;
     -webkit-transform: translateX(-50%);
             transform: translateX(-50%);
-    padding: 30px 28px 0px 28px; }
+    padding: 30px 28px 20px 10px; }
     .navbar .navbar-inner .title {
       color: #1b1b1b;
       font-weight: 600;
@@ -4509,6 +4509,7 @@ margin-bottom:-20px !important;
   position: relative;
   top: 0px;}
 
+<<<<<<< HEAD
   .font-small {
     font-size : 16px
   }
@@ -4516,3 +4517,62 @@ margin-bottom:-20px !important;
   .font-lg {
     font-size : 26px
   }
+=======
+  .nametag {
+    font-size:17px !important;
+    font-weight:600 !important;
+    margin-bottom:0px !important;
+  }
+
+.box {
+  width: 200px; height: 300px;
+  position: relative;
+  border: 1px solid #BBB;
+  background: #EEE;
+}
+.ribbon {
+  position: absolute;
+  right: -5px; top: -5px;
+  z-index: 1;
+  overflow: hidden;
+  width: 75px; height: 75px;
+  text-align: right;
+}
+.ribbon span {
+  font-size: 10px;
+  font-weight: bold;
+  color: #FFF;
+  text-transform: uppercase;
+  text-align: center;
+  line-height: 20px;
+  transform: rotate(45deg);
+  -webkit-transform: rotate(45deg);
+  width: 100px;
+  display: block;
+  background: #EF5742;
+  background: -webkit-gradient(linear, left top, left bottom, from(#EF5742), to(#EF5742));
+  background: linear-gradient(#EF5742 0%, #EF5742 100%);
+  -webkit-box-shadow: 0 3px 10px -5px rgba(0, 0, 0, 1);
+          box-shadow: 0 3px 10px -5px rgba(0, 0, 0, 1);
+  position: absolute;
+  top: 19px; right: -21px;
+}
+.ribbon span::before {
+  content: "";
+  position: absolute; left: 0px; top: 100%;
+  z-index: -1;
+  border-left: 3px solid #EF5742;
+  border-right: 3px solid transparent;
+  border-bottom: 3px solid transparent;
+  border-top: 3px solid #EF5742;
+}
+.ribbon span::after {
+  content: "";
+  position: absolute; right: 0px; top: 100%;
+  z-index: -1;
+  border-left: 3px solid transparent;
+  border-right: 3px solid #EF5742;
+  border-bottom: 3px solid transparent;
+  border-top: 3px solid #EF5742;
+}
+>>>>>>> 8c3ed82fd27ca5fce54fd10651d42ae93611e02e
