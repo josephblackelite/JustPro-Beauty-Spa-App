@@ -126,12 +126,14 @@
 
 
 
+
   <div id="app" is="dmx-f7-app" theme="md">
 
 
     <!-- Statusbar overlay -->
 
 
+    <dmx-geolocation id="geo" dmx-on:permissiondenied="geo.getCurrentPosition()"></dmx-geolocation>
     <dmx-local-manager id=" local_store">
     </dmx-local-manager>
     <dmx-session-manager id="cart_preFill"></dmx-session-manager>
@@ -213,7 +215,7 @@
     <script is="dmx-flow" id="hideSplashScreen" type="text/dmx-flow">{
   runJS: {function: "hideSplashScreen"}
 }</script>
-    <dmx-geolocation id="geo" tracking="true" dmx-on:permissiondenied="geo.getCurrentPosition()"></dmx-geolocation>
+
     <div class="statusbar"></div>
 
     <!-- Sidebar Nav -->

@@ -24,6 +24,10 @@ dmx.config({
       {
         "type": "text",
         "name": "service_location"
+      },
+      {
+        "type": "text",
+        "name": "freelacer_card_class_toggle"
       }
     ],
     "Show_proloader": [
@@ -1069,6 +1073,61 @@ dmx.config({
         {
           "type": "text",
           "name": "provider_avatar"
+        }
+      ],
+      "outputType": "array"
+    },
+    "repeat_employees": {
+      "meta": [
+        {
+          "name": "staff_name",
+          "type": "text"
+        },
+        {
+          "name": "provider_avatar",
+          "type": "text"
+        },
+        {
+          "name": "provider_availability",
+          "type": "number"
+        },
+        {
+          "name": "provider_email",
+          "type": "text"
+        },
+        {
+          "name": "provider_phone_number",
+          "type": "text"
+        },
+        {
+          "name": "skill_rating",
+          "type": "number"
+        },
+        {
+          "name": "job_title",
+          "type": "text"
+        },
+        {
+          "name": "id",
+          "type": "number"
+        },
+        {
+          "name": "parent_provider_id",
+          "type": "number"
+        },
+        {
+          "name": "brief_introduction",
+          "type": "text"
+        },
+        {
+          "name": "rating",
+          "type": "number",
+          "sub": [
+            {
+              "name": "rating_number",
+              "type": "number"
+            }
+          ]
         }
       ],
       "outputType": "array"

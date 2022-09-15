@@ -18,6 +18,23 @@
     }
   }
 ]</script>
+    <script is="dmx-flow" id="freelancer_card_toggle" type="text/dmx-flow" autorun="">[
+  {
+    wait: {delay: 2000}
+  },
+  {
+    condition: {
+      if: "{{!app.local_store.data.service_location}}",
+      then: {
+        steps: {
+          run: {
+            action: "{{app.local_store.set('service_location',app.main.home.providers.value)}}"
+          }
+        }
+      }
+    }
+  }
+]</script>
     <dmx-datetime id="var1"></dmx-datetime>
     <dmx-serverconnect id="queryServices" url="https://api.justpro.me/api/services/query_services" site="JustPro-Spa-Backend" dmx-param:category="app.local_store.data.state" sockets="true" dmx-on:start="app.showPreloader('deeporange')" dmx-on:done="app.hidePreloader()" dmx-param:product_delivery="app.local_store.data.service_location"></dmx-serverconnect>
     <dmx-serverconnect id="querySalons" url="https://api.justpro.me/api/provider/all_salons" site="JustPro-Spa-Backend" dmx-param:category="app.main.home.selector.value" dmx-on:start="app.showPreloader('deeporange')" dmx-on:done="app.hidePreloader()" dmx-param:product_delivery="app.main.home.providers.value" dmx-param:customer_lat="app.geo.coords.latitude" dmx-param:customer_long="app.geo.coords.longitude" dmx-param:provider_type="app.local_store.data.service_location"></dmx-serverconnect>
@@ -59,7 +76,7 @@
                                         <option value="threading">Threading Services</option> -->
                                     </select>
                                     <div class="item-content">
-                                        <div class="item-inner">
+                                        <div class="item-inner padding">
                                             <div class="item-title text-color-black tajawal-s"><i class="bi bi-search"></i>&nbsp; Filter Services</div>
                                         </div>
                                     </div>
@@ -111,9 +128,9 @@
 
         <!-- Search backdrop -->
         <div class="searchbar-backdrop" style="border-bottom:0px !important"></div>
+        <div class="relative">
 
-
-        <!--    <div class="block up-30 text-align-right">
+            <!--    <div class="block up-30 text-align-right">
             <h4 class="tajawal text-color-white  strong"><a href="/profile" class="link small text-color-black">
                     <small>
                         Marhaba, {{app.Current_user.data.customer.customer_name.titlecase()}}
@@ -123,8 +140,8 @@
         </div> -->
 
 
-        <div class="list mt-0 up-20">
-            <!--  <ul>
+            <div class="list mt-0 up-20">
+                <!--  <ul>
                 <li>
                     <p class="mb-0 mt-0 small text-color-black block smallfont bottom-10">Where do you want to be served?</p>
                     <a class="item-link smart-select smart-select-init" data-open-in="sheet">
@@ -140,162 +157,171 @@
                     </a>
                 </li>
             </ul> -->
-            <p class="segmented segmented-strong up-40">
-                <button class="button strong text-color-primary" dmx-on:click="app.local_store.set('service_location','home')" dmx-class:button-active="(app.local_store.data.service_location == 'home')">Home Service</button>
-                <button class="button strong text-color-primary" dmx-on:click="app.local_store.set('service_location','salon')" dmx-class:button-active="(app.local_store.data.service_location == 'salon')">Salon Visit</button>
-                <span class="segmented-highlight"></span>
-            </p>
-        </div>
-
-        <!-- Locations select         
-=======
-        <!-- Locations select -->
-        <!-- <div class="block">
->>>>>>> 88d5d124f273c1da63095e2781e63f17f6f2d42f
-            <form action="" is="dmx-serverconnect-form" method="post" id="address_select_form">
-                <div class="list" style="margin-top:-20px !important">
-                    <ul class="row">
-                        <li class="item-content item-input item-input-outline" style="width:100% !important">
-
-                            <div class="item-inner" style="width:100% !important">
-                                <div class="item-title item-floating-label strong">My Saved Address <i class="bi bi-geo-alt-fill"></i></div>
-                                <div class="item-input-wrap">
-                                    <select id="select_address" class="form-control" dmx-bind:options="app.Current_user.data.customer.customer_addresses" optionvalue="id" optiontext="address_name" placeholder="My Saved Address" style="width:100% !important; border:0px !important;" dmx-bind:value="app.local_store.data.customer_last_address_id" dmx-on:changed="app.local_store.set('customer_last_address_id',app.main.chooseaddress.address_select_form.select_address.value)">
-                                        <option value="0">Choose Address</option>
-                                    </select>
-                                    <span class="input-clear-button"></span>
-                                </div>
-                            </div>
-                            <i class="bi-shuffle" dmx-on:click="app.main.navigate('/create-new-address',{})"></i>
-                        </li>
-                    </ul>
-                </div>
-            </form>
-<<<<<<< HEAD
-       -->
-
-
-
-
-        <div id="services" style="margin-bottom:130px !important">
-            <div class="block mb-0 mt-0" dmx-hide="app.main.home.queryServices.state.processing">
-
-                <h4 class="custom-font" style="font-size:15px !important">
-                    <span dmx-show="(app.local_store.data.service_location == 'salon')"> {{app.main.home.querySalons.data.repeat_providers.count()}} <span dmx-show="app.local_store.data.state">Salons offering {{app.local_store.data.state.titlecase()}} services. </span> <span dmx-hide="app.local_store.data.state">Salons Nearby</span>
-                    </span>
-                    <span dmx-show="(app.local_store.data.service_location == 'home')">
-                        {{app.main.home.home_service_providers.data.repeat_providers.count()}} {{app.local_store.data.state.titlecase()}} Freelance Professionals</span>
-                </h4>
-
-
+                <p class="segmented segmented-strong  up-40  sticky-top">
+                    <button class="button strong text-color-primary" dmx-on:click="app.local_store.set('service_location','home')" dmx-class:button-active="(app.local_store.data.service_location == 'home')">Home Service</button>
+                    <button class="button strong text-color-primary" dmx-on:click="app.local_store.set('service_location','salon')" dmx-class:button-active="(app.local_store.data.service_location == 'salon')">Salon Visit</button>
+                    <span class="segmented-highlight"></span>
+                </p>
             </div>
 
-            <!-- list services -->
-            <div class="row no-gap" dmx-show="">
-                <div class="col-50" dmx-hide="app.main.home.queryServices.state.processing" dmx-repeat:repeat1="app.main.home.queryServices.data.queryServices">
-                    <div class="card demo-card-header-pic no-shadow card-outline border-10" dmx-on:click="app.main.navigate('/product-info/'+services_offered_id,{})">
-                        <div class="card-header align-items-flex-end" dmx-style:background-image="'url(' + product_avatar + ')'" style="height:256px; background-position:bottom">
-                            <span style="font-size:22px; text-transform:capitalize; strong" class="tajawal"> {{product_name.capitalize()}}</span>
-                            <!--<br>
+            <!-- Locations select         
+                    =======
+                            <!-- Locations select -->
+            <!-- <div class="block">
+                    >>>>>>> 88d5d124f273c1da63095e2781e63f17f6f2d42f
+                                <form action="" is="dmx-serverconnect-form" method="post" id="address_select_form">
+                                    <div class="list" style="margin-top:-20px !important">
+                                        <ul class="row">
+                                            <li class="item-content item-input item-input-outline" style="width:100% !important">
+
+                                                <div class="item-inner" style="width:100% !important">
+                                                    <div class="item-title item-floating-label strong">My Saved Address <i class="bi bi-geo-alt-fill"></i></div>
+                                                    <div class="item-input-wrap">
+                                                        <select id="select_address" class="form-control" dmx-bind:options="app.Current_user.data.customer.customer_addresses" optionvalue="id" optiontext="address_name" placeholder="My Saved Address" style="width:100% !important; border:0px !important;" dmx-bind:value="app.local_store.data.customer_last_address_id" dmx-on:changed="app.local_store.set('customer_last_address_id',app.main.chooseaddress.address_select_form.select_address.value)">
+                                                            <option value="0">Choose Address</option>
+                                                        </select>
+                                                        <span class="input-clear-button"></span>
+                                                    </div>
+                                                </div>
+                                                <i class="bi-shuffle" dmx-on:click="app.main.navigate('/create-new-address',{})"></i>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </form>
+                    <<<<<<< HEAD
+                        -->
+
+
+
+
+            <div id="services" style="margin-bottom:130px !important">
+                <div class="block mb-0 mt-0" dmx-hide="app.main.home.queryServices.state.processing">
+
+                    <h4 class="custom-font" style="font-size:15px !important">
+                        <span dmx-show="(app.local_store.data.service_location == 'salon')"> {{app.main.home.querySalons.data.repeat_providers.count()}} <span dmx-show="app.local_store.data.state">Salons offering {{app.local_store.data.state.titlecase()}} services. </span> <span dmx-hide="app.local_store.data.state">Salons Nearby</span>
+                        </span>
+                        <span dmx-show="(app.local_store.data.service_location == 'home')">
+                            {{app.main.home.home_service_providers.data.repeat_providers.count()}} {{app.local_store.data.state.titlecase()}} Freelance Professionals</span>
+                    </h4>
+
+
+                </div>
+
+                <!-- list services -->
+                <div class="row no-gap" dmx-show="">
+                    <div class="col-50" dmx-hide="app.main.home.queryServices.state.processing" dmx-repeat:repeat1="app.main.home.queryServices.data.queryServices">
+                        <div class="card demo-card-header-pic no-shadow card-outline border-10" dmx-on:click="app.main.navigate('/product-info/'+services_offered_id,{})">
+                            <div class="card-header align-items-flex-end" dmx-style:background-image="'url(' + product_avatar + ')'" style="height:256px; background-position:bottom">
+                                <span style="font-size:22px; text-transform:capitalize; strong" class="tajawal"> {{product_name.capitalize()}}</span>
+                                <!--<br>
                             <button class="button-4 btn-dir bg-color-yellow popover-open text-align-center justify-content-center" title="This product is nice" data-popover="#popover1" dmx-on:click="app.main.home.popover_title.setValue(product_name.capitalize());app.main.home.popover_description.setValue(product_description.capitalize())" style="border-radius:50% !important; height:20px; width:20px;display:block !important; padding:0px !important; border:0px !important;">
                                 <i class="bi bi-info-circle-fill fa-fw"></i>
                             </button>-->
-                        </div>
-                        <div class="card-footer no-border bg-transparent" style="padding-top:-210px !important; height:40px !important">
-                            <div class="row">
-                                <div class="col-100">
-                                    <h4 class="strong tajawal text-color-black"> {{product_amt.toNumber().formatCurrency('AED', '.', ',', 2)}}
-                                        <!--<small dmx-show="amount_matrix" class="smallfont"> {{amount_matrix}} </small>-->
-                                    </h4>
-                                </div>
-                                <!-- <div class="col-100">
+                            </div>
+                            <div class="card-footer no-border bg-transparent" style="padding-top:-210px !important; height:40px !important">
+                                <div class="row">
+                                    <div class="col-100">
+                                        <h4 class="strong tajawal text-color-black"> {{product_amt.toNumber().formatCurrency('AED', '.', ',', 2)}}
+                                            <!--<small dmx-show="amount_matrix" class="smallfont"> {{amount_matrix}} </small>-->
+                                        </h4>
+                                    </div>
+                                    <!-- <div class="col-100">
                                     <a class="link button-4 brand-bg text-color-white" dmx-on:click="app.main.navigate('/product-info/'+id,{})">Book Now</a>
                                 </div> -->
-                            </div>
+                                </div>
 
+                            </div>
                         </div>
+
                     </div>
 
                 </div>
+                <!-- dmx-show="(app.local_store.data.service_location == 'salon')" -->
+                <!-- list salon providers -->
+                <div class="row no-gap">
+                    <div class="col-100" dmx-hide="app.main.home.querySalons.state.processing" dmx-repeat:repeat_salons="app.main.home.querySalons.data.repeat_providers.sort(`distance.Distance`)" dmx-show="(app.local_store.data.service_location == 'salon')">
+                        <div class="card demo-card-header-pic no-shadow card-outline border-10" dmx-on:click="app.main.navigate('/provider-services-page/'+id+'/'+staff_name+'/'+app.main.home.selector.value,{})">
+                            <div class="card-header align-items-flex-end" dmx-style:background-image="'url('+ provider_avatar +')'" style="height:256px; background-position:bottom">
+                                <span style="font-size:26px; text-transform:capitalize; strong" class="tajawal">
+                                    {{staff_name.capitalize()}}
 
-            </div>
-            <!-- dmx-show="(app.local_store.data.service_location == 'salon')" -->
-            <!-- list salon providers -->
-            <div class="row no-gap">
-                <div class="col-100" dmx-hide="app.main.home.querySalons.state.processing" dmx-repeat:repeat_salons="app.main.home.querySalons.data.repeat_providers.sort(`distance.Distance`)" dmx-show="(app.local_store.data.service_location == 'salon')">
-                    <div class="card demo-card-header-pic no-shadow card-outline border-10" dmx-on:click="app.main.navigate('/provider-services-page/'+id+'/'+staff_name+'/'+app.main.home.selector.value,{})">
-                        <div class="card-header align-items-flex-end" dmx-style:background-image="'url('+ provider_avatar +')'" style="height:256px; background-position:bottom">
-                            <span style="font-size:26px; text-transform:capitalize; strong" class="tajawal">
-                                {{staff_name.capitalize()}}
-
-                            </span>
-                            <!--<br>
+                                </span>
+                                <!--<br>
                             <button class="button-4 btn-dir bg-color-yellow popover-open text-align-center justify-content-center" title="This product is nice" data-popover="#popover1" dmx-on:click="app.main.home.popover_title.setValue(product_name.capitalize());app.main.home.popover_description.setValue(product_description.capitalize())" style="border-radius:50% !important; height:20px; width:20px;display:block !important; padding:0px !important; border:0px !important;">
                                 <i class="bi bi-info-circle-fill fa-fw"></i>
                             </button>-->
-                        </div>
-                        <div class="card-footer no-border bg-transparent" style="padding-top:-210px !important; height:40px !important">
-                            <div class="row">
-                                <div class="col-100">
-                                    <h4 class="strong tajawal text-color-black">
-                                        <!--<small dmx-show="amount_matrix" class="smallfont"> {{amount_matrix}} </small>-->{{distance.Distance.floor()}} km away
-                                    </h4>
-                                </div>
-                                <!-- <div class="col-100">
-                                    <a class="link button-4 brand-bg text-color-white" dmx-on:click="app.main.navigate('/product-info/'+id,{})">Book Now</a>
-                                </div> -->
                             </div>
-
+                            <div class="card-footer no-border bg-transparent" style="padding-top:-210px !important; height:40px !important">
+                                <div class="row" style="width: 100%;">
+                                    <div class="col">
+                                        <h4 class="">
+                                            <!--<small dmx-show="amount_matrix" class="smallfont"> {{amount_matrix}} </small>-->{{distance.Distance.floor()}} km away
+                                        </h4>
+                                    </div>
+                                    <div class="col">
+                                        <h4 class="">
+                                            {{rating}} <i class="bi bi-star-fill text-color-red"></i>
+                                        </h4>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
+
                     </div>
 
                 </div>
-
-            </div>
-            <!-- list home providers -->
-            <div class="row no-gap">
-                <div class="col-50" dmx-hide="app.main.home.querySalons.state.processing" dmx-repeat:repeat_salons="app.main.home.home_service_providers.data.repeat_providers.sort(`distance.Distance`)" dmx-show="(app.local_store.data.service_location == 'home')">
-                    <div class="card demo-card-header-pic no-shadow card-outline border-10" dmx-on:click="run([{run:{action:`app.main.navigate(\'/provider-services-page/\'+parent_provider_id+\'/\'+staff_name+\'/\'+app.main.home.selector.value,{})`}},{run:{action:`app.selected_employee_id.setValue(id)`}},{run:{action:`app.cart_preFill.set(\'employee_id\',id)`}}])">
-                        <div class="card-header align-items-flex-end" dmx-style:background-image="'url('+ provider_avatar +')'" style="height:256px; background-position:bottom">
-                            <span style="font-size:26px; text-transform:capitalize; strong" class="tajawal">
-                                <!--{{}}-->{{staff_name.capitalize()}}
-                            </span>
-                            <!--<br>
+                <!-- list home providers -->
+                <div class="row no-gap">
+                    <div class="col-100 padding" dmx-on:click="run({condition:{if:`(app.local_store.data.freelacer_card_class_toggle == 100)`,then:{steps:{run:{action:`app.local_store.set(\'freelacer_card_class_toggle\',50)`}}},else:{steps:{run:{action:`app.local_store.set(\'freelacer_card_class_toggle\',100)`}}}}})" style="transition: width 0.5s;">Switch view</div>
+                    <div class="col-50" dmx-hide="app.main.home.querySalons.state.processing" dmx-repeat:repeat_salons="app.main.home.home_service_providers.data.repeat_providers.sort(`distance.Distance`)" dmx-show="(app.local_store.data.service_location == 'home')" dmx-class:col-100="(app.local_store.data.freelacer_card_class_toggle == 100)" style="transition: width 2s;">
+                        <div class="card demo-card-header-pic no-shadow card-outline border-10" dmx-on:click="run([{run:{action:`app.main.navigate(\'/provider-services-page/\'+parent_provider_id+\'/\'+staff_name+\'/\'+app.main.home.selector.value,{})`}},{run:{action:`app.selected_employee_id.setValue(id)`}},{run:{action:`app.cart_preFill.set(\'employee_id\',id)`}}])">
+                            <div class="card-header align-items-flex-end" dmx-style:background-image="'url('+ provider_avatar +')'" style="height:256px; background-position:bottom">
+                                <span style="font-size:26px; text-transform:capitalize; strong" class="tajawal">
+                                    <!--{{}}-->{{staff_name.capitalize()}}
+                                </span>
+                                <!--<br>
                                         <button class="button-4 btn-dir bg-color-yellow popover-open text-align-center justify-content-center" title="This product is nice" data-popover="#popover1" dmx-on:click="app.main.home.popover_title.setValue(product_name.capitalize());app.main.home.popover_description.setValue(product_description.capitalize())" style="border-radius:50% !important; height:20px; width:20px;display:block !important; padding:0px !important; border:0px !important;">
                                             <i class="bi bi-info-circle-fill fa-fw"></i>
                                         </button>-->
-                        </div>
-                        <div class="card-footer no-border bg-transparent" style="padding-top:-210px !important; height:40px !important">
-                            <div class="row">
-                                <div class="col-100">
-                                    <h4 class="strong tajawal text-color-black">
-                                        <!--<small dmx-show="amount_matrix" class="smallfont"> {{amount_matrix}} </small>-->{{distance.Distance.floor()}} km away
-                                    </h4>
-                                </div>
-                                <!-- <div class="col-100">
-                                                <a class="link button-4 brand-bg text-color-white" dmx-on:click="app.main.navigate('/product-info/'+id,{})">Book Now</a>
-                                            </div> -->
                             </div>
+                            <div class="card-footer no-border bg-transparent" style="padding-top:-210px !important; height:40px !important">
+                                <div class="row" style="width: 100%;">
+                                    <div class="col">
+                                        <h4 class="">
+                                            <!--<small dmx-show="amount_matrix" class="smallfont"> {{amount_matrix}} </small>-->{{distance.Distance.floor()}} km away
+                                        </h4>
+                                    </div>
+                                    <div class="col">
+                                        <h4 class="">
+                                            {{rating}} <i class="bi bi-star-fill text-color-red"></i>
+                                        </h4>
+                                    </div>
+                                    <div class="col">
+                                        <h4 class="">
+                                            Flag
+                                        </h4>
+                                    </div>
+                                </div>
 
+                            </div>
                         </div>
+
                     </div>
 
                 </div>
-
             </div>
-        </div>
-        <div class="popover" id="popover1">
-            <div class="popover-inner">
-                <div class="block">
-                    <p>{{app.main.home.popover_title.value.capitalize()}}</p>
-                    <p>{{app.main.home.popover_description.value.capitalize()}}</p>
+            <div class="popover" id="popover1">
+                <div class="popover-inner">
+                    <div class="block">
+                        <p>{{app.main.home.popover_title.value.capitalize()}}</p>
+                        <p>{{app.main.home.popover_description.value.capitalize()}}</p>
+                    </div>
                 </div>
             </div>
+
+
+
         </div>
-
-
-
-
     </div>
 
 </div>

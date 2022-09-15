@@ -7,6 +7,7 @@
     <div class="padding-top padding-bottom">
         <div class="navbar shadow">
             <div class="navbar-inner" style="padding-right:0px !important; padding-left:0px !important; margin-right:0px !important">
+
                 <div class="left">
                     <a href="#" class="link back">
                         <i class="icon f7-icons">arrow_left</i>
@@ -21,6 +22,25 @@
                         <i class="icon f7-icons">ellipsis_vertical</i>
                     </a>
                 </div>
+                <div class="subnavbar">
+                    <div class="list" style="width:100%">
+                        <ul>
+                            <li class="item-content item-input item-input-outline">
+                                <div class="item-inner" style="width:100% !important">
+                                    <div class="item-title item-floating-label strong"><i class="bi bi-search"></i> &nbsp; Find professional by name</div>
+                                    <div class="item-input-wrap" style="width:100% !important">
+                                        <input type="text" placeholder="Search by name" class="form-control" id="search_by_name" name="search_by_name" style="width:100% !important" />
+                                        <span class="input-clear-button"></span>
+                                    </div>
+                                </div>
+
+                            </li>
+                        </ul>
+
+                    </div>
+
+
+                </div>
             </div>
         </div>
 
@@ -28,37 +48,14 @@
     <div class="page-content wappler-block">
         <dmx-preloader id="justpropreloader" spinner="pulse" color="#ff6600"></dmx-preloader>
 
-
-
-
-        <div class="block">
-            <div class="list no-hairlines-md up-20">
-                <ul>
-                    <li class="item-content item-input item-input-outline">
-                        <div class="item-inner" style="width:100% !important">
-                            <div class="item-title item-floating-label strong"><i class="bi bi-search"></i> &nbsp; Find professional by name</div>
-                            <div class="item-input-wrap" style="width:100% !important">
-                                <input type="text" placeholder="Search by name" class="form-control" id="search_by_name" name="search_by_name" style="width:100% !important" />
-                                <span class="input-clear-button"></span>
-                            </div>
-                        </div>
-
-                    </li>
-                </ul>
-
-            </div>
-
-        </div>
-
-
-
+        <div class="block"></div>
         <div class="row up-50">
             <div class="col-100">
                 <div class="block-title h6 strong custom-font text-color-primary">{{app.main.chooseprofessional.service_info.data.queryServices.count()}} {{app.main.chooseprofessional.service_info.data.queryServices.product_name.titlecase()}} Service Providers</div>
             </div>
             <div class="col-100">
-                <div class="list media-list inset">
-                    <ul class="mb-10" dmx-repeat:repeat_employees="app.main.chooseprofessional.list_employees.data.queryEmployees">
+                <div class="list media-list inset no-margin-top">
+                    <ul class="mb-10" dmx-repeat:repeat_employees="app.main.chooseprofessional.list_employees.data.repeatEmployees">
                         <li dmx-on:click="run([{run:{action:`app.cart_preFill.set(\'employee_id\',id);app.cart_preFill.set(\'parent_provider_id\',parent_provider_id)`}},{run:{action:`app.main.navigate(\'/appointment-page/\'+id+\'/\'+app.main.chooseprofessional.route.params.provider_service_id,{})`}},{run:{action:`app.selected_employee_id.setValue(id)`}}])">
                             <a href="#" class="item-link item-content">
                                 <div class="item-media"><img width="80" height="80" dmx-bind:src="provider_avatar" style="border-radius:50%" /></div>
@@ -67,8 +64,8 @@
                                         <div class="item-title strong">{{staff_name.titlecase()}}</div>
                                         <div class="item-after text-color-black">Choose</div>
                                     </div>
-                                    <div class="item-subtitle small">2 <i class="bi bi-star-fill text-color-red"></i> </div>
-                                    <div class="item-text">{{distance.Distance.floor()+' km'}} away</div>
+                                    <div class="item-subtitle small">{{rating}} <i class="bi bi-star-fill text-color-red"></i></div>
+                                    <div class="item-text">{{brief_introduction}}</div>
                                 </div>
                             </a>
                         </li>
