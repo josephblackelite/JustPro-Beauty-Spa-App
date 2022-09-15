@@ -1,4 +1,4 @@
-<!-- Wappler include head-page="index.html" is="dmx-app" id="providerservicespage" appConnect="local" framework7_6="With App Connect" framework7_icons="local" capacitor="local" -->
+<!-- Wappler include head-page="index.html" is="dmx-app" id="providerservicespage" appConnect="local" framework7_6="With App Connect" framework7_icons="local" capacitor="local" components="{dmxFormatter:{}}" -->
 
 <div class="page" path="/provider-services-page/:provider_id/:provider_name/:category?" data-name="provider-services-page" id="providerservicespage">
     <dmx-serverconnect id="queryProviderServices" url="https://api.justpro.me/api/provider/list_provider_services_4_category" site="JustPro-Spa-Backend" dmx-param:provider_id="app.main.providerservicespage.route.params.provider_id" dmx-param:category="app.main.providerservicespage.route.params.category"></dmx-serverconnect>
@@ -7,9 +7,12 @@
             <div class="navbar-inner" style="padding-right:0px !important; padding-left:0px !important; margin-right:0px !important">
                 <div class="subnavbar">
                     <div class="row">
-                        <div class="col-100 text-align-right justify-content-right">
-                            <div class="block text-align-right justify-content-right">
-                                <h6 class="nametag text-align-right justify-content-right">{{app.main.providerservicespage.route.params.provider_name.titlecase()}}'s Freelance Page</h6>
+                        <div class="col-100 justify-content-right">
+                            <div class="block text-align-right">
+                                <p class="nametag">
+                                    {{app.main.providerservicespage.route.params.category.titlecase()}} Services
+
+                                </p>
                             </div>
                         </div>
                     </div>
@@ -23,7 +26,7 @@
 
                 </div>
 
-                <div class="title" dmx-text="">{{app.local_store.data.state}} Services</div>
+                <div class="title">{{app.main.providerservicespage.route.params.provider_name.titlecase()}}<span dmx-hide="(app.local_store.data.service_location == 'salon')">'s Store</span></div>
 
                 <div class="right">
                     <a href="#" class="link panel-open icon-only" data-panel="left">
