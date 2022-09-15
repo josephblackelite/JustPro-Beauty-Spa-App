@@ -1,32 +1,45 @@
-<!-- Wappler include head-page="index.html" is="dmx-app" id="providerservicespage" appConnect="local" framework7_6="With App Connect" framework7_icons="local" capacitor="local" components="{dmxFormatter:{}}" -->
+<!-- Wappler include head-page="index.html" is="dmx-app" id="providerservicespage" appConnect="local" framework7_6="With App Connect" framework7_icons="local" capacitor="local" components="{dmxFormatter:{},dmxSlideshow:{},dmxPreloader:{}}" -->
+
 
 <div class="page" path="/provider-services-page/:provider_id/:provider_name/:category?" data-name="provider-services-page" id="providerservicespage">
-    <dmx-serverconnect id="queryProviderServices" url="https://api.justpro.me/api/provider/list_provider_services_4_category" site="JustPro-Spa-Backend" dmx-param:provider_id="app.main.providerservicespage.route.params.provider_id" dmx-param:category="app.main.providerservicespage.route.params.category"></dmx-serverconnect>
+    <dmx-serverconnect id="queryProviderServices" url="https://api.justpro.me/api/provider/list_provider_services_4_category" site="JustPro-Spa-Backend" dmx-param:provider_id="app.main.providerservicespage.route.params.provider_id" dmx-param:category="app.main.providerservicespage.route.params.category" dmx-param:search_by_name="app.main.providerservicespage.search.value" dmx-on:start="app.showPreloader('deeporange')" dmx-on:done="app.hidePreloader()"></dmx-serverconnect>
+    <dmx-serverconnect id="provider_info" url="https://api.justpro.me/api/provider/provider_info" site="JustPro-Spa-Backend" dmx-param:provider_id="app.main.providerservicespage.route.params.provider_id" dmx-on:start="app.showPreloader('deeporange')" dmx-on:done="app.hidePreloader()" dmx-param:customer_longitude="app.geo.coords.longitude" dmx-param:customer_latitude="app.geo.coords.latitude"></dmx-serverconnect>
     <div class="padding-top padding-bottom">
         <div class="navbar shadow">
             <div class="navbar-inner" style="padding-right:0px !important; padding-left:0px !important; margin-right:0px !important">
                 <div class="subnavbar">
+                    <a href="#!" class="link smallfont text-align-left"><span class="fa fa-star small" dmx-class:checked="(app.main.providerservicespage.provider_info.data.rating &gt; 0)"></span>
+                        <span class="fa fa-star small" dmx-class:checked="(app.main.providerservicespage.provider_info.data.rating &gt; 1)"></span>
+                        <span class="fa fa-star small" dmx-class:checked="(app.main.providerservicespage.provider_info.data.rating &gt; 2)"></span>
+                        <span class="fa fa-star small" dmx-class:checked="(app.main.providerservicespage.provider_info.data.rating &gt; 3)"></span>
+                        <span class="fa fa-star small" dmx-class:checked="(app.main.providerservicespage.provider_info.data.rating &gt; 4)"></span></a>
+                    <a href="#!" class="link smallfont text-align-right">{{app.main.providerservicespage.provider_info.data.distance.Distance.toNumber().floor()}}km away</a>
+
+                    <!--  
                     <div class="row">
-                        <div class="col-100 justify-content-right">
+                        <div class="col-100">
                             <div class="block text-align-right">
                                 <p class="nametag">
-                                    {{app.main.providerservicespage.route.params.category.titlecase()}} Services
+                                    <span dmx-hide="!app.local_store.data.state">{{app.main.providerservicespage.route.params.category.titlecase()}} Services</span>
+                                    <span dmx-show="!app.local_store.data.state">
+                                        <span dmx-show="(app.local_store.data.service_location == 'salon')">Our </span><span dmx-show="(app.local_store.data.service_location == 'home')">My </span> Services
+                                    </span> 
 
                                 </p>
                             </div>
                         </div>
                     </div>
-                    <p></p>
+                    <p></p>-->
 
                 </div>
                 <div class="left">
                     <a href="#" class="link back">
-                        <i class="icon f7-icons">arrow_left</i>
+                        <i class="icon f7-icons">arrow_left</i> &nbsp; Back
                     </a>
 
                 </div>
 
-                <div class="title">{{app.main.providerservicespage.route.params.provider_name.titlecase()}}<span dmx-hide="(app.local_store.data.service_location == 'salon')">'s Store</span></div>
+                <div class="title"> </div>
 
                 <div class="right">
                     <a href="#" class="link panel-open icon-only" data-panel="left">
@@ -39,17 +52,63 @@
 
     </div>
     <div class="page-content location-wraper newbg">
+        <dmx-preloader id="justpropreloader" spinner="pulse" color="#ff6600"></dmx-preloader>
         <div id="services" style="margin-bottom:130px !important">
             <!-- <div class="block mb-0" dmx-hide="app.main.home.queryServices.state.processing">
                 <h4 class="montserrat smallfont">{{app.main.providerservicespage.queryProviderServices.data.queryServices.count()}} Services offered <span dmx-show="(app.local_store.data.service_location == 'salon')">in</span><span dmx-show="(app.local_store.data.service_location == 'home')">at</span> {{app.main.home.providers.value.titlecase()}}</h4>
+            </div>   -->
+
+            <dmx-slideshow id="prov_info" dmx-bind:slides="app.main.providerservicespage.provider_info.data.queryProvider" slide-url="provider_avatar" slide-title="staff_name.titlecase()" slide-link="'#!'" style="height:256px !important" class="up-15" slide-description="job_title.titlecase()"></dmx-slideshow>
+
+
+            <div class="block mb-10 up-30">
+                <div class="list no-hairlines-md">
+                    <ul>
+                        <li class="item-content item-input item-input-outline">
+                            <div class="item-inner">
+                                <div class="item-title item-floating-label"><i class="bi bi-search"></i> Search Services</div>
+                                <div class="item-input-wrap">
+                                    <input type="text" placeholder="Search Services" id="search" name="search" />
+                                    <span class="input-clear-button"></span>
+                                </div>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
             </div>
 
-            -->
-            <div class="row no-gap">
-                <div class="col-50" dmx-hide="app.main.providerservicespage.queryProviderServices.state.processing" dmx-repeat:repeat_provider_services="app.main.providerservicespage.queryProviderServices.data.queryServices">
+
+
+
+            <div class="block up-30">
+
+                <div class="row" style="transition: width 0.5s;">
+                    <div class="col-70">
+                        <h5 class="custom-font nametag no-margin" style="padding-top:15px !important"><span dmx-show="(app.local_store.data.service_location == 'salon')">Our {{app.main.providerservicespage.route.params.category.titlecase()}} Services</span>
+                            <span dmx-show="(app.local_store.data.service_location == 'home')">My {{app.main.providerservicespage.route.params.category.titlecase()}} Services</span>
+                        </h5>
+                    </div>
+                    <div class="col-30 text-align-right justify-content-right">
+                        <p class="segmented segmented-round no-padding no-margin justify-content-right text-align-right">
+                            <button class="button smallbox" dmx-on:click="app.local_store.set('freelacer_card_class_toggle',100)"><i class="bi bi-window-fullscreen grow"></i></button>
+                            <button class="button smallbox" dmx-on:click="app.local_store.set('freelacer_card_class_toggle',50)"><i class="bi bi-window-split grow"></i></button>
+                        </p>
+                        <p class="smallfont no-padding no-margin text-color-black">
+                            <span></span>
+                            <span></span>
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+
+
+
+            <div class="row no-gap up-30">
+                <div class="col-50" dmx-hide="app.main.providerservicespage.queryProviderServices.state.processing" dmx-repeat:repeat_provider_services="app.main.providerservicespage.queryProviderServices.data.queryServices" dmx-class:col-100="(app.local_store.data.freelacer_card_class_toggle == 100)">
                     <div class="card demo-card-header-pic no-shadow card-outline border-10" dmx-on:click="app.main.navigate('/product-info/'+service_offered_id,{})">
                         <div class="card-header align-items-flex-end" dmx-style:background-image="'url(' + product_avatar + ')'" style="height:256px; background-position:bottom">
-                            <span style="font-size:22px; text-transform:capitalize; strong" class="tajawal"> {{product_name.capitalize()}}</span>
+                            <span style="font-size:22px; text-transform:capitalize; strong" class="tajawal nametag"> {{product_name.capitalize()}}</span>
 
                         </div>
                         <div class="card-footer no-border bg-transparent" style="padding-top:-210px !important; height:40px !important">

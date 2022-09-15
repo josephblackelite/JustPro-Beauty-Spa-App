@@ -109,7 +109,7 @@
                     </div>
                     <div class="card-footer justify-content-right text-align-right">
                         <!--<a href="#" class="link">Like</a><a href="#" class="link">Comment</a>-->
-                        <span dmx-hide="(provider_type == 'home')"> <a href="" dmx-bind:href="'https://www.google.com/maps/place/?q=place_id:'+google_place_id" class="button-6 text-color-white strong bg-color-black" dmx-show="(order_status == 'pending')"> View Location</a>
+                        <span dmx-hide="(provider_type == 'home')"> <a href="" dmx-bind:href="'https://www.google.com/maps/place/?q=place_id:'+google_place_id" class="button-6 text-color-white strong bg-color-black external" dmx-show="(order_status == 'pending')"> View Location</a>
                         </span>
                         <a href="#" class="link button-6 text-color-white strong bg-color-primary" dmx-on:click="app.main.navigate('/review-service/'+provider_service_id,{})" dmx-show="(order_status == 'completed')">Rate Service</a>
                     </div>

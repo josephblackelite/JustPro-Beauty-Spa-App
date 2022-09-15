@@ -4390,6 +4390,9 @@ h6, .h6 {
 .up-10 {
     margin-top:-10px !important;
 }
+.up-15 {
+    margin-top:-15px !important;
+}
 .up-20 {
     margin-top:-20px !important;
 }
@@ -4576,6 +4579,17 @@ margin-bottom:-20px !important;
   border-top: 3px solid #EF5742;
 }
 .grow {
-  font-size:19px !important;
-  font-weight:500 !important;
+  font-size:22px !important;
+  font-weight:400 !important;
+}
+
+.small {
+  font-size:16px !important;
+
+}
+
+
+.smallbox {
+width:50px !important;
+height:50px !important;
 }
