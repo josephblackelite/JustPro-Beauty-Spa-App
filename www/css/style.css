@@ -4575,4 +4575,7 @@ margin-bottom:-20px !important;
   border-bottom: 3px solid transparent;
   border-top: 3px solid #EF5742;
 }
-
+.grow {
+  font-size:19px !important;
+  font-weight:500 !important;
+}
