@@ -259,7 +259,13 @@ function sendMail(email) {
 //APP - BACK BUTTON >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 //BACK BUTTON
 App.addListener('backButton', () => {
-    Framework7.instance.views.main.router.back()
+
+    if (Framework7.instance.views.main.router.currentRoute.path == "/order-tracking") {
+        Framework7.instance.views.main.router.navigate("/home")
+    } else {
+        Framework7.instance.views.main.router.back()
+    }
+
 })
 
 App.addListener('appUrlOpen', (event) => {
