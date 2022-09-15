@@ -128,7 +128,7 @@
 
         <!-- Search backdrop -->
         <div class="searchbar-backdrop" style="border-bottom:0px !important"></div>
-        <div class="relative">
+        <div class="container mb-100">
 
             <!--    <div class="block up-30 text-align-right">
             <h4 class="tajawal text-color-white  strong"><a href="/profile" class="link small text-color-black">
@@ -137,7 +137,7 @@
                     </small>
                 </a>
             </h4>
-        </div> -->
+         </div> -->
 
 
             <div class="list mt-0 up-20">
@@ -158,8 +158,8 @@
                 </li>
             </ul> -->
                 <p class="segmented segmented-strong  up-40  sticky-top">
-                    <button class="button strong text-color-primary" dmx-on:click="app.local_store.set('service_location','home')" dmx-class:button-active="(app.local_store.data.service_location == 'home')">Home Service</button>
-                    <button class="button strong text-color-primary" dmx-on:click="app.local_store.set('service_location','salon')" dmx-class:button-active="(app.local_store.data.service_location == 'salon')">Salon Visit</button>
+                    <button class="button strong text-color-primary" dmx-on:click="app.local_store.set('service_location','home')" dmx-class:button-active="(app.local_store.data.service_location == 'home')" style="font-weight: bold;">Home Service</button>
+                    <button class="button strong text-color-primary" dmx-on:click="app.local_store.set('service_location','salon')" dmx-class:button-active="(app.local_store.data.service_location == 'salon')" style="font-weight: bold;">Salon Visit</button>
                     <span class="segmented-highlight"></span>
                 </p>
             </div>
@@ -276,7 +276,7 @@
                     <div class="col-50" dmx-hide="app.main.home.querySalons.state.processing" dmx-repeat:repeat_salons="app.main.home.home_service_providers.data.repeat_providers.sort(`distance.Distance`)" dmx-show="(app.local_store.data.service_location == 'home')" dmx-class:col-100="(app.local_store.data.freelacer_card_class_toggle == 100)" style="transition: width 2s;">
                         <div class="card demo-card-header-pic no-shadow card-outline border-10" dmx-on:click="run([{run:{action:`app.main.navigate(\'/provider-services-page/\'+parent_provider_id+\'/\'+staff_name+\'/\'+app.main.home.selector.value,{})`}},{run:{action:`app.selected_employee_id.setValue(id)`}},{run:{action:`app.cart_preFill.set(\'employee_id\',id)`}}])">
                             <div class="card-header align-items-flex-end" dmx-style:background-image="'url('+ provider_avatar +')'" style="height:256px; background-position:bottom">
-                                <span style="font-size:26px; text-transform:capitalize; strong" class="tajawal">
+                                <span style="font-size:26px; text-transform:capitalize;" class="strong tajawal">
                                     <!--{{}}-->{{staff_name.capitalize()}}
                                 </span>
                                 <!--<br>

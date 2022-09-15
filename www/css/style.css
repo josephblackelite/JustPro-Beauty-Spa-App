@@ -732,6 +732,13 @@ h6, .h6 {
 .mb-100 {
   margin-bottom: 100px; }
 
+
+.mb-150 {
+  margin-bottom: 150px; }
+
+  .mb-200 {
+  margin-bottom: 200px; 
+  }
 /* Margin left */
 .ml-auto {
   margin-left: auto; }
@@ -4501,3 +4508,11 @@ margin-bottom:-20px !important;
     .relative {
   position: relative;
   top: 0px;}
+
+  .font-small {
+    font-size : 16px
+  }
+
+  .font-lg {
+    font-size : 26px
+  }
