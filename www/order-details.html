@@ -38,7 +38,7 @@
             </div>
 
             <div class="col-100">
-                <h5 class="tajawal mt-10 block">You have {{app.main.orderdetails.orderchildren.data.query.count()}} appointment(s) in this booking</h5>
+                <h5 class="tajawal mt-10 block text-color-black">You have {{app.main.orderdetails.orderchildren.data.query.count()}} appointment(s) in this booking</h5>
 
 
                 <!--
@@ -69,7 +69,7 @@
 
 
 
-                <div class="card demo-facebook-card" dmx-repeat:fullinfo="app.main.orderdetails.orderchildren.data.query">
+                <div class="card demo-facebook-card text-color-black" dmx-repeat:fullinfo="app.main.orderdetails.orderchildren.data.query">
                     <div class="card-header">
                         <div class="demo-facebook-avatar"><img width="34px" height="34px" dmx-bind:src="employee_avatar"></div>
                         <div class="demo-facebook-name">{{item_name.titlecase()}}</div>
@@ -109,9 +109,9 @@
                     </div>
                     <div class="card-footer justify-content-right text-align-right">
                         <!--<a href="#" class="link">Like</a><a href="#" class="link">Comment</a>-->
-                        <span dmx-hide="(provider_type == 'home')"> <a href="" dmx-bind:href="'https://www.google.com/maps/place/?q=place_id:'+google_place_id" class="button-6 text-color-white strong" dmx-show="(order_status == 'pending')"> View Location</a>
+                        <span dmx-hide="(provider_type == 'home')"> <a href="" dmx-bind:href="'https://www.google.com/maps/place/?q=place_id:'+google_place_id" class="button-6 text-color-white strong bg-color-black" dmx-show="(order_status == 'pending')"> View Location</a>
                         </span>
-                        <a href="#" class="link button-6 text-color-white strong" dmx-on:click="app.main.navigate('/review-service/'+provider_service_id,{})" dmx-show="(order_status == 'completed')">Rate Service</a>
+                        <a href="#" class="link button-6 text-color-white strong bg-color-primary" dmx-on:click="app.main.navigate('/review-service/'+provider_service_id,{})" dmx-show="(order_status == 'completed')">Rate Service</a>
                     </div>
                 </div>
 

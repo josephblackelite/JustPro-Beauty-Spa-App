@@ -78,28 +78,30 @@
             <p class="mt-0"><small>Swipe right to reveal all cards</small></p>
         </div>
         <div is="dmx-swiper" id="cardreader" dmx-bind:slides="app.main.checkout.customerPaymentMethods.data.query" class="mb-50 justify-content-center" space-between="15" centered-slides="true" navigation="true" pagination="bullets">
-            <div class="swiper-slide margin-right margin-left  align-self-center" style="margin-right:30px !important; margin-left:30px !important">
-                <div class="payment-card">
-                    <div class="card-media">
-                        <img src="img/card/card1.png" alt="">
-                        <img src="img/card/card2.png" alt="">
-                    </div>
-                    <div class="card-info">
-                        <div class="clearfix">
-                            <h5 class="card-name">{{funding}}</h5>
-                            <p class="card-number">**** **** **** {{last4}}</p>
+            <!-- style="margin-right:30px !important; margin-left:30px !important" margin-right margin-left align-self-center -->
+            <div class="swiper-slide display-flex justify-content-center align-items-center">
+                <div>
+                    <div class="payment-card">
+                        <div class="card-media">
+                            <img src="img/card/card1.png" alt="">
+                            <img src="img/card/card2.png" alt="">
                         </div>
-                        <div class="bottom-info">
-                            <p>{{exp_month+' / '+exp_year}}</p>
-                            <p>{{brand}}</p>
+                        <div class="card-info">
+                            <div class="clearfix">
+                                <h5 class="card-name">{{funding}}</h5>
+                                <p class="card-number">**** **** **** {{last4}}</p>
+                            </div>
+                            <div class="bottom-info">
+                                <p>{{exp_month+' / '+exp_year}}</p>
+                                <p>{{brand}}</p>
+                            </div>
                         </div>
                     </div>
+                    <button class="brand-bg text-color-white button-6 margin-top custom-font smallfont" dmx-on:click="run({'f7.dialog.confirm':{title:'Ready to pay?',text:`\'You are about to pay with your card ending in \'+last4+\' ?\'`,then:{steps:{run:{action:`app.main.checkout.bill_selected_card.selected_payment_method.setValue(stripe_payment_method_id);app.main.checkout.bill_selected_card.submit()`}}}}})" dmx-bind:disabled="(app.main.checkout.bill_selected_card.state.executing &amp;&amp; (app.main.checkout.bill_selected_card.selected_payment_method.value == stripe_payment_method_id))" style="width:285px !important"><span dmx-hide="(app.main.checkout.bill_selected_card.state.executing &amp;&amp; (app.main.checkout.bill_selected_card.selected_payment_method.value == stripe_payment_method_id))" class="smallfont">Click to Pay with this card</span>
+                        <span class="preloader color-white" dmx-show="(app.main.checkout.bill_selected_card.state.executing &amp;&amp; (app.main.checkout.bill_selected_card.selected_payment_method.value == stripe_payment_method_id))"></span>
+                    </button>
+
                 </div>
-                <button class="brand-bg text-color-white button-6 margin-top custom-font smallfont" dmx-on:click="run({'f7.dialog.confirm':{title:'Ready to pay?',text:`\'You are about to pay with your card ending in \'+last4+\' ?\'`,then:{steps:{run:{action:`app.main.checkout.bill_selected_card.selected_payment_method.setValue(stripe_payment_method_id);app.main.checkout.bill_selected_card.submit()`}}}}})" dmx-bind:disabled="(app.main.checkout.bill_selected_card.state.executing &amp;&amp; (app.main.checkout.bill_selected_card.selected_payment_method.value == stripe_payment_method_id))" style="width:285px !important"><span dmx-hide="(app.main.checkout.bill_selected_card.state.executing &amp;&amp; (app.main.checkout.bill_selected_card.selected_payment_method.value == stripe_payment_method_id))" class="smallfont">Click to Pay with this card</span>
-                    <span class="preloader color-white" dmx-show="(app.main.checkout.bill_selected_card.state.executing &amp;&amp; (app.main.checkout.bill_selected_card.selected_payment_method.value == stripe_payment_method_id))"></span>
-                </button>
-
-
             </div>
         </div>
 

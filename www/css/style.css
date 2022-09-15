@@ -732,6 +732,13 @@ h6, .h6 {
 .mb-100 {
   margin-bottom: 100px; }
 
+
+.mb-150 {
+  margin-bottom: 150px; }
+
+  .mb-200 {
+  margin-bottom: 200px; 
+  }
 /* Margin left */
 .ml-auto {
   margin-left: auto; }
@@ -4502,6 +4509,15 @@ margin-bottom:-20px !important;
   position: relative;
   top: 0px;}
 
+
+  .font-small {
+    font-size : 16px
+  }
+
+  .font-lg {
+    font-size : 26px
+  }
+
   .nametag {
     font-size:17px !important;
     font-weight:600 !important;
@@ -4559,3 +4575,4 @@ margin-bottom:-20px !important;
   border-bottom: 3px solid transparent;
   border-top: 3px solid #EF5742;
 }
+
