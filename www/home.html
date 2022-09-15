@@ -118,7 +118,6 @@
     <div class="page-content location-wraper newbg">
         <dmx-preloader id="justpropreloader" spinner="pulse" color="#ff6600"></dmx-preloader>
 
-
         <div class="searchbar-backdrop" style="border-bottom:0px !important"></div>
         <div class="mb-150">
 
@@ -135,7 +134,6 @@
 
 
             <div id="services">
-
                 <div class="block up-30  bg-color-white" style="position:fixed !important;  right:3px !important; top:210px !important; margin-bottom:40px !important">
                     <div class="row" style="transition: width 0.5s;">
                         <div class="col-100 text-align-right">
@@ -198,19 +196,14 @@
                 </div>
 
 
-
-
                 <div class="row no-gap">
-
-
                     <div class="col-50" dmx-hide="app.main.home.querySalons.state.processing" dmx-repeat:repeat_salons="app.main.home.home_service_providers.data.repeat_providers.sort(`distance.Distance`)" dmx-show="(app.local_store.data.service_location == 'home')" style="transition: width 0s;" dmx-class:col-100="(app.local_store.data.freelacer_card_class_toggle == 100)">
-                        <div class="card demo-card-header-pic no-shadow card-outline border-10" dmx-on:click="run([{run:{action:`app.main.navigate(\'/provider-services-page/\'+parent_provider_id+\'/\'+staff_name+\'/\'+app.main.home.selector.value,{})`}},{run:{action:`app.selected_employee_id.setValue(id)`}},{run:{action:`app.cart_preFill.set(\'employee_id\',id)`}}])">
+                        <div class="card demo-card-header-pic no-shadow card-outline border-10" dmx-on:click="run([{run:{action:`app.main.navigate(\'/provider-services-page/\'+parent_provider_id+\'/\'+staff_name+\'/\'+app.main.home.selector.value,{})`}},{run:{action:`app.selected_employee_id.setValue(id)`}},{run:{action:`app.cart_preFill.set(\'parent_provider_id\',id)`}}])">
                             <div class="ribbon" dmx-show="verified"><span>Verified</span></div>
                             <div class="card-header align-items-flex-end" dmx-style:background-image="'url('+ provider_avatar +')'" style="height:256px; background-position:bottom">
 
                                 <span style="font-size:26px; text-transform:capitalize; strong" class="tajawal nametag">
-
-                                    <!--{{}}-->{{staff_name.capitalize()}}
+                                    {{staff_name.capitalize()}}
                                 </span>
                                 <!--<br>
                                         <button class="button-4 btn-dir bg-color-yellow popover-open text-align-center justify-content-center" title="This product is nice" data-popover="#popover1" dmx-on:click="app.main.home.popover_title.setValue(product_name.capitalize());app.main.home.popover_description.setValue(product_description.capitalize())" style="border-radius:50% !important; height:20px; width:20px;display:block !important; padding:0px !important; border:0px !important;">
