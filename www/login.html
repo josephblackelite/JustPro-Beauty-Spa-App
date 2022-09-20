@@ -38,7 +38,7 @@
 }</script>
 
   <div class="page-content wappler-block">
-    <div class="container welcome-inner">
+    <div class="welcome-inner">
       <div class="text-align-center">
         <div class="main-logo center mb-10">
 
@@ -66,13 +66,14 @@
               </li>
             </ul>
           </div>
-          <button href="" class="button-large button-18 button-social rounded-xl button-fill mb-40" dmx-on:click="app.main.login.login_register_with_number.submit()" dmx-bind:disabled="app.main.login.login_register_with_number.state.executing" style="width:100% !important"><i class="bi-telephone-fill text-color-white" dmx-hide="app.main.login.login_register_with_number.state.executing"></i> <span dmx-hide="app.main.login.login_register_with_number.state.executing">Login With Mobile Number</span>
-            <div class="preloader color-white" dmx-show="app.main.login.login_register_with_number.state.executing"></div>
-
-          </button>
+          <div class="block">
+            <button href="" class="button-large button-18 button-social rounded-xl button-fill mb-40" dmx-on:click="app.main.login.login_register_with_number.submit()" dmx-bind:disabled="app.main.login.login_register_with_number.state.executing" style="width:100% !important"><i class="bi-telephone-fill text-color-white" dmx-hide="app.main.login.login_register_with_number.state.executing"></i> <span dmx-hide="app.main.login.login_register_with_number.state.executing">Login With Mobile Number</span>
+              <div class="preloader color-white" dmx-show="app.main.login.login_register_with_number.state.executing"></div>
+            </button>
+          </div>
         </form>
-        <!-- dmx-on:click="run({runJS:{function:'loginWithFb'}})"-->
-        <a href="/home" class="button-large button-18 button-social rounded-xl button-fill facebook" style="width:100% !important"><img src="img/social/facebook.png" alt=""> <span>Login with facebook</span></a>
+        <!-- dmx-on:click="run({runJS:{function:'loginWithFb'}})"
+        <a href="/home" class="button-large button-18 button-social rounded-xl button-fill facebook" style="width:100% !important"><img src="img/social/facebook.png" alt=""> <span>Login with facebook</span></a>-->
         <!--   <form id="GoogleSignInForm" is="dmx-serverconnect-form" method="post" action="https://api.justpro.me/api/security/login_with_google" site="JustPro-Spa-Backend" dmx-on:success="run({condition:{if:`app.main.Login.GoogleSignInForm.data.set_new_user_id`,then:{steps:[{runJS:{function:'addExternalUserId',args:[`app.main.login.GoogleSignInForm.data.set_new_user_id.toString()`]}},{run:{action:`app.local_store.set(\'user_id\',app.main.login.GoogleSignInForm.data.set_new_user_id);app.main.navigate(\'/home\',{clearPreviousHistory: true, history: false})`}}]},else:{steps:[{runJS:{function:'addExternalUserId',args:[`app.main.login.GoogleSignInForm.data.set_login_user_id.toString()`]}},{run:{action:`app.local_store.set(\'user_id\',app.main.login.GoogleSignInForm.data.set_login_user_id);app.main.navigate(\'/home\',{clearPreviousHistory: true, history: false})`}}]}}})" dmx-on:error="run({'f7.dialog.alert':{title:'Error',text:'User not found, try other login methods.'}})"><input id="first_name" name="first_name" type="hidden"><input id="last_name" name="last_name" type="hidden"><input id="email" name="email" type="hidden"><input id="googleImgUrl" name="googleImgUrl" type="hidden"><input id="password" name="password" type="hidden">
                     <input id="GoogleSignInFormLong" name="long" type="hidden" dmx-bind:value="geoLocation.coords.longitude">
                     <input id="GoogleSignInFormLat" name="lat" type="hidden" dmx-bind:value="geoLocation.coords.latitude">
