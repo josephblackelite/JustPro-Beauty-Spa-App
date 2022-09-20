@@ -421,7 +421,10 @@ dmx.config({
           }
         ]
       }
-    ]
+    ],
+    "var1": {
+      "outputType": "array"
+    }
   },
   "onboarding": {
     "App_notifcation": [
@@ -514,42 +517,6 @@ dmx.config({
       "outputType": "array"
     },
     "repeat_salons": {
-      "meta": [
-        {
-          "name": "id",
-          "type": "number"
-        },
-        {
-          "name": "staff_name",
-          "type": "text"
-        },
-        {
-          "name": "provider_full_address",
-          "type": "text"
-        },
-        {
-          "name": "provider_address_longitude",
-          "type": "number"
-        },
-        {
-          "name": "provider_address_latitude",
-          "type": "number"
-        },
-        {
-          "name": "provider_avatar",
-          "type": "text"
-        },
-        {
-          "name": "distance",
-          "type": "text",
-          "sub": [
-            {
-              "name": "Distance",
-              "type": "text"
-            }
-          ]
-        }
-      ],
       "outputType": "array"
     }
   },
