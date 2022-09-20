@@ -4595,3 +4595,22 @@ margin-bottom:-20px !important;
 width:50px !important;
 height:50px !important;
 }
+
+.newbtn {
+  background: #EF5742;
+  background-image: -webkit-gradient(linear, left top, left bottom, from(#EF5742), to(#EF5742));
+  background-image: linear-gradient(to bottom, #EF5742, #EF5742);
+  border-radius: 5px;
+  font-family: Arial;
+  color: #ffffff;
+  font-size: 14px;
+  height:auto;
+  padding: 0px 20px 0px 20px;
+  text-decoration: none;
+}
+
+.newbtn:hover {
+  background: #000;
+  color:#fff;
+  text-decoration: none;
+}
