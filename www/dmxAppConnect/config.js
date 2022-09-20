@@ -424,7 +424,19 @@ dmx.config({
     ],
     "var1": {
       "outputType": "array"
-    }
+    },
+    "AddOneSignal_user_id": [
+      {
+        "name": "$param",
+        "type": "object",
+        "sub": [
+          {
+            "type": "text",
+            "name": "user_id"
+          }
+        ]
+      }
+    ]
   },
   "onboarding": {
     "App_notifcation": [

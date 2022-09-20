@@ -354,20 +354,20 @@
 
       <div class="page welcome-screen" data-name="login" path="/" id="login">
         <script is="dmx-flow" id="AddOneSignal_user_id" type="text/dmx-flow">{
-              meta: {
-                $param: [
-                  {type: "text", name: "user_id"}
-                ]
-              },
-              exec: {
-                steps: {
-                  runJS: {
-                    function: "addExternalUserId",
-                    args: ["{{app.local_store.data.user_id.toString()}}"]
-                  }
-                }
-              }
-            }</script>
+  meta: {
+    $param: [
+      {type: "text", name: "user_id"}
+    ]
+  },
+  exec: {
+    steps: {
+      runJS: {
+        function: "addExternalUserId",
+        args: ["{{Current_user.data.customer.id}}"]
+      }
+    }
+  }
+}</script>
         <script is="dmx-flow" id="navigate_to_verify_otp" type="text/dmx-flow">{
               meta: {
                 $param: [

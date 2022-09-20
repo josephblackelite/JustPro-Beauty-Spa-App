@@ -175,22 +175,6 @@
                     </div>
                 </div>
 
-
-                <!--  <div class="block mb-0 up-10" dmx-hide="app.main.home.querySalons.state.processing+app.main.home.querySalons.state.executing+app.main.home.home_service_providers.state.processing+app.main.home.home_service_providers.state.executing">
-
-                    <h4 class="custom-font" style="font-size:15px !important">
-                        <span dmx-show="(app.local_store.data.service_location == 'salon')"> {{app.main.home.querySalons.data.repeat_providers.count()}} <span dmx-show="app.local_store.data.state">Salons offering {{app.local_store.data.state.titlecase()}} services. </span> <span dmx-hide="app.local_store.data.state">Salons Nearby</span>
-                        </span>
-                        <span dmx-show="(app.local_store.data.service_location == 'home')">
-                            {{app.main.home.home_service_providers.data.repeat_providers.count()}} {{app.local_store.data.state.titlecase()}} Freelancers</span>
-                    </h4>
-
-
-                </div> -->
-
-
-
-
                 <!-- Repeat salons -->
                 <div class="row no-gap up-10">
                     <div class="col-50" dmx-hide="app.main.home.querySalons.state.processing" dmx-repeat:repeat_salons="(app.main.home.querySalons.data.repeat_providers.where(`rating`, app.main.home.filter.value, '==').sort(`distance.Distance`).count() &gt; 0)?app.main.home.querySalons.data.repeat_providers.where(`rating`, app.main.home.filter.value, '==').sort(`distance.Distance`):app.main.home.querySalons.data.repeat_providers.sort(`distance.Distance`))" dmx-show="(app.local_store.data.service_location == 'salon')" dmx-class:col-100="(app.local_store.data.freelacer_card_class_toggle == 100)">
