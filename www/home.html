@@ -144,8 +144,8 @@
 
             <div class="list mt-0 up-20">
                 <p class="segmented segmented-strong text-color-primary nametag up-40">
-                    <button class="button strong text-color-primary" dmx-on:click="app.local_store.set('service_location','home')" dmx-class:button-active="(app.local_store.data.service_location == 'home')" style="font-weight: bold;">Home Service</button>
-                    <button class="button strong text-color-primary" dmx-on:click="app.local_store.set('service_location','salon')" dmx-class:button-active="(app.local_store.data.service_location == 'salon')" style="font-weight: bold;">Salon Visit</button>
+                    <button class="button strong text-color-primary" dmx-on:click="app.local_store.set('service_location','home')" dmx-class:button-active="(app.local_store.data.service_location == 'home')" style="font-weight: 600;">Home Service</button>
+                    <button class="button strong text-color-primary" dmx-on:click="app.local_store.set('service_location','salon')" dmx-class:button-active="(app.local_store.data.service_location == 'salon')" style="font-weight: 600;">Salon Visit</button>
 
                     <span class="segmented-highlight"></span>
                 </p>
@@ -167,7 +167,7 @@
                             <p style="width: 100%;">
 
                                 <select id="filter" name="filter" style="height:20px; border:0px !important;" class="form-control text-align-center small text-color-black" placeholder="Filter" dmx-on:changed="app.local_store.set('rating',app.main.home.filter.value)" dmx-bind:value="app.local_store.data.rating">
-                                    <option value="">Filter by Rating</option>
+                                    <option value="">All Rating</option>
                                     <option value="5">5 Star Rating</option>
                                     <option value="4">4 Star Rating</option>
                                     <option value="3">3 Star Rating</option>

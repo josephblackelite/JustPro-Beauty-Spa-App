@@ -2,6 +2,7 @@
 
 
 <div class="page" path="/provider-services-page/:provider_id/:provider_name/:category?" data-name="provider-services-page" id="providerservicespage">
+    <dmx-preloader id="justpropreloader" spinner="pulse" color="#ff6600"></dmx-preloader>
     <dmx-serverconnect id="queryProviderServices" url="https://api.justpro.me/api/provider/list_provider_services_4_category" site="JustPro-Spa-Backend" dmx-param:provider_id="app.main.providerservicespage.route.params.provider_id" dmx-param:category="app.main.providerservicespage.route.params.category" dmx-param:search_by_name="app.main.providerservicespage.search.value" dmx-on:start="app.showPreloader('deeporange')" dmx-on:done="app.hidePreloader()"></dmx-serverconnect>
     <dmx-serverconnect id="provider_info" url="https://api.justpro.me/api/provider/provider_info" site="JustPro-Spa-Backend" dmx-param:provider_id="app.main.providerservicespage.route.params.provider_id" dmx-on:start="app.showPreloader('deeporange')" dmx-on:done="app.hidePreloader()" dmx-param:customer_longitude="app.geo.coords.longitude" dmx-param:customer_latitude="app.geo.coords.latitude"></dmx-serverconnect>
     <div class="padding-top padding-bottom">
@@ -52,7 +53,7 @@
 
     </div>
     <div class="page-content location-wraper newbg">
-        <dmx-preloader id="justpropreloader" spinner="pulse" color="#ff6600"></dmx-preloader>
+
         <div id="services" style="margin-bottom:130px !important">
             <!-- <div class="block mb-0" dmx-hide="app.main.home.queryServices.state.processing">
                 <h4 class="montserrat smallfont">{{app.main.providerservicespage.queryProviderServices.data.queryServices.count()}} Services offered <span dmx-show="(app.local_store.data.service_location == 'salon')">in</span><span dmx-show="(app.local_store.data.service_location == 'home')">at</span> {{app.main.home.providers.value.titlecase()}}</h4>

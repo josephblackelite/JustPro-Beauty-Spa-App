@@ -81,7 +81,7 @@
   <div class="toolbar toolbar-bottom toolbar-bottom-md no-shadow">
     <div class="toolbar-inner justify-content-center" style="padding:10px !important">
       <a class="item-link list-button button-large rounded-xl button-6 bg-color-black button-fill text-color-white margin-right" style="width:100%" dmx-on:click="run([{runJS:{function:'backFromOrderConfirmation',disabled:true}},{run:{action:`app.main.navigate(\'/home\',{})`}}])"><i class="bi-arrow-left-circle-fill"></i>&nbsp; Keep Shopping</a>
-      <a class="button-large rounded-xl button-6 bg-color-primary text-color-white" style="width:100%" dmx-hide="((app.Cart.data.count() &lt; 1) || (app.Cart.data.where(`selected_timeSlot_expired`, 1, '==').count() &gt; 0))" dmx-on:click="run({run:{action:`app.main.navigate(\'/checkout\',{})`}})">Pay now<i class="bi-arrow-right-circle-fill"></i></a>
+      <a class="button-large rounded-xl button-6 bg-color-primary text-color-white" style="width:100%" dmx-hide="((app.Cart.data.count() &lt; 1) || (app.Cart.data.where(`selected_timeSlot_expired`, 1, '==').count() &gt; 0))" dmx-on:click="run({run:{action:`app.main.navigate(\'/checkout\',{})`}})">Pay now &nbsp;<i class="bi-arrow-right-circle-fill"></i></a>
 
 
 
