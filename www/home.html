@@ -157,17 +157,24 @@
                     <div class="row" style="transition: width 0.5s;">
                         <div class="col display-flex align-items-center">
                             <p style="width: 100%;">
-                                <input id="search_by_name" name="text1" type="text" style="border: solid; width: 100%;" class="form-control" placeholder="Search name">
+                                <input id="search_by_name" name="text1" type="text" style="height:20px; border:0px !important; font-weight:600" class="form-control" placeholder="Search By Name">
                             </p>
 
 
 
                         </div>
                         <div class="col display-flex align-items-center justify-content-center">
-                            <div class="display-flex align-items-center">
-                                <i class="bi-filter-circle margin-right"></i>
-                                <p>Filter</p>
-                            </div>
+                            <p style="width: 100%;">
+
+                                <select id="filter" name="filter" style="height:20px; border:0px !important;" class="form-control text-align-center small text-color-black" placeholder="Filter" dmx-on:changed="app.local_store.set('rating',app.main.home.filter.value)" dmx-bind:value="app.local_store.data.rating">
+                                    <option value="">Filter by Rating</option>
+                                    <option value="5">5 Star Rating</option>
+                                    <option value="4">4 Star Rating</option>
+                                    <option value="3">3 Star Rating</option>
+                                    <option value="2">2 Star Rating</option>
+                                    <option value="1">1 Star Rating</option>
+                                </select>
+                            </p>
                         </div>
                         <div class="col text-align-right justify-content-right">
 

@@ -28,6 +28,10 @@ dmx.config({
       {
         "type": "text",
         "name": "freelacer_card_class_toggle"
+      },
+      {
+        "type": "text",
+        "name": "rating"
       }
     ],
     "Show_proloader": [
