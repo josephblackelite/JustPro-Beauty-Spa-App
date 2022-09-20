@@ -193,7 +193,11 @@
 
                 <!-- Repeat salons -->
                 <div class="row no-gap up-10">
+<<<<<<< HEAD
                     <div class="col-50" dmx-hide="app.main.home.querySalons.state.processing" dmx-repeat:repeat_salons="app.main.home.querySalons.data.repeat_providers.where(`rating`, app.main.home.filter.value, '<=').sort(`distance.Distance`)" dmx-show="(app.local_store.data.service_location == 'salon')" dmx-class:col-100="(app.local_store.data.freelacer_card_class_toggle == 100)">
+=======
+                    <div class="col-50" dmx-hide="app.main.home.querySalons.state.processing" dmx-repeat:repeat_salons="(app.main.home.querySalons.data.repeat_providers.where(`rating`, app.main.home.filter.value, '==').sort(`distance.Distance`).count() &gt; 0)?app.main.home.querySalons.data.repeat_providers.where(`rating`, app.main.home.filter.value, '==').sort(`distance.Distance`):app.main.home.querySalons.data.repeat_providers.sort(`distance.Distance`))" dmx-show="(app.local_store.data.service_location == 'salon')" dmx-class:col-100="(app.local_store.data.freelacer_card_class_toggle == 100)">
+>>>>>>> ced03c2758bcc2d7267610e8c240d0fc55c445f8
                         <div class="card demo-card-header-pic no-shadow card-outline border-10" dmx-on:click="app.main.navigate('/provider-services-page/'+id+'/'+staff_name+'/'+app.main.home.selector.value,{})">
                             <div class="ribbon" dmx-show="verified"><span>Verified</span></div>
                             <div class="card-header align-items-flex-end" dmx-style:background-image="'url('+ provider_avatar +')'" style="height:256px; background-position:bottom">
@@ -224,10 +228,10 @@
                 </div>
 
 
-
+                <!-- .where(`rating`, app.main.home.filter.value, '==') -->
                 <!-- Repeat freelancers -->
                 <div class="row no-gap up-10 no-padding">
-                    <div class="col-50" dmx-hide="app.main.home.home_service_providers.state.processing" dmx-repeat:repeat_salons="app.main.home.home_service_providers.data.repeat_providers.where(`rating`, app.main.home.filter.value, '==').sort(`distance.Distance`)" dmx-show="(app.local_store.data.service_location == 'home')" dmx-class:col-100="(app.local_store.data.freelacer_card_class_toggle == 100)">
+                    <div class="col-50" dmx-hide="app.main.home.home_service_providers.state.processing" dmx-repeat:repeat_salons="(app.main.home.home_service_providers.data.repeat_providers.where(`rating`, app.main.home.filter.value, '==').sort(`distance.Distance`).count() &gt; 0)?app.main.home.home_service_providers.data.repeat_providers.where(`rating`, app.main.home.filter.value, '==').sort(`distance.Distance`):app.main.home.home_service_providers.data.repeat_providers.sort(`distance.Distance`))" dmx-show="(app.local_store.data.service_location == 'home')" dmx-class:col-100="(app.local_store.data.freelacer_card_class_toggle == 100)">
                         <div class="card demo-card-header-pic no-shadow card-outline border-10" dmx-on:click="run([{run:{action:`app.selected_employee_id.setValue(id)`}},{run:{action:`app.cart_preFill.set(\'employee_id\',id);app.cart_preFill.set(\'parent_provider_id\',id)`}},{run:{action:`app.main.navigate(\'/provider-services-page/\'+parent_provider_id+\'/\'+staff_name+\'/\'+app.main.home.selector.value,{})`}}])">
                             <div class="ribbon" dmx-show="verified"><span>Verified</span></div>
                             <div class="card-header align-items-flex-end" dmx-style:background-image="'url('+ provider_avatar +')'" style="height:256px; background-position:bottom">

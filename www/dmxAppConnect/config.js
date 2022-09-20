@@ -517,7 +517,7 @@ dmx.config({
       "outputType": "array"
     },
     "repeat_salons": {
-      "outputType": "array"
+      "outputType": "text"
     }
   },
   "orderconfirmation": {
