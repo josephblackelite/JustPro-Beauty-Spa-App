@@ -52,9 +52,10 @@
                         <div class="accordion-item-content">
                             <div class="item-content-inner mb-30">
                                 <!-- Payment Swiper -->
-                                <div data-space-between="15" data-slides-per-view="auto" data-centered-slides="false" class="swiper-container swiper-init payment-swiper item-swiper">
-                                    <div class="swiper-wrapper">
-                                        <div class="swiper-slide display-flex align-items-center" dmx-repeat:repeat_user_cards="app.main.billing.customerPaymentMethods.data.query">
+                                <div is="dmx-swiper" id="cardreader" dmx-bind:slides="app.main.billing.customerPaymentMethods.data.query" class="mb-50 justify-content-center" space-between="15" centered-slides="true" navigation="true" pagination="bullets">
+
+                                    <div class="swiper-slide display-flex justify-content-center align-items-center">
+                                        <div>
                                             <div class="payment-card">
                                                 <div class="card-media">
                                                     <img src="img/card/card1.png" alt="">
@@ -71,9 +72,10 @@
                                                     </div>
                                                 </div>
                                             </div>
-                                            <i class="bi bi-x-circle margin-left" style="font-size: 24px;" dmx-on:click="run({'f7.dialog.confirm':{title:'Remove card?',text:'This card will be removed from your account! ',then:{steps:{run:{action:`app.main.billing.remove_Payment_method.payment_Method_id.setValue(stripe_payment_method_id);app.main.billing.remove_Payment_method.submit()`}}}}})"></i>
+                                            <button class="brand-bg text-color-white button-6 margin-top custom-font smallfont" dmx-on:click="run({'f7.dialog.confirm':{title:'Remove card?',text:'This card will be removed from your account! ',then:{steps:{run:{action:`app.main.billing.remove_Payment_method.payment_Method_id.setValue(stripe_payment_method_id);app.main.billing.remove_Payment_method.submit()`}}}}})"><span dmx-hide="(app.main.checkout.bill_selected_card.state.executing &amp;&amp; (app.main.checkout.bill_selected_card.selected_payment_method.value == stripe_payment_method_id))" class="smallfont">Remove card</span>
+                                                <span class="preloader color-white" dmx-show="(app.main.checkout.bill_selected_card.state.executing &amp;&amp; (app.main.checkout.bill_selected_card.selected_payment_method.value == stripe_payment_method_id))"></span>
+                                            </button>
                                         </div>
-
                                     </div>
                                 </div>
                             </div>

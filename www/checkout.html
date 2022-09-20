@@ -61,6 +61,61 @@
     <script is="dmx-flow" id="clear_cart" type="text/dmx-flow">{
     run: {action: "{{app.Cart.clear()}}"}
     }</script>
+    <script is="dmx-flow" id="check_bookings_timeSlots" type="text/dmx-flow" autorun>{
+  repeat: {
+    repeat: "{{app.Cart.data}}",
+    outputFields: [],
+    exec: {
+      steps: [
+        {
+          serverConnect: {
+            url: "https://api.justpro.me/api/provider/query_appointment",
+            site: "JustPro-Spa-Backend",
+            params: {date_time: "{{appointment_date}}", provider_id: "{{employee_id}}"},
+            name: "checkDate",
+            output: true
+          }
+        },
+        {
+          serverConnect: {
+            url: "https://api.justpro.me/api/checkout_workflows/check_booked_timeSlot",
+            site: "JustPro-Spa-Backend",
+            params: {
+              date_id: "{{checkDate.data.query_provider_appointment.id}}",
+              timeslot_start: "{{timeSlot_start}}"
+            },
+            name: "checkDate_timeSlot",
+            output: true
+          }
+        },
+        {
+          condition: {
+            if: "{{checkDate_timeSlot.data.querTimeSlot_booking[0].time_start}}",
+            then: {
+              steps: [
+                {
+                  run: {
+                    action: "{{app.Cart.upsert({provider_service_id: provider_service_id},{selected_timeSlot_expired: 1})}}",
+                    output: true
+                  }
+                },
+                {
+                  runJS: {
+                    function: "log",
+                    args: ["{{checkDate_timeSlot.data.querTimeSlot_booking[0].time_start}}"],
+                    output: true
+                  }
+                }
+              ]
+            }
+          }
+        }
+      ]
+    },
+    name: "repeat",
+    output: true
+  }
+}</script>
 
     <div class="toolbar toolbar-bottom toolbar-bottom-md no-shadow">
         <div class="toolbar-inner justify-content-center" style="padding:10px !important">
@@ -97,7 +152,7 @@
                             </div>
                         </div>
                     </div>
-                    <button class="brand-bg text-color-white button-6 margin-top custom-font smallfont" dmx-on:click="run({'f7.dialog.confirm':{title:'Ready to pay?',text:`\'You are about to pay with your card ending in \'+last4+\' ?\'`,then:{steps:{run:{action:`app.main.checkout.bill_selected_card.selected_payment_method.setValue(stripe_payment_method_id);app.main.checkout.bill_selected_card.submit()`}}}}})" dmx-bind:disabled="(app.main.checkout.bill_selected_card.state.executing &amp;&amp; (app.main.checkout.bill_selected_card.selected_payment_method.value == stripe_payment_method_id))" style="width:285px !important"><span dmx-hide="(app.main.checkout.bill_selected_card.state.executing &amp;&amp; (app.main.checkout.bill_selected_card.selected_payment_method.value == stripe_payment_method_id))" class="smallfont">Click to Pay with this card</span>
+                    <button class="brand-bg text-color-white button-6 margin-top custom-font smallfont" dmx-on:click="run({condition:{if:`(app.Cart.data.where(\`selected_timeSlot_expired\`, 1, \'==\').count() &gt; 0)`,then:{steps:{run:{action:`app.main.navigate(\'/order-confirmation\',{})`}}},else:{steps:{'f7.dialog.confirm':{title:'Ready to pay?',text:`\'You are about to pay with your card ending in \'+last4+\' ?\'`,then:{steps:{run:{action:`app.main.checkout.bill_selected_card.selected_payment_method.setValue(stripe_payment_method_id);app.main.checkout.bill_selected_card.submit()`}}}}}}}})" dmx-bind:disabled="(app.main.checkout.bill_selected_card.state.executing &amp;&amp; (app.main.checkout.bill_selected_card.selected_payment_method.value == stripe_payment_method_id))" style="width:285px !important"><span dmx-hide="(app.main.checkout.bill_selected_card.state.executing &amp;&amp; (app.main.checkout.bill_selected_card.selected_payment_method.value == stripe_payment_method_id))" class="smallfont">Click to Pay with this card</span>
                         <span class="preloader color-white" dmx-show="(app.main.checkout.bill_selected_card.state.executing &amp;&amp; (app.main.checkout.bill_selected_card.selected_payment_method.value == stripe_payment_method_id))"></span>
                     </button>
 
@@ -141,7 +196,7 @@
 
         <div class="block">
             <div class="checkout-total">
-                <h4 class="title tajawal-s">You are about to pay</h4>
+                <h4 class="title tajawal-s no-margin-bottom">You are about to pay</h4>
                 <h1 class="checkout-total strong no-margin-top" style="margin-bottom:-5px !important">{{Cart.data.sum(`total.toNumber()`).formatCurrency('AED', '.', ',', 2)}}</h1>
                 <small> + 5% VAT of {{Cart.data.sum(`vat.toNumber()`).formatCurrency('AED', '.', ',', 2)}}</small>
             </div>

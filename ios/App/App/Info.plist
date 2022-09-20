@@ -54,6 +54,10 @@
 	<true/>
 	<key>NSCameraUsageDescription</key>
 	<string>Need camera access for read credit card.</string>
+	<key>NSLocationWhenInUseUsageDescription</key>
+	<string>Your location is needed for product personalization.</string> 
+	<key>NSLocationAlwaysUsageDescription</key>
+	<string>Your location is needed for product personalization.</string>
 	<key>UIBackgroundModes</key>
 	<array>
 		<string>remote-notification</string>

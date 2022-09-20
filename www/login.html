@@ -46,24 +46,7 @@
         </div>
       </div>
       <div class="clearfix pb-30">
-        <li>
-          <a class="item-link smart-select smart-select-init" data-open-in="popover">
-            <select name="superhero" multiple>
-              <option value="Batman" selected>Batman</option>
-              <option value="Superman">Superman</option>
-              <option value="Hulk">Hulk</option>
-              <option value="Spiderman">Spiderman</option>
-              <option value="Ironman">Ironman</option>
-              <option value="Thor">Thor</option>
-              <option value="Wonder Woman">Wonder Woman</option>
-            </select>
-            <div class="item-content">
-              <div class="item-inner">
-                <div class="item-title">Super Hero</div>
-              </div>
-            </div>
-          </a>
-        </li>
+
         <form action="https://api.justpro.me/api/security/login_register_with_number" is="dmx-serverconnect-form" method="post" id="login_register_with_number" site="JustPro-Spa-Backend" dmx-on:invalid="run({'f7.dialog.alert':{title:'Error',text:`app.main.login.login_register_with_number.lastError.response`}})" dmx-on:success="run({condition:{if:`app.main.login.login_register_with_number.data.Logged_in_user_id`,then:{steps:[{run:{action:`app.local_store.set(\'user_id\',app.main.login.login_register_with_number.data.Logged_in_user_id)`}},{run:{action:`app.main.login.AddOneSignal_user_id.run()`}},{condition:{if:`(app.main.login.login_register_with_number.data.send_otp_for_login_user.api.data.status == \'open\')`,then:{steps:[{run:{action:`app.otp_id.setValue(app.main.login.login_register_with_number.data.send_otp_for_login_user.api.data.otp_id)`}},{run:{action:`app.main.login.navigate_to_verify_otp.run()`}}]},else:{steps:{run:{action:`app.main.navigate(\'/home\',{})`}}}}}]},else:{steps:[{run:{action:`app.local_store.set(\'user_id\',app.main.login.login_register_with_number.data.insert.identity)`}},{run:{action:`app.main.login.AddOneSignal_user_id.run()`}},{condition:{if:`(app.main.login.login_register_with_number.data.send_otp_for_new_user.api.data.status== \'open\')`,then:{steps:[{run:{action:`app.otp_id.setValue(app.main.login.login_register_with_number.data.send_otp_for_new_user.api.data.otp_id)`}},{run:{action:`app.main.login.navigate_to_verify_otp.run()`}}]},else:{steps:{run:{action:`app.main.navigate(\'/home\',{})`}}}}}]}}})">
           <div class="list">
             <ul class="row">

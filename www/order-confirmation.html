@@ -2,91 +2,149 @@
 
 
 <div class="page" id="orderconfirmation" data-name="order_confirmation" path="/order-confirmation">
-    <div class="padding-top padding-bottom">
-        <div class="navbar shadow">
-            <div class="navbar-inner" style="padding-right:0px !important; padding-left:0px !important; margin-right:0px !important">
-                <div class="left">
-                    <a href="#" class="link back">
-                        <i class="icon f7-icons">arrow_left</i>
-                    </a>
+  <script is="dmx-flow" id="check_bookings_timeSlots" type="text/dmx-flow" autorun>{
+  repeat: {
+    repeat: "{{app.Cart.data}}",
+    outputFields: [],
+    exec: {
+      steps: [
+        {
+          serverConnect: {
+            url: "https://api.justpro.me/api/provider/query_appointment",
+            site: "JustPro-Spa-Backend",
+            params: {date_time: "{{appointment_date}}", provider_id: "{{employee_id}}"},
+            name: "checkDate",
+            output: true
+          }
+        },
+        {
+          serverConnect: {
+            url: "https://api.justpro.me/api/checkout_workflows/check_booked_timeSlot",
+            site: "JustPro-Spa-Backend",
+            params: {
+              date_id: "{{checkDate.data.query_provider_appointment.id}}",
+              timeslot_start: "{{timeSlot_start}}"
+            },
+            name: "checkDate_timeSlot",
+            output: true
+          }
+        },
+        {
+          condition: {
+            if: "{{checkDate_timeSlot.data.querTimeSlot_booking[0].time_start}}",
+            then: {
+              steps: [
+                {
+                  run: {
+                    action: "{{app.Cart.upsert({provider_service_id: provider_service_id},{selected_timeSlot_expired: 1})}}",
+                    output: true
+                  }
+                },
+                {
+                  runJS: {
+                    function: "log",
+                    args: ["{{checkDate_timeSlot.data.querTimeSlot_booking[0].time_start}}"],
+                    output: true
+                  }
+                }
+              ]
+            }
+          }
+        }
+      ]
+    },
+    name: "repeat",
+    output: true
+  }
+}</script>
+  <div class="padding-top padding-bottom">
+    <div class="navbar shadow">
+      <div class="navbar-inner" style="padding-right:0px !important; padding-left:0px !important; margin-right:0px !important">
+        <div class="left">
+          <a href="#" class="link back">
+            <i class="icon f7-icons">arrow_left</i>
+          </a>
 
-                </div>
-
-                <div class="title">My Cart</div>
-                <div class="right">
-                    <a href="#" class="link panel-open icon-only" data-panel="left">
-
-                        <i class="icon f7-icons">ellipsis_vertical</i>
-                    </a>
-                </div>
-            </div>
         </div>
 
-    </div>
-    <div class="toolbar toolbar-bottom toolbar-bottom-md no-shadow">
-        <div class="toolbar-inner justify-content-center" style="padding:10px !important">
-            <a class="item-link list-button button-large rounded-xl button-6 bg-color-black button-fill text-color-white margin-right" style="width:100%" dmx-on:click="run({runJS:{function:'backFromOrderConfirmation'}})"><i class="bi-arrow-left-circle-fill"></i>&nbsp; Keep Shopping</a>
-            <a class="button-large rounded-xl button-6 bg-color-primary text-color-white" style="width:100%" dmx-bind:href="'/choose-address'" dmx-hide="(app.Cart.data.count() < 1)" dmx-on:click="run({condition:{if:`(app.local_store.data.service_location == \'home\')`,then:{steps:{run:{action:`app.main.navigate(\'/choose-address\',{})`}}},else:{steps:{run:{action:`app.main.navigate(\'/checkout\',{})`}}}}})">Checkout &nbsp;<i class="bi-arrow-right-circle-fill"></i></a>
+        <div class="title">My Cart</div>
+        <div class="right">
+          <a href="#" class="link panel-open icon-only" data-panel="left">
 
-
-
-
-            <a class="button-large rounded-xl button-18 bg-color-primary text-color-white" style="width:100%" dmx-bind:href="'/home'" dmx-show="(app.Cart.data.count() < 1)">Keep Shopping</a>
+            <i class="icon f7-icons">ellipsis_vertical</i>
+          </a>
         </div>
+      </div>
     </div>
 
-    <div class="page-content bg-gray">
-        <dmx-preloader id="justpropreloader" spinner="pulse" color="#ff6600"></dmx-preloader>
-
-        <div class="container" style="margin-bottom:150px !important">
-
-
-
+  </div>
+  <div class="toolbar toolbar-bottom toolbar-bottom-md no-shadow">
+    <div class="toolbar-inner justify-content-center" style="padding:10px !important">
+      <a class="item-link list-button button-large rounded-xl button-6 bg-color-black button-fill text-color-white margin-right" style="width:100%" dmx-on:click="run([{runJS:{function:'backFromOrderConfirmation',disabled:true}},{run:{action:`app.main.navigate(\'/home\',{})`}}])"><i class="bi-arrow-left-circle-fill"></i>&nbsp; Keep Shopping</a>
+      <a class="button-large rounded-xl button-6 bg-color-primary text-color-white" style="width:100%" dmx-hide="((app.Cart.data.count() &lt; 1) || (app.Cart.data.where(`selected_timeSlot_expired`, 1, '==').count() &gt; 0))" dmx-on:click="run({run:{action:`app.main.navigate(\'/checkout\',{})`}})">Pay now<i class="bi-arrow-right-circle-fill"></i></a>
 
 
 
 
-            <div class="block text-align-right" dmx-hide="(app.Cart.data.count() < 1)">
-                <p style="margin-bottom:0px !important" class="strong">Basket Total</p>
-                <h1 style="margin-top:-5px !important; margin-bottom:-5px !important">{{Cart.data.sum(`total.toNumber()`).formatCurrency('AED', '.', ',', 2)}}</h1>
-                <small>Total price above includes VAT of {{Cart.data.sum(`vat.toNumber()`).formatCurrency('AED', '.', ',', 2)}}</small>
-            </div>
+      <a class="button-large rounded-xl button-18 bg-color-primary text-color-white" style="width:100%" dmx-bind:href="'/home'" dmx-show="(app.Cart.data.count() < 1)">Keep Shopping</a>
+    </div>
+  </div>
+
+  <div class="page-content bg-gray">
+    <dmx-preloader id="justpropreloader" spinner="pulse" color="#ff6600"></dmx-preloader>
+
+    <div class="container" style="margin-bottom:150px !important">
 
 
 
 
 
-            <div class="block text-align-center padding-top padding-bottom" dmx-show="(app.Cart.data.count() < 1)">
-                <h4> Your shopping cart is empty.</h4>
-
-            </div>
 
 
+      <div class="block text-align-right" dmx-hide="(app.Cart.data.count() < 1)">
+        <p style="margin-bottom:0px !important" class="strong">Basket Total</p>
+        <h1 style="margin-top:-5px !important; margin-bottom:-5px !important">{{Cart.data.sum(`total.toNumber()`).formatCurrency('AED', '.', ',', 2)}}</h1>
+        <small>Total price above includes VAT of {{Cart.data.sum(`vat.toNumber()`).formatCurrency('AED', '.', ',', 2)}}</small>
+      </div>
 
-            <div class="list search-list mt-0 mb-10 dz-list item-list no-shadow" dmx-repeat:repeat1="app.Cart.data" style="margin-right:20px !important; margin-left:-10px !important">
-                <ul>
-                    <li class="col-100 mb-20">
-                        <div class="wishlist-bx" style="width:100% !important">
-                            <div class="dz-media">
-                                <a href="/item-details/"><img dmx-bind:src="product_avatar"></a>
-                            </div>
-                            <div class="dz-info">
-                                <div class="dz-head">
-                                    <h4 class="item-title mb-0 tajawal" style="margin-bottom:0px !important">{{name.capitalize()}}</h4>
-                                    <p style="margin-top:4px !important">{{quantity}} People<span dmx-show="name.contains('massage')">, {{matrix}} hour</span></p>
-                                </div>
-                                <div class="row">
-                                    <div class="col-70">
-                                        <p class="price">{{total.toNumber().formatCurrency('AED', '.', ',', 2)}}</p>
-                                    </div>
-                                    <div class="col-30"> <button class="button-18 text-align-center brand-bg" style="height:30px !important; width:30px !important; margin-top:10px !important" dmx-on:click="run({'f7.dialog.confirm':{title:'Delete Item?',text:'This item will be removed from your cart.',then:{steps:{run:{action:`app.Cart.delete({provider_service_id: provider_service_id})`}}}}})"><i class="bi bi-trash fa-fw text-color-white fa-2w margin"></i> </button></div>
-                                </div>
-                                <div class="row">
-                                    <div class="col-100">
-                                        {{service_type.titlecase()}} Service
-                                    </div>
-                                </div>
-                                <!--  <div class="dz-meta">
+
+
+
+
+      <div class="block text-align-center padding-top padding-bottom" dmx-show="(app.Cart.data.count() < 1)">
+        <h4> Your shopping cart is empty.</h4>
+
+      </div>
+
+
+
+      <div class="list search-list mt-0 mb-10 dz-list item-list no-shadow" dmx-repeat:repeat1="app.Cart.data" style="margin-right:20px !important; margin-left:-10px !important">
+        <ul>
+          <li class="col-100 mb-20">
+            <div class="wishlist-bx" style="width:100% !important" dmx-class:bg-color-red="(selected_timeSlot_expired == 1)">
+              <div class="dz-media">
+                <a href="/item-details/"><img dmx-bind:src="product_avatar"></a>
+              </div>
+              <div class="dz-info">
+                <div class="dz-head" dmx-class:text-color-white="(selected_timeSlot_expired == 1)">
+                  <h4 class="item-title mb-0 tajawal" style="margin-bottom:0px !important">{{name.capitalize()}}</h4>
+                  <p style="margin-top:4px !important">{{quantity}} People<span dmx-show="name.contains('massage')">, {{matrix}} hour</span></p>
+                </div>
+                <div class="row">
+                  <div class="col-70">
+                    <p class="price">{{total.toNumber().formatCurrency('AED', '.', ',', 2)}}</p>
+                  </div>
+                  <div class="col-30"> <button class="button-18 text-align-center brand-bg" style="height:30px !important; width:30px !important; margin-top:10px !important" dmx-on:click="run({'f7.dialog.confirm':{title:'Delete Item?',text:'This item will be removed from your cart.',then:{steps:{run:{action:`app.Cart.delete({provider_service_id: provider_service_id})`}}}}})"><i class="bi bi-trash fa-fw text-color-white fa-2w margin"></i> </button></div>
+                </div>
+                <div class="row">
+                  <div class="col-100" dmx-class:text-color-white="(selected_timeSlot_expired == 1)">
+                    {{service_type.titlecase()}} Service
+                  </div>
+                  <div class="col-100 margin-top" dmx-show="(selected_timeSlot_expired == 1)" dmx-class:text-color-white="(selected_timeSlot_expired == 1)" dmx-on:click="run({condition:{if:`(selected_timeSlot_expired == 1)`,then:{steps:[{run:{action:`app.local_store.set(\'service_location\',service_type);app.cart_preFill.set(\'service_type\',service_type);app.cart_preFill.set(\'employee_id\',employee_id);app.cart_preFill.set(\'provider_service_id\',parent_provider_id)`}},{run:{action:`app.main.navigate(\'/product-info/\'+provider_service_id,{})`}}]}}})">
+                    Booked date and time slot for this service is no longer available. Tap here to update
+                  </div>
+                </div>
+                <!--  <div class="dz-meta">
                                         <ul>
                                             <li </li>
                                             <li>
@@ -97,12 +155,12 @@
                                             </li>
                                         </ul>
                                     </div> -->
-                            </div>
-                        </div>
-                    </li>
-                </ul>
+              </div>
             </div>
-        </div>
-
+          </li>
+        </ul>
+      </div>
     </div>
+
+  </div>
 </div>

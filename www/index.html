@@ -93,6 +93,7 @@
 <body is="dmx-app" id="index">
 
 
+
   <style>
     @import url('https://fonts.googleapis.com/css2?family=Maven+Pro&display=swap');
 
@@ -133,7 +134,7 @@
     <!-- Statusbar overlay -->
 
 
-    <dmx-geolocation id="geo" dmx-on:permissiondenied="geo.getCurrentPosition()"></dmx-geolocation>
+
     <dmx-local-manager id=" local_store">
     </dmx-local-manager>
     <dmx-session-manager id="cart_preFill"></dmx-session-manager>
@@ -176,6 +177,7 @@
 
     <dmx-value id="cartQtyVal" dmx-bind:value="0"></dmx-value><input id="STRIPE_CARD_SETUP" name="text1" type="hidden">
     <dmx-value id="selected_employee_id"></dmx-value>
+    <dmx-value id="selected_freelacer_name"></dmx-value>
     <script is="dmx-flow" id="App_notifcation" type="text/dmx-flow">{
           meta: {
             $param: [
@@ -215,7 +217,7 @@
     <script is="dmx-flow" id="hideSplashScreen" type="text/dmx-flow">{
   runJS: {function: "hideSplashScreen"}
 }</script>
-
+    <dmx-geolocation id="geo" dmx-on:permissiondenied="geo.getCurrentPosition()"></dmx-geolocation>
     <div class="statusbar"></div>
 
     <!-- Sidebar Nav -->
@@ -692,6 +694,10 @@ to: today
         }
         } 
 
+
+function log(data){
+  console.log(data)
+}
   </script>
 
 

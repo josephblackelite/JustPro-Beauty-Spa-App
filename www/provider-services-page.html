@@ -58,7 +58,8 @@
                 <h4 class="montserrat smallfont">{{app.main.providerservicespage.queryProviderServices.data.queryServices.count()}} Services offered <span dmx-show="(app.local_store.data.service_location == 'salon')">in</span><span dmx-show="(app.local_store.data.service_location == 'home')">at</span> {{app.main.home.providers.value.titlecase()}}</h4>
             </div>   -->
 
-            <dmx-slideshow id="prov_info" dmx-bind:slides="app.main.providerservicespage.provider_info.data.queryProvider" slide-url="provider_avatar" slide-title="staff_name.titlecase()" slide-link="'#!'" style="height:256px !important" class="up-15" slide-description="job_title.titlecase()"></dmx-slideshow>
+            <dmx-slideshow id="prov_info" dmx-bind:slides="app.main.providerservicespage.provider_info.data.queryProvider" slide-url="provider_avatar" slide-title="staff_name.titlecase()" slide-link="'#!'" style="height:256px !important" class="up-15" slide-description="job_title.titlecase()" dmx-on:click="app.main.navigate('/provider-services-page/'+app.main.providerservicespage.provider_info.data.queryProvider[0].id+'/'+app.main.providerservicespage.provider_info.data.queryProvider[0].staff_name,{reloadCurrent: true, reloadAll: true})">
+            </dmx-slideshow>
 
 
             <div class="block mb-10 up-30">
@@ -106,7 +107,7 @@
 
             <div class="row no-gap up-30">
                 <div class="col-50" dmx-hide="app.main.providerservicespage.queryProviderServices.state.processing" dmx-repeat:repeat_provider_services="app.main.providerservicespage.queryProviderServices.data.queryServices" dmx-class:col-100="(app.local_store.data.freelacer_card_class_toggle == 100)">
-                    <div class="card demo-card-header-pic no-shadow card-outline border-10" dmx-on:click="app.main.navigate('/product-info/'+service_offered_id,{})">
+                    <div class="card demo-card-header-pic no-shadow card-outline border-10" dmx-on:click="app.main.navigate('/product-info/'+service_offered_id+'/'+app.main.providerservicespage.route.params.provider_name,{})">
                         <div class="card-header align-items-flex-end" dmx-style:background-image="'url(' + product_avatar + ')'" style="height:256px; background-position:bottom">
                             <span style="font-size:22px; text-transform:capitalize; strong" class="tajawal nametag"> {{product_name.capitalize()}}</span>
 

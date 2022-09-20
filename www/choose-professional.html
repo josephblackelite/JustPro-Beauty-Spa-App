@@ -54,7 +54,48 @@
                 <div class="block-title h6 strong custom-font text-color-primary">{{app.main.chooseprofessional.service_info.data.queryServices.count()}} {{app.main.chooseprofessional.service_info.data.queryServices.product_name.titlecase()}} Service Providers</div>
             </div>
             <div class="col-100">
-                <div class="list media-list inset no-margin-top">
+
+                <div class="row no-gap up-10">
+                    <div class="col-100" dmx-hide="app.main.home.querySalons.state.processing" dmx-repeat:repeat_employees="app.main.chooseprofessional.list_employees.data.repeatEmployees">
+                        <div class="card demo-card-header-pic no-shadow card-outline border-10">
+
+                            <div class="card-header align-items-flex-end" dmx-style:background-image="'url('+ provider_avatar +')'" style="height:256px; background-position:bottom">
+                                <span style="font-size:26px; text-transform:capitalize; strong" class="tajawal nametag">
+                                    {{staff_name.capitalize()}}
+                                </span>
+                                <div class="col-100 no-padding">
+                                    <span class="fa fa-star small" dmx-class:checked="(rating > 0)"></span>
+                                    <span class="fa fa-star small" dmx-class:checked="(rating > 1)"></span>
+                                    <span class="fa fa-star small" dmx-class:checked="(rating > 2)"></span>
+                                    <span class="fa fa-star small" dmx-class:checked="(rating > 3)"></span>
+                                    <span class="fa fa-star small" dmx-class:checked="(rating > 4)"></span>
+                                </div>
+                            </div>
+                            <div class="card-footer no-border bg-transparent">
+                                <div class="" style="width: 100%;">
+                                    <div class="padding smallfont">
+                                        {{brief_introduction}}
+                                    </div>
+                                    <div class="">
+                                        <button class="button-6 button-small rounded-lg text-color-white brand-bg" dmx-on:click="run([{run:{action:`app.cart_preFill.set(\'employee_id\',id);app.cart_preFill.set(\'parent_provider_id\',parent_provider_id)`}},{run:{action:`app.selected_employee_id.setValue(id)`}},{run:{action:`app.main.navigate(\'/appointment-page/\'+id+\'/\'+app.main.chooseprofessional.route.params.provider_service_id,{})`}}])">
+                                            Book {{staff_name.capitalize()}}
+                                        </button>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+
+
+
+
+                <div class="list media-list inset no-margin-top" dmx-show="">
                     <ul class="mb-10" dmx-repeat:repeat_employees="app.main.chooseprofessional.list_employees.data.repeatEmployees">
                         <li dmx-on:click="run([{run:{action:`app.cart_preFill.set(\'employee_id\',id);app.cart_preFill.set(\'parent_provider_id\',parent_provider_id)`}},{run:{action:`app.main.navigate(\'/appointment-page/\'+id+\'/\'+app.main.chooseprofessional.route.params.provider_service_id,{})`}},{run:{action:`app.selected_employee_id.setValue(id)`}}])">
                             <a href="#" class="item-link item-content">

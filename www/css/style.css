@@ -27,6 +27,24 @@ Table of Sass Contents
   --f7-theme-color-tint: #ffae29;
 }
 
+
+/* Theme Color */
+:root,
+.md:not([class*='color-theme']) {
+  /*--f7-theme-color: #04764E;
+  --f7-theme-color-rgb: 18,34,97;
+  --f7-theme-color-shade: #00613f;
+  --f7-theme-color-tint: #07ac72;
+  --f7-theme-color-light: #D9EDE6; }
+  */
+
+
+  --f7-theme-color: #F05742;
+  --f7-theme-color-rgb: 240, 87, 66;
+  --f7-theme-color-shade: #ed351c;
+  --f7-theme-color-tint: #f37968;
+}
+
 /*
 :root {
   --f7-theme-color: #A11F71;
@@ -3484,22 +3502,6 @@ h6, .h6 {
   --f7-theme-color-white: #151515;
   --border-color: #333333; }
 
-/* Theme Color */
-:root,
-.md:not([class*='color-theme']) {
-  /*--f7-theme-color: #04764E;
-  --f7-theme-color-rgb: 18,34,97;
-  --f7-theme-color-shade: #00613f;
-  --f7-theme-color-tint: #07ac72;
-  --f7-theme-color-light: #D9EDE6; }
-  */
-
-
-  --f7-theme-color: #F05742;
-  --f7-theme-color-rgb: 240, 87, 66;
-  --f7-theme-color-shade: #ed351c;
-  --f7-theme-color-tint: #f37968;
-}
 
 
 .color-theme-red {
@@ -3635,7 +3637,7 @@ h6, .h6 {
     left: 50%;
     -webkit-transform: translateX(-50%);
             transform: translateX(-50%);
-    padding: 30px 28px 20px 10px; }
+    padding: 30px 28px 0px 10px; }
     .navbar .navbar-inner .title {
       color: #1b1b1b;
       font-weight: 600;
@@ -4256,7 +4258,7 @@ h6, .h6 {
         }
 
         .strong {
-            font-weight: 900px;
+            font-weight: bolder;
         }
 
         .flex-buttons {

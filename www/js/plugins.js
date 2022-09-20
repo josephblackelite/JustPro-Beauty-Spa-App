@@ -273,7 +273,7 @@ App.addListener('appUrlOpen', (event) => {
     let length = dmx.app.children.length
     let lastItem = length - 1
 
-    const domain = 'maidz.ae';
+    const domain = 'https://api.justpro.me';
     const pathArray = event.url.split(domain);
     const appPath = pathArray.pop();
 

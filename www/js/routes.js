@@ -21,7 +21,7 @@ var routes = [
     "url": "./order-confirmation.html"
   },
   {
-    "path": "/product-info/:service_offered_id",
+    "path": "/product-info/:service_offered_id/:freelancer_name?",
     "url": "./product-info.html"
   },
   {
