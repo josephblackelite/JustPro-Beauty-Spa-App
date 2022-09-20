@@ -54,7 +54,7 @@
   }
 ]</script>
     <dmx-datetime id="var1"></dmx-datetime>
-    <dmx-serverconnect id="queryServices" url="https://api.justpro.me/api/services/query_services" site="JustPro-Spa-Backend" dmx-param:category="app.local_store.data.state" sockets="true" dmx-on:start="app.showPreloader('deeporange')" dmx-on:done="app.hidePreloader()" dmx-param:product_delivery="app.local_store.data.service_location"></dmx-serverconnect>
+    <dmx-serverconnect id="queryServices" url="https://api.justpro.me/api/services/query_services" site="JustPro-Spa-Backend" dmx-param:category="app.local_store.data.state" dmx-on:start="app.showPreloader('deeporange')" dmx-on:done="app.hidePreloader()" dmx-param:product_delivery="app.local_store.data.service_location"></dmx-serverconnect>
     <dmx-serverconnect id="querySalons" url="https://api.justpro.me/api/provider/all_salons" site="JustPro-Spa-Backend" dmx-param:category="app.main.home.selector.value" dmx-on:start="app.showPreloader('deeporange')" dmx-on:done="app.hidePreloader()" dmx-param:product_delivery="app.main.home.providers.value" dmx-param:customer_lat="app.geo.coords.latitude" dmx-param:customer_long="app.geo.coords.longitude" dmx-param:provider_type="app.local_store.data.service_location" dmx-param:search_by_name="app.main.home.search_by_name.value"></dmx-serverconnect>
     <dmx-serverconnect id="home_service_providers" url="https://api.justpro.me/api/provider/home_services_providers" site="JustPro-Spa-Backend" dmx-param:category="app.main.home.selector.value" dmx-on:start="app.showPreloader('deeporange')" dmx-on:done="app.hidePreloader()" dmx-param:product_delivery="app.main.home.providers.value" dmx-param:customer_lat="app.geo.coords.latitude" dmx-param:customer_long="app.geo.coords.longitude" dmx-param:provider_type="app.local_store.data.service_location" dmx-param:search_by_name="app.main.home.search_by_name.value"></dmx-serverconnect>
     <dmx-value id="popover_title"></dmx-value>
@@ -71,8 +71,6 @@
             font-family: 'Maven Pro', sans-serif !important;
         }
     </style>
-
-
     <div class="padding-top padding-bottom" style="padding-top:30px !important; padding-bottom:40px !important">
         <div class="navbar no-hairline no-border color-theme-white">
             <div class="navbar-inner" data-name="order-prompt">
@@ -93,38 +91,23 @@
                             </li>
                         </ul>
                     </div>
-
-
-
-
                 </div>
                 <div class="left">
                     <img src="assets/images/logo-pages.png">
-
-
                 </div>
                 <div class="title">
-
                 </div>
                 <div class="right mr-0" style="mr-0">
-
                     <div class="media" dmx-show="app.Cart.data.count()>0">
                         <a href="/order-confirmation"> <i class="bi bi-basket-fill text-color-primary"></i> <sup>{{app.Cart.data.count()}}</sup></a>
                     </div>
-
                     <a href="#" class="link panel-open icon-only mr-0 pr-0" data-panel="left" style="margin-right:-30px !important; padding-right:-30px !important">
                         <i class="icon f7-icons">ellipsis_vertical</i>
                     </a>
                 </div>
-
-
-
             </div>
         </div>
-
     </div>
-
-
 
     <div class="toolbar toolbar-bottom toolbar-bottom-md no-shadow" dmx-show="app.Cart.data.count()>0">
         <div class="toolbar-inner justify-content-center" style="padding:10px !important;">
@@ -159,16 +142,13 @@
                             <p style="width: 100%;">
                                 <input id="search_by_name" name="text1" type="text" style="height:20px; border:0px !important; font-weight:600" class="form-control" placeholder="Search By Name">
                             </p>
-
-
-
                         </div>
                         <div class="col display-flex align-items-center justify-content-center">
                             <p style="width: 100%;">
 
                                 <select id="filter" name="filter" style="height:20px; border:0px !important;" class="form-control text-align-center small text-color-black" placeholder="Filter" dmx-on:changed="app.local_store.set('rating',app.main.home.filter.value)" dmx-bind:value="app.local_store.data.rating">
                                     <option value="">Filter by Rating</option>
-                                    <option value="5">5 Star Rating</option>
+                                    <option selected="" value="5">5 Star Rating</option>
                                     <option value="4">4 Star Rating</option>
                                     <option value="3">3 Star Rating</option>
                                     <option value="2">2 Star Rating</option>
@@ -211,10 +191,9 @@
 
 
 
-
-
+                <!-- Repeat salons -->
                 <div class="row no-gap up-10">
-                    <div class="col-50" dmx-hide="app.main.home.querySalons.state.processing" dmx-repeat:repeat_salons="app.main.home.querySalons.data.repeat_providers.sort(`distance.Distance`)" dmx-show="(app.local_store.data.service_location == 'salon')" dmx-class:col-100="(app.local_store.data.freelacer_card_class_toggle == 100)">
+                    <div class="col-50" dmx-hide="app.main.home.querySalons.state.processing" dmx-repeat:repeat_salons="app.main.home.querySalons.data.repeat_providers.where(`rating`, app.main.home.filter.value, '==').sort(`distance.Distance`)" dmx-show="(app.local_store.data.service_location == 'salon')" dmx-class:col-100="(app.local_store.data.freelacer_card_class_toggle == 100)">
                         <div class="card demo-card-header-pic no-shadow card-outline border-10" dmx-on:click="app.main.navigate('/provider-services-page/'+id+'/'+staff_name+'/'+app.main.home.selector.value,{})">
                             <div class="ribbon" dmx-show="verified"><span>Verified</span></div>
                             <div class="card-header align-items-flex-end" dmx-style:background-image="'url('+ provider_avatar +')'" style="height:256px; background-position:bottom">
@@ -246,9 +225,9 @@
 
 
 
-
+                <!-- Repeat freelancers -->
                 <div class="row no-gap up-10 no-padding">
-                    <div class="col-50" dmx-hide="app.main.home.home_service_providers.state.processing" dmx-repeat:repeat_salons="app.main.home.home_service_providers.data.repeat_providers.sort(`distance.Distance`)" dmx-show="(app.local_store.data.service_location == 'home')" dmx-class:col-100="(app.local_store.data.freelacer_card_class_toggle == 100)">
+                    <div class="col-50" dmx-hide="app.main.home.home_service_providers.state.processing" dmx-repeat:repeat_salons="app.main.home.home_service_providers.data.repeat_providers.where(`rating`, app.main.home.filter.value, '==').sort(`distance.Distance`)" dmx-show="(app.local_store.data.service_location == 'home')" dmx-class:col-100="(app.local_store.data.freelacer_card_class_toggle == 100)">
                         <div class="card demo-card-header-pic no-shadow card-outline border-10" dmx-on:click="run([{run:{action:`app.selected_employee_id.setValue(id)`}},{run:{action:`app.cart_preFill.set(\'employee_id\',id);app.cart_preFill.set(\'parent_provider_id\',id)`}},{run:{action:`app.main.navigate(\'/provider-services-page/\'+parent_provider_id+\'/\'+staff_name+\'/\'+app.main.home.selector.value,{})`}}])">
                             <div class="ribbon" dmx-show="verified"><span>Verified</span></div>
                             <div class="card-header align-items-flex-end" dmx-style:background-image="'url('+ provider_avatar +')'" style="height:256px; background-position:bottom">

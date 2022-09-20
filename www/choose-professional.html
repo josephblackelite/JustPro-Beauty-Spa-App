@@ -95,23 +95,7 @@
 
 
 
-                <div class="list media-list inset no-margin-top" dmx-show="">
-                    <ul class="mb-10" dmx-repeat:repeat_employees="app.main.chooseprofessional.list_employees.data.repeatEmployees">
-                        <li dmx-on:click="run([{run:{action:`app.cart_preFill.set(\'employee_id\',id);app.cart_preFill.set(\'parent_provider_id\',parent_provider_id)`}},{run:{action:`app.main.navigate(\'/appointment-page/\'+id+\'/\'+app.main.chooseprofessional.route.params.provider_service_id,{})`}},{run:{action:`app.selected_employee_id.setValue(id)`}}])">
-                            <a href="#" class="item-link item-content">
-                                <div class="item-media"><img width="80" height="80" dmx-bind:src="provider_avatar" style="border-radius:50%" /></div>
-                                <div class="item-inner">
-                                    <div class="item-title-row">
-                                        <div class="item-title strong">{{staff_name.titlecase()}}</div>
-                                        <div class="item-after text-color-black">Choose</div>
-                                    </div>
-                                    <div class="item-subtitle small">{{rating}} <i class="bi bi-star-fill text-color-red"></i></div>
-                                    <div class="item-text">{{brief_introduction}}</div>
-                                </div>
-                            </a>
-                        </li>
-                    </ul>
-                </div>
+
             </div>
 
 
