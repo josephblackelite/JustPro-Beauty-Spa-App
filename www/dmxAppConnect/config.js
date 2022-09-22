@@ -2066,6 +2066,46 @@ dmx.config({
         }
       ],
       "outputType": "array"
+    },
+    "working_day_array": {
+      "meta": [
+        {
+          "type": "number",
+          "name": "wordking_day_id"
+        },
+        {
+          "type": "text",
+          "name": "day_name"
+        },
+        {
+          "type": "number",
+          "name": "value"
+        }
+      ],
+      "outputType": "array"
+    },
+    "working_days_array": {
+      "meta": [
+        {
+          "name": "queryWorking_days",
+          "type": "array",
+          "sub": [
+            {
+              "type": "number",
+              "name": "wordking_day_id"
+            },
+            {
+              "type": "text",
+              "name": "day_name"
+            },
+            {
+              "type": "number",
+              "name": "value"
+            }
+          ]
+        }
+      ],
+      "outputType": "object"
     }
   },
   "providerservicespage": {
