@@ -232,6 +232,7 @@
         <input id="User_id_bill_selected_card" name="user_id" dmx-bind:value="app.Current_user.data.customer.id" type="hidden">
         <input id="setUp_bill_selected_card" name="setUp" type="hidden">
         <input id="customer_id_bill_selected_card" name="customer_id" type="hidden" dmx-bind:value="app.Current_user.data.customer.id"><input id="address_id_bill_selected_card" name="address_id" dmx-bind:value="app.main.checkout.route.params.address_id" type="hidden">
+        <input id="coupon_code" name="coupon_code" dmx-bind:value="app.main.checkout.route.params.address_id" type="hidden" value="Freebie_First_Month">
         <div is="dmx-form-repeat" id="cartRepeat_bill_selected_card" dmx-bind:items="app.Cart.data">
             <input id="provider_service_id_bill_selected_card" name="provider_service_id" type="hidden" dmx-bind:value="$value.provider_service_id">
             <input id="product_price_id_bill_selected_card" name="product_price_id" type="hidden" dmx-bind:value="$value.product_price_id">
