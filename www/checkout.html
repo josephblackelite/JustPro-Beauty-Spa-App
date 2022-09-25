@@ -120,6 +120,7 @@
     <div class="toolbar toolbar-bottom toolbar-bottom-md no-shadow">
         <div class="toolbar-inner justify-content-center" style="padding:10px !important">
             <button class="button-large rounded-xl button-6 button-fill text-color-white bg-color-primary" dmx-on:click="run({condition:{if:`!app.Current_user.data.customer.customer_email`,then:{steps:{runJS:{function:'showEnterEmailAddressSheet'}}},else:{steps:{condition:{if:`!app.Current_user.data.customer.phone_number`,then:{steps:{runJS:{function:'showVerifyNumberSheet'}}},else:{steps:[{run:{action:`app.main.checkout.justpropreloader.show()`}},{run:{action:`app.main.checkout.Setup_Intent_ephemeral_key_gen.submit()`}}]}}}}}})" style="width:100%; font-size:14px !important">Add New Payment Method</button>
+            <button class="button-large rounded-xl button-6 button-fill text-color-white bg-color-primary" dmx-on:click="app.stripe1.checkout()" style="width:100%; font-size:14px !important">checkout</button>
 
 
 
