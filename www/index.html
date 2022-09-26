@@ -121,7 +121,7 @@
   </style>
 
   <div id="app" is="dmx-f7-app" theme="md">
-    <dmx-stripe id="stripe1" key="pk_test_51KNDGMCQn4pLZ37HnTBiHVjg6zPbY5B5pVgmOAGnmsWAwUSdQA7EfW9tgjckRfHxcsqb7sOj8DxfUPXkfRTtZgOY00d2SkIFxE" dmx-bind:line-items="Cart.data" checkout="server" session-url="https://api.justpro.me/api/stripe/checkout" dmx-on:error="run({'f7.dialog.alert':{text:`app.stripe1.lastError`}})"></dmx-stripe>
+    <dmx-stripe id="stripe1" key="pk_test_51KNDGMCQn4pLZ37HnTBiHVjg6zPbY5B5pVgmOAGnmsWAwUSdQA7EfW9tgjckRfHxcsqb7sOj8DxfUPXkfRTtZgOY00d2SkIFxE" dmx-bind:line-items="'price_1LdvQjCQn4pLZ37H7wSMq5bi'" checkout="server" session-url="https://api.justpro.me/api/stripe/checkout" dmx-on:error="run({'f7.dialog.alert':{text:`app.stripe1.lastError`}})"></dmx-stripe>
 
     <!-- Statusbar overlay -->
 
