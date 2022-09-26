@@ -30,8 +30,8 @@
     "capacitor": {
       "checked": true
     },
-    "platform": "android",
-    "target": "Pixel_4_XL_API_32",
+    "platform": "ios",
+    "target": "F6649D25-FCC2-4FCC-8FEC-83099E013686",
     "device": null,
     "deviceId": null
   }
