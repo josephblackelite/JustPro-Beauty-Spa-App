@@ -53,6 +53,27 @@
     }
   }
 ]</script>
+
+    <script is="dmx-flow" id="AddOneSignal_user_id" type="text/dmx-flow" autorun>{
+  meta: {
+    $param: [
+      {type: "text", name: "user_id"}
+    ]
+  },
+  exec: {
+    steps: [
+      {
+        wait: {delay: 5000}
+      },
+      {
+        runJS: {
+          function: "addExternalUserId",
+          args: ["{{Current_user.data.customer.id}}"]
+        }
+      }
+    ]
+  }
+}</script>
     <dmx-datetime id="var1"></dmx-datetime>
     <dmx-serverconnect id="queryServices" url="https://api.justpro.me/api/services/query_services" site="JustPro-Spa-Backend" dmx-param:category="app.local_store.data.state" dmx-on:start="app.showPreloader('deeporange')" dmx-on:done="app.hidePreloader()" dmx-param:product_delivery="app.local_store.data.service_location"></dmx-serverconnect>
     <dmx-serverconnect id="querySalons" url="https://api.justpro.me/api/provider/all_salons" site="JustPro-Spa-Backend" dmx-param:category="app.main.home.selector.value" dmx-on:start="app.showPreloader('deeporange')" dmx-on:done="app.hidePreloader()" dmx-param:product_delivery="app.main.home.providers.value" dmx-param:customer_lat="app.geo.coords.latitude" dmx-param:customer_long="app.geo.coords.longitude" dmx-param:provider_type="app.local_store.data.service_location" dmx-param:search_by_name="app.main.home.search_by_name.value"></dmx-serverconnect>

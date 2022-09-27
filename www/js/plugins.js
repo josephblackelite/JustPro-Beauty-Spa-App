@@ -330,4 +330,10 @@ function startOtpWatch() {
     }
 }
 
+//oneSignal  >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 
+//Add external user id
+function addExternalUserId(id) {
+    val = id.toString()
+    window.plugins.OneSignal.setExternalUserId(val);
+}

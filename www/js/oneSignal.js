@@ -20,7 +20,3 @@ function OneSignalInit() {
 }
 
 
-//Add external user id
-function addExternalUserId(id) {
-    window.plugins.OneSignal.setExternalUserId(id);
-}

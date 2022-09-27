@@ -2165,5 +2165,19 @@ dmx.config({
       ],
       "outputType": "array"
     }
+  },
+  "home": {
+    "AddOneSignal_user_id": [
+      {
+        "name": "$param",
+        "type": "object",
+        "sub": [
+          {
+            "type": "text",
+            "name": "user_id"
+          }
+        ]
+      }
+    ]
   }
 });
