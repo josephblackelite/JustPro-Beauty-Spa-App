@@ -24,7 +24,7 @@
     </div>
 
     <dmx-serverconnect id="customerPaymentMethods" url="https://api.justpro.me/api/stripe/customerPaymentMethods" site="JustPro-Spa-Backend" dmx-param:stripecustomerid="app.Current_user.data.customer.stripe_customer_id" sockets="true" dmx-param:customer_id="app.Current_user.data.customer.id" dmx-on:start="app.showPreloader('purple')" dmx-on:done="app.hidePreloader()"></dmx-serverconnect>
-    <dmx-serverconnect id="lastOrder" url="https://api.justpro.me/api/customer_orders/last_order" site="JustPro-Spa-Backend" dmx-param:stripecustomerid="app.Current_user.data.customer.stripe_customer_id" sockets="true" dmx-param:customer_id="app.Current_user.data.customer.id"></dmx-serverconnect>
+    <dmx-serverconnect id="lastOrder" url="https://api.justpro.me/api/customer_orders/last_order" site="JustPro-Spa-Backend" dmx-param:stripecustomerid="app.Current_user.data.customer.stripe_customer_id" dmx-param:customer_id="app.Current_user.data.customer.id" sockets="true"></dmx-serverconnect>
     <script is="dmx-flow" id="check_last_order" type="text/dmx-flow">[
   {
     wait: {delay: 20000}
@@ -245,6 +245,7 @@
             <input id="timeSlot_end_bill_selected_card" name="timeSlot_end" type="hidden" dmx-bind:value="$value.timeSlot_end">
             <input id="item_img" name="item_img" type="hidden" dmx-bind:value="$value.product_avatar">
             <input id="item_name" name="item_name" type="hidden" dmx-bind:value="$value.name">
+            <input id="address_id" name="address_id" type="hidden" dmx-bind:value="$value.address_id">
         </div>
     </form>
 
