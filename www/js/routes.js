@@ -111,5 +111,9 @@ var routes = [
   {
     "path": "/provider-employee-4-service/:service_id/:parent_provider_id",
     "url": "./provider-employee-4-service.html"
+  },
+  {
+    "path": "/change-appointment-date/:order_item_id",
+    "url": "./change-appointment-date.html"
   }
 ]

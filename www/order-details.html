@@ -20,7 +20,8 @@
     </div>
     <div class="toolbar toolbar-bottom toolbar-bottom-md">
         <div class="toolbar-inner justify-content-center" style="padding:10px !important">
-            <a class="button-large rounded-xl button-6 bg-color-primary button-fill text-color-white" style="width:100%" href="#!" dmx-on:click="app.main.navigate('/cancel-appointment/'+app.main.orderdetails.route.params.id+'/'+app.main.orderdetails.route.params.uuid,{})" dmx-show="(app.main.orderdetails.orderinfo.data.query.order_status == 'pending')">Change Appointment</a>
+            <a class="button-large rounded-xl button-6 bg-color-primary button-fill text-color-white margin-right" style="width:100%" href="#!" dmx-on:click="app.main.navigate('/cancel-appointment/'+app.main.orderdetails.route.params.id+'/'+app.main.orderdetails.route.params.uuid,{})" dmx-hide="app.main.orderdetails.orderchildren.data.query[0].order_status">Cancel Appointment</a>
+            <a class="button-large rounded-xl button-6 bg-color-primary button-fill text-color-white" style="width:100%" href="#!" dmx-on:click="app.main.navigate('/change-appointment-date/'+app.main.orderdetails.orderchildren.data.query[0].order_item_id,{})" dmx-hide="app.main.orderdetails.orderchildren.data.query[0].order_status">Change Appointment date</a>
         </div>
     </div>
 

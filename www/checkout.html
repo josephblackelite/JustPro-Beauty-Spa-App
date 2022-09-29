@@ -24,14 +24,19 @@
     </div>
 
     <dmx-serverconnect id="customerPaymentMethods" url="https://api.justpro.me/api/stripe/customerPaymentMethods" site="JustPro-Spa-Backend" dmx-param:stripecustomerid="app.Current_user.data.customer.stripe_customer_id" sockets="true" dmx-param:customer_id="app.Current_user.data.customer.id" dmx-on:start="app.showPreloader('purple')" dmx-on:done="app.hidePreloader()"></dmx-serverconnect>
-    <dmx-serverconnect id="lastOrder" url="https://api.justpro.me/api/customer_orders/last_order" site="JustPro-Spa-Backend" dmx-param:stripecustomerid="app.Current_user.data.customer.stripe_customer_id" dmx-param:customer_id="app.Current_user.data.customer.id" sockets="true"></dmx-serverconnect>
+    <dmx-serverconnect id="lastOrder" url="https://api.justpro.me/api/customer_orders/last_order" site="JustPro-Spa-Backend" dmx-param:customer_id="app.Current_user.data.customer.id" sockets="true"></dmx-serverconnect>
     <script is="dmx-flow" id="check_last_order" type="text/dmx-flow">[
   {
     wait: {delay: 20000}
   },
   {
+    run: {
+      action: "{{app.main.checkout.lastOrder.load({customer_id: app.Current_user.data.customer.id},true)}}"
+    }
+  },
+  {
     condition: {
-      if: "{{(app.main.checkout.last_order_id.value == (app.main.checkout.lastOrder.data.queryLastOrder.id && (app.main.checkout.lastOrder.data.queryLastOrder.order_paid == 1)))}}",
+      if: "{{(app.main.checkout.last_order_id.value==app.main.checkout.lastOrder.data.queryLastOrder.id)&&app.main.checkout.lastOrder.data.queryLastOrder.order_paid}}",
       then: {
         steps: [
           {
@@ -224,7 +229,7 @@
             <input id="timeSlot_end" name="timeSlot_end" type="hidden" dmx-bind:value="$value.timeSlot_end">
         </div>
     </form>
-    <form is="dmx-serverconnect-form" id="bill_selected_card" method="post" action="https://api.justpro.me/api/stripe/bill_customer_card" site="JustPro-Spa-Backend" dmx-on:success="run([{run:{action:`app.main.checkout.last_order_id.setValue(app.main.checkout.bill_selected_card.data.insertOrder.identity)`}},{run:{action:`app.main.checkout.justpropreloader.show()`}},{run:{action:`app.main.checkout.justpropreloader.show();app.main.checkout.check_last_order.run()`}}])" dmx-on:start="app.showPreloader('purple')" dmx-on:done="app.hidePreloader()">
+    <form is="dmx-serverconnect-form" id="bill_selected_card" method="post" action="https://api.justpro.me/api/stripe/bill_customer_card" site="JustPro-Spa-Backend" dmx-on:success="run([{run:{action:`app.main.checkout.last_order_id.setValue(app.main.checkout.bill_selected_card.data.insertOrder.identity)`}},{run:{action:`app.main.checkout.justpropreloader.show()`}},{run:{action:`app.main.checkout.scheduler1.start()`,disabled:true}},{run:{action:`app.main.checkout.check_last_order.run()`}}])" dmx-on:start="app.showPreloader('purple')" dmx-on:done="app.hidePreloader()">
         <input id="selected_payment_method" name="selected_payment_method" type="hidden">
         <input id="User_id_bill_selected_card" name="user_id" dmx-bind:value="app.Current_user.data.customer.id" type="hidden">
         <input id="setUp_bill_selected_card" name="setUp" type="hidden">
