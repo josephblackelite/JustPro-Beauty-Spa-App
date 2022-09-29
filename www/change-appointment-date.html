@@ -42,10 +42,10 @@
     </div>
   </div>
   <form is="dmx-serverconnect-form" id="update_booked_date" method="post" action="https://api.justpro.me/api/customer_orders/change_appointment_date" site="JustPro-Spa-Backend" dmx-on:success="run({runJS:{function:'back'}})">
-    <input id="date" name="date" dmx-bind:value="app.main.changeappointmentdate.update_booked_date.date.value">
-    <input id="order_item_id" name="order_item_id" dmx-bind:value="app.main.changeappointmentdate.route.params.order_item_id">
-    <input id="timeSlot_start" name="timeSlot_start" dmx-bind:value="app.main.changeappointmentdate.appointment_timeStart.value">
-    <input id="timeSlot_end" name="timeSlot_end" dmx-bind:value="app.main.changeappointmentdate.appointment_timeEnd.value">
+    <input id="date" name="date" dmx-bind:value="app.main.changeappointmentdate.form.appointmentDate.value.toDate()" type="hidden">
+    <input id="order_item_id" name="order_item_id" dmx-bind:value="app.main.changeappointmentdate.route.params.order_item_id" type="hidden">
+    <input id="timeSlot_start" name="timeSlot_start" dmx-bind:value="app.main.changeappointmentdate.appointment_timeStart.value" type="hidden">
+    <input id="timeSlot_end" name="timeSlot_end" dmx-bind:value="app.main.changeappointmentdate.appointment_timeEnd.value" type="hidden">
   </form>
   <div class="page-content content-area wappler-block">
     <dmx-preloader id="justpropreloader" spinner="pulse" color="#ff6600"></dmx-preloader>
