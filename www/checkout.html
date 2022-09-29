@@ -197,6 +197,23 @@
         </div> -->
 
         <div class="block">
+            <form is="dmx-serverconnect-form" id="serverconnectform1" method="post">
+                <div class="list no-hairlines-md padding-top">
+                    <ul>
+                        <li class="item-content item-input item-input-outline">
+                            <div class="item-inner" style="width:100% !important">
+                                <div class="item-title item-floating-label strong">Have a coupon code?</div>
+                                <div class="item-input-wrap" style="width:100% !important">
+                                    <input type="text" placeholder="coupon_entry" class="form-control" id="coupon_entry" name="name" style="width:100% !important" />
+                                    <span class="input-clear-button"></span>
+                                </div>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+            </form>
+        </div>
+        <div class="block">
             <div class="checkout-total">
                 <h4 class="title tajawal-s no-margin-bottom">You are about to pay</h4>
                 <h1 class="checkout-total strong no-margin-top" style="margin-bottom:-5px !important">{{Cart.data.sum(`total.toNumber()`).formatCurrency('AED', '.', ',', 2)}}</h1>
