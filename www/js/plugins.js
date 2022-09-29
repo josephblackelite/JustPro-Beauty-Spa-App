@@ -85,10 +85,10 @@ async function googleSignIn() {
 
 // STRIPE PLUGIN  >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 
-//initialize "pk_live_51KNDGMCQn4pLZ37HDzM61Wv2XIdopS2iemkynJQfKrvwSmyL6kxXQwN431NLY2hPcVKUP1YS4dkcsnlxQluxFbp500CbgqMqI7"
+//initialize 
 Stripe.initialize({
     publishableKey:
-        "pk_test_51KNDGMCQn4pLZ37HnTBiHVjg6zPbY5B5pVgmOAGnmsWAwUSdQA7EfW9tgjckRfHxcsqb7sOj8DxfUPXkfRTtZgOY00d2SkIFxE"
+        "pk_live_51KNDGMCQn4pLZ37HDzM61Wv2XIdopS2iemkynJQfKrvwSmyL6kxXQwN431NLY2hPcVKUP1YS4dkcsnlxQluxFbp500CbgqMqI7"
 });
 
 
