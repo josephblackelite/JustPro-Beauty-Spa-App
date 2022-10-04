@@ -9,6 +9,8 @@
 
     <dmx-value id="varQty" dmx-bind:value="app.main.product_info.qty_form.quantity.value"></dmx-value>
     <dmx-serverconnect id="service_info" url="https://api.justpro.me/api/services/service_info" site="JustPro-Spa-Backend" dmx-param:service_id="app.main.product_info.route.params.id" sockets="true" dmx-param:service_offered_id="app.main.product_info.route.params.service_offered_id"></dmx-serverconnect>
+    <dmx-serverconnect id="service_options" url="https://api.justpro.me/api/provider/service_offered_options" site="JustPro-Spa-Backend" dmx-param:service_id="app.main.product_info.route.params.id" sockets="true" dmx-param:service_offered_id="app.main.product_info.route.params.service_offered_id"></dmx-serverconnect>
+    <dmx-serverconnect id="service_option_data" url="https://api.justpro.me/api/provider/service_offered_option_data" site="JustPro-Spa-Backend" dmx-param:service_id="app.main.product_info.route.params.id" sockets="true" dmx-param:service_offered_id="app.main.product_info.route.params.service_offered_id" dmx-param:service_offered_option_data_id="app.main.product_info.qty_form.option.value"></dmx-serverconnect>
 
 
     <script is="dmx-flow" id="ShowSlides" type="text/dmx-flow" autorun>[
@@ -52,7 +54,7 @@
     </div>
     <div class="toolbar toolbar-bottom toolbar-bottom-md no-shadow">
         <div class="toolbar-inner justify-content-center" style="padding:10px !important">
-            <a href="#!" class="item-link list-button button-large rounded-xl button-6 strong bg-color-primary button-fill text-color-white" dmx-on:click="run({condition:{if:`(app.main.product_info.qty_form.quantity.value &gt;= 1)`,then:{steps:{condition:{if:`(app.local_store.data.service_location == \'home\')`,then:{steps:[{run:{action:`app.cart_preFill.set(\'provider_service_id\',app.main.product_info.service_info.data.queryServices.provider_service_id);app.cart_preFill.set(\'product_price_id\',app.main.product_info.service_info.data.queryServices.stripe_price_id);app.cart_preFill.set(\'name\',app.main.product_info.service_info.data.queryServices.product_name);app.cart_preFill.set(\'quantity\',app.main.product_info.qty_form.quantity.value.toNumber());app.cart_preFill.set(\'amount\',app.main.product_info.service_info.data.queryServices.product_amt);app.cart_preFill.set(\'matrix\',app.main.product_info.qty_form.matrix.value);app.cart_preFill.set(\'total\',app.main.product_info.overall_total.value);app.cart_preFill.set(\'vat\',app.main.product_info.vat_amount.value);app.cart_preFill.set(\'product_avatar\',app.main.product_info.service_info.data.queryServices.product_avatar);app.cart_preFill.set(\'customer_id\',app.Current_user.data.customer.id);app.cart_preFill.set(\'service_type\',app.local_store.data.service_location)`}},{run:{action:`app.main.navigate(\'/appointment-page/\'+app.main.product_info.service_info.data.queryServices.parent_provider_id+\'/\'+app.main.product_info.route.params.service_offered_id,{})`}}]},else:{steps:[{run:{action:`app.cart_preFill.set(\'provider_service_id\',app.main.product_info.service_info.data.queryServices.provider_service_id);app.cart_preFill.set(\'product_price_id\',app.main.product_info.service_info.data.queryServices.stripe_price_id);app.cart_preFill.set(\'name\',app.main.product_info.service_info.data.queryServices.product_name);app.cart_preFill.set(\'quantity\',app.main.product_info.qty_form.quantity.value.toNumber());app.cart_preFill.set(\'amount\',app.main.product_info.service_info.data.queryServices.product_amt);app.cart_preFill.set(\'matrix\',app.main.product_info.qty_form.matrix.value);app.cart_preFill.set(\'total\',app.main.product_info.overall_total.value);app.cart_preFill.set(\'vat\',app.main.product_info.vat_amount.value);app.cart_preFill.set(\'product_avatar\',app.main.product_info.service_info.data.queryServices.product_avatar);app.cart_preFill.set(\'customer_id\',app.Current_user.data.customer.id);app.cart_preFill.set(\'service_type\',app.local_store.data.service_location)`}},{run:{action:`app.main.navigate(\'/choose-professional/\'+app.main.product_info.service_info.data.queryServices.id+\'/\'+app.main.product_info.service_info.data.queryServices.parent_provider_id+\'/\'+app.main.product_info.route.params.service_offered_id,{})`}}]}}}},else:{steps:{'f7.dialog.alert':{text:'Please select the number of people that need this service.',title:'How many people?'}}}}})" dmx-show="app.main.product_info.service_info.data.queryServices" style="width:100%" dmx-text="(app.local_store.data.service_location == 'home' ? 'Book '+app.main.product_info.route.params.freelancer_name.titlecase() : 'Choose Staff')">Choose Staff</a>
+            <a href="#!" class="item-link list-button button-large rounded-xl button-6 strong bg-color-primary button-fill text-color-white" dmx-on:click="run({condition:{if:`(app.main.product_info.qty_form.quantity.value &gt;= 1)`,then:{steps:[{run:{action:`app.cart_preFill.set(\'provider_service_id\',app.main.product_info.service_info.data.queryServices.provider_service_id);app.cart_preFill.set(\'product_price_id\',app.main.product_info.service_option_data.data.query_service_options.stripe_price_id);app.cart_preFill.set(\'name\',app.main.product_info.service_info.data.queryServices.product_name+\' - \'+app.main.product_info.service_option_data.data.query_service_options.option_name);app.cart_preFill.set(\'quantity\',app.main.product_info.qty_form.quantity.value.toNumber());app.cart_preFill.set(\'amount\',app.main.product_info.service_option_data.data.query_service_options.item_price_with_tax);app.cart_preFill.set(\'matrix\',app.main.product_info.qty_form.matrix.value);app.cart_preFill.set(\'total\',app.main.product_info.overall_total.value);app.cart_preFill.set(\'vat\',app.main.product_info.vat_amount.value);app.cart_preFill.set(\'product_avatar\',app.main.product_info.service_info.data.queryServices.product_avatar);app.cart_preFill.set(\'customer_id\',app.Current_user.data.customer.id);app.cart_preFill.set(\'service_type\',app.local_store.data.service_location);app.cart_preFill.set(\'service_option_id\',app.main.product_info.service_option_data.data.query_service_options.id)`}},{condition:{if:`(app.local_store.data.service_location == \'home\')`,then:{steps:{run:{action:`app.main.navigate(\'/appointment-page/\'+app.main.product_info.service_info.data.queryServices.parent_provider_id+\'/\'+app.main.product_info.route.params.service_offered_id,{})`}}},else:{steps:{run:{action:`app.main.navigate(\'/choose-professional/\'+app.main.product_info.service_info.data.queryServices.id+\'/\'+app.main.product_info.service_info.data.queryServices.parent_provider_id+\'/\'+app.main.product_info.route.params.service_offered_id,{})`}}}}}]},else:{steps:{'f7.dialog.alert':{text:'Please select the number of people that need this service.',title:'How many people?'}}}}})" dmx-show="app.main.product_info.service_info.data.queryServices" style="width:100%" dmx-text="(app.local_store.data.service_location == 'home' ? 'Book '+app.main.product_info.route.params.freelancer_name.titlecase() : 'Choose Staff')">Choose Staff</a>
         </div>
     </div>
     <div class="page-content bg-gray pt-0 mr-0 ml-0">
@@ -71,15 +73,27 @@
                         <p class="text-align-center" style="margin-top:-25px"><small>5% VAT Included </small></p>
                         <input type="hidden" name="vat_amount" id="vat_amount" dmx-bind:value="app.main.product_info.working_total.value.toNumber().per(5)">
 
-                        <input type="hidden" name="working_total" id="working_total" dmx-bind:value="(app.main.product_info.service_info.data.queryServices.product_amt.toNumber() * (app.main.product_info.qty_form.quantity.value * app.main.product_info.qty_form.matrix.value))">
+                        <input type="hidden" name="working_total" id="working_total" dmx-bind:value="(app.main.product_info.service_option_data.data.query_service_options.item_price_with_tax.toNumber() * (app.main.product_info.qty_form.quantity.value * app.main.product_info.qty_form.matrix.value))">
                         <input type="hidden" name="overall_total" id="overall_total" dmx-bind:value="app.main.product_info.working_total.value.toNumber()">
                     </div>
                 </div>
 
                 <div class="col-100 up-20">
-                    <form action="" id="qty_form">
+                    <form action="" id="qty_form" is="dmx-serverconnect-form" method="post">
                         <div class="list inline-labels bg-color-gray color-theme-gray">
                             <ul>
+                                <li>
+                                    <p class="mb-0 mt-0 small text-color-black block smallfont bottom-10">Select your preffered offered</p>
+                                    <a class="item-link smart-select smart-select-init" data-open-in="sheet">
+                                        <select name="quantity" id="option" required="" data-msg-required="Please select quantity" dmx-bind:options="app.main.product_info.service_options.data.query_service_options" optiontext="option_name" optionvalue="id">
+                                        </select>
+                                        <div class="item-content">
+                                            <div class="item-inner">
+                                                <div class="item-title strong">Which option?</div>
+                                            </div>
+                                        </div>
+                                    </a>
+                                </li>
                                 <li>
                                     <p class="mb-0 mt-0 small text-color-black block smallfont bottom-10">How many people are you booking for?</p>
                                     <a class="item-link smart-select smart-select-init" data-open-in="sheet">
@@ -158,13 +172,14 @@
                             </div>
                             <div class="rating-info small">
                                 <h2 class="rating-text">{{app.main.product_info.service_info.data.rating}}</h2>
-                                <ul class="rating-list">
-                                    <li class="rating-star"><i class="fas fa-star" dmx-show="(app.main.product_info.service_info.data.rating > 0)"></i></li>
-                                    <li class="rating-star"><i class="fas fa-star" dmx-show="(app.main.product_info.service_info.data.rating > 1)"></i></li>
-                                    <li class="rating-star"><i class="fas fa-star" dmx-show="(app.main.product_info.service_info.data.rating > 2)"></i></li>
-                                    <li class="rating-star"><i class="fas fa-star" dmx-show="(app.main.product_info.service_info.data.rating > 3)"></i></li>
-                                    <li class="rating-star"><i class="fas fa-star" dmx-show="(app.main.product_info.service_info.data.rating > 4)"></i></li>
-                                </ul>
+                                <div>
+
+                                    <span class="fa fa-star small" dmx-class:checked="(app.main.product_info.service_info.data.rating > 0)"></span>
+                                    <span class="fa fa-star small" dmx-class:checked="(app.main.product_info.service_info.data.rating > 1)"></span>
+                                    <span class="fa fa-star small" dmx-class:checked="(app.main.product_info.service_info.data.rating > 2)"></span>
+                                    <span class="fa fa-star small" dmx-class:checked="(app.main.product_info.service_info.data.rating > 3)"></span>
+                                    <span class="fa fa-star small" dmx-class:checked="(app.main.product_info.service_info.data.rating > 4)"></span>
+                                </div>
                             </div>
 
                         </div>
