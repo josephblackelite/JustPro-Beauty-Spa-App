@@ -1,6 +1,141 @@
-<!-- Wappler include head-page="index.html" is="dmx-app" id="orders" appConnect="local" framework7_6="With App Connect" framework7_icons="local" capacitor="local" components="{dmxSwiper:{},dmxFormatter:{}}" -->
+<!-- Wappler include head-page="index.html" is="dmx-app" id="orders" appConnect="local" framework7_6="With App Connect" framework7_icons="local" capacitor="local" components="{dmxSwiper:{},dmxFormatter:{},dmxPreloader:{},dmxSockets:{}}" -->
+
+
 
 <div class="page" id="orders" data-name="orders" path="/orders">
+    <dmx-serverconnect id="customers_orders" url="https://api.justpro.me/api/customer_orders/list_orders" site="JustPro-Spa-Backend" dmx-param:customer_id="app.Current_user.data.customer.id" dmx-param:order_status="app.main.orders.booking_status_select_form.booking_status.value" sockets="true" dmx-on:start="app.showPreloader('purple')" dmx-on:done="app.hidePreloader()"></dmx-serverconnect>
+    <style>
+        .white {
+            background-color: #fff !important;
+            color: #000 !important;
+            font-weight: 600 !important;
+        }
+    </style>
+    <dmx-value id="provider_booking_dates_query_param" dmx-bind:value="app.main.orders.booking_status_select_form.booking_status.value"></dmx-value>
+    <div class="padding-top padding-bottom navbar-extra">
+        <div class="navbar no-hairline no-shadow no-border">
+            <div class="navbar-inner" style="padding-right:0px !important; padding-left:0px !important; margin-right:0px !important">
+                <div class="subnavbar">
+                    <div class="segmented segmented-strong nametag text-color-white">
+                        <a class="button strong active text-color-white" dmx-class:active="!app.main.orders.provider_booking_dates_query_param.value" dmx-on:click="app.main.orders.booking_status_select_form.booking_status.setValue('\'\'')" dmx-style:white.important="!app.main.orders.provider_booking_dates_query_param.value">Upcoming</a>
+                        <a class="button strong text-color-white" dmx-class:active="app.main.orders.provider_booking_dates_query_param.value " dmx-on:click="app.main.orders.booking_status_select_form.booking_status.setValue('completed')" dmx-style:white.important="app.main.orders.provider_booking_dates_query_param.value">Past</a>
+                    </div>
+                </div>
+                <div class="left">
+                    <a href="#" class="link back">
+                        <i class="icon f7-icons">arrow_left</i>
+                    </a>
+                </div>
+                <div class="title text-brand">Appointments</div>
+                <div class="right">
+                    <a href="#" class="link panel-open icon-only" data-panel="left">
+                        <i class="icon f7-icons">ellipsis_vertical</i>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- <div class="toolbar toolbar-bottom toolbar-bottom-md">
+        <div class="toolbar-inner justify-content-center" style="padding:10px !important">
+            <a class="button-large rounded-xl button-6 bg-color-primary button-fill text-color-white" style="width:100%" dmx-bind:href="'/order-prompt'">Book Appointment</a>
+        </div>
+    </div> -->
+
+    <div class="page-content content-area mb-150">
+        <dmx-preloader id="justpropreloader" spinner="pulse" color="#ff6600"></dmx-preloader>
+
+
+        <div class="mb-150">
+            <div class="col-100">
+                <div class="block text-align-center padding-top padding-bottom" dmx-show="(!app.main.orders.customers_orders.data.query_orders &amp;&amp; !app.main.orders.customers_orders.data.query_orders_null)">
+                    <h5 class="custom-font">You don't have any bookings yet.</h5>
+
+                </div>
+                <div class="block">
+                    <form action="" is="dmx-serverconnect-form" method="post" id="booking_status_select_form">
+                        <div class="list" style="margin-top:-20px !important">
+                            <ul class="row">
+                                <li class="item-content item-input item-input-outline" style="width:100% !important">
+
+                                    <div class="item-inner" style="width:100% !important">
+
+                                        <div class="item-input-wrap">
+                                            <select id="booking_status" class="form-control" style="width:100% !important">
+                                                <option value="">Select status</option>
+                                                <option value="completed">Completed</option>
+                                                <option value="accepted">Accepted</option>
+                                            </select>
+                                            <span class="input-clear-button"></span>
+                                        </div>
+                                    </div>
+                                </li>
+                            </ul>
+                        </div>
+                    </form>
+
+                </div>
+            </div>
+            <!-- Not null -->
+            <div class="card no-shadow card-outline mb-0" dmx-repeat:repeat_items_slots="app.main.orders.customers_orders.data.query_orders" dmx-show="app.main.orders.provider_booking_dates_query_param.value" dmx-on:click="app.main.navigate('/order-details/'+id+'/'+order_uuid_id,{})">
+
+                <span class="badge" dmx-show="(order_status == null)">New</span>
+                <span class="badge" dmx-show="(order_status == 'accepted')" dmx-class:bg-color-green="(order_status == 'accepted')">Booked</span>
+                <span class="badge" dmx-show="(order_status == 'completed')" dmx-class:bg-color-blue="(order_status == 'completed')">Done</span>
+                <div class="card-content" dmx-on:click="app.main.navigate('/order-details/'+order_item_id,{})">
+
+                    <div class="list media-list no-ios-edges">
+                        <ul dmx-on:click="app.main.navigate('/order-details/'+order_item_id,{})">
+                            <li class="item-content">
+                                <div class="item-media">
+                                    <img dmx-bind:src="item_image " width="50" height="50" />
+                                </div>
+                                <div class="item-inner">
+                                    <div class="item-title-row">
+                                        <div class="item-title">{{item_name.titlecase()}}</div>
+
+                                    </div>
+                                    <div class="item-subtitle">{{total_amt.toNumber().formatCurrency('AED', '.', ',', 2)}}</div>
+                                    <div class="item-subtitle">{{date.formatDate('dd MMM y')}} at {{time_start.formatDate('hh:mm a')}}</div>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <!-- Null -->
+            <div class="card no-shadow card-outline mb-0" dmx-repeat:repeat_items_slots="app.main.orders.customers_orders.data.query_orders_null" dmx-show="!app.main.orders.provider_booking_dates_query_param.value" dmx-on:click="app.main.navigate('/order-details/'+id+'/'+order_uuid_id,{})">
+
+                <span class="badge" dmx-show="(order_status == null)">New</span>
+                <span class="badge" dmx-show="(order_status == 'accepted')" dmx-class:bg-color-green="(order_status == 'accepted')">Booked</span>
+                <span class="badge" dmx-show="(order_status == 'completed')" dmx-class:bg-color-blue="(order_status == 'completed')">Done</span>
+                <div class="card-content" dmx-on:click="app.main.navigate('/order-details/'+order_item_id,{})">
+
+                    <div class="list media-list no-ios-edges">
+                        <ul dmx-on:click="app.main.navigate('/order-details/'+order_item_id,{})">
+                            <li class="item-content">
+                                <div class="item-media">
+                                    <img dmx-bind:src="item_image " width="50" height="50" />
+                                </div>
+                                <div class="item-inner">
+                                    <div class="item-title-row">
+                                        <div class="item-title">{{item_name.titlecase()}}</div>
+
+                                    </div>
+                                    <div class="item-subtitle">{{total_amt.toNumber().formatCurrency('AED', '.', ',', 2)}}</div>
+                                    <div class="item-subtitle">{{date.formatDate('dd MMM y')}} at {{time_start.formatDate('hh:mm a')}}</div>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<!-- <div class="page" id="orders" data-name="orders" path="/orders">
     <div class="padding-top padding-bottom">
         <div class="navbar no-hairline no-shadow no-border">
             <div class="navbar-inner" style="padding-right:0px !important; padding-left:0px !important; margin-right:0px !important">
@@ -78,4 +213,4 @@
 
         </div>
     </div>
-</div>
+</div> -->

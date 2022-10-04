@@ -1,4 +1,4 @@
-<!-- Wappler include head-page="index.html" is="dmx-app" id="billing" appConnect="local" framework7_6="With App Connect" framework7_icons="local" capacitor="local" components="{dmxSwiper:{},dmxPreloader:{},dmxSockets:{}}" bootstrap_icons="local" -->
+<!-- Wappler include head-page="index.html" is="dmx-app" id="billing" appConnect="local" framework7_6="With App Connect" framework7_icons="local" capacitor="local" components="{dmxSwiper:{},dmxPreloader:{},dmxSockets:{},dmxFormatter:{}}" bootstrap_icons="local" -->
 
 <div class="page" path="/billing" data-name="billing" id="billing">
     <dmx-serverconnect id="customerPaymentMethods" url="https://api.justpro.me/api/stripe/customerPaymentMethods" site="JustPro-Spa-Backend" dmx-param:stripecustomerid="app.Current_user.data.customer.stripe_customer_id" dmx-param:customer_id="app.Current_user.data.customer.id" sockets="true" dmx-on:start="app.showPreloader('purple')" dmx-on:done="app.hidePreloader()"></dmx-serverconnect>
@@ -45,7 +45,7 @@
         <div class="block" dmx-show="app.main.billing.customerPaymentMethods.data.query[0].id">
             <h4 class="pb-10">My Cards</h4>
         </div>
-        <div class="block no-margin">
+        <div class="block no-margin" dmx-hide="(app.main.billing.customerPaymentMethods.data.query.count() &lt; 1)">
             <div class="list accordion-list dz-accordion dz-list">
                 <ul class="padding">
                     <li class="accordion-item accordion-item-opened">
@@ -87,7 +87,7 @@
         </div>
 
         <div class="block">
-            <p>Payment is securely processed by Stripe.com. JustPro does not store or see your payment details. Stripe.com manages your payment data and handles all payment processing on behalf of JustPro Beauty & Spa Co. LLC. </p>
+            <p>Payment is securely processed by Stripe.com. JustPro does not store or see your payment details. Stripe.com manages your payment data and handles all payment processing on behalf of JustPro Beauty and Spa Co. LLC. </p>
         </div>
         <div class="sheet-modal EnterEmailAddressSheet">
             <div class="toolbar">

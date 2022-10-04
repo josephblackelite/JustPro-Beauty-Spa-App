@@ -82,7 +82,7 @@
     <dmx-value id="popover_description"></dmx-value>
 
     <dmx-serverconnect id="selected_address_data" url="https://api.justpro.me/api/customer_address_actions/selected_address_data" site="JustPro-Spa-Backend" dmx-param:address_id="app.main.home.address_select_form.select_address.value" sockets="true"></dmx-serverconnect>
-    <dmx-serverconnect id="available_categories" url="https://api.justpro.me/api/services/query_available_categories" site="JustPro-Spa-Backend" dmx-param:address_id="app.main.home.address_select_form.select_address.value" sockets="true" dmx-param:product_delivery="app.local_store.data.service_location"></dmx-serverconnect>
+    <dmx-serverconnect id="available_categories" url="https://api.justpro.me/api/admin/service_workflows/query_main_categories" site="JustPro-Spa-Backend" dmx-param:address_id="app.main.home.address_select_form.select_address.value" sockets="true" dmx-param:product_delivery="app.local_store.data.service_location"></dmx-serverconnect>
     <style>
         .strong {
             font-weight: 600 !important;
@@ -100,7 +100,7 @@
                         <ul style="width:100%;">
                             <li style="width:100%;">
                                 <a class="item-link smart-select smart-select-init text-color-black" data-open-in="popup" data-searchbar="true" data-searchbar-placeholder="Search Services" style="position:relative">
-                                    <select class="text-color-black custom-font nametag" style="width:100%;" name="selector" id="selector" dmx-on:changed="app.local_store.set('state',app.main.home.selector.value)" dmx-bind:value="app.local_store.data.state" dmx-bind:options="app.main.home.available_categories.data.query_available_categories" optiontext="category.capitalize()" optionvalue="category">
+                                    <select class="text-color-black custom-font nametag" style="width:100%;" name="selector" id="selector" dmx-on:changed="app.local_store.set('state',app.main.home.selector.value)" dmx-bind:value="app.local_store.data.state" dmx-bind:options="app.main.home.available_categories.data.query_categories" optiontext="category_name" optionvalue="id">
                                         <option value="" class="nametag"><i class="bi bi-search"></i> Show All</option>
                                     </select>
                                     <div class="item-content">

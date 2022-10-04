@@ -122,6 +122,10 @@ dmx.config({
       {
         "type": "text",
         "name": "selected_timeSlot_expired"
+      },
+      {
+        "type": "text",
+        "name": "service_option_id"
       }
     ],
     "sessionStorage": [
@@ -192,6 +196,10 @@ dmx.config({
       {
         "type": "text",
         "name": "service_type"
+      },
+      {
+        "type": "text",
+        "name": "service_option_id"
       }
     ],
     "check_bookings_timeSlots": [
@@ -1837,6 +1845,268 @@ dmx.config({
               "name": "id"
             }
           ]
+        }
+      ],
+      "outputType": "array"
+    },
+    "repeat_items_slots": {
+      "meta": [
+        {
+          "type": "number",
+          "name": "amount"
+        },
+        {
+          "type": "number",
+          "name": "quantity"
+        },
+        {
+          "type": "number",
+          "name": "tax_amt"
+        },
+        {
+          "type": "number",
+          "name": "total_amt"
+        },
+        {
+          "type": "number",
+          "name": "discount_amt"
+        },
+        {
+          "type": "number",
+          "name": "discount_percent"
+        },
+        {
+          "type": "text",
+          "name": "order_status"
+        },
+        {
+          "type": "text",
+          "name": "order_uuid_id"
+        },
+        {
+          "type": "text",
+          "name": "cancellation_reason"
+        },
+        {
+          "type": "boolean",
+          "name": "reviewed"
+        },
+        {
+          "type": "boolean",
+          "name": "payed_out_to_provider"
+        },
+        {
+          "type": "boolean",
+          "name": "refunded"
+        },
+        {
+          "type": "number",
+          "name": "refund_amount"
+        },
+        {
+          "type": "boolean",
+          "name": "paid_out_to_provider"
+        },
+        {
+          "type": "text",
+          "name": "refund_status"
+        },
+        {
+          "type": "text",
+          "name": "refund_id"
+        },
+        {
+          "type": "time",
+          "name": "time_start"
+        },
+        {
+          "type": "time",
+          "name": "time_end"
+        },
+        {
+          "type": "datetime",
+          "name": "date"
+        },
+        {
+          "type": "text",
+          "name": "item_image"
+        },
+        {
+          "type": "text",
+          "name": "item_name"
+        },
+        {
+          "type": "number",
+          "name": "id"
+        }
+      ],
+      "outputType": "array"
+    },
+    "fullinfo": {
+      "meta": [
+        {
+          "type": "number",
+          "name": "customer_id"
+        },
+        {
+          "type": "text",
+          "name": "order_uuid_id"
+        },
+        {
+          "type": "number",
+          "name": "provider_service_id"
+        },
+        {
+          "type": "number",
+          "name": "amount"
+        },
+        {
+          "type": "number",
+          "name": "quantity"
+        },
+        {
+          "type": "number",
+          "name": "tax_amt"
+        },
+        {
+          "type": "number",
+          "name": "total_amt"
+        },
+        {
+          "type": "number",
+          "name": "discount_amt"
+        },
+        {
+          "type": "number",
+          "name": "discount_percent"
+        },
+        {
+          "type": "text",
+          "name": "order_status"
+        },
+        {
+          "type": "datetime",
+          "name": "order_dateTime"
+        },
+        {
+          "type": "datetime",
+          "name": "last_updated"
+        },
+        {
+          "type": "number",
+          "name": "provider_id"
+        },
+        {
+          "type": "text",
+          "name": "matrix"
+        },
+        {
+          "type": "number",
+          "name": "related_order_id"
+        },
+        {
+          "type": "text",
+          "name": "stripe_invoice_item_id"
+        },
+        {
+          "type": "text",
+          "name": "item_image"
+        },
+        {
+          "type": "text",
+          "name": "item_name"
+        },
+        {
+          "type": "text",
+          "name": "employee_name"
+        },
+        {
+          "type": "text",
+          "name": "employee_avatar"
+        },
+        {
+          "type": "text",
+          "name": "employee_email"
+        },
+        {
+          "type": "text",
+          "name": "employee_phone_number"
+        },
+        {
+          "type": "number",
+          "name": "employee_id"
+        },
+        {
+          "type": "text",
+          "name": "parent_provider_name"
+        },
+        {
+          "type": "text",
+          "name": "parent_provider_avatar"
+        },
+        {
+          "type": "text",
+          "name": "parent_provider_email"
+        },
+        {
+          "type": "text",
+          "name": "parent_provider_phone_number"
+        },
+        {
+          "type": "text",
+          "name": "provider_type"
+        },
+        {
+          "type": "text",
+          "name": "provider_full_address"
+        },
+        {
+          "type": "text",
+          "name": "street"
+        },
+        {
+          "type": "text",
+          "name": "building"
+        },
+        {
+          "type": "text",
+          "name": "shop_number"
+        },
+        {
+          "type": "text",
+          "name": "city"
+        },
+        {
+          "type": "text",
+          "name": "country"
+        },
+        {
+          "type": "text",
+          "name": "google_place_id"
+        },
+        {
+          "type": "number",
+          "name": "parent_provider_id"
+        },
+        {
+          "type": "time",
+          "name": "time_slot_start"
+        },
+        {
+          "type": "time",
+          "name": "time_slot_end"
+        },
+        {
+          "type": "datetime",
+          "name": "appointment_date"
+        },
+        {
+          "type": "number",
+          "name": "order_item_id"
+        },
+        {
+          "type": "text",
+          "name": "parent_provider_job_tilte"
         }
       ],
       "outputType": "array"

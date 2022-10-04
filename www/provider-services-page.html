@@ -1,9 +1,9 @@
-<!-- Wappler include head-page="index.html" is="dmx-app" id="providerservicespage" appConnect="local" framework7_6="With App Connect" framework7_icons="local" capacitor="local" components="{dmxFormatter:{},dmxSlideshow:{},dmxPreloader:{}}" -->
+<!-- Wappler include head-page="index.html" is="dmx-app" id="providerservicespage" appConnect="local" framework7_6="With App Connect" framework7_icons="local" capacitor="local" components="{dmxFormatter:{},dmxSlideshow:{},dmxPreloader:{},dmxSockets:{}}" -->
 
 
 <div class="page" path="/provider-services-page/:provider_id/:provider_name/:category?" data-name="provider-services-page" id="providerservicespage">
     <dmx-preloader id="justpropreloader" spinner="pulse" color="#ff6600"></dmx-preloader>
-    <dmx-serverconnect id="queryProviderServices" url="https://api.justpro.me/api/provider/list_provider_services_4_category" site="JustPro-Spa-Backend" dmx-param:provider_id="app.main.providerservicespage.route.params.provider_id" dmx-param:category="app.main.providerservicespage.route.params.category" dmx-param:search_by_name="app.main.providerservicespage.search.value" dmx-on:start="app.showPreloader('deeporange')" dmx-on:done="app.hidePreloader()"></dmx-serverconnect>
+    <dmx-serverconnect id="queryProviderServices" url="https://api.justpro.me/api/provider/list_provider_services_4_category" site="JustPro-Spa-Backend" dmx-param:provider_id="app.main.providerservicespage.route.params.provider_id" dmx-param:category="app.main.providerservicespage.route.params.category" dmx-param:search_by_name="app.main.providerservicespage.search.value" dmx-on:start="app.showPreloader('deeporange')" dmx-on:done="app.hidePreloader()" sockets="true"></dmx-serverconnect>
     <dmx-serverconnect id="provider_info" url="https://api.justpro.me/api/provider/provider_info" site="JustPro-Spa-Backend" dmx-param:provider_id="app.main.providerservicespage.route.params.provider_id" dmx-on:start="app.showPreloader('deeporange')" dmx-on:done="app.hidePreloader()" dmx-param:customer_longitude="app.geo.coords.longitude" dmx-param:customer_latitude="app.geo.coords.latitude"></dmx-serverconnect>
     <div class="padding-top padding-bottom">
         <div class="navbar shadow">
@@ -116,7 +116,7 @@
                         <div class="card-footer no-border bg-transparent" style="padding-top:-210px !important; height:40px !important">
                             <div class="row">
                                 <div class="col-100">
-                                    <h4 class="strong tajawal text-color-black"> {{item_price_with_tax.toNumber().formatCurrency('AED', '.', ',', 2)}}
+                                    <h4 class="strong tajawal text-color-black smallfont">{{app.main.providerservicespage.route.params.provider_name}}
                                         <!--<small dmx-show="amount_matrix" class="smallfont"> {{amount_matrix}} </small>-->
                                     </h4>
                                 </div>

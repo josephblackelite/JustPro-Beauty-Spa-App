@@ -122,10 +122,13 @@
 
   <div id="app" is="dmx-f7-app" theme="md">
 
+
     <!-- Statusbar overlay -->
 
     <dmx-local-manager id=" local_store">
     </dmx-local-manager>
+    <dmx-datetime id="date"></dmx-datetime>
+    <dmx-value id="user_id"></dmx-value>
     <dmx-session-manager id="cart_preFill"></dmx-session-manager>
 
     <script is="dmx-flow" id="Redirect_to_login_or_home" type="text/dmx-flow" autorun>{
@@ -154,7 +157,7 @@
   }
 }</script>
     <dmx-serverconnect id="Current_user" url="https://api.justpro.me/api/security/logged_in_user_data" site="JustPro-Spa-Backend" dmx-param:user_id="local_store.data.user_id" sockets="true"></dmx-serverconnect>
-    <dmx-serverconnect id="customers_orders" url="https://api.justpro.me/api/customer_orders/list_orders" site="JustPro-Spa-Backend" dmx-param:customer_id="Current_user.data.customer.id" sockets="true" dmx-on:start="app.showPreloader('purple')" dmx-on:done="app.hidePreloader()"></dmx-serverconnect>
+
     <dmx-datastore id="Cart"></dmx-datastore>
 
 
@@ -162,6 +165,7 @@
     <dmx-value id="service_category" dmx-bind:value="'massage'"></dmx-value>
     <dmx-value id="panelLinkClassToggle" dmx-bind:value="'home'"></dmx-value>
     <dmx-value id="otp_id"></dmx-value>
+
 
 
     <dmx-value id="cartQtyVal" dmx-bind:value="0"></dmx-value><input id="STRIPE_CARD_SETUP" name="text1" type="hidden">

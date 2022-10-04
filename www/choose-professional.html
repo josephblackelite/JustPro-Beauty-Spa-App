@@ -56,7 +56,7 @@
     </div>
     <div class="page-content wappler-block">
         <dmx-preloader id="justpropreloader" spinner="pulse" color="#ff6600"></dmx-preloader>
-        <div class="block bg-color-white">
+        <!-- <div class="block bg-color-white">
             <div class="row up-40">
                 <div class="col-70"></div>
                 <div class="col-30">
@@ -68,20 +68,19 @@
             </div>
 
 
-        </div>
+        </div> -->
         <div class="block" style="margin-bottom:120px !important">
-            <div class="row no-gap">
-                <div class="col-100 bottom-20 up-40">
-                    <div class="block-title h6 strong custom-font text-color-primary">{{app.main.chooseprofessional.list_employees.data.repeatEmployees.count()}} {{app.main.chooseprofessional.service_info.data.queryServices.product_name}} Service Providers</div>
-                </div>
-                <div class="col-50" dmx-hide="app.main.home.querySalons.state.processing" dmx-repeat:repeat_employees="app.main.chooseprofessional.list_employees.data.repeatEmployees" dmx-class:col-100="(app.local_store.data.freelacer_card_class_toggle == 100)">
-                    <div class="card demo-card-header-pic no-shadow card-outline border-10">
-                        <div class="card-header align-items-flex-end" dmx-style:background-image="'url('+ provider_avatar +')'" style="height:256px; background-position:bottom">
-                            <span style="font-size:26px; text-transform:capitalize; strong" class="tajawal nametag">
-                                {{staff_name.capitalize()}}
-                            </span>
-                            <div class="padding smallfont" style="width: 100%; position:absolute; top:0; left:0">
-                                <div class="col-100 no-padding">
+            <div class="block-title h6 strong custom-font text-color-primary">{{app.main.chooseprofessional.list_employees.data.repeatEmployees.count()}} {{app.main.chooseprofessional.service_info.data.queryServices.product_name}} Service Providers</div>
+            <div class="list media-list inset">
+                <ul>
+                    <li dmx-repeat:repeat_employees="app.main.chooseprofessional.list_employees.data.repeatEmployees" dmx-on:click="run([{run:{action:`app.cart_preFill.set(\'employee_id\',id);app.cart_preFill.set(\'parent_provider_id\',parent_provider_id)`}},{run:{action:`app.selected_employee_id.setValue(id)`}},{run:{action:`app.main.navigate(\'/appointment-page/\'+id+\'/\'+app.main.chooseprofessional.route.params.provider_service_id,{})`}}])">
+                        <a href="#" class="item-link item-content">
+                            <div class="item-media"><img src="https://cdn.framework7.io/placeholder/fashion-88x88-5.jpg" width="44" /></div>
+                            <div class="item-inner">
+                                <div class="item-title-row">
+                                    <div class="item-title">{{staff_name.capitalize()}}</div>
+                                </div>
+                                <div class="item-subtitle">
                                     <span class="fa fa-star small smallfont" dmx-class:checked="(rating > 0)"></span>
                                     <span class="fa fa-star small smallfont" dmx-class:checked="(rating > 1)"></span>
                                     <span class="fa fa-star small smallfont" dmx-class:checked="(rating > 2)"></span>
@@ -89,17 +88,13 @@
                                     <span class="fa fa-star small smallfont" dmx-class:checked="(rating > 4)"></span>
                                 </div>
                             </div>
-                        </div>
-                        <div class="card-footer bg-transparent">
-                            <button class="button newbtn mt-0 mb-0" dmx-on:click="run([{run:{action:`app.cart_preFill.set(\'employee_id\',id);app.cart_preFill.set(\'parent_provider_id\',parent_provider_id)`}},{run:{action:`app.selected_employee_id.setValue(id)`}},{run:{action:`app.main.navigate(\'/appointment-page/\'+id+\'/\'+app.main.chooseprofessional.route.params.provider_service_id,{})`}}])">
-                                Book Now
-                                <!--{{staff_name.capitalize()}}-->
-                            </button>
-                        </div>
+                        </a>
+                    </li>
 
-                    </div>
-                </div>
+                </ul>
             </div>
+
+
         </div>
     </div>
 </div>

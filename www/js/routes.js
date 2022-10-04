@@ -9,7 +9,7 @@ var routes = [
     "name": "index"
   },
   {
-    "path": "/verifyOtp",
+    "path": "/verifyOtp/:checkout?",
     "url": "./otpPage.html"
   },
   {

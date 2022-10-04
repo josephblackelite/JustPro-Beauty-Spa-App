@@ -196,18 +196,30 @@
             </div>
         </div> -->
 
-        <div class="block">
-            <form is="dmx-serverconnect-form" id="serverconnectform1" method="post">
+        <div class="block" dmx-hide="">
+            <form is="dmx-serverconnect-form" id="coupon_code_form" method="post" action="https://api.justpro.me/api/stripe/redeem_coupon_code" site="JustPro-Spa-Backend" dmx-on:success="run({'f7.dialog.alert':{title:'Hurray',text:'The discount has been applied.'}})" dmx-on:invalid="run({'f7.dialog.alert':{title:'Invalid coupon',text:`app.main.checkout.coupon_code_form.lastError.response`}})">
+                <input id="customer_id" name="customer_id" type="hidden" dmx-bind:value="app.Current_user.data.customer.id">
+                <input id="coupon_amount_off" name="coupon_amount_off" type="hidden" dmx-bind:value="app.Current_user.data.customer.amount_off">
+                <input id="coupon_percent_off" name="coupon_percent_off" type="hidden" dmx-bind:value="Cart.data.sum(`total.toNumber().per(app.Current_user.data.customer.percent_off)`)">
                 <div class="list no-hairlines-md padding-top">
                     <ul>
                         <li class="item-content item-input item-input-outline">
                             <div class="item-inner" style="width:100% !important">
                                 <div class="item-title item-floating-label strong">Have a coupon code?</div>
                                 <div class="item-input-wrap" style="width:100% !important">
-                                    <input type="text" placeholder="coupon_entry" class="form-control" id="coupon_entry" name="name" style="width:100% !important" />
+                                    <input type="text" placeholder="Enter coupon code" class="form-control" id="coupon_code" name="coupon_code" style="width:100% !important" />
                                     <span class="input-clear-button"></span>
                                 </div>
                             </div>
+                        </li>
+                        <li>
+                            <a href="" class="item-link">
+                                <div class="item-content">
+                                    <div class="item-inner">
+                                        <div class="item-title" dmx-on:click="run({condition:{if:`!app.Current_user.data.customer.customer_email`,then:{steps:{runJS:{function:'showEnterEmailAddressSheet'}}},else:{steps:{condition:{if:`app.Current_user.data.customer.discount_id`,then:{steps:{'f7.dialog.alert':{title:'Coupon applied',text:'You already have a discount. You can\'t use multiple discounts.'}}},else:{steps:{run:{action:`app.main.checkout.coupon_code_form.submit()`}}}}}}}})">Use coupon code</div>
+                                    </div>
+                                </div>
+                            </a>
                         </li>
                     </ul>
                 </div>
@@ -218,6 +230,8 @@
                 <h4 class="title tajawal-s no-margin-bottom">You are about to pay</h4>
                 <h1 class="checkout-total strong no-margin-top" style="margin-bottom:-5px !important">{{Cart.data.sum(`total.toNumber()`).formatCurrency('AED', '.', ',', 2)}}</h1>
                 <small> + 5% VAT of {{Cart.data.sum(`vat.toNumber()`).formatCurrency('AED', '.', ',', 2)}}</small>
+                <p dmx-show="app.main.checkout.coupon_code_form.coupon_amount_off.value">{{app.main.checkout.coupon_code_form.coupon_amount_off.value+' off discount will be applied when you submit order.'}}</p>
+                <p dmx-show="app.main.checkout.coupon_code_form.coupon_percent_off.value">{{app.main.checkout.coupon_code_form.coupon_percent_off.value+' off discount will be applied when you submit order.'}}</p>
             </div>
         </div>
 
@@ -232,7 +246,7 @@
 
     <form is="dmx-serverconnect-form" id="Setup_Intent_ephemeral_key_gen" method="post" action="https://api.justpro.me/api/stripe/create_setup_intent" site="JustPro-Spa-Backend" dmx-on:success="run([{run:{action:`app.main.checkout.last_order_id.setValue(app.main.checkout.Setup_Intent_ephemeral_key_gen.data.insertOrder.identity)`}},{runJS:{function:'createPaymentFlow',args:[`app.main.checkout.Setup_Intent_ephemeral_key_gen.data.client_secret`,`app.main.checkout.Setup_Intent_ephemeral_key_gen.data.customer_id`,`app.main.checkout.Setup_Intent_ephemeral_key_gen.data.ephemeral_key`]}}])" dmx-on:start="app.showPreloader('purple')" dmx-on:done="app.hidePreloader()"><input id="User_id" name="user_id" dmx-bind:value="app.Current_user.data.customer.id" type="hidden">
         <input id="setUp" name="setUp" type="hidden" value="setUp">
-        <input id="customer_id" name="customer_id" type="hidden" dmx-bind:value="app.Current_user.data.customer.id"><input id="address_id" name="address_id" dmx-bind:value="app.main.checkout.route.params.address_id" type="hidden">
+        <input id="custmer_id" name="customer_id" type="hidden" dmx-bind:value="app.Current_user.data.customer.id"><input id="address_id" name="address_id" dmx-bind:value="app.main.checkout.route.params.address_id" type="hidden">
         <div is="dmx-form-repeat" id="cartRepeat" dmx-bind:items="app.Cart.data">
             <input id="product_id" name="product_id" type="hidden" dmx-bind:value="$value.product_id">
             <input id="product_stripe_id" name="product_stripe_id" type="hidden" dmx-bind:value="$value.product_stripe_id">
@@ -244,6 +258,7 @@
             <input id="appointment_date" name="appointment_date" type="hidden" dmx-bind:value="$value.appointment_date">
             <input id="timeSlot_start" name="timeSlot_start" type="hidden" dmx-bind:value="$value.timeSlot_start">
             <input id="timeSlot_end" name="timeSlot_end" type="hidden" dmx-bind:value="$value.timeSlot_end">
+
         </div>
     </form>
     <form is="dmx-serverconnect-form" id="bill_selected_card" method="post" action="https://api.justpro.me/api/stripe/bill_customer_card" site="JustPro-Spa-Backend" dmx-on:success="run([{run:{action:`app.main.checkout.last_order_id.setValue(app.main.checkout.bill_selected_card.data.insertOrder.identity)`}},{run:{action:`app.main.checkout.justpropreloader.show()`}},{run:{action:`app.main.checkout.scheduler1.start()`,disabled:true}},{run:{action:`app.main.checkout.check_last_order.run()`}}])" dmx-on:start="app.showPreloader('purple')" dmx-on:done="app.hidePreloader()">
@@ -268,6 +283,7 @@
             <input id="item_img" name="item_img" type="hidden" dmx-bind:value="$value.product_avatar">
             <input id="item_name" name="item_name" type="hidden" dmx-bind:value="$value.name">
             <input id="address_id" name="address_id" type="hidden" dmx-bind:value="$value.address_id">
+            <input id="service_option_id" name="service_option_id" type="hidden" dmx-bind:value="$value.service_option_id">
         </div>
     </form>
 
