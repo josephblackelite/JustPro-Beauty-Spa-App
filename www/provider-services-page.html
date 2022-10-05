@@ -6,7 +6,7 @@
     <dmx-serverconnect id="queryProviderServices" url="https://api.justpro.me/api/provider/list_provider_services_4_category" site="JustPro-Spa-Backend" dmx-param:provider_id="app.main.providerservicespage.route.params.provider_id" dmx-param:category="app.main.providerservicespage.route.params.category" dmx-param:search_by_name="app.main.providerservicespage.search.value" dmx-on:start="app.showPreloader('deeporange')" dmx-on:done="app.hidePreloader()" sockets="true"></dmx-serverconnect>
     <dmx-serverconnect id="provider_info" url="https://api.justpro.me/api/provider/provider_info" site="JustPro-Spa-Backend" dmx-param:provider_id="app.main.providerservicespage.route.params.provider_id" dmx-on:start="app.showPreloader('deeporange')" dmx-on:done="app.hidePreloader()" dmx-param:customer_longitude="app.geo.coords.longitude" dmx-param:customer_latitude="app.geo.coords.latitude"></dmx-serverconnect>
     <div class="padding-top padding-bottom">
-        <div class="navbar navbar-large shadow">
+        <div class="navbar shadow">
             <div class="navbar-inner" style="padding-right:0px !important; padding-left:0px !important; margin-right:0px !important">
                 <div class="subnavbar">
                     <a href="#!" class="link smallfont text-align-left"><span class="fa fa-star small" dmx-class:checked="(app.main.providerservicespage.provider_info.data.rating &gt; 0)"></span>

@@ -2449,5 +2449,60 @@ dmx.config({
         ]
       }
     ]
+  },
+  "notifications": {
+    "repeat_notifactions": {
+      "meta": [
+        {
+          "type": "number",
+          "name": "id"
+        },
+        {
+          "type": "number",
+          "name": "customer_id"
+        },
+        {
+          "type": "number",
+          "name": "provider_id"
+        },
+        {
+          "type": "number",
+          "name": "employee_id"
+        },
+        {
+          "type": "number",
+          "name": "service_offered_id"
+        },
+        {
+          "type": "text",
+          "name": "notification_text"
+        },
+        {
+          "type": "boolean",
+          "name": "read"
+        },
+        {
+          "type": "number",
+          "name": "sender_employee_id"
+        },
+        {
+          "type": "number",
+          "name": "sender_provider_id"
+        },
+        {
+          "type": "number",
+          "name": "sender_customer_id"
+        },
+        {
+          "type": "number",
+          "name": "order_item_id"
+        },
+        {
+          "type": "text",
+          "name": "order_item_uuid"
+        }
+      ],
+      "outputType": "array"
+    }
   }
 });

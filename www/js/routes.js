@@ -46,7 +46,8 @@ var routes = [
   },
   {
     "path": "/notifications",
-    "url": "./notifications.html"
+    "url": "./notifications.html",
+    "name": "notifications"
   },
   {
     "path": "/profile",

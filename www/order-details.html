@@ -2,7 +2,7 @@
 
 <div class="page" id="orderdetails" data-name="ordersdetails" path="/order-details/:id/:uuid">
     <div class="padding-top padding-bottom">
-        <div class="navbar navbar-large no-hairline no-shadow no-border">
+        <div class="navbar no-hairline no-shadow no-border">
             <div class="navbar-inner" style="padding-right:0px !important; padding-left:0px !important; margin-right:0px !important">
                 <div class="left">
                     <a href="#" class="link back">
@@ -31,7 +31,7 @@
         <dmx-preloader id="justpropreloader" spinner="pulse" color="#ff6600"></dmx-preloader>
         <div style="margin-bottom:150px !important">
 
-            <dmx-serverconnect id="orderinfo" url="https://api.justpro.me/api/customer_orders/order_details" site="JustPro-Spa-Backend" dmx-param:order_id="app.main.orderdetails.route.params.id" dmx-on:start="app.showPreloader('purple')" dmx-on:done="app.hidePreloader()" sockets="true"></dmx-serverconnect>
+            <dmx-serverconnect id="orderinfo" url="https://api.justpro.me/api/customer_orders/order_details" site="JustPro-Spa-Backend" dmx-param:order_id="app.main.orderdetails.route.params.uuid" dmx-on:start="app.showPreloader('purple')" dmx-on:done="app.hidePreloader()" sockets="true"></dmx-serverconnect>
             <dmx-serverconnect id="orderchildren" url="https://api.justpro.me/api/customer_orders/order_items_details" site="JustPro-Spa-Backend" dmx-param:order_uuid="app.main.orderdetails.route.params.uuid" dmx-on:start="app.showPreloader('purple')" dmx-on:done="app.hidePreloader()" sockets="true"></dmx-serverconnect>
             <div class="block text-align-right">
                 <p class="mb-0"><small>Order Total</small></p>

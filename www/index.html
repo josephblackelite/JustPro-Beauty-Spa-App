@@ -157,11 +157,12 @@
   }
 }</script>
     <dmx-serverconnect id="Current_user" url="https://api.justpro.me/api/security/logged_in_user_data" site="JustPro-Spa-Backend" dmx-param:user_id="local_store.data.user_id" sockets="true"></dmx-serverconnect>
-    <dmx-serverconnect id="notification" url="https://api.justpro.me/api/security/logged_in_user_data" site="JustPro-Spa-Backend" dmx-param:user_id="local_store.data.user_id" sockets="true"></dmx-serverconnect>
+
 
     <dmx-datastore id="Cart"></dmx-datastore>
 
 
+    <dmx-serverconnect id="notification" url="https://api.justpro.me/api/notification/list_notification_4_customer" site="JustPro-Spa-Backend" dmx-param:user_id="local_store.data.user_id" sockets="true" dmx-param:customer_id="Current_user.data.customer.id"></dmx-serverconnect>
     <dmx-json-datasource id="countryList" is="dmx-serverconnect" url="countryList.json"></dmx-json-datasource>
     <dmx-value id="service_category" dmx-bind:value="'massage'"></dmx-value>
     <dmx-value id="panelLinkClassToggle" dmx-bind:value="'home'"></dmx-value>
@@ -237,6 +238,13 @@
                   <a class="item-link" dmx-on:click="run([{run:{action:`app.main.navigate(\'/home\',{});app.panelLinkClassToggle.setValue(\'home\')`}},{runJS:{function:'hidePanel'}}])" dmx-class:item-selected="(panelLinkClassToggle.value == 'home')">
                     <i class="bi bi-house-fill"></i>
                     <span>Home</span>
+                  </a>
+                </li>
+                <li>
+                  <a class="item-link stretched-link" dmx-on:click="run([{run:{action:`app.main.navigate(\'/notifications\',{});app.panelLinkClassToggle.setValue(\'notification\')`}},{runJS:{function:'hidePanel'}}])" dmx-class:item-selected="(panelLinkClassToggle.value == 'notification')">
+                    <i class="bi-envelope-fill"></i>
+                    <span>Notifications</span>
+                    <span class="badge color-primary">{{notification.data.query.where(`read`, 1, '!=').count()}} </span>
                   </a>
                 </li>
                 <li>
