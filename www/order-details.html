@@ -2,7 +2,7 @@
 
 <div class="page" id="orderdetails" data-name="ordersdetails" path="/order-details/:id/:uuid">
     <div class="padding-top padding-bottom">
-        <div class="navbar no-hairline no-shadow no-border">
+        <div class="navbar navbar-large no-hairline no-shadow no-border">
             <div class="navbar-inner" style="padding-right:0px !important; padding-left:0px !important; margin-right:0px !important">
                 <div class="left">
                     <a href="#" class="link back">
@@ -22,7 +22,7 @@
         <div class="toolbar-inner justify-content-center padding-top padding-bottom">
             <a class="button-large rounded-xl button-6 bg-color-primary button-fill text-color-white margin-right" style="width:100%" href="#!" dmx-on:click="app.main.navigate('/cancel-appointment/'+app.main.orderdetails.route.params.id+'/'+app.main.orderdetails.route.params.uuid,{})" dmx-hide="app.main.orderdetails.orderchildren.data.query[0].order_status">Cancel Appointment</a>
             <a class="button-large rounded-xl button-6 bg-color-primary button-fill text-color-white" style="width:100%" href="#!" dmx-on:click="app.main.navigate('/change-appointment-date/'+app.main.orderdetails.orderchildren.data.query[0].order_item_id,{})" dmx-hide="app.main.orderdetails.orderchildren.data.query[0].order_status">Change Appointment date</a>
-            <a href="#" class="link button-6 text-color-white strong bg-color-primary" dmx-on:click="app.main.navigate('/review-service/'+app.main.orderdetails.orderchildren.data.query[0].provider_service_id,{})" dmx-show="(app.main.orderdetails.orderchildren.data.query[0].order_status == 'completed')">Rate Service</a>
+            <a href="#" class="link button-6 text-color-white strong bg-color-primary" dmx-on:click="app.main.navigate('/review-service/'+app.main.orderdetails.orderchildren.data.query[0].provider_service_id+'/'+app.main.orderdetails.orderchildren.data.query[0].employee_id,{})" dmx-show="(app.main.orderdetails.orderchildren.data.query[0].order_status == 'completed')">Rate Service</a>
         </div>
     </div>
 

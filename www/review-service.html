@@ -7,7 +7,7 @@
         font-weight: 600 !important;
     }
 </style>
-<div class="page" path="/review-service/:service_id" data-name="review-service" id="reviewservice">
+<div class="page" path="/review-service/:service_id/:employee_id" data-name="review-service" id="reviewservice">
 
     <dmx-value id="varQty" dmx-bind:value="app.main.reviewservice.qty_form.quantity.value"></dmx-value>
     <dmx-serverconnect id="service_info" url="https://api.justpro.me/api/services/service_info" site="JustPro-Spa-Backend" dmx-param:service_id="app.main.reviewservice.route.params.service_id" sockets="true" dmx-param:service_offered_id="app.main.reviewservice.route.params.service_id"></dmx-serverconnect>
@@ -33,7 +33,7 @@
   }
 ]</script>
     <div class="padding-top padding-bottom">
-        <div class="navbar no-hairline no-shadow no-border">
+        <div class="navbar navbar-large no-hairline no-shadow no-border">
             <div class="navbar-inner" style="padding-right:0px !important; padding-left:0px !important; margin-right:0px !important">
                 <div class="left">
                     <a href="#" class="link back">
@@ -66,7 +66,7 @@
                 <dmx-slideshow id="productreview" dmx-bind:slides="app.main.reviewservice.service_info.data.queryServices.services_photos" slide-url="avatar_url">
                 </dmx-slideshow>
             </div>
-            <div class="col-100 block" style="margin-top:50px">
+            <div class="col-100 block">
                 <h3 class="title text-align-center strong">{{app.main.reviewservice.service_info.data.queryServices.product_name.titlecase()}}</h3>
                 <div class="text-align-center">
                     <input type="hidden" name="vat_amount" id="vat_amount" dmx-bind:value="app.main.reviewservice.working_total.value.toNumber().per(5)">
@@ -126,11 +126,11 @@
                                     </li>
                                 </ul>
                             </div>
-                            <input type="hidden" name="employee_id" id="employee_id" dmx-bind:value="app.main.reviewservice.service_info.data.queryServices.provider_service_id">
-                            <input type="hidden" name="company_id" id="company_id" dmx-bind:value="app.main.reviewservice.service_info.data.queryServices.parent_provider_id">
+                            <input name="employee_id" id="employee_id" dmx-bind:value="app.main.reviewservice.route.params.employee_id" type="hidden">
+                            <input name="company_id" id="company_id" dmx-bind:value="app.main.reviewservice.service_info.data.queryServices.parent_provider_id" type="hidden">
 
                             <input id="review_id" name="review_id" type="hidden" dmx-bind:value="app.main.reviewservice.review.data.query.id">
-                            <input id="rating" name="rating" value="0" type="hidden" dmx-bind:value="app.main.reviewservice.review.data.query.rating_number"><input id="customer_id" name="customer_id" type="hidden" dmx-bind:value="app.Current_user.data.customer.id"><input id="service_id" name="service_id" type="hidden" dmx-bind:value="app.main.reviewservice.route.params.service_id">
+                            <input id="rating" name="rating" value="0" type="hidden" dmx-bind:value="app.main.reviewservice.review.data.query.rating_number"><input id="customer_id" name="customer_id" type="hidden" dmx-bind:value="app.Current_user.data.customer.id"><input id="service_id" name="service_id" dmx-bind:value="app.main.reviewservice.route.params.service_id" type="hidden">
                         </form>
                     </div>
                 </div>

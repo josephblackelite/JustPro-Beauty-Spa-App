@@ -33,10 +33,6 @@ var routes = [
     "url": "./choose-professional.html"
   },
   {
-    "path": "/schedule",
-    "url": "./schedule.html"
-  },
-  {
     "path": "/choose-address",
     "url": "./choose-address.html"
   },
@@ -93,15 +89,11 @@ var routes = [
     "url": "./customer-name-prompt.html"
   },
   {
-    "path": "/thank-you-page",
-    "url": "./thank-you-page.html"
-  },
-  {
     "path": "/cancel-appointment/:id/:order_uuid",
     "url": "./cancel-appointment.html"
   },
   {
-    "path": "/review-service/:service_id",
+    "path": "/review-service/:service_id/:employee_id",
     "url": "./review-service.html"
   },
   {
