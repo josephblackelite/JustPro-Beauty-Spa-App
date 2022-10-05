@@ -17,8 +17,8 @@
             <div class="navbar-inner" style="padding-right:0px !important; padding-left:0px !important; margin-right:0px !important">
                 <div class="subnavbar">
                     <div class="segmented segmented-strong nametag text-color-white">
-                        <a class="button strong active text-color-white" dmx-class:active="!app.main.orders.provider_booking_dates_query_param.value" dmx-on:click="app.main.orders.booking_status_select_form.booking_status.setValue('\'\'')" dmx-style:white.important="!app.main.orders.provider_booking_dates_query_param.value">Upcoming</a>
-                        <a class="button strong text-color-white" dmx-class:active="app.main.orders.provider_booking_dates_query_param.value " dmx-on:click="app.main.orders.booking_status_select_form.booking_status.setValue('completed')" dmx-style:white.important="app.main.orders.provider_booking_dates_query_param.value">Past</a>
+                        <a class="button strong active text-color-white" dmx-class:active="!app.main.orders.provider_booking_dates_query_param.value" dmx-on:click="app.main.orders.booking_status_select_form.booking_status.setValue('\'\'')" dmx-class:text-color-black="app.main.orders.provider_booking_dates_query_param.value">Upcoming</a>
+                        <a class="button strong text-color-white" dmx-class:active="app.main.orders.provider_booking_dates_query_param.value " dmx-on:click="app.main.orders.booking_status_select_form.booking_status.setValue('completed')" dmx-class:text-color-black="!app.main.orders.provider_booking_dates_query_param.value">Past</a>
                     </div>
                 </div>
                 <div class="left">
@@ -87,11 +87,11 @@
                         <ul dmx-on:click="app.main.navigate('/order-details/'+order_item_id,{})">
                             <li class="item-content">
                                 <div class="item-media">
-                                    <img dmx-bind:src="item_image " width="50" height="50" />
+                                    <img dmx-bind:src="item_image " width="60" height="60" />
                                 </div>
-                                <div class="item-inner">
+                                <div class="item-inner text-color-black">
                                     <div class="item-title-row">
-                                        <div class="item-title">{{item_name.titlecase()}}</div>
+                                        <div class="item-title strong ">{{item_name.titlecase()}}</div>
 
                                     </div>
                                     <div class="item-subtitle">{{total_amt.toNumber().formatCurrency('AED', '.', ',', 2)}}</div>
@@ -114,11 +114,11 @@
                         <ul dmx-on:click="app.main.navigate('/order-details/'+order_item_id,{})">
                             <li class="item-content">
                                 <div class="item-media">
-                                    <img dmx-bind:src="item_image " width="50" height="50" />
+                                    <img dmx-bind:src="item_image " width="60" height="60" />
                                 </div>
-                                <div class="item-inner">
+                                <div class="item-inner text-color-black">
                                     <div class="item-title-row">
-                                        <div class="item-title">{{item_name.titlecase()}}</div>
+                                        <div class="item-title strong">{{item_name.titlecase()}}</div>
 
                                     </div>
                                     <div class="item-subtitle">{{total_amt.toNumber().formatCurrency('AED', '.', ',', 2)}}</div>

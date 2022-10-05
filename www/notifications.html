@@ -26,16 +26,16 @@
         </div>
     </div>
 
-    <div class="bg-gray page-content content-area pt-120">
+    <div class="bg-gray page-content content-area">
         <div class="container">
-            <div class=".space"></div>
+
             <div class="notification-list mb-30">
                 <ul is="dmx-repeat" id="repeat_notifactions" dmx-bind:repeat="app.notification.data.query">
                     <li>
                         <div class="card">
                             <div dmx-on:click="run([{condition:{if:`(type == \'order\')`,then:{steps:{run:{action:`app.main.navigate(\'/order-details/1/\'+order_item_uuid,{})`}}}}},{condition:{if:`(type == \'rating\')`,then:{steps:{run:{action:`app.main.navigate(\'/review-service/\'+service_offered_id+\'/\'+employee_id,{})`}}}}}])">
                                 <h5 class="item-title"><i class="text-primary fa fa-circle"></i> {{title.capitalize()}}</h5>
-                                <div class="item-text">{{notification_text}}</div>
+                                <div class="item-text text-color-black">{{notification_text}}</div>
                             </div>
                             <div class="item-time">
                                 <span class="time"><i class="las la-clock"></i> {{app.date.datetime.hoursUntil(creation_date)+'h ago'}}</span>

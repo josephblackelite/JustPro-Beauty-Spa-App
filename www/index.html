@@ -127,10 +127,6 @@
 
     <dmx-local-manager id=" local_store">
     </dmx-local-manager>
-    <dmx-datetime id="date"></dmx-datetime>
-    <dmx-value id="user_id"></dmx-value>
-    <dmx-session-manager id="cart_preFill"></dmx-session-manager>
-
     <script is="dmx-flow" id="Redirect_to_login_or_home" type="text/dmx-flow" autorun>{
   condition: {
     if: "{{local_store.data.user_id}}",
@@ -156,6 +152,12 @@
     }
   }
 }</script>
+    <dmx-datetime id="date"></dmx-datetime>
+    <dmx-value id="user_id"></dmx-value>
+    <dmx-session-manager id="cart_preFill"></dmx-session-manager>
+
+
+
     <dmx-serverconnect id="Current_user" url="https://api.justpro.me/api/security/logged_in_user_data" site="JustPro-Spa-Backend" dmx-param:user_id="local_store.data.user_id" sockets="true"></dmx-serverconnect>
 
 
@@ -163,7 +165,9 @@
 
 
     <dmx-serverconnect id="notification" url="https://api.justpro.me/api/notification/list_notification_4_customer" site="JustPro-Spa-Backend" dmx-param:user_id="local_store.data.user_id" sockets="true" dmx-param:customer_id="Current_user.data.customer.id"></dmx-serverconnect>
+
     <dmx-json-datasource id="countryList" is="dmx-serverconnect" url="countryList.json"></dmx-json-datasource>
+
     <dmx-value id="service_category" dmx-bind:value="'massage'"></dmx-value>
     <dmx-value id="panelLinkClassToggle" dmx-bind:value="'home'"></dmx-value>
     <dmx-value id="otp_id"></dmx-value>

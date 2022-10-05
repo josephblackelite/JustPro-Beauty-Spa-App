@@ -38,7 +38,7 @@
     <div class="toolbar-inner justify-content-center" style="padding:10px !important">
 
 
-      <button class="item-link list-button button-large rounded-xl button-6 bg-color-black button-fill text-color-white margin-right" style="width:100%" href="#!" dmx-on:click="run({run:{action:`app.main.changeappointmentdate.update_booked_date.submit()`}})" dmx-show="(app.main.changeappointmentdate.update_booked_date.timeSlot_start.value &amp;&amp; app.main.changeappointmentdate.update_booked_date.timeSlot_end.value)">Change appointment date</button>
+      <button class="item-link list-button button-large rounded-xl button-6 bg-color-black button-fill text-color-white margin-right" style="width:100%" href="#!" dmx-on:click="run({run:{action:`app.main.changeappointmentdate.update_booked_date.submit()`}})" dmx-show="(app.main.changeappointmentdate.update_booked_date.timeSlot_start.value &amp;&amp; app.main.changeappointmentdate.update_booked_date.timeSlot_end.value)" dmx-bind:disabled="app.main.changeappointmentdate.update_booked_date.state.executing">Change appointment date</button>
     </div>
   </div>
   <form is="dmx-serverconnect-form" id="update_booked_date" method="post" action="https://api.justpro.me/api/customer_orders/change_appointment_date" site="JustPro-Spa-Backend" dmx-on:success="run({runJS:{function:'back'}})">
