@@ -7,7 +7,7 @@
         font-weight: 600 !important;
     }
 </style>
-<div class="page" path="/review-service/:service_id/:employee_id" data-name="review-service" id="reviewservice">
+<div class="page" path="/review-service/:service_id/:employee_id/:order_item_id" data-name="review-service" id="reviewservice">
 
     <dmx-value id="varQty" dmx-bind:value="app.main.reviewservice.qty_form.quantity.value"></dmx-value>
     <dmx-serverconnect id="service_info" url="https://api.justpro.me/api/services/service_info" site="JustPro-Spa-Backend" dmx-param:service_id="app.main.reviewservice.route.params.service_id" sockets="true" dmx-param:service_offered_id="app.main.reviewservice.route.params.service_id"></dmx-serverconnect>
@@ -55,7 +55,7 @@
     </div>
     <div class="toolbar toolbar-bottom toolbar-bottom-md no-shadow">
         <div class="toolbar-inner justify-content-center" style="padding:10px !important">
-            <button class="item-link list-button button-large rounded-xl button-6 bg-color-primary button-fill text-color-white" dmx-on:click="run({condition:{if:`(app.main.reviewservice.rate_service.rating.value > 0)`,then:{steps:{run:{action:`app.main.reviewservice.rate_service.submit()`}}},else:{steps:{'f7.dialog.alert':{title:'Did not rate service?',text:'Click one of the rating buttons to continue '}}}}})" style="width:100%">Submit Review</button>
+            <button class="item-link list-button button-large rounded-xl button-6 bg-color-primary button-fill text-color-white" dmx-on:click="run({condition:{if:`(app.main.reviewservice.rate_service.rating.value > 0)`,then:{steps:{run:{action:`app.main.reviewservice.rate_service.submit()`}}},else:{steps:{'f7.dialog.alert':{title:'Did not rate service?',text:'Click one of the rating buttons to continue '}}}}})" style="width:100%" dmx-bind:disabled="app.main.reviewservice.rate_service.state.executing">Submit Review</button>
         </div>
     </div>
     <div class="page-content bg-gray pt-0 mr-0 ml-0">
@@ -131,6 +131,7 @@
 
                             <input id="review_id" name="review_id" type="hidden" dmx-bind:value="app.main.reviewservice.review.data.query.id">
                             <input id="rating" name="rating" value="0" type="hidden" dmx-bind:value="app.main.reviewservice.review.data.query.rating_number"><input id="customer_id" name="customer_id" type="hidden" dmx-bind:value="app.Current_user.data.customer.id"><input id="service_id" name="service_id" dmx-bind:value="app.main.reviewservice.route.params.service_id" type="hidden">
+                            <input id="order_item_id" name="order_item_id" dmx-bind:value="app.main.reviewservice.route.params.order_item_id" type="hidden">
                         </form>
                     </div>
                 </div>

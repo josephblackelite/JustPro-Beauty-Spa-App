@@ -94,7 +94,7 @@ var routes = [
     "url": "./cancel-appointment.html"
   },
   {
-    "path": "/review-service/:service_id/:employee_id",
+    "path": "/review-service/:service_id/:employee_id/:order_item_id",
     "url": "./review-service.html"
   },
   {

@@ -85,7 +85,7 @@
                                 <li>
                                     <p class="mb-0 mt-0 small text-color-black block smallfont bottom-10">Select your preffered offered</p>
                                     <a class="item-link smart-select smart-select-init" data-open-in="sheet">
-                                        <select name="quantity" id="option" required="" data-msg-required="Please select quantity" dmx-bind:options="app.main.product_info.service_options.data.query_service_options" optiontext="option_name" optionvalue="id">
+                                        <select name="quantity" id="option" required="" data-msg-required="Please select quantity" dmx-bind:options="app.main.product_info.service_options.data.query_service_options" optiontext="(option_name == 'default' ? 'All services' : option_name)" optionvalue="id">
                                         </select>
                                         <div class="item-content">
                                             <div class="item-inner">
@@ -165,7 +165,7 @@
                         </div>
                     </div>
 
-                    <div class="col-100">
+                    <div class="col-100" dmx-hide="!app.main.product_info.service_info.data.rating">
                         <div class="write-reviews-box container margin-bottom">
                             <div class="reviews-head text-align-center">
                                 <p class="text-black ma-0">More than 99.9% of our clients responded with positive reviews on this service.</p>

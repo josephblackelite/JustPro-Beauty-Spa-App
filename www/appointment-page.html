@@ -12,7 +12,7 @@
     <dmx-value id="appointment_timeStart" dmx-bind:value="0"></dmx-value>
     <dmx-value id="appointment_timeEnd"></dmx-value>
     <div class="padding-top padding-bottom">
-        <div class="navbar shadow">
+        <div class="navbar no-hairline no-shadow no-border">
             <div class="navbar-inner" style="padding-right:0px !important; padding-left:0px !important; margin-right:0px !important">
                 <div class="left">
                     <a href="/home" class="link back">
@@ -58,7 +58,7 @@
 
             </form>
             <div class="block no-padding" style="margin-top:40px !important" dmx-show="app.main.appointmentpage.form.appointmentDate.value">
-                <h4 class="tajawal-s mb-10" dmx-hide="!app.main.appointmentpage.working_days_array.items.contains(app.main.appointmentpage.form.appointmentDate.value.formatDate('dddd'))">Select Time Slot <i class="bi bi-chevron-right"></i></h4>
+                <h4 class="tajawal-s mb-10" dmx-show="(app.main.appointmentpage.query_time_slots.data.query_slots[0].id &amp;&amp; app.main.appointmentpage.working_days_array.items.contains(app.main.appointmentpage.form.appointmentDate.value.formatDate('dddd')))">Select Time Slot <i class="bi bi-chevron-right"></i></h4>
                 <div class="flex-buttons">
                     <p>
                     <h5 dmx-show="!app.main.appointmentpage.working_days_array.items.contains(app.main.appointmentpage.form.appointmentDate.value.formatDate('dddd'))">
@@ -75,7 +75,7 @@
                         </div>
                     </div>
                     <p>
-                    <h5 dmx-hide="app.main.appointmentpage.query_time_slots.data.query_slots[0].id">Unfortunately, this provider is fully booked for {{app.main.appointmentpage.form.appointmentDate.value.formatDate('dd MMMM y')}}. You can select another date or pick another professional </h5>
+                    <h5 dmx-show="(!app.main.appointmentpage.query_time_slots.data.query_slots[0].id &amp;&amp; app.main.appointmentpage.working_days_array.items.contains(app.main.appointmentpage.form.appointmentDate.value.formatDate('dddd')))">Unfortunately, this provider is fully booked for {{app.main.appointmentpage.form.appointmentDate.value.formatDate('dd MMMM y')}}. You can select another date or pick another professional </h5>
                     </p>
                 </div>
             </div>
