@@ -1,15 +1,16 @@
-<!-- Wappler include head-page="index.html" is="dmx-app" id="providerservicespage" appConnect="local" framework7_6="With App Connect" framework7_icons="local" capacitor="local" components="{dmxFormatter:{},dmxSlideshow:{},dmxPreloader:{},dmxSockets:{}}" -->
+<!-- Wappler include head-page="index.html" is="dmx-app" id="providerservicespage" appConnect="local" framework7_6="With App Connect" framework7_icons="local" capacitor="local" components="{dmxFormatter:{},dmxSlideshow:{},dmxPreloader:{},dmxSockets:{},dmxGoogleDirections:{},dmxGoogleMaps:{}}" -->
 
 
 <div class="page" path="/provider-services-page/:provider_id/:provider_name/:category?" data-name="provider-services-page" id="providerservicespage">
     <dmx-preloader id="justpropreloader" spinner="pulse" color="#ff6600"></dmx-preloader>
     <dmx-serverconnect id="queryProviderServices" url="https://api.justpro.me/api/provider/list_provider_services_4_category" site="JustPro-Spa-Backend" dmx-param:provider_id="app.main.providerservicespage.route.params.provider_id" dmx-param:category="app.main.providerservicespage.route.params.category" dmx-param:search_by_name="app.main.providerservicespage.search.value" dmx-on:start="app.showPreloader('deeporange')" dmx-on:done="app.hidePreloader()" sockets="true"></dmx-serverconnect>
+    <dmx-serverconnect id="category" url="https://api.justpro.me/api/services/single_category" site="JustPro-Spa-Backend" dmx-param:provider_id="app.main.providerservicespage.route.params.provider_id" dmx-param:category="app.main.providerservicespage.route.params.category" dmx-param:search_by_name="app.main.providerservicespage.search.value" dmx-on:start="app.showPreloader('deeporange')" dmx-on:done="app.hidePreloader()" sockets="true" dmx-param:category_id="app.main.providerservicespage.route.params.category"></dmx-serverconnect>
     <dmx-serverconnect id="provider_info" url="https://api.justpro.me/api/provider/provider_info" site="JustPro-Spa-Backend" dmx-param:provider_id="app.main.providerservicespage.route.params.provider_id" dmx-on:start="app.showPreloader('deeporange')" dmx-on:done="app.hidePreloader()" dmx-param:customer_longitude="app.geo.coords.longitude" dmx-param:customer_latitude="app.geo.coords.latitude"></dmx-serverconnect>
     <div class="padding-top padding-bottom">
         <div class="navbar no-hairline no-shadow no-border">
             <div class="navbar-inner" style="padding-right:0px !important; padding-left:0px !important; margin-right:0px !important">
                 <div class="subnavbar">
-                    <a href="#!" class="link smallfont text-align-left"><span class="fa fa-star small" dmx-class:checked="(app.main.providerservicespage.provider_info.data.rating &gt; 0)"></span>
+                    <a href="#!" class="link smallfont text-align-left" dmx-on:click="app.main.navigate('/rating-review-page/'+app.main.providerservicespage.route.params.provider_id,{})"><span class="fa fa-star small" dmx-class:checked="(app.main.providerservicespage.provider_info.data.rating &gt; 0)"></span>
                         <span class="fa fa-star small" dmx-class:checked="(app.main.providerservicespage.provider_info.data.rating &gt; 1)"></span>
                         <span class="fa fa-star small" dmx-class:checked="(app.main.providerservicespage.provider_info.data.rating &gt; 2)"></span>
                         <span class="fa fa-star small" dmx-class:checked="(app.main.providerservicespage.provider_info.data.rating &gt; 3)"></span>
@@ -50,14 +51,14 @@
                 </div>
             </div>
         </div>
-
     </div>
     <div class="page-content location-wraper newbg">
-
-        <div id="services" style="margin-bottom:130px !important">
+        <div id="services" style="margin-bottom:130px !important" class="">
             <!-- <div class="block mb-0" dmx-hide="app.main.home.queryServices.state.processing">
                 <h4 class="montserrat smallfont">{{app.main.providerservicespage.queryProviderServices.data.queryServices.count()}} Services offered <span dmx-show="(app.local_store.data.service_location == 'salon')">in</span><span dmx-show="(app.local_store.data.service_location == 'home')">at</span> {{app.main.home.providers.value.titlecase()}}</h4>
             </div>   -->
+
+            <!-- <div class="ribbon" dmx-show="app.main.providerservicespage.provider_info.data.queryProvider[0].verified"><span>Verified</span></div> -->
 
             <dmx-slideshow id="prov_info" dmx-bind:slides="app.main.providerservicespage.provider_info.data.queryProvider" slide-url="provider_avatar" slide-title="staff_name.titlecase()" slide-link="'#!'" style="height:256px !important" class="up-15" slide-description="job_title.titlecase()" dmx-on:click="app.main.navigate('/provider-services-page/'+app.main.providerservicespage.provider_info.data.queryProvider[0].id+'/'+app.main.providerservicespage.provider_info.data.queryProvider[0].staff_name,{reloadCurrent: true, reloadAll: true})">
             </dmx-slideshow>
@@ -87,7 +88,7 @@
                 <div class="row" style="transition: width 0.5s;">
                     <div class="col-70">
                         <h5 class="custom-font nametag no-margin" style="padding-top:15px !important"><span dmx-show="(app.local_store.data.service_location == 'salon')">Our {{app.main.providerservicespage.route.params.category.titlecase()}} Services</span>
-                            <span dmx-show="(app.local_store.data.service_location == 'home')">My {{app.main.providerservicespage.route.params.category.titlecase()}} Services</span>
+                            <span dmx-show="(app.local_store.data.service_location == 'home')">My {{app.main.providerservicespage.category.data.query_category.category_name}} Services</span>
                         </h5>
                     </div>
                     <div class="col-30 text-align-right justify-content-right">

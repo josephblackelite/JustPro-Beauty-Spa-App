@@ -1,0 +1,71 @@
+<!-- Wappler include head-page="index.html" is="dmx-app" id="ratingreviewpage" appConnect="local" framework7_6="With App Connect" framework7_icons="local" capacitor="local" fontawesome_6="local" components="{dmxFormatter:{},dmxSockets:{}}" -->
+
+
+<div class="page" path="/rating-review-page/:provider_id/:service_offered_id?" data-name="rating-review-page" id="ratingreviewpage">
+  <dmx-serverconnect id="provider_review" url="https://api.justpro.me/api/reviews/reviews" site="JustPro-Spa-Backend" dmx-param:provider_id="app.main.ratingreviewpage.route.params.provider_id" dmx-param:service_offered_id="app.main.ratingreviewpage.route.params.service_offered_id" sockets="true"></dmx-serverconnect>
+  <div class="padding-top padding-bottom">
+    <div class="navbar no-hairline no-shadow no-border">
+      <div class="navbar-inner" style="padding-right:0px !important; padding-left:0px !important; margin-right:0px !important">
+        <div class="left">
+          <a href="#" class="link back">
+            <i class="icon f7-icons">arrow_left</i>
+          </a>
+
+        </div>
+
+        <div class="title">
+          <h3 class="no-margin">
+            Reviews
+          </h3>
+          <small class="no-margin">
+            {{app.main.ratingreviewpage.provider_review.data.query_provider_reviews.count() +' reviews'}}
+          </small>
+        </div>
+        <div class="right">
+          <a href="#" class="link panel-open icon-only" data-panel="left">
+
+            <i class="icon f7-icons">ellipsis_vertical</i>
+          </a>
+        </div>
+      </div>
+    </div>
+
+  </div>
+  <div class="page-content wappler-block">
+    <div class="container mb-150 text-color-black">
+
+      <!-- provider_rating repeat -->
+      <div class="row margin-top">
+        <div class="col-100 bg-color-white padding" dmx-repeat:repeat_provider_reviews="app.main.ratingreviewpage.provider_review.data.query_provider_reviews">
+          <div>
+            <!-- Review Head-->
+            <div class="display-flex align-items-center">
+              <!-- Meta -->
+              <div class="display-flex align-items-center">
+                <img src="" alt="" class="50-image-radius elevation-1 margin-right" dmx-bind:src="customer_avatar_url" width="50" height="50">
+                <div>
+                  <h3 class="no-margin">{{customer_name.capitalize()}} </h3>
+                  <small>{{rating_dateTime.formatDate('dd/MM/yy hh:mm a')}} </small>
+                </div>
+              </div>
+              <!-- Rating -->
+              <div class="display-flex align-items-center ml-auto">
+                <i class="fa-solid fa-star margin-right text-color-primary"></i>
+                <p>
+                  {{rating_number}}
+                </p>
+              </div>
+            </div>
+            <!-- Review body -->
+            <div>
+              <h3> {{comment ? comment : '**No comment**'}}</h3>
+            </div>
+          </div>
+          <div>
+
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

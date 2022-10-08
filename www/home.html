@@ -111,7 +111,7 @@
         <input name="company_id" id="company_id" dmx-bind:value="app.main.home.last_item_query_4_review.data.query_order_items.provider_id" type="hidden">
 
         <input id="review_id" name="review_id" type="hidden">
-        <input id="rating" name="rating" value="5" type="hidden"><input id="customer_id" name="customer_id" type="hidden" dmx-bind:value="app.Current_user.data.customer.id"><input id="service_id" name="service_id" dmx-bind:value="app.main.home.last_item_query_4_review.data.query_order_items.provider_service_id" type="hidden">
+        <input id="ratig" name="rating" value="5" type="hidden"><input id="customer_id" name="customer_id" type="hidden" dmx-bind:value="app.Current_user.data.customer.id"><input id="service_id" name="service_id" dmx-bind:value="app.main.home.last_item_query_4_review.data.query_order_items.provider_service_id" type="hidden">
         <input id="order_item_id" name="order_item_id" dmx-bind:value="app.main.home.last_item_query_4_review.data.query_order_items.id" type="hidden">
     </form>
     <dmx-datetime id="var1"></dmx-datetime>
@@ -140,7 +140,7 @@
                         <ul style="width:100%;">
                             <li style="width:100%;">
                                 <a class="item-link smart-select smart-select-init text-color-black" data-open-in="popup" data-searchbar="true" data-searchbar-placeholder="Search Services" style="position:relative">
-                                    <select class="text-color-black custom-font nametag" style="width:100%;" name="selector" id="selector" dmx-on:changed="app.local_store.set('state',app.main.home.selector.value)" dmx-bind:value="app.local_store.data.state" dmx-bind:options="app.main.home.available_categories.data.query_categories" optiontext="category_name" optionvalue="id">
+                                    <select class="text-color-black custom-font nametag" style="width:100%;" name="selector" id="selector" dmx-on:changed="app.local_store.set('state',app.main.home.selector.value)" dmx-bind:value="app.local_store.data.state" dmx-bind:options="app.main.home.available_categories.data.query_categories" optiontext="category_name.capitalize()" optionvalue="id">
                                         <option value="" class="nametag"><i class="bi bi-search"></i> Show All</option>
                                     </select>
                                     <div class="item-content">
@@ -268,14 +268,8 @@
 
                             </div>
                         </div>
-
                     </div>
-
                 </div>
-
-
-                <!-- .where(`rating`, app.main.home.filter.value, '==') -->
-                <!-- Repeat freelancers -->
                 <div class="row no-gap up-10 no-padding">
                     <div class="col-50" dmx-hide="app.main.home.home_service_providers.state.processing" dmx-repeat:repeat_salons="(app.main.home.home_service_providers.data.repeat_providers.where(`rating`, app.main.home.filter.value, '==').sort(`distance.Distance`).count() &gt; 0)?app.main.home.home_service_providers.data.repeat_providers.where(`rating`, app.main.home.filter.value, '==').sort(`distance.Distance`):app.main.home.home_service_providers.data.repeat_providers.sort(`distance.Distance`))" dmx-show="(app.local_store.data.service_location == 'home')" dmx-class:col-100="(app.local_store.data.freelacer_card_class_toggle == 100)">
                         <div class="card demo-card-header-pic no-shadow card-outline border-10" dmx-on:click="run([{run:{action:`app.selected_employee_id.setValue(id)`}},{run:{action:`app.cart_preFill.set(\'employee_id\',id);app.cart_preFill.set(\'parent_provider_id\',id)`}},{run:{action:`app.main.navigate(\'/provider-services-page/\'+parent_provider_id+\'/\'+staff_name+\'/\'+app.main.home.selector.value,{})`}}])">
@@ -310,7 +304,6 @@
                     </div>
 
                 </div>
-
             </div>
 
         </div>

@@ -110,5 +110,9 @@
   "change-appointment-date.html": {
     "layoutPage": "",
     "description": ""
+  },
+  "rating-review-page.html": {
+    "layoutPage": "",
+    "description": ""
   }
 }

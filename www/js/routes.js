@@ -108,5 +108,9 @@ var routes = [
   {
     "path": "/change-appointment-date/:order_item_id",
     "url": "./change-appointment-date.html"
+  },
+  {
+    "path": "/rating-review-page/:provider_id/:service_offered_id?",
+    "url": "./rating-review-page.html"
   }
 ]

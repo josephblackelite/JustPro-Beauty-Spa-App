@@ -75,7 +75,7 @@
                         </div>
                     </div>
                     <p>
-                    <h5 dmx-show="(!app.main.appointmentpage.query_time_slots.data.query_slots[0].id &amp;&amp; app.main.appointmentpage.working_days_array.items.contains(app.main.appointmentpage.form.appointmentDate.value.formatDate('dddd')))">Unfortunately, this provider is fully booked for {{app.main.appointmentpage.form.appointmentDate.value.formatDate('dd MMMM y')}}. You can select another date or pick another professional </h5>
+                    <h5 dmx-show="(!app.main.appointmentpage.query_time_slots.data.query_slots[0].id &amp;&amp; app.main.appointmentpage.working_days_array.items.contains(app.main.appointmentpage.form.appointmentDate.value.formatDate('dddd')))">Unfortunately, {{app.main.appointmentpage.provider_info.data.queryProvider.staff_name.capitalize()}} is fully booked for {{app.main.appointmentpage.form.appointmentDate.value.formatDate('dd MMMM y')}}. You can select another date or pick another professional </h5>
                     </p>
                 </div>
             </div>

@@ -44,7 +44,7 @@
                             </div>
                             <div class="item-time">
                                 <span class="time"><i class="las la-clock"></i> {{creation_date.hoursUntil(app.date.datetime)+'h ago'}}</span>
-                                <span class="mark text-primary" dmx-on:click="run({condition:{if:`(read == 1)`,then:{steps:{'f7.dialog.confirm':{title:'Delete notifcation?',text:'Are you sure you want to delete this notification?',then:{steps:{run:{action:`app.main.notifications.delete_notification.id.setValue(id);app.main.notifications.delete_notification.submit()`}}}}}},else:{steps:{'f7.dialog.confirm':{title:'Mark as read?',text:'Are you sure you want to mark this notification as read?',then:{steps:{run:{action:`app.main.notifications.mark_notification_as_read.i_d.setValue(id);app.main.notifications.mark_notification_as_read.submit()`}}}}}}}})">{{(read == 1 ? 'Delete' : 'Mark as read')}}</span>
+                                <span class="mark text-primary" dmx-on:click="run({condition:{if:`(read == 1)`,then:{steps:{run:{action:`app.main.notifications.delete_notification.id.setValue(id);app.main.notifications.delete_notification.submit()`}}},else:{steps:{'f7.dialog.confirm':{title:'Mark as read?',text:'Are you sure you want to mark this notification as read?',then:{steps:{run:{action:`app.main.notifications.mark_notification_as_read.i_d.setValue(id);app.main.notifications.mark_notification_as_read.submit()`}}}}}}}})">{{(read == 1 ? 'Delete' : 'Mark as read')}}</span>
                             </div>
                         </div>
                     </li>

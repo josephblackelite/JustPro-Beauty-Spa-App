@@ -2504,5 +2504,28 @@ dmx.config({
       ],
       "outputType": "array"
     }
+  },
+  "ratingreviewpage": {
+    "repeat_provider_reviews": {
+      "meta": [
+        {
+          "type": "text",
+          "name": "comment"
+        },
+        {
+          "type": "number",
+          "name": "rating_number"
+        },
+        {
+          "type": "text",
+          "name": "customer_name"
+        },
+        {
+          "type": "datetime",
+          "name": "rating_dateTime"
+        }
+      ],
+      "outputType": "array"
+    }
   }
 });

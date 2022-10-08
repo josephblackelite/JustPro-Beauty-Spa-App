@@ -49,13 +49,13 @@
                 <div class="display-flex align-items-center justify-content-space-between">
                     <div class="display-flex align-items-center">
                         <i class="bi-handbag-fill"></i>
-                        <p class="margin-left">{{app.main.orderdetails.orderchildren.data.query[0].order_status ? app.main.orderdetails.orderchildren.data.query[0].order_status : 'Waiting for provider'}} </p>
+                        <p class="margin-left">{{app.main.orderdetails.orderchildren.data.query[0].order_status?app.main.orderdetails.orderchildren.data.query[0].order_status.titlecase():'Waiting for provider'}} </p>
                     </div>
                     <p class="">Booked {{app.main.orderdetails.orderchildren.data.query[0].order_dateTime.formatDate('dd MMM y')}}</p>
                 </div>
                 <!-- Item name - link -->
                 <div class="display-flex align-items-center justify-content-space-between">
-                    <h3 class="strong">{{app.main.orderdetails.orderchildren.data.query[0].item_name}} </h3>
+                    <h3 class="strong">{{app.main.orderdetails.orderchildren.data.query[0].item_name.capitalize()}} </h3>
                     <a href="" dmx-on:click="run({condition:{if:`(app.main.orderdetails.orderchildren.data.query[0].provider_type == \'home\')`,then:{steps:[{run:{action:`app.cart_preFill.set(\'employee_id\',app.main.orderdetails.orderchildren.data.query[0].parent_provider_id);app.local_store.set(\'service_location\',\'home\')`}},{run:{action:`app.main.navigate(\'/product-info/\'+app.main.orderdetails.orderchildren.data.query[0].provider_service_id+\'/\'+app.main.orderdetails.orderchildren.data.query[0].employee_name,{})`}}]},else:{steps:[{run:{action:`app.local_store.set(\'service_location\',\'salon\')`}},{run:{action:`app.main.navigate(\'/provider-services-page/\'+app.main.orderdetails.orderchildren.data.query[0].parent_provider_id+\'/\'+app.main.orderdetails.orderchildren.data.query[0].parent_provider_name,{})`}}]}}})">Book again</a>
                 </div>
                 <!-- Pending - order -->
