@@ -36,89 +36,91 @@
     </div>
     <div class="page-content wappler-block">
         <dmx-preloader id="justpropreloader" spinner="pulse" color="#ff6600"></dmx-preloader>
-        <div class="col-100">
-            <div class="block text-align-center padding-top padding-bottom" dmx-hide="app.main.billing.customerPaymentMethods.data.query[0].id">
-                <h5 class="custom-font"> You do not have any payment card(s) stored.</h5>
+        <div class="mb-150">
+            <div class="col-100">
+                <div class="block text-align-center padding-top padding-bottom" dmx-hide="app.main.billing.customerPaymentMethods.data.query[0].id">
+                    <h5 class="custom-font"> You do not have any payment card(s) stored.</h5>
 
+                </div>
             </div>
-        </div>
-        <div class="block" dmx-show="app.main.billing.customerPaymentMethods.data.query[0].id">
-            <h4 class="pb-10">My Cards</h4>
-        </div>
-        <div class="block no-margin" dmx-hide="(app.main.billing.customerPaymentMethods.data.query.count() &lt; 1)">
-            <div class="list accordion-list dz-accordion dz-list">
-                <ul class="padding">
-                    <li class="accordion-item accordion-item-opened">
-                        <div class="accordion-item-content">
-                            <div class="item-content-inner mb-30">
-                                <!-- Payment Swiper -->
-                                <div is="dmx-swiper" id="cardreader" dmx-bind:slides="app.main.billing.customerPaymentMethods.data.query" class="mb-50 justify-content-center" space-between="15" centered-slides="true" navigation="true" pagination="bullets">
+            <div class="block" dmx-show="app.main.billing.customerPaymentMethods.data.query[0].id">
+                <h4 class="pb-10">My Cards</h4>
+            </div>
+            <div class="block no-margin" dmx-hide="(app.main.billing.customerPaymentMethods.data.query.count() &lt; 1)">
+                <div class="list accordion-list dz-accordion dz-list">
+                    <ul class="padding">
+                        <li class="accordion-item accordion-item-opened">
+                            <div class="accordion-item-content">
+                                <div class="item-content-inner mb-30">
+                                    <!-- Payment Swiper -->
+                                    <div is="dmx-swiper" id="cardreader" dmx-bind:slides="app.main.billing.customerPaymentMethods.data.query" class="mb-50 justify-content-center" space-between="15" centered-slides="true" navigation="true" pagination="bullets">
 
-                                    <div class="swiper-slide display-flex justify-content-center align-items-center">
-                                        <div>
-                                            <div class="payment-card">
-                                                <div class="card-media">
-                                                    <img src="img/card/card1.png" alt="">
-                                                    <img src="img/card/card2.png" alt="">
-                                                </div>
-                                                <div class="card-info">
-                                                    <div class="clearfix">
-                                                        <h5 class="card-name">{{funding}}</h5>
-                                                        <p class="card-number">{{last4}} **** **** ****</p>
+                                        <div class="swiper-slide display-flex justify-content-center align-items-center">
+                                            <div>
+                                                <div class="payment-card">
+                                                    <div class="card-media">
+                                                        <img src="img/card/card1.png" alt="">
+                                                        <img src="img/card/card2.png" alt="">
                                                     </div>
-                                                    <div class="bottom-info">
-                                                        <p>{{exp_month+' / '+exp_year}}</p>
-                                                        <p>{{brand}}</p>
+                                                    <div class="card-info">
+                                                        <div class="clearfix">
+                                                            <h5 class="card-name">{{funding}}</h5>
+                                                            <p class="card-number">{{last4}} **** **** ****</p>
+                                                        </div>
+                                                        <div class="bottom-info">
+                                                            <p>{{exp_month+' / '+exp_year}}</p>
+                                                            <p>{{brand}}</p>
+                                                        </div>
                                                     </div>
                                                 </div>
+                                                <button class="brand-bg text-color-white button-6 margin-top custom-font smallfont" dmx-on:click="run({'f7.dialog.confirm':{title:'Remove card?',text:'This card will be removed from your account! ',then:{steps:{run:{action:`app.main.billing.remove_Payment_method.payment_Method_id.setValue(stripe_payment_method_id);app.main.billing.remove_Payment_method.submit()`}}}}})"><span dmx-hide="(app.main.checkout.bill_selected_card.state.executing &amp;&amp; (app.main.checkout.bill_selected_card.selected_payment_method.value == stripe_payment_method_id))" class="smallfont">Remove card</span>
+                                                    <span class="preloader color-white" dmx-show="(app.main.checkout.bill_selected_card.state.executing &amp;&amp; (app.main.checkout.bill_selected_card.selected_payment_method.value == stripe_payment_method_id))"></span>
+                                                </button>
                                             </div>
-                                            <button class="brand-bg text-color-white button-6 margin-top custom-font smallfont" dmx-on:click="run({'f7.dialog.confirm':{title:'Remove card?',text:'This card will be removed from your account! ',then:{steps:{run:{action:`app.main.billing.remove_Payment_method.payment_Method_id.setValue(stripe_payment_method_id);app.main.billing.remove_Payment_method.submit()`}}}}})"><span dmx-hide="(app.main.checkout.bill_selected_card.state.executing &amp;&amp; (app.main.checkout.bill_selected_card.selected_payment_method.value == stripe_payment_method_id))" class="smallfont">Remove card</span>
-                                                <span class="preloader color-white" dmx-show="(app.main.checkout.bill_selected_card.state.executing &amp;&amp; (app.main.checkout.bill_selected_card.selected_payment_method.value == stripe_payment_method_id))"></span>
-                                            </button>
                                         </div>
                                     </div>
                                 </div>
                             </div>
-                        </div>
-                    </li>
+                        </li>
 
-                </ul>
-            </div>
-        </div>
-
-        <div class="block">
-            <p>Payment is securely processed by Stripe.com. JustPro does not store or see your payment details. Stripe.com manages your payment data and handles all payment processing on behalf of JustPro Beauty and Spa Co. LLC. </p>
-        </div>
-        <div class="sheet-modal EnterEmailAddressSheet">
-            <div class="toolbar">
-                <div class="toolbar-inner justify-content-center">
-                    <div class="left"></div>
-                    <div class="title text-align-center">Please add your email address</div>
-                    <div class="right"></div>
+                    </ul>
                 </div>
             </div>
-            <div class="sheet-modal-inner">
-                <div class="block no-margin-top">
-                    <form action="https://api.justpro.me/api/security/collect_user_email_for_billing" is="dmx-serverconnect-form" method="post" id="enter_email_address" site="JustPro-Spa-Backend" dmx-on:success="run({runJS:{function:'closeEnterEmailAddressSheet'}})" class="no-padding" dmx-on:invalid="run({'f7.dialog.alert':{title:'Error',text:'There is an error'}})"><input id="user__id" name="user_id" type="hidden" dmx-bind:value="app.Current_user.data.customer.id">
-                        <div class="list no-margin-top ">
-                            <ul class="row">
-                                <li class="item-content col-100 item-input">
-                                    <div class="item-inner">
-                                        <div class="item-title item-label">Email</div>
-                                        <div class="item-input-wrap">
-                                            <input type="email" placeholder="Email Address" class="form-control" name="email" dmx-bind:value="app.Current_user.data.customer.customer_email" required="" data-rule-email="" data-msg-required="Email is required">
-                                        </div>
-                                    </div>
-                                </li>
-                            </ul>
-                        </div>
-                        <div class="clearfix text-align-center pb-30">
 
-                            <button href="" class="button-large button-18 bg-color-primary button-fill rounded-xl text-color-white" dmx-on:click="run({condition:{if:`app.main.billing.enter_email_address.email.value`,then:{steps:{run:{action:`app.main.billing.enter_email_address.submit()`}}}}})" dmx-bind:disabled="app.main.billing.enter_email_address.state.executing"><span dmx-hide="app.main.billing.enter_email_address.state.executing">Save Email</span>
-                                <div class="preloader color-purple" dmx-show="app.main.billing.enter_email_address.state.executing"></div>
-                            </button>
-                        </div>
-                    </form>
+            <div class="block">
+                <p>Payment is securely processed by Stripe.com. JustPro does not store or see your payment details. Stripe.com manages your payment data and handles all payment processing on behalf of JustPro Beauty and Spa Co. LLC. </p>
+            </div>
+            <div class="sheet-modal EnterEmailAddressSheet">
+                <div class="toolbar">
+                    <div class="toolbar-inner justify-content-center">
+                        <div class="left"></div>
+                        <div class="title text-align-center">Please add your email address</div>
+                        <div class="right"></div>
+                    </div>
+                </div>
+                <div class="sheet-modal-inner">
+                    <div class="block no-margin-top">
+                        <form action="https://api.justpro.me/api/security/collect_user_email_for_billing" is="dmx-serverconnect-form" method="post" id="enter_email_address" site="JustPro-Spa-Backend" dmx-on:success="run({runJS:{function:'closeEnterEmailAddressSheet'}})" class="no-padding" dmx-on:invalid="run({'f7.dialog.alert':{title:'Error',text:'There is an error'}})"><input id="user__id" name="user_id" type="hidden" dmx-bind:value="app.Current_user.data.customer.id">
+                            <div class="list no-margin-top ">
+                                <ul class="row">
+                                    <li class="item-content col-100 item-input">
+                                        <div class="item-inner">
+                                            <div class="item-title item-label">Email</div>
+                                            <div class="item-input-wrap">
+                                                <input type="email" placeholder="Email Address" class="form-control" name="email" dmx-bind:value="app.Current_user.data.customer.customer_email" required="" data-rule-email="" data-msg-required="Email is required">
+                                            </div>
+                                        </div>
+                                    </li>
+                                </ul>
+                            </div>
+                            <div class="clearfix text-align-center pb-30">
+
+                                <button href="" class="button-large button-18 bg-color-primary button-fill rounded-xl text-color-white" dmx-on:click="run({condition:{if:`app.main.billing.enter_email_address.email.value`,then:{steps:{run:{action:`app.main.billing.enter_email_address.submit()`}}}}})" dmx-bind:disabled="app.main.billing.enter_email_address.state.executing"><span dmx-hide="app.main.billing.enter_email_address.state.executing">Save Email</span>
+                                    <div class="preloader color-purple" dmx-show="app.main.billing.enter_email_address.state.executing"></div>
+                                </button>
+                            </div>
+                        </form>
+                    </div>
                 </div>
             </div>
         </div>

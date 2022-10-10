@@ -30,7 +30,7 @@
         </div>
     </div>
     <div class="page-content content-area">
-        <div class="container">
+        <div class="container mb-150">
             <div class="form-elements">
                 <form is="dmx-serverconnect-form" method="post" id="cancel_appointment_form" dmx-on:success="app.main.back('/order-details/'+app.main.cancelappointment.route.params.id+'/'+app.main.cancelappointment.route.params.order_uuid,{})" site="JustPro-Spa-Backend" action="https://api.justpro.me/api/customer_orders/cancel_order">
                     <input id="order_uuid" name="order_uuid" type="hidden" dmx-bind:value="app.main.cancelappointment.route.params.order_uuid">

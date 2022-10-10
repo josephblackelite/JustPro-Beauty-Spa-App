@@ -53,12 +53,7 @@
         </div>
     </div>
     <div class="page-content location-wraper newbg">
-        <div id="services" style="margin-bottom:130px !important" class="">
-            <!-- <div class="block mb-0" dmx-hide="app.main.home.queryServices.state.processing">
-                <h4 class="montserrat smallfont">{{app.main.providerservicespage.queryProviderServices.data.queryServices.count()}} Services offered <span dmx-show="(app.local_store.data.service_location == 'salon')">in</span><span dmx-show="(app.local_store.data.service_location == 'home')">at</span> {{app.main.home.providers.value.titlecase()}}</h4>
-            </div>   -->
-
-            <!-- <div class="ribbon" dmx-show="app.main.providerservicespage.provider_info.data.queryProvider[0].verified"><span>Verified</span></div> -->
+        <div id="services" class="150">
 
             <dmx-slideshow id="prov_info" dmx-bind:slides="app.main.providerservicespage.provider_info.data.queryProvider" slide-url="provider_avatar" slide-title="staff_name.titlecase()" slide-link="'#!'" style="height:256px !important" class="up-15" slide-description="job_title.titlecase()" dmx-on:click="app.main.navigate('/provider-services-page/'+app.main.providerservicespage.provider_info.data.queryProvider[0].id+'/'+app.main.providerservicespage.provider_info.data.queryProvider[0].staff_name,{reloadCurrent: true, reloadAll: true})">
             </dmx-slideshow>

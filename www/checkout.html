@@ -130,50 +130,17 @@
         </div>
     </div>
     <div class="page-content wappler-block">
-        <dmx-preloader id="justpropreloader" spinner="pulse" color="#ff6600"></dmx-preloader>
+        <div class="mb-150">
+            <dmx-preloader id="justpropreloader" spinner="pulse" color="#ff6600"></dmx-preloader>
 
-        <div class="block" dmx-show="app.main.checkout.customerPaymentMethods.data.query[0].id">
-            <h4 class="tajawal strong mb-0">Your Payment Cards</h4>
-            <p class="mt-0"><small>Swipe right to reveal all cards</small></p>
-        </div>
-        <div is="dmx-swiper" id="cardreader" dmx-bind:slides="app.main.checkout.customerPaymentMethods.data.query" class="mb-50 justify-content-center" space-between="15" centered-slides="true" navigation="true" pagination="bullets">
-            <!-- style="margin-right:30px !important; margin-left:30px !important" margin-right margin-left align-self-center -->
-            <div class="swiper-slide display-flex justify-content-center align-items-center">
-                <div>
-                    <div class="payment-card">
-                        <div class="card-media">
-                            <img src="img/card/card1.png" alt="">
-                            <img src="img/card/card2.png" alt="">
-                        </div>
-                        <div class="card-info">
-                            <div class="clearfix">
-                                <h5 class="card-name">{{funding}}</h5>
-                                <p class="card-number">**** **** **** {{last4}}</p>
-                            </div>
-                            <div class="bottom-info">
-                                <p>{{exp_month+' / '+exp_year}}</p>
-                                <p>{{brand}}</p>
-                            </div>
-                        </div>
-                    </div>
-                    <button class="brand-bg text-color-white button-6 margin-top custom-font smallfont" dmx-on:click="run({condition:{if:`(app.Cart.data.where(\`selected_timeSlot_expired\`, 1, \'==\').count() &gt; 0)`,then:{steps:{run:{action:`app.main.navigate(\'/order-confirmation\',{})`}}},else:{steps:{'f7.dialog.confirm':{title:'Ready to pay?',text:`\'You are about to pay with your card ending in \'+last4+\' ?\'`,then:{steps:{run:{action:`app.main.checkout.bill_selected_card.selected_payment_method.setValue(stripe_payment_method_id);app.main.checkout.bill_selected_card.submit()`}}}}}}}})" dmx-bind:disabled="(app.main.checkout.bill_selected_card.state.executing &amp;&amp; (app.main.checkout.bill_selected_card.selected_payment_method.value == stripe_payment_method_id))" style="width:285px !important"><span dmx-hide="(app.main.checkout.bill_selected_card.state.executing &amp;&amp; (app.main.checkout.bill_selected_card.selected_payment_method.value == stripe_payment_method_id))" class="smallfont">Click to Pay with this card</span>
-                        <span class="preloader color-white" dmx-show="(app.main.checkout.bill_selected_card.state.executing &amp;&amp; (app.main.checkout.bill_selected_card.selected_payment_method.value == stripe_payment_method_id))"></span>
-                    </button>
-
-                </div>
+            <div class="block" dmx-show="app.main.checkout.customerPaymentMethods.data.query[0].id">
+                <h4 class="tajawal strong mb-0">Your Payment Cards</h4>
+                <p class="mt-0"><small>Swipe right to reveal all cards</small></p>
             </div>
-        </div>
-
-
-
-
-
-        <!--
-        <div class="block">
-            <div data-space-between="15" data-slides-per-view="1" data-centered-slides="false" class="swiper-container swiper-init payment-swiper item-swiper">
-                <div class="swiper-wrapper">
-                    <div class="swiper-slide margin-
-                right" dmx-repeat:repeat_user_cards="app.main.checkout.customerPaymentMethods.data.query" style="margin-right:20px !important">
+            <div is="dmx-swiper" id="cardreader" dmx-bind:slides="app.main.checkout.customerPaymentMethods.data.query" class="mb-50 justify-content-center" space-between="15" centered-slides="true" navigation="true" pagination="bullets">
+                <!-- style="margin-right:30px !important; margin-left:30px !important" margin-right margin-left align-self-center -->
+                <div class="swiper-slide display-flex justify-content-center align-items-center">
+                    <div>
                         <div class="payment-card">
                             <div class="card-media">
                                 <img src="img/card/card1.png" alt="">
@@ -190,59 +157,59 @@
                                 </div>
                             </div>
                         </div>
-                        <button class="brand-bg text-color-white button-6 margin-top tajawal-s smallfont" dmx-on:click="run({'f7.dialog.confirm':{title:'Ready to pay?',text:`\'You are about to pay with your card ending in \'+last4+\' ?\'`,then:{steps:{run:{action:`app.main.checkout.bill_selected_card.selected_payment_method.setValue(stripe_payment_method_id);app.main.checkout.bill_selected_card.submit()`}}}}})" dmx-bind:disabled="(app.main.checkout.bill_selected_card.state.executing &amp;&amp; (app.main.checkout.bill_selected_card.selected_payment_method.value == stripe_payment_method_id))"><span dmx-hide="(app.main.checkout.bill_selected_card.state.executing &amp;&amp; (app.main.checkout.bill_selected_card.selected_payment_method.value == stripe_payment_method_id))" class="smallfont">Click to Pay with this card</span>
+                        <button class="brand-bg text-color-white button-6 margin-top custom-font smallfont" dmx-on:click="run({condition:{if:`(app.Cart.data.where(\`selected_timeSlot_expired\`, 1, \'==\').count() &gt; 0)`,then:{steps:{run:{action:`app.main.navigate(\'/order-confirmation\',{})`}}},else:{steps:{'f7.dialog.confirm':{title:'Ready to pay?',text:`\'You are about to pay with your card ending in \'+last4+\' ?\'`,then:{steps:{run:{action:`app.main.checkout.bill_selected_card.selected_payment_method.setValue(stripe_payment_method_id);app.main.checkout.bill_selected_card.submit()`}}}}}}}})" dmx-bind:disabled="(app.main.checkout.bill_selected_card.state.executing &amp;&amp; (app.main.checkout.bill_selected_card.selected_payment_method.value == stripe_payment_method_id))" style="width:285px !important"><span dmx-hide="(app.main.checkout.bill_selected_card.state.executing &amp;&amp; (app.main.checkout.bill_selected_card.selected_payment_method.value == stripe_payment_method_id))" class="smallfont">Click to Pay with this card</span>
                             <span class="preloader color-white" dmx-show="(app.main.checkout.bill_selected_card.state.executing &amp;&amp; (app.main.checkout.bill_selected_card.selected_payment_method.value == stripe_payment_method_id))"></span>
                         </button>
+
                     </div>
                 </div>
             </div>
-        </div> -->
 
-        <div class="block" dmx-hide="">
-            <form is="dmx-serverconnect-form" id="coupon_code_form" method="post" action="https://api.justpro.me/api/stripe/redeem_coupon_code" site="JustPro-Spa-Backend" dmx-on:success="run({'f7.dialog.alert':{title:'Hurray',text:'The discount has been applied.'}})" dmx-on:invalid="run({'f7.dialog.alert':{title:'Invalid coupon',text:`app.main.checkout.coupon_code_form.lastError.response`}})">
-                <input id="customer_id" name="customer_id" type="hidden" dmx-bind:value="app.Current_user.data.customer.id">
-                <input id="coupon_amount_off" name="coupon_amount_off" type="hidden" dmx-bind:value="app.Current_user.data.customer.amount_off">
-                <input id="coupon_percent_off" name="coupon_percent_off" type="hidden" dmx-bind:value="Cart.data.sum(`total.toNumber().per(app.Current_user.data.customer.percent_off)`)">
-                <div class="list no-hairlines-md padding-top">
-                    <ul>
-                        <li class="item-content item-input item-input-outline">
-                            <div class="item-inner" style="width:100% !important">
-                                <div class="item-title item-floating-label strong">Have a coupon code?</div>
-                                <div class="item-input-wrap" style="width:100% !important">
-                                    <input type="text" placeholder="Enter coupon code" class="form-control" id="coupon_code" name="coupon_code" style="width:100% !important" />
-                                    <span class="input-clear-button"></span>
-                                </div>
-                            </div>
-                        </li>
-                        <li>
-                            <a href="" class="item-link">
-                                <div class="item-content">
-                                    <div class="item-inner">
-                                        <div class="item-title" dmx-on:click="run({condition:{if:`!app.Current_user.data.customer.customer_email`,then:{steps:{runJS:{function:'showEnterEmailAddressSheet'}}},else:{steps:{condition:{if:`app.Current_user.data.customer.discount_id`,then:{steps:{'f7.dialog.alert':{title:'Coupon applied',text:'You already have a discount. You can\'t use multiple discounts.'}}},else:{steps:{run:{action:`app.main.checkout.coupon_code_form.submit()`}}}}}}}})">Use coupon code</div>
+            <div class="block" dmx-hide="">
+                <form is="dmx-serverconnect-form" id="coupon_code_form" method="post" action="https://api.justpro.me/api/stripe/redeem_coupon_code" site="JustPro-Spa-Backend" dmx-on:success="run({'f7.dialog.alert':{title:'Hurray',text:'The discount has been applied.'}})" dmx-on:invalid="run({'f7.dialog.alert':{title:'Invalid coupon',text:`app.main.checkout.coupon_code_form.lastError.response`}})">
+                    <input id="customer_id" name="customer_id" type="hidden" dmx-bind:value="app.Current_user.data.customer.id">
+                    <input id="coupon_amount_off" name="coupon_amount_off" type="hidden" dmx-bind:value="app.Current_user.data.customer.amount_off">
+                    <input id="coupon_percent_off" name="coupon_percent_off" type="hidden" dmx-bind:value="Cart.data.sum(`total.toNumber().per(app.Current_user.data.customer.percent_off)`)">
+                    <div class="list no-hairlines-md padding-top">
+                        <ul>
+                            <li class="item-content item-input item-input-outline">
+                                <div class="item-inner" style="width:100% !important">
+                                    <div class="item-title item-floating-label strong">Have a coupon code?</div>
+                                    <div class="item-input-wrap" style="width:100% !important">
+                                        <input type="text" placeholder="Enter coupon code" class="form-control" id="coupon_code" name="coupon_code" style="width:100% !important" />
+                                        <span class="input-clear-button"></span>
                                     </div>
                                 </div>
-                            </a>
-                        </li>
-                    </ul>
-                </div>
-            </form>
-        </div>
-        <div class="block">
-            <div class="checkout-total">
-                <h4 class="title tajawal-s no-margin-bottom">You are about to pay</h4>
-                <h1 class="checkout-total strong no-margin-top" style="margin-bottom:-5px !important">{{Cart.data.sum(`total.toNumber()`).formatCurrency('AED', '.', ',', 2)}}</h1>
-                <small> + 5% VAT of {{Cart.data.sum(`vat.toNumber()`).formatCurrency('AED', '.', ',', 2)}}</small>
+                            </li>
+                            <li>
+                                <a href="" class="item-link">
+                                    <div class="item-content">
+                                        <div class="item-inner">
+                                            <div class="item-title" dmx-on:click="run({condition:{if:`!app.Current_user.data.customer.customer_email`,then:{steps:{runJS:{function:'showEnterEmailAddressSheet'}}},else:{steps:{condition:{if:`app.Current_user.data.customer.discount_id`,then:{steps:{'f7.dialog.alert':{title:'Coupon applied',text:'You already have a discount. You can\'t use multiple discounts.'}}},else:{steps:{run:{action:`app.main.checkout.coupon_code_form.submit()`}}}}}}}})">Use coupon code</div>
+                                        </div>
+                                    </div>
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                </form>
+            </div>
+            <div class="block">
+                <div class="checkout-total">
+                    <h4 class="title tajawal-s no-margin-bottom">You are about to pay</h4>
+                    <h1 class="checkout-total strong no-margin-top" style="margin-bottom:-5px !important">{{Cart.data.sum(`total.toNumber()`).formatCurrency('AED', '.', ',', 2)}}</h1>
+                    <small> + 5% VAT of {{Cart.data.sum(`vat.toNumber()`).formatCurrency('AED', '.', ',', 2)}}</small>
 
-                <p dmx-show="app.Current_user.data.customer.coupon_name">{{app.main.checkout.coupon_code_form.coupon_percent_off.value+' off discount will be applied when you submit order.'}}</p>
+                    <p dmx-show="app.Current_user.data.customer.coupon_name">{{app.main.checkout.coupon_code_form.coupon_percent_off.value+' off discount will be applied when you submit order.'}}</p>
+                </div>
+            </div>
+
+            <div class="block" style="margin-bottom:150px !important">
+                <p><img src="assets/images/pbystripe.png"></p>
+                <p>Payment is securely processed by Stripe.com. JustPro does not store or see your payment details. Stripe.com manages your payment data and handles all payment processing on behalf of JustPro Beauty &amp Spa Co. LLC. </p>
+
             </div>
         </div>
-
-        <div class="block" style="margin-bottom:150px !important">
-            <p><img src="assets/images/pbystripe.png"></p>
-            <p>Payment is securely processed by Stripe.com. JustPro does not store or see your payment details. Stripe.com manages your payment data and handles all payment processing on behalf of JustPro Beauty &amp Spa Co. LLC. </p>
-
-        </div>
-
     </div>
 
 

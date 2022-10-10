@@ -413,7 +413,7 @@
                 }
               }
             ]</script>-->
-        <div class="page-content wappler-block">
+        <!-- <div class="page-content wappler-block">
 
           <div class="container welcome-inner">
             <div class="text-align-center">
@@ -446,7 +446,7 @@
 
                 </button>
               </form>
-              <!-- dmx-on:click="run({runJS:{function:'loginWithFb'}})"-->
+             
               <a href="/home" class="button-large button-18 button-social rounded-xl button-fill facebook" style="width:100% !important"><img src="img/social/facebook.png" alt=""> <span>Login with facebook</span></a>
               <form id="GoogleSignInForm" is="dmx-serverconnect-form" method="post" action="https://api.justpro.me/api/security/login_with_google" site="JustPro-Spa-Backend" dmx-on:success="run({condition:{if:`app.main.Login.GoogleSignInForm.data.set_new_user_id`,then:{steps:[{run:{action:`app.local_store.set(\'user_id\',app.main.login.GoogleSignInForm.data.set_new_user_id)`}},{run:{action:`app.main.login.AddOneSignal_user_id.run()`}},{run:{action:`app.main.navigate(\'/home\',{})`}}]},else:{steps:[{run:{action:`app.local_store.set(\'user_id\',app.main.login.GoogleSignInForm.data.set_login_user_id)`}},{run:{action:`app.main.login.AddOneSignal_user_id.run()`}},{run:{action:`app.main.navigate(\'/home\',{})`}}]}}})" dmx-on:error="run({'f7.dialog.alert':{title:'Error',text:'User not found, try other login methods.'}})"><input id="first_name" name="first_name" type="hidden"><input id="last_name" name="last_name" type="hidden"><input id="email" name="email" type="hidden"><input id="googleImgUrl" name="googleImgUrl" type="hidden"><input id="password" name="password" type="hidden">
                 <input id="GoogleSignInFormLong" name="long" type="hidden" dmx-bind:value="geoLocation.coords.longitude">
@@ -457,58 +457,9 @@
               </button>
             </div>
           </div>
-        </div>
+        </div> -->
       </div>
-      <!-- <div class="page page-onboading" data-name="index" path="/somepage" id="indexPage">
-                <div class="page-content" style="background-image:url(assets/images/bg.jpg)">
-                    <div class="started-swiper-box">
-                        <div data-pagination='{"el": ".swiper-pagination", "hideOnClick": true}' class="swiper-container swiper-init swiper-container-initialized swiper-container-horizontal get-started">
-                            <div class="swiper-wrapper">
-                                <div class="swiper-slide">
-                                    <div class="slide-info">
-                                        <div class="dz-media">
-                                            <img src="assets/images/undraw_makeup_artist_rxn8.svg" alt="" />
-                                        </div>
-                                        <div class="slide-content">
-                                            <h2 class="dz-title">Your professional Spa</h2>
-                                            <p>At justPro we only hire professional stylists and beauticians to always deliver on guaranteed outcomes or your money back.</p>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="swiper-slide">
-                                    <div class="slide-info">
-                                        <div class="dz-media">
-                                            <img src="assets/images/undraw_relaxing_at_home_re_mror.svg" alt="" />
-                                        </div>
-                                        <div class="slide-content">
-                                            <h2 class="dz-title">Home or Office Services</h2>
-                                            <p>We bring your salon and full spa experience to you right at home or in your office or even in the middle of the road.</p>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="swiper-slide">
-                                    <div class="slide-info">
-                                        <div class="dz-media">
-                                            <img src="assets/images/undraw_time_management_re_tk5w.svg" alt="" />
-                                        </div>
-                                        <div class="slide-content">
-                                            <h2 class="dz-title">Always on time</h2>
-                                            <p>With our always on time guarantee, you can be sure that you have what you need at the right time.</p>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="swiper-pagination swiper-pagination-bullets"></div>
-                        </div>
-                    </div>
-                    <div class="block">
-                        <a href="" class="button-large rounded-xl button button-fill" dmx-on:click="main.navigate('/login',{});local_store.set('not_new_user',1)">Let's Begin</a>
-                    </div>
 
-
-                </div>
-
-            </div> -->
     </div>
 
 

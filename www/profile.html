@@ -1,7 +1,9 @@
-<!-- Wappler include head-page="index.html" is="dmx-app" id="profile" appConnect="local" framework7_6="With App Connect" capacitor="local" components="{dmxSwiper:{},dmxLazyLoad:{}}" bootstrap_icons="local" framework7_icons="local" fontawesome_5="local" -->
+<!-- Wappler include head-page="index.html" is="dmx-app" id="profile" appConnect="local" framework7_6="With App Connect" capacitor="local" components="{dmxSwiper:{},dmxLazyLoad:{}}" bootstrap_icons="local" framework7_icons="local" fontawesome_6="local" -->
 
-<div class="page profile-wraper">
-
+<div class="page profile-wraper" path="/profile" data-name="profile" id="profile">
+    <form is="dmx-serverconnect-form" id="delete_account" method="post" action="https://api.justpro.me/api/security/request_for_account_deletion" site="JustPro-Spa-Backend" dmx-on:success="run({run:{action:`app.local_store.removeAll();app.Cart.clear();app.main.navigate(\'/\',{})`}})">
+        <input id="delete_account_id" name="id" type="hidden" dmx-bind:value="app.Current_user.data.customer.id">
+    </form>
     <div class="padding-top padding-bottom">
         <div class="navbar no-hairline no-shadow no-border">
             <div class="navbar-inner" style="padding-right:0px !important; padding-left:0px !important; margin-right:0px !important">
@@ -32,7 +34,7 @@
     <!-- Page Content -->
     <div class="page-content content-area">
         <div class="profile-info">
-            <div class="container">
+            <div class="container mb-150">
 
                 <!-- author -->
                 <div class="author-bx">
@@ -72,7 +74,7 @@
                         </li>
                         <li>
                             <div class="icon-bx">
-                                <i class="fas fa-map-marker-alt text-color-primary margin fa-2x"></i>
+                                <i class="fa-solid fa-location-dot text-color-primary margin fa-2x"></i>
                             </div>
                             <div class="dz-content">
                                 <p class="sub-title">Your address</p>
@@ -81,8 +83,19 @@
                         </li>
                     </ul>
                 </div>
+
+                <div class="author-bx">
+                    <div class="bg-color-white display-flex align-items-center justify-content-center padding 20-radius-card">
+                        <a class="link external" dmx-on:click="run({'f7.dialog.confirm':{title:'Delete account?',text:'Are you sure you want remove your account? all your data will be lost will be lost forever.',then:{steps:{run:{action:`app.main.profile.delete_account.submit()`}}}}})">
+                            <p>
+                                Delete my account
+                            </p>
+                        </a>
+
+                    </div>
+
+                </div>
             </div>
         </div>
     </div>
-
 </div>

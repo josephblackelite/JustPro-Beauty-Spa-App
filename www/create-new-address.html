@@ -29,7 +29,7 @@
         </div>
     </div>
     <div class="page-content content-area wappler-block">
-        <div class="container">
+        <div class="container mb-150">
             <div class="form-elements">
                 <form is="dmx-serverconnect-form" method="post" id="add_new_address" dmx-on:success="run([{run:{action:`app.local_store.set(\'customer_last_address_id\',app.main.addaddress.add_new_address.data.insert_address.identity)`}},{condition:{if:`app.main.addaddress.route.params.from_manage_address`,then:{steps:{run:{action:`app.main.back(\'/choose-address\',{})`}}},else:{steps:{run:{action:`app.main.back(\'/choose-address\',{})`}}}}}])" site="JustPro-Spa-Backend" action="https://api.justpro.me/api/customer_address_actions/create_new_address"><input id="customer_id" name="customer_id" type="hidden" dmx-bind:value="app.Current_user.data.customer.id">
                     <input id="country" name="country" type="hidden" dmx-bind:value="app.main.addaddress.add_new_address.inp_location.components.country.long">
