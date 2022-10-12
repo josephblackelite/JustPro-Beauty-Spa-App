@@ -2448,7 +2448,11 @@ dmx.config({
           }
         ]
       }
-    ]
+    ],
+    "category_filter": {
+      "meta": null,
+      "outputType": "text"
+    }
   },
   "notifications": {
     "repeat_notifactions": {

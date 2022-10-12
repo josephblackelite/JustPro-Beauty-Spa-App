@@ -5,7 +5,7 @@
     <dmx-preloader id="justpropreloader" spinner="pulse" color="#ff6600"></dmx-preloader>
     <dmx-serverconnect id="queryProviderServices" url="https://api.justpro.me/api/provider/list_provider_services_4_category" site="JustPro-Spa-Backend" dmx-param:provider_id="app.main.providerservicespage.route.params.provider_id" dmx-param:category="app.main.providerservicespage.route.params.category" dmx-param:search_by_name="app.main.providerservicespage.search.value" dmx-on:start="app.showPreloader('deeporange')" dmx-on:done="app.hidePreloader()" sockets="true"></dmx-serverconnect>
     <dmx-serverconnect id="category" url="https://api.justpro.me/api/services/single_category" site="JustPro-Spa-Backend" dmx-param:provider_id="app.main.providerservicespage.route.params.provider_id" dmx-param:category="app.main.providerservicespage.route.params.category" dmx-param:search_by_name="app.main.providerservicespage.search.value" dmx-on:start="app.showPreloader('deeporange')" dmx-on:done="app.hidePreloader()" sockets="true" dmx-param:category_id="app.main.providerservicespage.route.params.category"></dmx-serverconnect>
-    <dmx-serverconnect id="provider_info" url="https://api.justpro.me/api/provider/provider_info" site="JustPro-Spa-Backend" dmx-param:provider_id="app.main.providerservicespage.route.params.provider_id" dmx-on:start="app.showPreloader('deeporange')" dmx-on:done="app.hidePreloader()" dmx-param:customer_longitude="app.geo.coords.longitude" dmx-param:customer_latitude="app.geo.coords.latitude"></dmx-serverconnect>
+    <dmx-serverconnect id="provider_info" url="https://api.justpro.me/api/provider/provider_info" site="JustPro-Spa-Backend" dmx-param:provider_id="app.main.providerservicespage.route.params.provider_id" dmx-on:start="app.showPreloader('deeporange')" dmx-on:done="app.hidePreloader()" dmx-param:customer_longitude="app.longitude.value" dmx-param:customer_latitude="app.latitude.value"></dmx-serverconnect>
     <div class="padding-top padding-bottom">
         <div class="navbar no-hairline no-shadow no-border">
             <div class="navbar-inner" style="padding-right:0px !important; padding-left:0px !important; margin-right:0px !important">
@@ -52,8 +52,8 @@
             </div>
         </div>
     </div>
-    <div class="page-content location-wraper newbg">
-        <div id="services" class="150">
+    <div class="page-content newbg">
+        <div id="" class="mb-150">
 
             <dmx-slideshow id="prov_info" dmx-bind:slides="app.main.providerservicespage.provider_info.data.queryProvider" slide-url="provider_avatar" slide-title="staff_name.titlecase()" slide-link="'#!'" style="height:256px !important" class="up-15" slide-description="job_title.titlecase()" dmx-on:click="app.main.navigate('/provider-services-page/'+app.main.providerservicespage.provider_info.data.queryProvider[0].id+'/'+app.main.providerservicespage.provider_info.data.queryProvider[0].staff_name,{reloadCurrent: true, reloadAll: true})">
             </dmx-slideshow>

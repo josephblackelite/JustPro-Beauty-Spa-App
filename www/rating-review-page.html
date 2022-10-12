@@ -3,6 +3,7 @@
 
 <div class="page" path="/rating-review-page/:provider_id/:service_offered_id?" data-name="rating-review-page" id="ratingreviewpage">
   <dmx-serverconnect id="provider_review" url="https://api.justpro.me/api/reviews/reviews" site="JustPro-Spa-Backend" dmx-param:provider_id="app.main.ratingreviewpage.route.params.provider_id" dmx-param:service_offered_id="app.main.ratingreviewpage.route.params.service_offered_id" sockets="true"></dmx-serverconnect>
+  <dmx-serverconnect id="provider_info" url="https://api.justpro.me/api/admin/providers/provider_info" site="JustPro-Spa-Backend" dmx-param:provider_id="app.main.ratingreviewpage.route.params.provider_id" dmx-param:service_offered_id="app.main.ratingreviewpage.route.params.service_offered_id" sockets="true"></dmx-serverconnect>
   <div class="padding-top padding-bottom">
     <div class="navbar no-hairline no-shadow no-border">
       <div class="navbar-inner" style="padding-right:0px !important; padding-left:0px !important; margin-right:0px !important">
@@ -36,7 +37,10 @@
 
       <!-- provider_rating repeat -->
       <div class="row margin-top">
-        <div class="col-100 bg-color-white padding" dmx-repeat:repeat_provider_reviews="app.main.ratingreviewpage.provider_review.data.query_provider_reviews">
+        <div class="col-100 text-align-center" dmx-hide="(app.main.ratingreviewpage.provider_review.data.query_provider_reviews.count() &gt; 0)">
+          <p> {{app.main.ratingreviewpage.provider_info.data.queryProvider.staff_name.capitalize()+' has not been reviewed yet.'}}</p>
+        </div>
+        <div class="col-100 bg-color-white padding margin-bottom" dmx-repeat:repeat_provider_reviews="app.main.ratingreviewpage.provider_review.data.query_provider_reviews">
           <div>
             <!-- Review Head-->
             <div class="display-flex align-items-center">

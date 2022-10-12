@@ -1,6 +1,26 @@
-<!-- Wappler include head-page="index.html" is="dmx-app" id="otpPage" appConnect="local" framework7_6="With App Connect" framework7_icons="local" capacitor="local" components="{dmxValidator:{}}" -->
+<!-- Wappler include head-page="index.html" is="dmx-app" id="otpPage" appConnect="local" framework7_6="With App Connect" framework7_icons="local" capacitor="local" components="{dmxValidator:{},dmxFormatter:{}}" -->
 
 <div class="page account-area" path="/verifyOtp/:checkout?" data-name="verifyOtp" id="verifyOtp">
+    <script is="dmx-flow" id="customer_name_prompt_redirect" type="text/dmx-flow">[
+  {
+    wait: {delay: 2000}
+  },
+  {
+    condition: {
+      if: "{{app.Current_user.data.customer.customer_name}}",
+      then: {
+        steps: {
+          run: {action: "{{app.main.navigate('/home',{})}}"}
+        }
+      },
+      else: {
+        steps: {
+          run: {action: "{{app.main.navigate('/customer-name-prompt',{})}}"}
+        }
+      }
+    }
+  }
+]</script>
     <form is="dmx-serverconnect-form" method="post" id="resend_otp" action="https://api.justpro.me/api/security/resend_otp" site="JustPro-Spa-Backend" dmx-on:success="run([{run:{action:`app.otp_id.setValue(app.main.verifyOtp.resend_otp.data.resend_otp.data.otp_id)`}},{runJS:{function:'createNotication',args:[`\'New otp code sent!\'`,`\'Check your sms inbox for new otp code.\'`]}},{'f7.dialog.alert':{text:'OTP Code sent',title:'We\'ve sent a new OTP code. If you entered the wrong number, please close and reopen the app to try with  a new number.'}}])" dmx-on:start="app.showPreloader('purple')" dmx-on:done="app.hidePreloader()">
         <input id="resend_otp_id" name="otp_id" type="hidden" dmx-bind:value="app.otp_id.value">
     </form>
@@ -14,7 +34,7 @@
                 </div>
             </div>
             <div class="tab tab-active form-elements tabs">
-                <form class="tab tab-active" id="verifyOtp_form" is="dmx-serverconnect-form" method="post" action="https://api.justpro.me/api/security/verify_otp" site="JustPro-Spa-Backend" dmx-on:success="run({condition:{if:`app.main.verifyOtp.route.params.checkout`,then:{steps:{run:{action:`app.main.navigate(\'/checkout\',{})`}}},else:{steps:[{run:{action:`app.local_store.set(\'user_id\',app.user_id.value)`}},{condition:{if:`app.Current_user.data.customer.customer_name`,then:{steps:{run:{action:`app.main.navigate(\'/home\',{})`}}},else:{steps:{run:{action:`app.main.navigate(\'/customer-name-prompt\',{})`}}}}}]}}})" dmx-on:start="app.showPreloader('purple')" dmx-on:done="app.hidePreloader()" dmx-on:invalid="run({'f7.dialog.alert':{title:'Code invalid',text:'Otp code invalid.'}})">
+                <form class="tab tab-active" id="verifyOtp_form" is="dmx-serverconnect-form" method="post" action="https://api.justpro.me/api/security/verify_otp" site="JustPro-Spa-Backend" dmx-on:success="run({condition:{if:`app.main.verifyOtp.route.params.checkout`,then:{steps:{run:{action:`app.main.navigate(\'/checkout\',{})`}}},else:{steps:[{run:{action:`app.local_store.set(\'user_id\',app.user_id.value)`}},{run:{action:`app.main.verifyOtp.customer_name_prompt_redirect.run()`}}]}}})" dmx-on:start="app.showPreloader('purple')" dmx-on:done="app.hidePreloader()" dmx-on:invalid="run({'f7.dialog.alert':{title:'Code invalid',text:'Otp code invalid.'}})">
                     <input id="otp_id" name="otp_id" dmx-bind:value="app.otp_id.value" type="hidden">
                     <input id="mobile_number" name="mobile_number" dmx-bind:value="app.Current_user.data.customer.phone_number" type="hidden">
                     <div class="title-head">
@@ -45,7 +65,7 @@
 
 
                     <div class="clearfix">
-                        <a href="" class="button-large button rounded-xl button-fill" dmx-on:click="run({condition:{if:`app.main.verifyOtp.verifyOtp_form.otp_code.value`,then:{steps:{run:{action:`app.main.verifyOtp.verifyOtp_form.submit()`}}}}})"><span dmx-hide="app.main.verifyOtp.verifyOtp_form.state.executing">Verify number</span>
+                        <a href="" class="button-large button rounded-xl button-fill" dmx-on:click="run({condition:{if:`app.main.verifyOtp.verifyOtp_form.otp_code.value`,then:{steps:{run:{action:`app.main.verifyOtp.verifyOtp_form.submit()`}}}}})" dmx-hide="app.main.verifyOtp.verifyOtp_form.state.executing"><span dmx-hide="app.main.verifyOtp.verifyOtp_form.state.executing">Verify number</span>
                             <div class="preloader color-white" dmx-show="app.main.verifyOtp.verifyOtp_form.state.executing"></div>
                         </a>
                         <p class="form-text text-align-center">Didn't receive a code? <br> <a href="" class="tab-link ml-5" dmx-on:click="app.main.verifyOtp.resend_otp.submit()">Get a new code</a></p>

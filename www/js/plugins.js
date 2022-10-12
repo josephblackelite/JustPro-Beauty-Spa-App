@@ -2,7 +2,7 @@
 
 var $$ = Dom7;
 const { Plugins } = Capacitor;
-const { GoogleAuth, FacebookLogin, FacebookLoginResponse, Stripe, PaymentFlowEventsEnum, LocalNotifications, App, CallNumber, EmailComposer, SplashScreen } = Plugins;
+const { GoogleAuth, FacebookLogin, FacebookLoginResponse, Stripe, PaymentFlowEventsEnum, LocalNotifications, App, CallNumber, EmailComposer, SplashScreen, Geolocation } = Plugins;
 
 
 // FACEBOOK AUTH PLUGIN  >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
@@ -302,33 +302,33 @@ async function hideSplashScreen() {
 //     timeout: 1200
 // }
 
-function successCallback(result) {
-    if (result === 'Resend OTP') {
-        smsOtpAutofill.startOTPListener(successCallback, errorCallback, {
-            otpLength: 6,
-            delimiter: 'is',
-            senderID: 'JustPro',
-            timeout: 120
-        });
-    } else {
-        //Set the result (OTP value) to the field
-        $$("#otp_code").val(result)
-    }
-}
-function errorCallback(message) {
-    Framework7.instance.dialog.alert(message, "Err")
-}
-function startOtpWatch() {
-    if (Capacitor.platform != "ios") {
-        smsOtpAutofill.startOTPListener(successCallback, errorCallback, {
-            otpLength: 6,
-            delimiter: 'is',
-            senderID: 'JustPro',
-            timeout: 120
-        });
+// function successCallback(result) {
+//     if (result === 'Resend OTP') {
+//         smsOtpAutofill.startOTPListener(successCallback, errorCallback, {
+//             otpLength: 6,
+//             delimiter: 'is',
+//             senderID: 'JustPro',
+//             timeout: 120
+//         });
+//     } else {
+//         //Set the result (OTP value) to the field
+//         $$("#otp_code").val(result)
+//     }
+// }
+// function errorCallback(message) {
+//     Framework7.instance.dialog.alert(message, "Err")
+// }
+// function startOtpWatch() {
+//     if (Capacitor.platform != "ios") {
+//         smsOtpAutofill.startOTPListener(successCallback, errorCallback, {
+//             otpLength: 6,
+//             delimiter: 'is',
+//             senderID: 'JustPro',
+//             timeout: 120
+//         });
 
-    }
-}
+//     }
+// }
 
 //oneSignal  >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 
@@ -336,4 +336,17 @@ function startOtpWatch() {
 function addExternalUserId(id) {
     val = id.toString()
     window.plugins.OneSignal.setExternalUserId(val);
+}
+
+
+
+//Geolocation >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+async function currentPosition() {
+    await Geolocation.requestPermissions()
+
+    const coordinates = await Geolocation.getCurrentPosition();
+
+    $$('#latitude').val(coordinates.coords.latitude);
+    $$('#longitude').val(coordinates.coords.longitude);
+
 }
