@@ -62,14 +62,6 @@
                                                 <div class="reviews-head text-align-center">
                                                     <p class="text-black">Please take a minute to provide us feedback about your experience. It will help other users understand the quality of service to expect.</p>
                                                 </div>
-
-                                                <div class="col-lg-100 text-align-center justify-content-center">
-                                                    <span class="fa fa-star fa-2x text-color-yellow" dmx-on:click="app.main.home.rating_popup.rating.reviewservice.rate_service.rate.setValue(1)" dmx-class:checked="(app.main.home.rating_popup.rating.reviewservice.rate_service.rate.value &gt; 0)"></span>
-                                                    <span class="fa fa-star fa-2x text-color-yellow" dmx-on:click="app.main.home.rating_popup.rating.reviewservice.rate_service.rate.setValue(2)" dmx-class:checked="(app.main.home.rating_popup.rating.reviewservice.rate_service.rate.value &gt; 1)"></span>
-                                                    <span class="fa fa-star fa-2x text-color-yellow" dmx-on:click="app.main.home.rating_popup.rating.reviewservice.rate_service.rate.setValue(3)" dmx-class:checked="(app.main.home.rating_popup.rating.reviewservice.rate_service.rate.value &gt; 2)"></span>
-                                                    <span class="fa fa-star fa-2x text-color-yellow" dmx-on:click="app.main.home.rating_popup.rating.reviewservice.rate_service.rate.setValue(4)" dmx-class:checked="(app.main.home.rating_popup.rating.reviewservice.rate_service.rate.value &gt; 3)"></span>
-                                                    <span class="fa fa-star fa-2x text-color-yellow" dmx-on:click="app.main.home.rating_popup.rating.reviewservice.rate_service.rate.setValue(5)" dmx-class:checked="(app.main.home.rating_popup.rating.reviewservice.rate_service.rate.value &gt; 4)"></span>
-                                                </div>
                                             </div>
                                         </div>
 
@@ -78,16 +70,25 @@
 
                                                 <div class="list no-hairlines-md">
                                                     <ul>
-                                                        <li class="item-content item-input item-input-with-info">
+                                                        <li class="item-content item-input item-input-with-info border">
                                                             <div class="item-inner">
                                                                 <div class="item-input-wrap">
-                                                                    <textarea type="text" id="comment" name="comment" placeholder="Type Review"></textarea>
+                                                                    <textarea type="text" id="comment" name="comment" placeholder="Type Review" class=""></textarea>
                                                                     <span class="input-clear-button"></span>
                                                                     <div class="item-input-info">What was your experience?</div>
                                                                 </div>
                                                             </div>
                                                         </li>
                                                     </ul>
+                                                </div>
+                                                <div class="block">
+                                                    <div class="col-lg-100 text-align-center justify-content-center">
+                                                        <span class="fa fa-star fa-3x text-color-gray" dmx-on:click="app.main.home.rating_popup.rating.reviewservice.rate_service.rate.setValue(1)" dmx-class:checked="(app.main.home.rating_popup.rating.reviewservice.rate_service.rate.value &gt; 0)"></span>
+                                                        <span class="fa fa-star fa-3x text-color-gray" dmx-on:click="app.main.home.rating_popup.rating.reviewservice.rate_service.rate.setValue(2)" dmx-class:checked="(app.main.home.rating_popup.rating.reviewservice.rate_service.rate.value &gt; 1)"></span>
+                                                        <span class="fa fa-star fa-3x text-color-gray" dmx-on:click="app.main.home.rating_popup.rating.reviewservice.rate_service.rate.setValue(3)" dmx-class:checked="(app.main.home.rating_popup.rating.reviewservice.rate_service.rate.value &gt; 2)"></span>
+                                                        <span class="fa fa-star fa-3x text-color-gray" dmx-on:click="app.main.home.rating_popup.rating.reviewservice.rate_service.rate.setValue(4)" dmx-class:checked="(app.main.home.rating_popup.rating.reviewservice.rate_service.rate.value &gt; 3)"></span>
+                                                        <span class="fa fa-star fa-3x text-color-gray" dmx-on:click="app.main.home.rating_popup.rating.reviewservice.rate_service.rate.setValue(5)" dmx-class:checked="(app.main.home.rating_popup.rating.reviewservice.rate_service.rate.value &gt; 4)"></span>
+                                                    </div>
                                                 </div>
                                                 <input name="employee_id" id="employee_id" dmx-bind:value="app.main.home.last_item_query_4_review.data.query_order_items.provider_employee_id" type="hidden">
                                                 <input name="company_id" id="company_id" dmx-bind:value="app.main.home.last_item_query_4_review.data.query_order_items.provider_id" type="hidden">
@@ -202,9 +203,19 @@
     </style>
     <div class="padding-top padding-bottom">
         <div class="navbar no-hairline no-shadow no-border">
-            <div class="navbar-inner" data-name="order-prompt">
+            <div class="navbar-inner no-padding" data-name="order-prompt">
                 <div class="subnavbar">
-                    <p class="strong padding-left">Where do you need the service?</p>
+                    <div class="row no-margin" style="width: 100%;">
+                        <div class="col-100 no-padding-top no-padding-bottom">
+                            <div class="list no-margin-bottom">
+                                <p class="segmented segmented-strong text-color-primary nametag up-40 no-margin">
+                                    <button class="button strong text-color-primary" dmx-on:click="app.local_store.set('service_location','home')" dmx-class:button-active="(app.local_store.data.service_location == 'home')" style="font-weight: 600;">Home Service</button>
+                                    <button class="button strong text-color-primary" dmx-on:click="app.local_store.set('service_location','salon')" dmx-class:button-active="(app.local_store.data.service_location == 'salon')" style="font-weight: 600;">Salon Visit</button>
+                                    <span class="segmented-highlight"></span>
+                                </p>
+                            </div>
+                        </div>
+                    </div>
                 </div>
                 <!-- <div class="subnavbar justify-content-right border-top" style="border-top:2px solid #ccc" data-intro="Filter Services" data-title="Welcome!">
                     <div class="list no-margin no-padding" style="width:100%;">
@@ -253,19 +264,7 @@
         <div class="searchbar-backdrop" style="border-bottom:0px !important"></div>
 
         <div class="mb-150">
-            <!-- Segment-btns -->
-            <div class="row margin-top">
-                <div class="col-100 margin-top no-padding-top no-padding-bottom">
-                    <div class="list margin-top no-margin-bottom">
-                        <p class="segmented segmented-strong text-color-primary nametag up-40">
-                            <button class="button strong text-color-primary" dmx-on:click="app.local_store.set('service_location','home')" dmx-class:button-active="(app.local_store.data.service_location == 'home')" style="font-weight: 600;">Home</button>
-                            <button class="button strong text-color-primary" dmx-on:click="app.local_store.set('service_location','salon')" dmx-class:button-active="(app.local_store.data.service_location == 'salon')" style="font-weight: 600;">Salon</button>
 
-                            <span class="segmented-highlight"></span>
-                        </p>
-                    </div>
-                </div>
-            </div>
             <!-- Sort -->
             <div class="block no-margin no-padding">
                 <div class="row bg-color-white padding" style="transition: width 0.5s;">
@@ -299,15 +298,17 @@
             </div>
             <!-- Category-swiper -->
             <div class="row text-color-black padding-left padding-right  no-padding-top">
-                <div class="col-100">
-                    <p class="strong">What services do you need?</p>
+                <div class="col-100 display-flex align-items-center justify-content-space-between">
+                    <p class="text-18 strong">What services do you need?</p>
+                    <a href="" dmx-on:click="app.local_store.remove('state')">Show all</a>
                 </div>
-                <div class="col-100">
+                <div class="col-100 display-flex">
+
                     <div is="dmx-swiper" id="categories_swiper" dmx-bind:slides="app.main.home.available_categories.data.query_categories" slides-per-view="3">
                         <div class="swiper-slide">
-                            <div class="display-flex flex-direction-column align-items-center padding" dmx-on:click="app.local_store.set('state',id)" dmx-class:bg-color-primary="(app.main.home.category_filter.value == id)" style="height: 100%;">
-                                <img src="" alt="" dmx-bind:src="avatar" class="category-cards-small">
-                                <p class="margin-top" dmx-class:text-color-white="(app.main.home.category_filter.value == id)">
+                            <div class="display-flex flex-direction-column align-items-center padding" dmx-on:click="app.local_store.set('state',id)">
+                                <img src="" alt="" dmx-bind:src="avatar" class="category-cards-small" dmx-class:gray-border="(app.main.home.category_filter.value == id)" style="height: 100%;">
+                                <p class="">
                                     {{category_name.capitalize()}}
                                 </p>
                             </div>
@@ -318,7 +319,7 @@
             <!-- Repeat salons -->
             <div class="row no-gap up-10" dmx-show="(app.local_store.data.service_location == 'salon')">
                 <div class="col-100 padding text-color-black">
-                    <p class="strong no-margin">
+                    <p class="text-18 strong no-margin">
                         {{app.main.home.querySalons.data.repeat_providers.count()+' salons nears you.'}}
                     </p>
                 </div>
@@ -354,7 +355,7 @@
             <!-- Repeat home providers -->
             <div class="row no-gap up-10 no-padding" dmx-show="(app.local_store.data.service_location == 'home')">
                 <div class="col-100 padding text-color-black">
-                    <p class="strong no-margin">
+                    <p class="text-18 strong no-margin">
                         {{app.main.home.home_service_providers.data.repeat_providers.count()+' professionals nears you.'}}
                     </p>
                 </div>

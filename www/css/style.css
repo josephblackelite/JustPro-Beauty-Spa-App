@@ -2608,7 +2608,7 @@ h6, .h6 {
         -webkit-box-align: center;
             -ms-flex-align: center;
                 align-items: center;
-        color: #b0acb3;
+        color: #000;
         font-size: 16px;
         padding: 15px 25px;
         position: relative;
@@ -4724,14 +4724,20 @@ height:50px !important;
   border-bottom-left-radius: 30px;
   border-bottom-right-radius: 30px;}
 
+.gray-border {
+  background-color:#D3D3D3;
+  border-style: solid;
+  border-width: 2px;
+}
 
+.border {
+  border-style: solid;
+  border-width: 1px;
+}
 
-
-
-
-
-
-
+.text-18 {
+  font-size: 18px;
+}
 
 
 

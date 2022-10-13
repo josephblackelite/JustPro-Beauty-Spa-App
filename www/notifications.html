@@ -1,6 +1,7 @@
-<!-- Wappler include head-page="index.html" is="dmx-app" id="notifications" appConnect="local" framework7_6="With App Connect" framework7_icons="local" capacitor="local" bootstrap_icons="local" components="{dmxFormatter:{}}" -->
+<!-- Wappler include head-page="index.html" is="dmx-app" id="notifications" appConnect="local" framework7_6="With App Connect" framework7_icons="local" capacitor="local" bootstrap_icons="local" components="{dmxFormatter:{},dmxPreloader:{}}" -->
 
 <div class="page" path="/notifications" data-name="notifications" id="notifications">
+
     <form is="dmx-serverconnect-form" id="delete_notification" method="post" action="https://api.justpro.me/api/notification/delete_notifcation" site="JustPro-Spa-Backend">
         <input id="id" name="id" type="hidden">
     </form>
@@ -9,6 +10,12 @@
     </form>
 
     <div class="padding-top padding-bottom">
+        <form is="dmx-serverconnect-form" id="read_all_notifications" method="post" action="https://api.justpro.me/api/notification/read_all_customer_notifications" site="JustPro-Spa-Backend">
+            <input id="customer_id" name="customer_id" type="hidden" dmx-bind:value="app.Current_user.data.customer.id">
+        </form>
+        <form is="dmx-serverconnect-form" id="delete_all_notifications" method="post" action="https://api.justpro.me/api/notification/delete_all_customer_notifications" site="JustPro-Spa-Backend">
+            <input id="customer__id" name="customer_id" type="hidden" dmx-bind:value="app.Current_user.data.customer.id">
+        </form>
         <div class="navbar no-hairline no-shadow no-border">
             <div class="navbar-inner" style="padding-right:0px !important; padding-left:0px !important; margin-right:0px !important">
                 <div class="left">
@@ -25,8 +32,20 @@
             </div>
         </div>
     </div>
+    <div class="toolbar toolbar-bottom toolbar-bottom-md no-shadow" dmx-show="(app.notification.data.query.count() &gt; 0)">
+        <div class="toolbar-inner justify-content-center" style="padding:10px !important">
 
+            <button class="item-link list-button button-large rounded-xl button-6 bg-color-black button-fill text-color-white margin-right" style="width:100%" href="#!" dmx-show="(app.notification.data.query.where(`read`, 0, '==').count() &gt; 0)" dmx-on:click="run({'f7.dialog.confirm':{title:'Read all?',text:'All notifications will be marked as read.',then:{steps:{run:{action:`app.main.notifications.read_all_notifications.submit()`}}}}})" dmx-bind:disabled="app.main.notifications.read_all_notifications.state.executing"><span dmx-hide="app.main.notifications.read_all_notifications.state.executing">Read all</span>
+                <div class="preloader color-white" dmx-show="app.main.notifications.read_all_notifications.state.executing"></div>
+            </button>
+
+            <button class="item-link list-button button-large rounded-xl button-6 bg-color-primary button-fill text-color-white" style="width:100%" dmx-show="(app.notification.data.query.where(`read`, 0, '==').count() &lt; 1)" dmx-on:click="run({'f7.dialog.confirm':{title:'Delete all?',text:'All notifications will be deleted.',then:{steps:{run:{action:`app.main.notifications.delete_all_notifications.submit()`}}}}})" dmx-bind:disabled="app.main.notifications.delete_all_notifications.state.executing"><span dmx-hide="app.main.notifications.delete_all_notifications.state.executing">Delete all</span>
+                <div class="preloader color-white" dmx-show="app.main.notifications.delete_all_notifications.state.executing"></div>
+            </button>
+        </div>
+    </div>
     <div class="page-content content-area">
+        <dmx-preloader id="justpropreloader" spinner="pulse" color="#ff6600"></dmx-preloader>
         <div class="container mb-150">
 
             <div class="block text-align-center padding-top padding-bottom" dmx-show="(app.notification.data.query.count() &lt; 1)">
@@ -44,7 +63,7 @@
                             </div>
                             <div class="item-time">
                                 <span class="time"><i class="las la-clock"></i> {{creation_date.hoursUntil(app.date.datetime)+'h ago'}}</span>
-                                <span class="mark text-primary" dmx-on:click="run({condition:{if:`(read == 1)`,then:{steps:{run:{action:`app.main.notifications.delete_notification.id.setValue(id);app.main.notifications.delete_notification.submit()`}}},else:{steps:{'f7.dialog.confirm':{title:'Mark as read?',text:'Are you sure you want to mark this notification as read?',then:{steps:{run:{action:`app.main.notifications.mark_notification_as_read.i_d.setValue(id);app.main.notifications.mark_notification_as_read.submit()`}}}}}}}})">{{(read == 1 ? 'Delete' : 'Mark as read')}}</span>
+                                <span class="mark text-primary" dmx-on:click="run({condition:{if:`(read == 1)`,then:{steps:{run:{action:`app.main.notifications.delete_notification.id.setValue(id);app.main.notifications.delete_notification.submit()`}}},else:{steps:{'f7.dialog.confirm':{title:'Mark as read?',text:'Are you sure you want to mark this notification as read?',then:{steps:{run:{action:`app.main.notifications.mark_notification_as_read.i_d.setValue(id);app.main.notifications.mark_notification_as_read.submit()`}}}}}}}})" dmx-hide="(app.main.notifications.read_all_notifications.state.executing &amp;&amp; app.main.notifications.delete_all_notifications.state.executing)">{{(read == 1 ? 'Delete' : 'Mark as read')}}</span>
                             </div>
                         </div>
                     </li>

@@ -1,4 +1,4 @@
-<!-- Wappler include head-page="index.html" is="dmx-app" id="ratingreviewpage" appConnect="local" framework7_6="With App Connect" framework7_icons="local" capacitor="local" fontawesome_6="local" components="{dmxFormatter:{},dmxSockets:{}}" -->
+<!-- Wappler include head-page="index.html" is="dmx-app" id="ratingreviewpage" appConnect="local" framework7_6="With App Connect" framework7_icons="local" capacitor="local" fontawesome_6="local" components="{dmxFormatter:{},dmxSockets:{},dmxPreloader:{}}" -->
 
 
 <div class="page" path="/rating-review-page/:provider_id/:service_offered_id?" data-name="rating-review-page" id="ratingreviewpage">
@@ -18,9 +18,6 @@
           <h3 class="no-margin">
             Reviews
           </h3>
-          <small class="no-margin">
-            {{app.main.ratingreviewpage.provider_review.data.query_provider_reviews.count() +' reviews'}}
-          </small>
         </div>
         <div class="right">
           <a href="#" class="link panel-open icon-only" data-panel="left">
@@ -33,8 +30,9 @@
 
   </div>
   <div class="page-content wappler-block">
-    <div class="container mb-150 text-color-black">
 
+    <dmx-preloader id="justpropreloader" spinner="pulse" color="#ff6600"></dmx-preloader>
+    <div class="container mb-150 text-color-black">
       <!-- provider_rating repeat -->
       <div class="row margin-top">
         <div class="col-100 text-align-center" dmx-hide="(app.main.ratingreviewpage.provider_review.data.query_provider_reviews.count() &gt; 0)">
