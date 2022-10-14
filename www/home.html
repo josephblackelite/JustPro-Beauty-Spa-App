@@ -192,6 +192,7 @@
 
     <dmx-serverconnect id="selected_address_data" url="https://api.justpro.me/api/customer_address_actions/selected_address_data" site="JustPro-Spa-Backend" dmx-param:address_id="app.main.home.address_select_form.select_address.value" sockets="true"></dmx-serverconnect>
     <dmx-serverconnect id="available_categories" url="https://api.justpro.me/api/admin/service_workflows/query_main_categories" site="JustPro-Spa-Backend" dmx-param:address_id="app.main.home.address_select_form.select_address.value" sockets="true" dmx-param:product_delivery="app.local_store.data.service_location"></dmx-serverconnect>
+    <dmx-serverconnect id="category" url="https://api.justpro.me/api/services/single_category" site="JustPro-Spa-Backend" dmx-param:provider_id="app.main.providerservicespage.route.params.provider_id" dmx-param:category="app.main.providerservicespage.route.params.category" dmx-param:search_by_name="app.main.providerservicespage.search.value" dmx-on:start="app.showPreloader('deeporange')" dmx-on:done="app.hidePreloader()" sockets="true" dmx-param:category_id="app.main.home.category_filter.value"></dmx-serverconnect>
     <style>
         .strong {
             font-weight: 600 !important;
@@ -203,8 +204,8 @@
     </style>
     <div class="padding-top padding-bottom">
         <div class="navbar no-hairline no-shadow no-border">
-            <div class="navbar-inner no-padding" data-name="order-prompt">
-                <div class="subnavbar">
+            <div class="navbar-inner" data-name="order-prompt">
+                <div class="subnavbar no-padding-bottom no-margin bg-color-white">
                     <div class="row no-margin" style="width: 100%;">
                         <div class="col-100 no-padding-top no-padding-bottom">
                             <div class="list no-margin-bottom">
@@ -222,7 +223,7 @@
                         <ul style="width:100%;">
                             <li style="width:100%;">
                                 <a class="item-link smart-select smart-select-init text-color-black" data-open-in="popup" data-searchbar="true" data-searchbar-placeholder="Search Services" style="position:relative">
-                                    <select class="text-color-black custom-font nametag" style="width:100%;" name="selector" id="selector" dmx-on:changed="app.local_store.set('state',app.main.home.selector.value)" dmx-bind:value="app.local_store.data.state" dmx-bind:options="app.main.home.available_categories.data.query_categories" optiontext="category_name.capitalize()" optionvalue="id">
+                                    <select class="text-color-black custom-font nametag" style="width:100%;" name="selector" id="selector" dmx-on:changed="app.local_store.set('state',app.main.home.category_filter.value)" dmx-bind:value="app.local_store.data.state" dmx-bind:options="app.main.home.available_categories.data.query_categories" optiontext="category_name.capitalize()" optionvalue="id">
                                         <option value="" class="nametag"><i class="bi bi-search"></i> Show All</option>
                                     </select>
                                     <div class="item-content">
@@ -299,7 +300,7 @@
             <!-- Category-swiper -->
             <div class="row text-color-black padding-left padding-right  no-padding-top">
                 <div class="col-100 display-flex align-items-center justify-content-space-between">
-                    <p class="text-18 strong">What services do you need?</p>
+                    <p class="strong">What services do you need?</p>
                     <a href="" dmx-on:click="app.local_store.remove('state')">Show all</a>
                 </div>
                 <div class="col-100 display-flex">
@@ -320,12 +321,12 @@
             <div class="row no-gap up-10" dmx-show="(app.local_store.data.service_location == 'salon')">
                 <div class="col-100 padding text-color-black">
                     <p class="text-18 strong no-margin">
-                        {{app.main.home.querySalons.data.repeat_providers.count()+' salons nears you.'}}
+                        {{app.main.home.querySalons.data.repeat_providers.count()+' '+app.main.home.category.data.query_category.category_name.capitalize()+' salons near you.'}}
                     </p>
                 </div>
                 <div class="col-50" dmx-hide="app.main.home.querySalons.state.processing" dmx-repeat:repeat_salons="(app.main.home.querySalons.data.repeat_providers.where(`rating`, app.main.home.filter.value, '==').sort(`distance.Distance`).count() &gt; 0)?app.main.home.querySalons.data.repeat_providers.where(`rating`, app.main.home.filter.value, '==').sort(`distance.Distance`):app.main.home.querySalons.data.repeat_providers.sort(`distance.Distance`))" dmx-class:col-100="(app.local_store.data.freelacer_card_class_toggle == 100)">
 
-                    <div class="card demo-card-header-pic no-shadow card-outline border-10" dmx-on:click="app.main.navigate('/provider-services-page/'+id+'/'+staff_name+'/'+app.main.home.selector.value,{})">
+                    <div class="card demo-card-header-pic no-shadow card-outline border-10" dmx-on:click="app.main.navigate('/provider-services-page/'+id+'/'+staff_name+'/'+app.main.home.category_filter.value,{})">
                         <div class="ribbon" dmx-show="verified"><span>Verified</span></div>
                         <div class="card-header align-items-flex-end" dmx-style:background-image="'url('+ provider_avatar +')'" style="height:256px; background-position:bottom">
                             <span style="font-size:26px; text-transform:capitalize; strong" class="tajawal nametag">
@@ -356,11 +357,11 @@
             <div class="row no-gap up-10 no-padding" dmx-show="(app.local_store.data.service_location == 'home')">
                 <div class="col-100 padding text-color-black">
                     <p class="text-18 strong no-margin">
-                        {{app.main.home.home_service_providers.data.repeat_providers.count()+' professionals nears you.'}}
+                        {{app.main.home.home_service_providers.data.repeat_providers.count()+'  '+app.main.home.category.data.query_category.category_name+' professionals near you.'}}
                     </p>
                 </div>
                 <div class="col-50" dmx-hide="app.main.home.home_service_providers.state.processing" dmx-repeat:repeat_home_providers="(app.main.home.home_service_providers.data.repeat_providers.where(`rating`, app.main.home.filter.value, '==').sort(`distance.Distance`).count() &gt; 0)?app.main.home.home_service_providers.data.repeat_providers.where(`rating`, app.main.home.filter.value, '==').sort(`distance.Distance`):app.main.home.home_service_providers.data.repeat_providers.sort(`distance.Distance`))" dmx-class:col-100="(app.local_store.data.freelacer_card_class_toggle == 100)">
-                    <div class="card demo-card-header-pic no-shadow card-outline border-10" dmx-on:click="run([{run:{action:`app.selected_employee_id.setValue(id)`}},{run:{action:`app.cart_preFill.set(\'employee_id\',id);app.cart_preFill.set(\'parent_provider_id\',id)`}},{run:{action:`app.main.navigate(\'/provider-services-page/\'+parent_provider_id+\'/\'+staff_name+\'/\'+app.main.home.selector.value,{})`}}])">
+                    <div class="card demo-card-header-pic no-shadow card-outline border-10" dmx-on:click="run([{run:{action:`app.selected_employee_id.setValue(id)`}},{run:{action:`app.cart_preFill.set(\'employee_id\',id);app.cart_preFill.set(\'parent_provider_id\',id)`}},{run:{action:`app.main.navigate(\'/provider-services-page/\'+parent_provider_id+\'/\'+staff_name+\'/\'+app.main.home.category_filter.value,{})`}}])">
                         <div class="ribbon" dmx-show="verified"><span>Verified</span></div>
                         <div class="card-header align-items-flex-end" dmx-style:background-image="'url('+ provider_avatar +')'" style="height:256px; background-position:bottom">
 

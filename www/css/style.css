@@ -4722,10 +4722,11 @@ height:50px !important;
   border-top-left-radius: 30px;
   border-top-right-radius: 30px;
   border-bottom-left-radius: 30px;
-  border-bottom-right-radius: 30px;}
+  border-bottom-right-radius: 30px;
+  }
 
 .gray-border {
-  background-color:#D3D3D3;
+  border-color: #F05742;
   border-style: solid;
   border-width: 2px;
 }

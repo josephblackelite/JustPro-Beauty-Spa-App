@@ -200,7 +200,7 @@
                     <h1 class="checkout-total strong no-margin-top" style="margin-bottom:-5px !important">{{Cart.data.sum(`total.toNumber()`).formatCurrency('AED', '.', ',', 2)}}</h1>
                     <small> + 5% VAT of {{Cart.data.sum(`vat.toNumber()`).formatCurrency('AED', '.', ',', 2)}}</small>
 
-                    <p dmx-show="app.Current_user.data.customer.coupon_name">{{app.main.checkout.coupon_code_form.coupon_percent_off.value+' off discount will be applied when you submit order.'}}</p>
+                    <p dmx-show="app.Current_user.data.customer.discount_id">{{app.main.checkout.coupon_code_form.coupon_percent_off.value+' off discount will be applied when you submit order.'}}</p>
                 </div>
             </div>
 

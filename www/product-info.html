@@ -171,7 +171,7 @@
                                 <p class="text-black ma-0">More than 99.9% of our clients responded with positive reviews on this service.</p>
                             </div>
                             <div class="rating-info small">
-                                <h2 class="rating-text">{{app.main.product_info.service_info.data.rating}}</h2>
+                                <h2 class="rating-text">{{app.main.product_info.service_info.data.rating.toNumber().round(0)}}</h2>
                                 <div>
 
                                     <span class="fa fa-star small" dmx-class:checked="(app.main.product_info.service_info.data.rating > 0)"></span>
