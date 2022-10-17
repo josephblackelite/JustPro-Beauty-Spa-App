@@ -112,5 +112,13 @@ var routes = [
   {
     "path": "/rating-review-page/:provider_id/:service_offered_id?",
     "url": "./rating-review-page.html"
+  },
+  {
+    "path": "/accept-push-page",
+    "url": "./accept-push-page.html"
+  },
+  {
+    "path": "/location-permission-page",
+    "url": "./location-permission-page.html"
   }
 ]

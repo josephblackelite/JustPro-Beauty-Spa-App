@@ -114,5 +114,13 @@
   "rating-review-page.html": {
     "layoutPage": "",
     "description": ""
+  },
+  "accept-push-page.html": {
+    "layoutPage": "",
+    "description": ""
+  },
+  "location-permission-page.html": {
+    "layoutPage": "",
+    "description": ""
   }
 }

@@ -32,6 +32,14 @@ dmx.config({
       {
         "type": "text",
         "name": "rating"
+      },
+      {
+        "type": "text",
+        "name": "location_permission_accepted"
+      },
+      {
+        "type": "text",
+        "name": "notification_permission_accepted"
       }
     ],
     "Show_proloader": [
@@ -2452,7 +2460,31 @@ dmx.config({
     "category_filter": {
       "meta": null,
       "outputType": "text"
-    }
+    },
+    "pushPrompt": [
+      {
+        "name": "$param",
+        "type": "object",
+        "sub": [
+          {
+            "type": "text",
+            "name": "user_id"
+          }
+        ]
+      }
+    ],
+    "pushPrompt_notifPrompt": [
+      {
+        "name": "$param",
+        "type": "object",
+        "sub": [
+          {
+            "type": "text",
+            "name": "user_id"
+          }
+        ]
+      }
+    ]
   },
   "notifications": {
     "repeat_notifactions": {

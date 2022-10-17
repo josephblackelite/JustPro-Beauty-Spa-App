@@ -2,7 +2,7 @@
 
 var $$ = Dom7;
 const { Plugins } = Capacitor;
-const { GoogleAuth, FacebookLogin, FacebookLoginResponse, Stripe, PaymentFlowEventsEnum, LocalNotifications, App, CallNumber, EmailComposer, SplashScreen, Geolocation } = Plugins;
+const { GoogleAuth, FacebookLogin, FacebookLoginResponse, Stripe, PaymentFlowEventsEnum, LocalNotifications, App, CallNumber, EmailComposer, SplashScreen, Geolocation, NativeSettings } = Plugins;
 
 
 // FACEBOOK AUTH PLUGIN  >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
@@ -341,12 +341,57 @@ function addExternalUserId(id) {
 
 
 //Geolocation >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+
 async function currentPosition() {
-    await Geolocation.requestPermissions()
 
-    const coordinates = await Geolocation.getCurrentPosition();
+    await Geolocation.requestPermissions().then(data => {
+        if (data.location == "granted") {
+            dmx.parse("app.local_store.set('location_permission_accepted',true)")
+            dmx.parse("app.main.location__prompt.goHome.run()")
+        } else {
+            NativeSettings.open({
+                optionAndroid: "application_details",
+                optionIOS: "app"
+            })
+        }
+    })
+};
 
-    $$('#latitude').val(coordinates.coords.latitude);
-    $$('#longitude').val(coordinates.coords.longitude);
+$$('#latitude').val(coordinates.coords.latitude);
+$$('#longitude').val(coordinates.coords.longitude);
 
+
+
+//oneSignal >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+
+function OneSignalInit() {
+    // Uncomment to set OneSignal device logging to VERBOSE  
+    // window.plugins.OneSignal.setLogLevel(6, 0);
+
+    // NOTE: Update the setAppId value below with your OneSignal AppId.
+    window.plugins.OneSignal.setAppId("daa98904-fee5-40df-a894-60bee78b711c");
+    window.plugins.OneSignal.setNotificationOpenedHandler(function (jsonData) {
+        console.log('notificationOpenedCallback: ' + JSON.stringify(jsonData));
+    });
+
+    // iOS - Prompts the user for notification permissions.
+    //    * Since this shows a generic native prompt, we recommend instead using an In-App Message to prompt for notification permission (See step 6) to better communicate to your users what notifications they will get.
+
+    window.plugins.OneSignal.promptForPushNotificationsWithUserResponse(function (accepted) {
+        if (accepted == true) {
+            console.log("User accepted notifications: " + accepted);
+            dmx.parse("app.local_store.set('notification_permission_accepted',true)")
+            dmx.parse("app.main.notification__prompt.goHome.run()")
+        } else {
+            NativeSettings.open({
+                optionAndroid: "application_details",
+                optionIOS: "app"
+            })
+        }
+    });
+
+}
+
+function pushPrompt() {
+    OneSignalInit()
 }
