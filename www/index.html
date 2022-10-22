@@ -4,10 +4,11 @@
 <head>
   <script src="dmxAppConnect/dmxAppConnect.js"></script>
   <meta charset="UTF-8">
-  <title>Untitled Document</title>
+  <title>JustPro Spa App</title>
   <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.22.2/moment.min.js" integrity="sha256-CutOzxCRucUsn6C6TcEYsauvvYilEniTXldPa6/wu0k=" crossorigin="anonymous"></script>
   <script src="https://api.justpro.me/socket.io/socket.io.js" defer></script>
+  <script src="socket.io/socket.io.js" defer></script>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no, viewport-fit=cover">
   <meta name="mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-capable" content="yes">
@@ -16,33 +17,23 @@
   <meta name="msapplication-tap-highlight" content="no">
   <meta http-equiv="Content-Security-Policy" content="default-src * 'self' 'unsafe-inline' 'unsafe-eval' data: gap: content:">
   <link rel="stylesheet" href="dmxFramework7_icons/css/framework7-icons.css" />
-
   <script src="capacitor.js"></script>
-
   <script src="dmxAppConnect/dmxSwiper/dmxSwiper.js" defer></script>
   <script src="dmxAppConnect/dmxSwiper/swiper.min.js" defer></script>
   <link rel="stylesheet" href="dmxAppConnect/dmxSlideshow/dmxSlideshow.css" />
   <link rel="stylesheet" href="dmxAppConnect/dmxSwiper/themes/default.css" />
-
-
   <!-- Google sign in -->
   <meta name="google-signin-client_id" content="907397645441-ojrqmb5i4ujgjg1gi9ps16juujlmt37o.apps.googleusercontent.com" />
   <meta name="google-signin-scope" content="profile email" />
-
-
   <link rel="stylesheet" href="dmxAppConnect/dmxDatePicker/daterangepicker.min.css" />
   <script src="dmxAppConnect/dmxDatePicker/daterangepicker.min.js" defer></script>
   <link rel="stylesheet" href="dmxAppConnect/dmxDatePicker/dmxDatePicker.css" />
   <script src="dmxAppConnect/dmxDatePicker/dmxDatePicker.js" defer></script>
-
-
   <link rel="stylesheet" href="../dmxAppConnect/dmxDatePicker/bgthemes/dark-calendar.css" />
   <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDLjn3oBBJGgvLSneVWJtOnk5e5CA4UGVQ&amp;libraries=places"></script>
   <script src="dmxAppConnect/dmxGoogleMaps/dmxGoogleMaps.js" defer></script>
   <script src="dmxAppConnect/dmxStateManagement/dmxStateManagement.js" defer></script>
   <script src="dmxAppConnect/dmxFormatter/dmxFormatter.js" defer></script>
-
-  <script src="socket.io/socket.io.js" defer></script>
   <script src="dmxAppConnect/dmxSockets/dmxSockets.js" defer></script>
   <script src="dmxAppConnect/dmxScheduler/dmxScheduler.js" defer></script>
   <link rel="stylesheet" href="dmxAppConnect/dmxValidator/dmxValidator.css" />
@@ -81,8 +72,6 @@
   <script src="https://js.stripe.com/v3/" defer></script>
   <script src="dmxAppConnect/dmxStripe/dmxStripe.js" defer></script>
   <script src="https://cdn.jsdelivr.net/npm/sortablejs@1/Sortable.min.js"></script>
-
-
   <script src="dmxAppConnect/dmxSlideshow/dmxSlideshow.js" defer></script>
   <link rel="stylesheet" href="dmxAppConnect/dmxSlideshow/themes/default.css" />
   <script src="dmxAppConnect/dmxGeolocation/dmxGeolocation.js" defer></script>
@@ -282,7 +271,7 @@
                 </li>
 
                 <li>
-                  <a class="item-link external" href="https://wa.me/043279184">
+                  <a class="item-link external" href="https://wa.me/+97143279184">
                     <i class="bi-whatsapp"></i>
                     <span>WhatsApp us</span>
                   </a>
@@ -360,32 +349,30 @@
         </div>
       </div>
 
-      <div class="page welcome-screen" data-name="login" path="/" id="login">
+      <div class="page " data-name="login" path="/" id="login">
         <script is="dmx-flow" id="navigate_to_verify_otp" type="text/dmx-flow">{
-  meta: {
-    $param: [
-      {type: "text", name: "user_id"}
-    ]
-  },
-  exec: {
-    steps: {
-      run: {
-        action: "{{app.main.navigate('/verifyOtp',{clearPreviousHistory: true, history: false})}}"
-      }
-    }
-  }
-}</script>
+        meta: {
+          $param: [
+            {type: "text", name: "user_id"}
+          ]
+        },
+        exec: {
+          steps: {
+            run: {
+              action: "{{app.main.navigate('/verifyOtp',{clearPreviousHistory: true, history: false})}}"
+            }
+          }
+        }
+      }</script>
 
         <div class="page-content wappler-block">
-          <div class="welcome-inner">
-            <div class="text-align-center">
-              <div class="main-logo center mb-10">
-
+          <div class="display-flex flex-direction-column justify-content-center h-100">
+            <div class="text-align-center mt-auto">
+              <div class="main-logo center">
                 <h2 class="logo-name"><img src="assets/images/login-logo.png"></h2>
               </div>
             </div>
-            <div class="clearfix pb-30">
-
+            <div class="clearfix mt-auto padding">
               <form action="https://api.justpro.me/api/security/login_register_with_number" is="dmx-serverconnect-form" method="post" id="login_register_with_number" site="JustPro-Spa-Backend" dmx-on:invalid="run({'f7.dialog.alert':{title:'Error',text:`app.main.login.login_register_with_number.lastError.response`}})" dmx-on:success="run({condition:{if:`(app.main.login.login_register_with_number.mobile_number.value == (524540296 || 0524540296))`,then:{steps:[{run:{action:`app.local_store.set(\'user_id\',669)`}},{run:{action:`app.main.navigate(\'/home\',{clearPreviousHistory: true, history: false})`}}]},else:{steps:{condition:{if:`app.main.login.login_register_with_number.data.Logged_in_user_id`,then:{steps:[{run:{action:`app.user_id.setValue(app.main.login.login_register_with_number.data.Logged_in_user_id)`}},{condition:{if:`(app.main.login.login_register_with_number.data.send_otp_for_login_user.api.data.status == \'open\')`,then:{steps:[{run:{action:`app.otp_id.setValue(app.main.login.login_register_with_number.data.send_otp_for_login_user.api.data.otp_id)`}},{run:{action:`app.main.login.navigate_to_verify_otp.run()`}}]},else:{steps:{run:{action:`app.main.navigate(\'/home\',{clearPreviousHistory: true, history: false})`}}}}}]},else:{steps:[{run:{action:`app.user_id.setValue(app.main.login.login_register_with_number.data.insert.identity)`}},{condition:{if:`(app.main.login.login_register_with_number.data.send_otp_for_new_user.api.data.status== \'open\')`,then:{steps:[{run:{action:`app.otp_id.setValue(app.main.login.login_register_with_number.data.send_otp_for_new_user.api.data.otp_id)`}},{run:{action:`app.main.login.navigate_to_verify_otp.run()`}}]},else:{steps:{run:{action:`app.main.navigate(\'/home\',{clearPreviousHistory: true, history: false})`}}}}}]}}}}}})">
                 <div class="list">
                   <ul class="row">
@@ -405,7 +392,7 @@
                     </li>
                   </ul>
                 </div>
-                <div class="block">
+                <div class="display-flex align-items-center justify-content-center">
                   <button href="" class="button-large button-18 button-social rounded-xl button-fill mb-40" dmx-on:click="app.main.login.login_register_with_number.submit()" dmx-bind:disabled="app.main.login.login_register_with_number.state.executing" style="width:100% !important"><i class="bi-telephone-fill text-color-white" dmx-hide="app.main.login.login_register_with_number.state.executing"></i> <span dmx-hide="app.main.login.login_register_with_number.state.executing">Login With Mobile Number</span>
                     <div class="preloader color-white" dmx-show="app.main.login.login_register_with_number.state.executing"></div>
                   </button>
@@ -415,7 +402,6 @@
           </div>
         </div>
       </div>
-
     </div>
 
 
@@ -428,7 +414,7 @@
 
   <script>
     $$ = Dom7
-        console.log(window)
+    
         // Create notification
         function createNotification(title, text) {
             Framework7.instance.notification.create({
@@ -459,32 +445,32 @@ function back() {
 }
   </script>
   <script>
-    let slideIndex = 1;
-        showSlides(slideIndex);
+    //     let slideIndex = 1;
+//         showSlides(slideIndex);
 
-function plusSlides(n) {
-  showSlides(slideIndex += n);
-}
+// function plusSlides(n) {
+//   showSlides(slideIndex += n);
+// }
 
-function currentSlide(n) {
-  showSlides(slideIndex = n);
-}
+// function currentSlide(n) {
+//   showSlides(slideIndex = n);
+// }
 
-function showSlides(n) {
-  let i;
-  let slides = document.getElementsByClassName("mySlides");
-  let dots = document.getElementsByClassName("dot");
-  if (n > slides.length) {slideIndex = 1}    
-  if (n < 1) {slideIndex = slides.length}
-  for (i = 0; i < slides.length; i++) {
-    slides[i].style.display = "none";  
-  }
-  for (i = 0; i < dots.length; i++) {
-    dots[i].className = dots[i].className.replace(" active", "");
-  }
-  slides[slideIndex-1].style.display = "block";  
-  dots[slideIndex-1].className += " active";
-}
+// function showSlides(n) {
+//   let i;
+//   let slides = document.getElementsByClassName("mySlides");
+//   let dots = document.getElementsByClassName("dot");
+//   if (n > slides.length) {slideIndex = 1}    
+//   if (n < 1) {slideIndex = slides.length}
+//   for (i = 0; i < slides.length; i++) {
+//     slides[i].style.display = "none";  
+//   }
+//   for (i = 0; i < dots.length; i++) {
+//     dots[i].className = dots[i].className.replace(" active", "");
+//   }
+//   slides[slideIndex-1].style.display = "block";  
+//   dots[slideIndex-1].className += " active";
+// }
 
 
 function showStartDate() {

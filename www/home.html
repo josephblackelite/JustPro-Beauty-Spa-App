@@ -202,6 +202,25 @@
     ]
   }
 }</script>
+  <script is="dmx-flow" id="getUserPosition" type="text/dmx-flow" autorun="">{
+  meta: {
+    $param: [
+      {type: "text", name: "user_id"}
+    ]
+  },
+  exec: {
+    steps: {
+      condition: {
+        if: "{{!app.latitude.value}}",
+        then: {
+          steps: {
+            runJS: {function: "getPosition"}
+          }
+        }
+      }
+    }
+  }
+}</script>
 
   <dmx-serverconnect id="last_item_query_4_review" url="https://api.justpro.me/api/customer_orders/last_item_query_4_review" site="JustPro-Spa-Backend" dmx-param:user_id="local_store.data.user_id" sockets="true" dmx-param:customer_id="Current_user.data.customer.id"></dmx-serverconnect>
   <script is="dmx-flow" id="prompt_user_4_review" type="text/dmx-flow" autorun="">[
@@ -299,7 +318,7 @@
     </div>
   </div>
   <div class="fab fab-right-bottom color-green mb-50">
-    <a href="https://wa.me/043279184" class="external">
+    <a href="https://wa.me/+97143279184" class="external">
       <i class="fab fa-whatsapp fa-2x text-color-black strong"></i>
     </a>
     <div class="fab-buttons fab-buttons-top">

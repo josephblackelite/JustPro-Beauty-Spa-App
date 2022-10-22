@@ -2,13 +2,42 @@
 
 var $$ = Dom7;
 const { Plugins } = Capacitor;
-const { GoogleAuth, FacebookLogin, FacebookLoginResponse, Stripe, PaymentFlowEventsEnum, LocalNotifications, App, CallNumber, EmailComposer, SplashScreen, Geolocation, NativeSettings } = Plugins;
+const { GoogleAuth, FacebookLogin, FacebookLoginResponse, Stripe, PaymentFlowEventsEnum, LocalNotifications, App, SplashScreen, Geolocation, NativeSettings, CallNumber, EmailComposer } = Plugins;
 
+
+
+
+//APP - BACK BUTTON >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+//BACK BUTTON
+
+App.addListener('backButton', () => {
+    Framework7.instance.views.main.router.back()
+    if (Framework7.instance.views.main.router.currentRoute.path == "/order-tracking") {
+        Framework7.instance.views.main.router.navigate("/home")
+    } else {
+        Framework7.instance.views.main.router.back()
+    }
+})
+
+App.addListener('appUrlOpen', (event) => {
+
+    let length = dmx.app.children.length
+    let lastItem = length - 1
+
+    const domain = 'https://api.justpro.me';
+    const pathArray = event.url.split(domain);
+    const appPath = pathArray.pop();
+
+
+    if (appPath) {
+        Framework7.instance.views.main.router.navigate(appPath)
+    }
+
+})
 
 // FACEBOOK AUTH PLUGIN  >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 
 FacebookLogin.initialize({ appId: '1191813141432284' });
-
 const FACEBOOK_PERMISSIONS = [
     'email',
     'user_birthday',
@@ -35,6 +64,7 @@ async function loginWithFb() {
 }
 
 //Fetch user data
+
 function loadUserData() {
     const url = `https://graph.facebook.com/${token.userId}?fields=id,name,picture.width(720),birthday,email&access_token=${token.token}`;
     fetch(url)
@@ -53,6 +83,7 @@ function getCurrentToken() {
         // Not logged in.
     }
 }
+
 
 // GOOGLE AUTH PLUGIN  >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 document.addEventListener('deviceready', GoogleAuth.initialize, false);
@@ -78,8 +109,6 @@ async function googleSignIn() {
     if ($$('#email').val()) {
         dmx.parse("app.main.login.submit_google_login_form.run()")
     }
-
-
 }
 
 
@@ -257,33 +286,7 @@ function sendMail(email) {
 
 }
 
-//APP - BACK BUTTON >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
-//BACK BUTTON
-App.addListener('backButton', () => {
 
-    if (Framework7.instance.views.main.router.currentRoute.path == "/order-tracking") {
-        Framework7.instance.views.main.router.navigate("/home")
-    } else {
-        Framework7.instance.views.main.router.back()
-    }
-
-})
-
-App.addListener('appUrlOpen', (event) => {
-
-    let length = dmx.app.children.length
-    let lastItem = length - 1
-
-    const domain = 'https://api.justpro.me';
-    const pathArray = event.url.split(domain);
-    const appPath = pathArray.pop();
-
-
-    if (appPath) {
-        Framework7.instance.views.main.router.navigate(appPath)
-    }
-
-})
 
 
 //SplashScreen >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
@@ -341,13 +344,22 @@ function addExternalUserId(id) {
 
 
 //Geolocation >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+async function getPosition() {
+    await Geolocation.requestPermissions()
+    const coordinates = await Geolocation.getCurrentPosition();
+    $$('#latitude').val(coordinates.coords.latitude);
+    $$('#longitude').val(coordinates.coords.longitude);
+}
 
 async function currentPosition() {
 
     await Geolocation.requestPermissions().then(data => {
         if (data.location == "granted") {
+            getPosition()
             dmx.parse("app.local_store.set('location_permission_accepted',true)")
             dmx.parse("app.main.location__prompt.goHome.run()")
+
+
         } else {
             NativeSettings.open({
                 optionAndroid: "application_details",
@@ -357,8 +369,7 @@ async function currentPosition() {
     })
 };
 
-$$('#latitude').val(coordinates.coords.latitude);
-$$('#longitude').val(coordinates.coords.longitude);
+
 
 
 

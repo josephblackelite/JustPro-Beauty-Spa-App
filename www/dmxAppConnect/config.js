@@ -2496,6 +2496,18 @@ dmx.config({
           }
         ]
       }
+    ],
+    "getUserPosition": [
+      {
+        "name": "$param",
+        "type": "object",
+        "sub": [
+          {
+            "type": "text",
+            "name": "user_id"
+          }
+        ]
+      }
     ]
   },
   "notifications": {
