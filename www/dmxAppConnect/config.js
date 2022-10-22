@@ -452,6 +452,18 @@ dmx.config({
           }
         ]
       }
+    ],
+    "navigate_to_verify_otp": [
+      {
+        "name": "$param",
+        "type": "object",
+        "sub": [
+          {
+            "type": "text",
+            "name": "user_id"
+          }
+        ]
+      }
     ]
   },
   "onboarding": {

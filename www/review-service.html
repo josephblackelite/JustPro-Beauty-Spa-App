@@ -12,6 +12,7 @@
     <dmx-value id="varQty" dmx-bind:value="app.main.reviewservice.qty_form.quantity.value"></dmx-value>
     <dmx-serverconnect id="service_info" url="https://api.justpro.me/api/services/service_info" site="JustPro-Spa-Backend" dmx-param:service_id="app.main.reviewservice.route.params.service_id" sockets="true" dmx-param:service_offered_id="app.main.reviewservice.route.params.service_id"></dmx-serverconnect>
     <dmx-serverconnect id="review" url="https://api.justpro.me/api/services/query_item_review" site="JustPro-Spa-Backend" dmx-param:service_id="app.main.reviewservice.route.params.service_id" sockets="true" dmx-param:customer_id="app.Current_user.data.customer.id" credentials></dmx-serverconnect>
+    <dmx-serverconnect id="order_item" url="https://api.justpro.me/api/services/item_4_review_query" site="JustPro-Spa-Backend" dmx-param:service_id="app.main.reviewservice.route.params.service_id" sockets="true" dmx-param:customer_id="" credentials="" dmx-param:order_item_id="app.main.reviewservice.route.params.order_item_id"></dmx-serverconnect>
 
 
     <script is="dmx-flow" id="ShowSlides" type="text/dmx-flow" autorun>[
@@ -63,12 +64,12 @@
 
         <div class="mb-150">
             <div class="row">
-                <div class="col-100" style="height:256px !important">
+                <div class="col-100 block" style="height:256px !important">
                     <dmx-slideshow id="productreview" dmx-bind:slides="app.main.reviewservice.service_info.data.queryServices.services_photos" slide-url="avatar_url">
                     </dmx-slideshow>
                 </div>
                 <div class="col-100 block">
-                    <h3 class="title text-align-center strong">{{app.main.reviewservice.service_info.data.queryServices.product_name.titlecase()}}</h3>
+                    <h3 class="title text-align-center strong">{{'How was the '+app.main.reviewservice.order_item.data.query_order_items.item_name+'?'}}</h3>
                     <div class="text-align-center">
                         <input type="hidden" name="vat_amount" id="vat_amount" dmx-bind:value="app.main.reviewservice.working_total.value.toNumber().per(5)">
                         <input type="hidden" name="working_total" id="working_total" dmx-bind:value="(app.main.reviewservice.service_info.data.queryServices.product_amt.toNumber() * (app.main.reviewservice.qty_form.quantity.value * app.main.reviewservice.qty_form.matrix.value))">
@@ -84,11 +85,11 @@
                                 </div>
 
                                 <div class="col-lg-100 text-align-center justify-content-center">
-                                    <span class="fa fa-star fa-2x text-color-yellow" dmx-on:click="app.main.reviewservice.rate_service.rating.setValue(1)" dmx-class:checked="(app.main.reviewservice.rate_service.rating.value &gt; 0)"></span>
-                                    <span class="fa fa-star fa-2x text-color-yellow" dmx-on:click="app.main.reviewservice.rate_service.rating.setValue(2)" dmx-class:checked="(app.main.reviewservice.rate_service.rating.value &gt; 1)"></span>
-                                    <span class="fa fa-star fa-2x text-color-yellow" dmx-on:click="app.main.reviewservice.rate_service.rating.setValue(3)" dmx-class:checked="(app.main.reviewservice.rate_service.rating.value &gt; 2)"></span>
-                                    <span class="fa fa-star fa-2x text-color-yellow" dmx-on:click="app.main.reviewservice.rate_service.rating.setValue(4)" dmx-class:checked="(app.main.reviewservice.rate_service.rating.value &gt; 3)"></span>
-                                    <span class="fa fa-star fa-2x text-color-yellow" dmx-on:click="app.main.reviewservice.rate_service.rating.setValue(5)" dmx-class:checked="(app.main.reviewservice.rate_service.rating.value &gt; 4)"></span>
+                                    <span class="fa fa-star fa-3x text-color-gray" dmx-on:click="app.main.reviewservice.rate_service.rating.setValue(1)" dmx-class:checked="(app.main.reviewservice.rate_service.rating.value &gt; 0)"></span>
+                                    <span class="fa fa-star fa-3x text-color-gray" dmx-on:click="app.main.reviewservice.rate_service.rating.setValue(2)" dmx-class:checked="(app.main.reviewservice.rate_service.rating.value &gt; 1)"></span>
+                                    <span class="fa fa-star fa-3x text-color-gray" dmx-on:click="app.main.reviewservice.rate_service.rating.setValue(3)" dmx-class:checked="(app.main.reviewservice.rate_service.rating.value &gt; 2)"></span>
+                                    <span class="fa fa-star fa-3x text-color-gray" dmx-on:click="app.main.reviewservice.rate_service.rating.setValue(4)" dmx-class:checked="(app.main.reviewservice.rate_service.rating.value &gt; 3)"></span>
+                                    <span class="fa fa-star fa-3x text-color-gray" dmx-on:click="app.main.reviewservice.rate_service.rating.setValue(5)" dmx-class:checked="(app.main.reviewservice.rate_service.rating.value &gt; 4)"></span>
                                 </div>
 
 
