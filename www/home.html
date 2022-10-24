@@ -267,21 +267,29 @@
     .custom-font {
       font-family: 'Maven Pro', sans-serif !important;
     }
+
+    .toggler {
+      background-color: #CA522A !important;
+      color: #fff !important;
+      font-weight: 800 !important;
+      font-family: 'Catamaran', sans-serif;
+    }
   </style>
   <div class="padding-top padding-bottom">
     <div class="navbar no-hairline no-shadow no-border">
       <div class="navbar-inner" data-name="order-prompt">
-        <div class="subnavbar no-padding-bottom no-margin bg-color-white" style="padding-bottom: 0px; !important">
-          <div class="row no-margin" style="width: 100%; height: 100%;">
-            <div class="col-100 no-padding-top no-padding-bottom" style="height: 100%;">
-              <div class="segmented segmented-strong text-color-primary nametag no-margin display-flex align-items-center justify-content-center" style="height: 100%;">
-                <button class="button strong text-color-primary " dmx-on:click="app.local_store.set('service_location','home')" dmx-class:button-active="(app.local_store.data.service_location == 'home')" style="font-weight: 800;" style="font-weight: 600; height: 100%;"><span style="height: 100%;">Home Service</span> </button>
-                <button class="button strong text-color-primary" dmx-on:click="app.local_store.set('service_location','salon')" dmx-class:button-active="(app.local_store.data.service_location == 'salon')" style="font-weight: 800;" style="font-weight: 600; height: 100%;">Salon Visit</button>
-                <span class="segmented-highlight"></span>
-              </div>
+        <div class="subnavbar no-shadow no-border bg-color-white">
+          <div class="segmented text-color-primary nametag no-margin display-flex align-items-center justify-content-center segmented-raised" style="margin-top:0px !important; margin-bottom:0px !important">
+            <button class="button strong text-color-primary " dmx-on:click="app.local_store.set('service_location','home')" style="font-weight: 800;" dmx-class:toggler="(app.local_store.data.service_location == 'home')"><span style="height: 100%;">Home Service</span> </button>
+            <button class="button strong text-color-primary" dmx-on:click="app.local_store.set('service_location','salon')" style="font-weight: 800;" dmx-class:toggler="(app.local_store.data.service_location == 'salon')">Salon Visit</button>
+            <span class="segmented-highlight"></span>
+          </div>
+          <!-- <div class="row no-margin" style="width: 100%; height: 100%; padding-top:0px !important; padding-bottom:0px !important; margin-bottom:0px !important; margin-top:0px !important">
+            <div class="col-100" style="height: 100%; margin-top:-10px !important; margin-bottom:-10px !important">
+             
 
             </div>
-          </div>
+          </div> -->
         </div>
         <!-- <div class="subnavbar justify-content-right border-top" style="border-top:2px solid #ccc" data-intro="Filter Services" data-title="Welcome!">
                     <div class="list no-margin no-padding" style="width:100%;">
@@ -341,7 +349,7 @@
 
       <!-- Sort -->
       <div class="block no-margin no-padding">
-        <div class="row bg-color-white padding" style="transition: width 0.5s;">
+        <div class="row bg-color-white" style="transition: width 0.5s;">
           <div class="col display-flex align-items-center">
             <p style="width: 100%;">
               <input id="search_by_name" name="text1" type="text" style="height:20px; border:0px !important; font-weight:600" class="form-control" placeholder="Search By Name">
@@ -372,11 +380,11 @@
       </div>
       <!-- Category-swiper -->
       <div class="row text-color-black padding-left padding-right  no-padding-top">
-        <div class="col-100 display-flex align-items-center justify-content-space-between">
+        <div class="col-100 display-flex align-items-center justify-content-space-between mb-0">
           <p class="strong">What services do you need?</p>
           <a href="" dmx-on:click="app.local_store.remove('state')">Show all</a>
         </div>
-        <div class="col-100 display-flex no-margin-top">
+        <div class="col-100 display-flex no-margin-top up-10">
           <div is="dmx-swiper" id="categories_swiper" dmx-bind:slides="app.main.home.available_categories.data.query_categories" slides-per-view="3" pagination="bullets">
             <div class="swiper-slide">
               <div class="display-flex flex-direction-column align-items-center padding" dmx-on:click="app.local_store.set('state',id)">

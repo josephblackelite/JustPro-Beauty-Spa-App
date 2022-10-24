@@ -177,9 +177,9 @@
 
 
           <p class="mb-0 text-color-black"><small>Have a discount coupon?</small></p>
-          <div class="row no-gutters  display-flex align-items-center justify-content-center ">
+          <div class="row no-gutters  display-flex align-items-center justify-content-center">
             <div class="col-60">
-              <input type="text" placeholder="Enter coupon code" class="form-control coupon-form" id="coupon_code" name="coupon_code" style="width:100% !important" />
+              <input type="text" placeholder="Enter coupon code" class="form-control coupon-form" id="coupon_cod" name="coupon_code" style="width:100% !important" />
             </div>
             <div class="col-40">
               <button class="button bg-color-primary text-color-white" dmx-on:click="run({condition:{if:`!app.Current_user.data.customer.customer_email`,then:{steps:{runJS:{function:'showEnterEmailAddressSheet'}}},else:{steps:{condition:{if:`app.Current_user.data.customer.discount_id`,then:{steps:{'f7.dialog.alert':{title:'Coupon applied',text:'You already have a discount. You can\'t use multiple discounts.'}}},else:{steps:{run:{action:`app.main.checkout.coupon_code_form.submit()`}}}}}}}})" style="height:40px">Apply</button>
