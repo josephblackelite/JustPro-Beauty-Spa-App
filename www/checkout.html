@@ -196,14 +196,14 @@
       </div>
       <div class="block">
         <div class="checkout-total">
-          <div id="no_discount" dmx-hide="app.main.checkout.coupon_code_form.coupon_percent_off.value">
+          <div id="no_discount" dmx-hide="app.Current_user.data.customer.discount_id">
             <h4 class="title tajawal-s no-margin-bottom">You are about to pay</h4>
             <p dmx-show="app.Current_user.data.customer.discount_id" class="text-color-black">{{app.main.checkout.coupon_code_form.coupon_percent_off.value+' off discount will be applied when you submit order.'}}</p>
             <h1 class="checkout-total strong no-margin-top text-color-black" style="margin-bottom:-5px !important">{{Cart.data.sum(`total.toNumber()`).formatCurrency('AED', '.', ',', 2)}}</h1>
             <small> + 5% VAT of {{Cart.data.sum(`vat.toNumber()`).formatCurrency('AED', '.', ',', 2)}}</small>
           </div>
 
-          <div id="discounted" dmx-show="app.main.checkout.coupon_code_form.coupon_percent_off.value">
+          <div id="discounted" dmx-show="app.Current_user.data.customer.discount_id">
             <h4 class="title tajawal-s no-margin-bottom">You are about to pay</h4>
             <!-- <p dmx-show="app.Current_user.data.customer.discount_id" class="text-color-black">{{app.main.checkout.coupon_code_form.coupon_percent_off.value+' discount is applied on this order'}}</p> -->
             <div class="">
@@ -218,7 +218,6 @@
       <div class="block" style="margin-bottom:150px !important">
         <p><img src="assets/images/pbystripe.png"></p>
         <p class="text-color-black">Payment is securely processed by Stripe.com. JustPro does not store or see your payment details. Stripe.com manages your payment data and handles all payment processing on behalf of JustPro Beauty &amp Spa Co. LLC. </p>
-
       </div>
     </div>
   </div>
