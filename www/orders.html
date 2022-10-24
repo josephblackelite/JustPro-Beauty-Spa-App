@@ -10,15 +10,26 @@
             color: #000 !important;
             font-weight: 600 !important;
         }
+
+        .toggler {
+            background-color: #CA522A !important;
+            color: #fff !important;
+            font-weight: 800 !important;
+            font-family: 'Catamaran', sans-serif;
+        }
     </style>
     <dmx-value id="provider_booking_dates_query_param" dmx-bind:value="app.main.orders.booking_status_select_form.booking_status.value"></dmx-value>
     <div class="padding-top padding-bottom navbar-extra">
         <div class="navbar no-hairline no-shadow no-border">
             <div class="navbar-inner" style="padding-right:0px !important; padding-left:0px !important; margin-right:0px !important">
-                <div class="subnavbar">
-                    <div class="segmented segmented-strong nametag text-color-white">
-                        <a class="button strong active text-color-white" dmx-class:active="!app.main.orders.provider_booking_dates_query_param.value" dmx-on:click="app.main.orders.booking_status_select_form.booking_status.setValue('\'\'')" dmx-class:text-color-black="app.main.orders.provider_booking_dates_query_param.value">Upcoming</a>
-                        <a class="button strong text-color-white" dmx-class:active="app.main.orders.provider_booking_dates_query_param.value " dmx-on:click="app.main.orders.booking_status_select_form.booking_status.setValue('completed')" dmx-class:text-color-black="!app.main.orders.provider_booking_dates_query_param.value">Past</a>
+                <div class="subnavbar no-border no-shadow bg-color-white">
+                    <div class="segmented nametag text-color-white segmented-raised">
+                        <button class="button strong text-color-primary" dmx-on:click="app.main.orders.booking_status_select_form.booking_status.setValue('\'\'')" style="font-weight: 800;" dmx-class:toggler="!app.main.orders.provider_booking_dates_query_param.value"><span style="height: 100%;">Upcoming</span> </button>
+                        <button class="button strong text-color-primary" dmx-on:click="app.main.orders.booking_status_select_form.booking_status.setValue('completed')" style="font-weight: 800;" dmx-class:toggler="app.main.orders.provider_booking_dates_query_param.value"><span style="height: 100%;">Past</span> </button>
+
+                        <!--
+                        <a class="button strong active text-color-white" dmx-class:active="" dmx-class:text-color-black="app.main.orders.provider_booking_dates_query_param.value">Upcoming</a>
+                        <a class="button strong text-color-white" dmx-class:active="app.main.orders.provider_booking_dates_query_param.value "  dmx-class:text-color-black="!app.main.orders.provider_booking_dates_query_param.value">Past</a> -->
                     </div>
                 </div>
                 <div class="left">

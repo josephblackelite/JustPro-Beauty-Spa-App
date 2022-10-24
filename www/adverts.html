@@ -1,0 +1,44 @@
+<!-- Wappler include head-page="index.html" is="dmx-app" id="notifications" appConnect="local" framework7_6="With App Connect" framework7_icons="local" capacitor="local" bootstrap_icons="local" components="{dmxFormatter:{},dmxPreloader:{}}" -->
+
+<div class="page" path="/advert" data-name="adverts" id="adverts">
+
+    <dmx-serverconnect id="live_ads" url="https://api.justpro.me/api/ads/single_ad" site="JustPro-Spa-Backend" dmx-param:id="app.main.adverts.route.params.id"></dmx-serverconnect>
+
+
+    <div class="padding-top padding-bottom">
+        <div class="navbar no-hairline no-shadow no-border">
+            <div class="navbar-inner" style="padding-right:0px !important; padding-left:0px !important; margin-right:0px !important">
+                <div class="left">
+                    <a href="#" class="link back">
+                        <i class="icon f7-icons">arrow_left</i>
+                    </a>
+                </div>
+                <div class="title">{{app.main.adverts.live_ads.data.query.title.titlecase()}} </div>
+                <div class="right">
+                    <a href="#" class="link panel-open icon-only" data-panel="left">
+                        <i class="icon f7-icons">ellipsis_vertical</i>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="page-content content-area">
+        <dmx-preloader id="justpropreloader" spinner="pulse" color="#ff6600"></dmx-preloader>
+        <div style="margin-bottom:150px !important">
+            <div class="row">
+                <div class="col-100 no-padding">
+                    <img dmx-bind:src="app.main.adverts.live_ads.data.query.avatar">
+                </div>
+            </div>
+
+            <div class="container">
+                <h3>{{app.main.adverts.live_ads.data.query.title.titlecase()}} </h3>
+
+                <div class="col-100 text-color-black" dmx-html="app.main.adverts.live_ads.data.query.content">
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
