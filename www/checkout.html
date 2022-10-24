@@ -170,36 +170,56 @@
           <input id="customer_id" name="customer_id" type="hidden" dmx-bind:value="app.Current_user.data.customer.id">
           <input id="coupon_amount_off" name="coupon_amount_off" type="hidden" dmx-bind:value="app.Current_user.data.customer.amount_off">
           <input id="coupon_percent_off" name="coupon_percent_off" type="hidden" dmx-bind:value="Cart.data.sum(`total.toNumber().per(app.Current_user.data.customer.percent_off)`).toNumber().formatCurrency('AED', '.', ',', 2)">
-          <div class="list no-hairlines-md padding-top">
-            <ul>
-              <li class="item-content item-input item-input-outline row padding">
-                <div class="item-inner col-80">
-                  <div class="item-title item-floating-label strong">Have a coupon code?</div>
-                  <div class="item-input-wrap">
-                    <input type="text" placeholder="Enter coupon code" class="form-control" id="coupon_code" name="coupon_code" style="width:100% !important" />
-                    <span class="input-clear-button"></span>
-                  </div>
-                </div>
-                <div class="col-20 display-flex justify-content-center padding">
-                  <a href="" dmx-on:click="run({condition:{if:`!app.Current_user.data.customer.customer_email`,then:{steps:{runJS:{function:'showEnterEmailAddressSheet'}}},else:{steps:{condition:{if:`app.Current_user.data.customer.discount_id`,then:{steps:{'f7.dialog.alert':{title:'Coupon applied',text:'You already have a discount. You can\'t use multiple discounts.'}}},else:{steps:{run:{action:`app.main.checkout.coupon_code_form.submit()`}}}}}}}})">Apply</a>
-                </div>
-              </li>
-            </ul>
+
+
+
+
+
+
+          <p class="mb-0 text-color-black"><small>Have a discount coupon?</small></p>
+          <div class="row no-gutters  display-flex align-items-center justify-content-center ">
+            <div class="col-60">
+              <input type="text" placeholder="Enter coupon code" class="form-control coupon-form" id="coupon_code" name="coupon_code" style="width:100% !important" />
+            </div>
+            <div class="col-40">
+              <button class="button bg-color-primary text-color-white" dmx-on:click="run({condition:{if:`!app.Current_user.data.customer.customer_email`,then:{steps:{runJS:{function:'showEnterEmailAddressSheet'}}},else:{steps:{condition:{if:`app.Current_user.data.customer.discount_id`,then:{steps:{'f7.dialog.alert':{title:'Coupon applied',text:'You already have a discount. You can\'t use multiple discounts.'}}},else:{steps:{run:{action:`app.main.checkout.coupon_code_form.submit()`}}}}}}}})" style="height:40px">Apply</button>
+            </div>
           </div>
+
+
+
+
+
+
+
         </form>
       </div>
       <div class="block">
         <div class="checkout-total">
-          <h4 class="title tajawal-s no-margin-bottom">You are about to pay</h4>
-          <p dmx-show="app.Current_user.data.customer.discount_id">{{app.main.checkout.coupon_code_form.coupon_percent_off.value+' off discount will be applied when you submit order.'}}</p>
-          <h1 class="checkout-total strong no-margin-top" style="margin-bottom:-5px !important">{{Cart.data.sum(`total.toNumber()`).formatCurrency('AED', '.', ',', 2)}}</h1>
-          <small> + 5% VAT of {{Cart.data.sum(`vat.toNumber()`).formatCurrency('AED', '.', ',', 2)}}</small>
+
+          <div id="no_discount" dmx-hide="app.main.checkout.coupon_code_form.coupon_percent_off.value">
+            <h4 class="title tajawal-s no-margin-bottom">You are about to pay</h4>
+            <p dmx-show="app.Current_user.data.customer.discount_id" class="text-color-black">{{app.main.checkout.coupon_code_form.coupon_percent_off.value+' off discount will be applied when you submit order.'}}</p>
+            <h1 class="checkout-total strong no-margin-top text-color-black" style="margin-bottom:-5px !important">{{Cart.data.sum(`total.toNumber()`).formatCurrency('AED', '.', ',', 2)}}</h1>
+            <small> + 5% VAT of {{Cart.data.sum(`vat.toNumber()`).formatCurrency('AED', '.', ',', 2)}}</small>
+          </div>
+
+          <div id="discounted" dmx-show="app.main.checkout.coupon_code_form.coupon_percent_off.value">
+            <h4 class="title tajawal-s no-margin-bottom">You are about to pay</h4>
+            <p dmx-show="app.Current_user.data.customer.discount_id" class="text-color-black">{{+' off discount will be applied when you submit order.'}}</p>
+            <h1 class="checkout-total strong no-margin-top text-color-black" style="margin-bottom:-5px !important">{{app.main.checkout.coupon_code_form.coupon_percent_off.value.formatCurrency('AED', '.', ',', 2)}}</h1>
+            <small> + 5% VAT of {{Cart.data.sum(`vat.toNumber()`).formatCurrency('AED', '.', ',', 2)}}</small>
+          </div>
+
+
+
+
         </div>
       </div>
 
       <div class="block" style="margin-bottom:150px !important">
         <p><img src="assets/images/pbystripe.png"></p>
-        <p>Payment is securely processed by Stripe.com. JustPro does not store or see your payment details. Stripe.com manages your payment data and handles all payment processing on behalf of JustPro Beauty &amp Spa Co. LLC. </p>
+        <p class="text-color-black">Payment is securely processed by Stripe.com. JustPro does not store or see your payment details. Stripe.com manages your payment data and handles all payment processing on behalf of JustPro Beauty &amp Spa Co. LLC. </p>
 
       </div>
     </div>
