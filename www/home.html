@@ -211,7 +211,7 @@
   exec: {
     steps: {
       condition: {
-        if: "{{!app.latitude.value}}",
+        if: "{{app.local_store.data.location_permission_accepted}}",
         then: {
           steps: {
             runJS: {function: "getPosition"}
