@@ -33,13 +33,10 @@
         <dmx-preloader id="justpropreloader" spinner="pulse" color="#ff6600"></dmx-preloader>
 
         <div class="col-100 mb-150">
-
-
-
-            <div class="list media-list chevron-center">
-                <ul>
-                    <li is="dmx-repeat" id="repeat_customer_addresses" dmx-bind:repeat="app.Current_user.data.customer.customer_addresses">
-                        <a href="#" class="item-link item-content">
+            <div class="list media-list chevron-center bg-color-primary">
+                <ul is="dmx-repeat" id="repeat_customer_addresses" dmx-bind:repeat="app.Current_user.data.customer.customer_addresses" class="margin-bottom">
+                    <li id="" class="margin-bottom">
+                        <a href="#" class="item-link item-content margin-bottom">
                             <div class="item-inner">
                                 <div class="item-title-row">
                                     <div class="item-title brand-text">{{address_name.capitalize()}} <i class="bi bi-trash fa-fw margin brand-text" dmx-on:click="run({'f7.dialog.confirm':{title:'Delete Address?',text:'This address will be removed from your addresses.',then:{steps:{run:{action:`app.main.customerAddresses.delete_address.address_id.setValue(id);app.main.customerAddresses.delete_address.submit()`}}}}})"></i></div>

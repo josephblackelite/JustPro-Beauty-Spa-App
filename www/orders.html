@@ -55,34 +55,10 @@
     <div class="page-content content-area mb-150">
         <dmx-preloader id="justpropreloader" spinner="pulse" color="#ff6600"></dmx-preloader>
 
-
         <div class="mb-150">
-            <div class="col-100">
+            <div class="">
                 <div class="block text-align-center padding-top padding-bottom" dmx-show="(!app.main.orders.customers_orders.data.query_orders &amp;&amp; !app.main.orders.customers_orders.data.query_orders_null)">
                     <h5 class="custom-font">You don't have any bookings yet.</h5>
-
-                </div>
-                <div class="block" style="display:none;">
-                    <form action="" is="dmx-serverconnect-form" method="post" id="booking_status_select_form">
-                        <div class="list" style="margin-top:-20px !important">
-                            <ul class="row">
-                                <li class="item-content item-input item-input-outline" style="width:100% !important">
-
-                                    <div class="item-inner" style="width:100% !important">
-
-                                        <div class="item-input-wrap">
-                                            <select id="booking_status" class="form-control" style="width:100% !important">
-                                                <option value="">Select status</option>
-                                                <option value="completed">Completed</option>
-                                                <option value="accepted">Accepted</option>
-                                            </select>
-                                            <span class="input-clear-button"></span>
-                                        </div>
-                                    </div>
-                                </li>
-                            </ul>
-                        </div>
-                    </form>
 
                 </div>
             </div>
@@ -92,8 +68,7 @@
                 <h5 class="custom-font">{{'You have '+app.main.orders.customers_orders.data.query_orders.count()+' past appointments.'}} </h5>
 
             </div>
-            <div class="card no-shadow card-outline mb-0" dmx-repeat:repeat_items_slots="app.main.orders.customers_orders.data.query_orders" dmx-show="app.main.orders.provider_booking_dates_query_param.value" dmx-on:click="app.main.navigate('/order-details/'+id+'/'+order_uuid_id,{})">
-
+            <div class="card mb-0 no-shadow card-outline" dmx-repeat:repeat_items_slots="app.main.orders.customers_orders.data.query_orders" dmx-show="app.main.orders.provider_booking_dates_query_param.value" dmx-on:click="app.main.navigate('/order-details/'+id+'/'+order_uuid_id,{})" style="width: 100%;">
                 <span class="badge margin-right margin-left" dmx-show="(order_status == null)">New</span>
                 <span class="badge margin-right margin-left" dmx-show="(order_status == 'accepted')" dmx-class:bg-color-green="(order_status == 'accepted')">Booked</span>
                 <span class="badge margin-right margin-left" dmx-show="(order_status == 'completed')" dmx-class:bg-color-blue="(order_status == 'completed')">Done</span>
@@ -124,7 +99,7 @@
                 <h5 class="custom-font">{{'You have '+app.main.orders.customers_orders.data.query_orders_null.where(`order_status`, 'completed', '!=').count()+' upcoming appointments.'}} </h5>
 
             </div>
-            <div class="card no-shadow card-outline mb-0" dmx-repeat:repeat_items_slots="app.main.orders.customers_orders.data.query_orders_null" dmx-show="(!app.main.orders.provider_booking_dates_query_param.value &amp;&amp; (order_status != ('completed' || 'rejected')))" dmx-on:click="app.main.navigate('/order-details/'+id+'/'+order_uuid_id,{})">
+            <div class="card no-shadow card-outline mb-0" dmx-repeat:repeat_items_slots="app.main.orders.customers_orders.data.query_orders_null" dmx-show="(!app.main.orders.provider_booking_dates_query_param.value &amp;&amp; (order_status != ('completed' || 'rejected')))" dmx-on:click="app.main.navigate('/order-details/'+id+'/'+order_uuid_id,{})" style="width: 100%;">
 
                 <span class="badge margin-right margin-left" dmx-show="(order_status == null)">New</span>
                 <span class="badge margin-right margin-left" dmx-show="(order_status == 'accepted')" dmx-class:bg-color-green="(order_status == 'accepted')">Booked</span>

@@ -177,7 +177,7 @@
 
 
           <p class="mb-0 text-color-black"><small>Have a discount coupon?</small></p>
-          <div class="row no-gutters  display-flex align-items-center justify-content-center ">
+          <div class="row  display-flex align-items-center justify-content-center  no-gutter">
             <div class="col-60 no-padding">
               <input type="text" placeholder="Enter coupon code" class="form-control coupon-form" id="coupon_code" name="coupon_code" style="width:100% !important" />
             </div>
@@ -208,7 +208,10 @@
             <!-- <p dmx-show="app.Current_user.data.customer.discount_id" class="text-color-black">{{app.main.checkout.coupon_code_form.coupon_percent_off.value+' discount is applied on this order'}}</p> -->
             <div class="">
               <h4 class="checkout-total strong no-margin  text-color-black" style="text-decoration: line-through;">{{Cart.data.sum(`total.toNumber()`).formatCurrency('AED', '.', ',', 2)}}</h4>
-              <h1 class="checkout-total strong no-margin-top text-color-black" style="margin-bottom:-5px !important">{{app.main.checkout.coupon_code_form.coupon_percent_off.value}}</h1>
+              <h1 class="checkout-total strong no-margin-top text-color-black" style="margin-bottom:-5px !important">
+                {{(Cart.data.sum(`total.toNumber()`) - Cart.data.sum(`total.toNumber().per(app.Current_user.data.customer.percent_off)`)).formatCurrency('AED', '.', ',', 2)}}
+
+              </h1>
             </div>
             <small> + 5% VAT of {{Cart.data.sum(`vat.toNumber()`).formatCurrency('AED', '.', ',', 2)}}</small>
           </div>
