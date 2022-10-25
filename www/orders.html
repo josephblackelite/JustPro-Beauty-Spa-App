@@ -59,10 +59,31 @@
             <div class="">
                 <div class="block text-align-center padding-top padding-bottom" dmx-show="(!app.main.orders.customers_orders.data.query_orders &amp;&amp; !app.main.orders.customers_orders.data.query_orders_null)">
                     <h5 class="custom-font">You don't have any bookings yet.</h5>
-
                 </div>
             </div>
 
+            <div class="block" style="display:none;">
+                <form action="" is="dmx-serverconnect-form" method="post" id="booking_status_select_form">
+                    <div class="list" style="margin-top:-20px !important">
+                        <ul class="row">
+                            <li class="item-content item-input item-input-outline" style="width:100% !important">
+
+                                <div class="item-inner" style="width:100% !important">
+
+                                    <div class="item-input-wrap">
+                                        <select id="booking_status" class="form-control" style="width:100% !important">
+                                            <option value="">Select status</option>
+                                            <option value="completed">Completed</option>
+                                            <option value="accepted">Accepted</option>
+                                        </select>
+                                        <span class="input-clear-button"></span>
+                                    </div>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                </form>
+            </div>
             <!-- Not null -->
             <div class="block" dmx-show="app.main.orders.provider_booking_dates_query_param.value">
                 <h5 class="custom-font">{{'You have '+app.main.orders.customers_orders.data.query_orders.count()+' past appointments.'}} </h5>
