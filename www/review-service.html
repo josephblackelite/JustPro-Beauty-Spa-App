@@ -113,7 +113,7 @@
                         </div>
 
                         <div class="col-100 up-10">
-                            <form is="dmx-serverconnect-form" id="rate_service" method="post" action="https://api.justpro.me/api/services/rate_services" site="JustPro-Spa-Backend" dmx-on:success="run([{'f7.dialog.alert':{title:'Thank you',text:'Thank you. Your feedback has been submitted'}},{runJS:{function:'back'}}])">
+                            <form is="dmx-serverconnect-form" id="rate_service" method="post" action="https://api.justpro.me/api/services/rate_services" site="JustPro-Spa-Backend" dmx-on:success="run([{'f7.dialog.alert':{title:'Thank you',text:'Thank you. Your feedback has been submitted'}},{runJS:{function:'back'}},{run:{action:`app.main.back(\'/home\',{})`}}])">
 
                                 <div class="list no-hairlines-md">
                                     <ul>

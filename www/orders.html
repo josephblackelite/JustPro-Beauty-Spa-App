@@ -89,7 +89,7 @@
                 <h5 class="custom-font">{{'You have '+app.main.orders.customers_orders.data.query_orders.count()+' past appointments.'}} </h5>
 
             </div>
-            <div class="card mb-0 no-shadow card-outline" dmx-repeat:repeat_items_slots="app.main.orders.customers_orders.data.query_orders" dmx-show="app.main.orders.provider_booking_dates_query_param.value" dmx-on:click="app.main.navigate('/order-details/'+id+'/'+order_uuid_id,{})" style="width: 100%;">
+            <div class="card mb-0 no-shadow card-outline" dmx-repeat:repeat_items_slots="app.main.orders.customers_orders.data.query_orders" dmx-show="app.main.orders.provider_booking_dates_query_param.value" dmx-on:click="app.main.navigate('/order-details/'+id+'/'+order_uuid_id,{})">
                 <span class="badge margin-right margin-left" dmx-show="(order_status == null)">New</span>
                 <span class="badge margin-right margin-left" dmx-show="(order_status == 'accepted')" dmx-class:bg-color-green="(order_status == 'accepted')">Booked</span>
                 <span class="badge margin-right margin-left" dmx-show="(order_status == 'completed')" dmx-class:bg-color-blue="(order_status == 'completed')">Done</span>
@@ -120,7 +120,7 @@
                 <h5 class="custom-font">{{'You have '+app.main.orders.customers_orders.data.query_orders_null.where(`order_status`, 'completed', '!=').count()+' upcoming appointments.'}} </h5>
 
             </div>
-            <div class="card no-shadow card-outline mb-0" dmx-repeat:repeat_items_slots="app.main.orders.customers_orders.data.query_orders_null" dmx-show="(!app.main.orders.provider_booking_dates_query_param.value &amp;&amp; (order_status != ('completed' || 'rejected')))" dmx-on:click="app.main.navigate('/order-details/'+id+'/'+order_uuid_id,{})" style="width: 100%;">
+            <div class="card no-shadow card-outline mb-0" dmx-repeat:repeat_items_slots="app.main.orders.customers_orders.data.query_orders_null" dmx-show="(!app.main.orders.provider_booking_dates_query_param.value &amp;&amp; (order_status != ('completed' || 'rejected')))" dmx-on:click="app.main.navigate('/order-details/'+id+'/'+order_uuid_id,{})">
 
                 <span class="badge margin-right margin-left" dmx-show="(order_status == null)">New</span>
                 <span class="badge margin-right margin-left" dmx-show="(order_status == 'accepted')" dmx-class:bg-color-green="(order_status == 'accepted')">Booked</span>
