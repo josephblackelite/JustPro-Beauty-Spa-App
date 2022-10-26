@@ -10,20 +10,17 @@ const { GoogleAuth, FacebookLogin, FacebookLoginResponse, Stripe, PaymentFlowEve
 //BACK BUTTON
 
 App.addListener('backButton', () => {
-    if (Framework7.instance.views[0].router.previousRoute.path == "/order-tracking") {
+    if ((Framework7.instance.views[0].router.previousRoute.path == "/order-tracking") || (Framework7.instance.views[0].router.currentRoute.path == "/home")) {
         dmx.parse("app.main.navigate('/home',{})")
     } else {
-        Framework7.instance.views.main.router.back()
+        dmx.parse("app.main.back('',{})")
     }
 })
 
 App.addListener('appUrlOpen', (event) => {
-
     const domain = 'https://api.justpro.me';
     const pathArray = event.url.split(domain);
     const appPath = pathArray.pop();
-
-
     if (appPath) {
         dmx.parse(appPath)
     }
