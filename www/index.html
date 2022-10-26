@@ -111,6 +111,9 @@
   </style>
 
   <div id="app" is="dmx-f7-app" theme="md">
+    <script is="dmx-flow" id="back" type="text/dmx-flow">{
+  runJS: {function: "back"}
+}</script>
 
 
     <!-- Statusbar overlay -->
@@ -352,19 +355,19 @@
 
       <div class="page " data-name="login" path="/" id="login">
         <script is="dmx-flow" id="navigate_to_verify_otp" type="text/dmx-flow">{
-        meta: {
-          $param: [
-            {type: "text", name: "user_id"}
-          ]
-        },
-        exec: {
-          steps: {
-            run: {
-              action: "{{app.main.navigate('/verifyOtp',{clearPreviousHistory: true, history: false})}}"
-            }
-          }
-        }
-      }</script>
+  meta: {
+    $param: [
+      {type: "text", name: "user_id"}
+    ]
+  },
+  exec: {
+    steps: {
+      run: {
+        action: "{{app.main.navigate('/verifyOtp',{clearPreviousHistory: true, history: false})}}"
+      }
+    }
+  }
+}</script>
 
         <div class="page-content wappler-block">
           <div class="display-flex flex-direction-column justify-content-center h-100">
@@ -374,7 +377,7 @@
               </div>
             </div>
             <div class="clearfix mt-auto padding">
-              <form action="https://api.justpro.me/api/security/login_register_with_number" is="dmx-serverconnect-form" method="post" id="login_register_with_number" site="JustPro-Spa-Backend" dmx-on:invalid="run({'f7.dialog.alert':{title:'Error',text:`app.main.login.login_register_with_number.lastError.response`}})" dmx-on:success="run({condition:{if:`(app.main.login.login_register_with_number.mobile_number.value == (524540296 || 0524540296))`,then:{steps:[{run:{action:`app.local_store.set(\'user_id\',669)`}},{run:{action:`app.main.navigate(\'/home\',{clearPreviousHistory: true, history: false})`}}]},else:{steps:{condition:{if:`app.main.login.login_register_with_number.data.Logged_in_user_id`,then:{steps:[{run:{action:`app.user_id.setValue(app.main.login.login_register_with_number.data.Logged_in_user_id)`}},{condition:{if:`(app.main.login.login_register_with_number.data.send_otp_for_login_user.api.data.status == \'open\')`,then:{steps:[{run:{action:`app.otp_id.setValue(app.main.login.login_register_with_number.data.send_otp_for_login_user.api.data.otp_id)`}},{run:{action:`app.main.login.navigate_to_verify_otp.run()`}}]},else:{steps:{run:{action:`app.main.navigate(\'/home\',{clearPreviousHistory: true, history: false})`}}}}}]},else:{steps:[{run:{action:`app.user_id.setValue(app.main.login.login_register_with_number.data.insert.identity)`}},{condition:{if:`(app.main.login.login_register_with_number.data.send_otp_for_new_user.api.data.status== \'open\')`,then:{steps:[{run:{action:`app.otp_id.setValue(app.main.login.login_register_with_number.data.send_otp_for_new_user.api.data.otp_id)`}},{run:{action:`app.main.login.navigate_to_verify_otp.run()`}}]},else:{steps:{run:{action:`app.main.navigate(\'/home\',{clearPreviousHistory: true, history: false})`}}}}}]}}}}}})">
+              <form action="https://api.justpro.me/api/security/login_register_with_number" is="dmx-serverconnect-form" method="post" id="login_register_with_number" site="JustPro-Spa-Backend" dmx-on:invalid="run({'f7.dialog.alert':{title:'Error',text:`app.main.login.login_register_with_number.lastError.response`}})" dmx-on:success="run({condition:{if:`(app.main.login.login_register_with_number.mobile_number.value == (524540296 || 0524540296))`,then:{steps:[{run:{action:`app.local_store.set(\'user_id\',669)`}},{run:{action:`app.main.navigate(\'/home\',{clearPreviousHistory: true, history: false})`}}]},else:{steps:{condition:{if:`app.main.login.login_register_with_number.data.Logged_in_user_id`,then:{steps:[{run:{action:`app.user_id.setValue(app.main.login.login_register_with_number.data.Logged_in_user_id)`}},{condition:{if:`(app.main.login.login_register_with_number.data.send_otp_for_login_user.api.data.status == \'open\')`,then:{steps:[{run:{action:`app.otp_id.setValue(app.main.login.login_register_with_number.data.send_otp_for_login_user.api.data.otp_id)`}},{run:{action:`app.main.login.navigate_to_verify_otp.run()`}}]},else:{steps:{run:{action:`app.main.navigate(\'/home\',{})`}}}}}]},else:{steps:[{run:{action:`app.user_id.setValue(app.main.login.login_register_with_number.data.insert.identity)`}},{condition:{if:`(app.main.login.login_register_with_number.data.send_otp_for_new_user.api.data.status== \'open\')`,then:{steps:[{run:{action:`app.otp_id.setValue(app.main.login.login_register_with_number.data.send_otp_for_new_user.api.data.otp_id)`}},{run:{action:`app.main.login.navigate_to_verify_otp.run()`}}]},else:{steps:{run:{action:`app.main.navigate(\'/home\',{})`}}}}}]}}}}}})">
                 <div class="list">
                   <ul class="row">
                     <li class="item-content item-input col-100">
@@ -414,6 +417,7 @@
   <script src="js/oneSignal.js"></script>
 
   <script>
+    console.log(window)
     $$ = Dom7
     
         // Create notification
@@ -446,35 +450,7 @@ function back() {
 }
   </script>
   <script>
-    //     let slideIndex = 1;
-//         showSlides(slideIndex);
-
-// function plusSlides(n) {
-//   showSlides(slideIndex += n);
-// }
-
-// function currentSlide(n) {
-//   showSlides(slideIndex = n);
-// }
-
-// function showSlides(n) {
-//   let i;
-//   let slides = document.getElementsByClassName("mySlides");
-//   let dots = document.getElementsByClassName("dot");
-//   if (n > slides.length) {slideIndex = 1}    
-//   if (n < 1) {slideIndex = slides.length}
-//   for (i = 0; i < slides.length; i++) {
-//     slides[i].style.display = "none";  
-//   }
-//   for (i = 0; i < dots.length; i++) {
-//     dots[i].className = dots[i].className.replace(" active", "");
-//   }
-//   slides[slideIndex-1].style.display = "block";  
-//   dots[slideIndex-1].className += " active";
-// }
-
-
-function showStartDate() {
+    function showStartDate() {
 var today = new Date();
       var infinite = new Date().setDate(today.getDate() - 999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999);
     Framework7.instance.calendar.create({
@@ -556,6 +532,15 @@ function openRatingPopUp() {
 dmx.parse("app.main.home.rating_popup.open()")
 }
 
+function cart2Home() {
+  
+  if (Framework7.instance.views[0].router.previousRoute.path == "/order-tracking") {
+    dmx.parse("app.main.navigate('/home',{})") 
+  } else {
+  Framework7.instance.views.main.router.back()
+  }
+}
+
   </script>
 
   <script>
@@ -602,12 +587,6 @@ dmx.parse("app.main.home.rating_popup.open()")
               Framework7.instance.views.main.router.back("/home", {force: true})
         }
         } 
-
-
-function log(data){
-  console.log(data)
-}
-
 
   </script>
 

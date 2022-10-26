@@ -1,5 +1,4 @@
 // JavaScript Document
-
 var $$ = Dom7;
 const { Plugins } = Capacitor;
 const { GoogleAuth, FacebookLogin, FacebookLoginResponse, Stripe, PaymentFlowEventsEnum, LocalNotifications, App, SplashScreen, Geolocation, NativeSettings, CallNumber, EmailComposer } = Plugins;
@@ -11,9 +10,8 @@ const { GoogleAuth, FacebookLogin, FacebookLoginResponse, Stripe, PaymentFlowEve
 //BACK BUTTON
 
 App.addListener('backButton', () => {
-    Framework7.instance.views.main.router.back()
-    if (Framework7.instance.views.main.router.currentRoute.path == "/order-tracking") {
-        Framework7.instance.views.main.router.navigate("/home")
+    if (Framework7.instance.views[0].router.previousRoute.path == "/order-tracking") {
+        dmx.parse("app.main.navigate('/home',{})")
     } else {
         Framework7.instance.views.main.router.back()
     }
@@ -27,10 +25,13 @@ App.addListener('appUrlOpen', (event) => {
 
 
     if (appPath) {
-        Framework7.instance.views.main.router.navigate(appPath)
+        dmx.parse(appPath)
     }
 
 })
+
+
+
 
 // FACEBOOK AUTH PLUGIN  >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 
