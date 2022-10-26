@@ -22,9 +22,8 @@ App.addListener('appUrlOpen', (event) => {
     const pathArray = event.url.split(domain);
     const appPath = pathArray.pop();
     if (appPath) {
-        dmx.parse(appPath)
+        Framework7.instance.views.main.router.navigate(appPath)
     }
-
 })
 
 
