@@ -43,9 +43,7 @@
             run: {action: "{{app.main.checkout.clear_cart.run()}}"}
           },
           {
-            run: {
-              action: "{{app.main.navigate('/order-tracking',{clearPreviousHistory: true, history: false})}}"
-            }
+            run: {action: "{{app.main.navigate('/order-tracking',{})}}"}
           }
         ]
       },

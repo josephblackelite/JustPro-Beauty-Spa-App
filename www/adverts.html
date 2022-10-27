@@ -1,8 +1,8 @@
-<!-- Wappler include head-page="index.html" is="dmx-app" id="notifications" appConnect="local" framework7_6="With App Connect" framework7_icons="local" capacitor="local" bootstrap_icons="local" components="{dmxFormatter:{},dmxPreloader:{}}" -->
+<!-- Wappler include head-page="index.html" is="dmx-app" id="notifications" appConnect="local" framework7_6="With App Connect" framework7_icons="local" capacitor="local" bootstrap_icons="local" components="{dmxFormatter:{},dmxPreloader:{},dmxSockets:{}}" -->
 
-<div class="page" path="/advert" data-name="adverts" id="adverts">
+<div class="page" path="/advert/:id" data-name="adverts" id="adverts">
 
-    <dmx-serverconnect id="live_ads" url="https://api.justpro.me/api/ads/single_ad" site="JustPro-Spa-Backend" dmx-param:id="app.main.adverts.route.params.id"></dmx-serverconnect>
+    <dmx-serverconnect id="live_ads" url="https://api.justpro.me/api/ads/single_ad" site="JustPro-Spa-Backend" dmx-param:id="app.main.adverts.route.params.id" sockets="true"></dmx-serverconnect>
 
 
     <div class="padding-top padding-bottom">
