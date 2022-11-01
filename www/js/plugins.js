@@ -15,6 +15,7 @@ App.addListener('backButton', () => {
     } else {
         dmx.parse("app.main.back('',{})")
     }
+
 })
 
 App.addListener('appUrlOpen', (event) => {

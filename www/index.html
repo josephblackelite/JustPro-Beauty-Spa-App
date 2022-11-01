@@ -111,9 +111,6 @@
   </style>
 
   <div id="app" is="dmx-f7-app" theme="md">
-    <script is="dmx-flow" id="back" type="text/dmx-flow">{
-  runJS: {function: "back"}
-}</script>
 
 
     <!-- Statusbar overlay -->
@@ -222,7 +219,6 @@
         <div class="page-content bg-color-white text-color-black">
           <div class="sidebar-menu">
             <div class="main-logo left">
-
               <div class="logo-content">
                 <h2 class="logo-name"><img src="assets/images/logo.png"></h2>
               </div>
@@ -245,7 +241,7 @@
                   <a class="item-link stretched-link" dmx-on:click="run([{run:{action:`app.main.navigate(\'/notifications\',{});app.panelLinkClassToggle.setValue(\'notification\')`}},{runJS:{function:'hidePanel'}}])" dmx-class:item-selected="(panelLinkClassToggle.value == 'notification')">
                     <i class="bi-envelope-fill"></i>
                     <span>Notifications</span>
-                    <span class="badge color-primary">{{notification.data.query.where(`read`, 1, '!=').count()}} </span>
+                    <span class="badge bg-color-primary text-color-white">{{notification.data.query.where(`read`, 1, '!=').count()}} </span>
                   </a>
                 </li>
                 <li>
@@ -446,7 +442,7 @@
 
 
 function back() {
-    Framework7.instance.views.main.router.back()
+    dmx.parse("app.main.back('',{})")
 }
   </script>
   <script>
@@ -500,7 +496,12 @@ function showAddressSheet() {
     Framework7.instance.sheet.close(".address-sheet-swipe-to-step", true)
     }
 
-    console.log(window)
+    function showFlagProviderSheeet() {
+      Framework7.instance.sheet.open(".flag-provider-sheet", true)
+    }
+    function closeFlagProviderSheeet() {
+    Framework7.instance.sheet.close(".flag-provider-sheet", true)
+    }
   </script>
 
   <script>
@@ -537,7 +538,7 @@ function cart2Home() {
   if (Framework7.instance.views[0].router.previousRoute.path == "/order-tracking") {
     dmx.parse("app.main.navigate('/home',{})") 
   } else {
-  Framework7.instance.views.main.router.back()
+  dmx.parse("app.main.back('',{})")
   }
 }
 

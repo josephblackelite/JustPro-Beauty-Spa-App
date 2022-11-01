@@ -23,7 +23,7 @@
         <dmx-preloader id="justpropreloader" spinner="pulse" color="#ff6600"></dmx-preloader>
 
         <dmx-serverconnect id="orderinfo" url="https://api.justpro.me/api/customer_orders/order_details" site="JustPro-Spa-Backend" dmx-param:order_id="app.main.orderdetails.route.params.uuid" dmx-on:start="app.showPreloader('purple')" dmx-on:done="app.hidePreloader()" sockets="true"></dmx-serverconnect>
-        <dmx-serverconnect id="orderchildren" url="https://api.justpro.me/api/customer_orders/order_items_details" site="JustPro-Spa-Backend" dmx-param:order_uuid="app.main.orderdetails.route.params.uuid" dmx-on:start="app.showPreloader('purple')" dmx-on:done="app.hidePreloader()" sockets="true"></dmx-serverconnect>
+        <dmx-serverconnect id="orderchildren" url="https://api.justpro.me/api/customer_orders/order_items_details" site="JustPro-Spa-Backend" dmx-param:order_uuid="app.main.orderdetails.route.params.uuid" dmx-on:start="app.showPreloader('purple')" dmx-on:done="app.hidePreloader()" sockets="true" dmx-param:order_item_id="app.main.orderdetails.route.params.id"></dmx-serverconnect>
         <div class="container text-color-black mb-150 margin-top">
             <!-- image -->
             <div style="width: 100%;">
@@ -32,10 +32,14 @@
             <!-- order details meta -->
             <div class="margin-top">
                 <!-- Total -->
-                <div class="">
-                    <h3 class="nametag strong " style="font-size:22px !important;">
+                <div class="display-flex align-items-center justify-content-space-between">
+                    <h3 class="nametag strong no-margin" style="font-size:22px !important;">
                         {{app.main.orderdetails.orderchildren.data.query[0].total_amt.toNumber().formatCurrency('AED', '.', ',', 2)}}
                     </h3>
+                    <div class="display-flex align-items-center " dmx-on:click="run({'f7.dialog.confirm':{title:'Report provider?',text:'We will investigate the case as soon as possible. ',then:{steps:{runJS:{function:'showFlagProviderSheeet'}}}}})">
+                        <a href="">Report</a>
+                        <i class="bi-flag-fill text-color-primary padding"></i>
+                    </div>
                 </div>
                 <!-- Status - date -->
                 <div class="display-flex align-items-center justify-content-space-between">
@@ -117,7 +121,7 @@
                 <h3>
                     Provider
                 </h3>
-                <div class="bg-color-white display-flex align-items-center justify-content-space-between padding 20-radius-card">
+                <div class="bg-color-white display-flex align-items-center justify-content-space-between 20-radius-card">
                     <div class="padding display-flex align-items-center">
                         <img src="" alt="" width="50" height="50" class="elevation-1 img-radius-all" dmx-bind:src="app.main.orderdetails.orderchildren.data.query[0].parent_provider_avatar">
                         <div class="margin-left ">
@@ -133,9 +137,15 @@
                         </div>
                     </div>
 
-                    <a href="" dmx-bind:href="'tel: '+app.main.orderdetails.orderchildren.data.query[0].parent_provider_phone_number" class=" external">
-                        <i class="fa-solid fa-phone-flip fa-2x"></i>
-                    </a>
+                    <div class="display-flex align-items-center">
+                        <a href="" dmx-bind:href="'tel:'+app.main.orderdetails.orderchildren.data.query[0].parent_provider_phone_number" class="padding external">
+                            <i class="fa-solid fa-phone-flip fa-2x"></i>
+                        </a>
+                        <a href="" dmx-bind:href="'https://wa.me/'+app.main.orderdetails.orderchildren.data.query[0].parent_provider_phone_number" class="padding external">
+                            <i class="fa-brands fa-square-whatsapp text-color-green fa-2x"></i>
+                        </a>
+                    </div>
+
                 </div>
             </div>
             <!-- More actions -->
@@ -151,25 +161,81 @@
                     <i class="fa-solid fa-angle-right"></i>
                 </div> -->
                 <!-- Change appointment date -->
-                <div class="bg-color-white display-flex align-items-center justify-content-space-between padding 20-radius-card" dmx-hide="app.main.orderdetails.orderchildren.data.query[0].order_status">
+                <div class="bg-color-white display-flex align-items-center justify-content-space-between 20-radius-card padding-left padding-right" dmx-hide="app.main.orderdetails.orderchildren.data.query[0].order_status">
 
                     <div>
-                        <a class="link" style="width:100%" href="#!" dmx-on:click="app.main.navigate('/change-appointment-date/'+app.main.orderdetails.orderchildren.data.query[0].order_item_id,{})" dmx-hide="app.main.orderdetails.orderchildren.data.query[0].order_status">Change Appointment date</a>
+                        <a class="link" style="width:100%" href="#!" dmx-on:click="app.main.navigate('/change-appointment-date/'+app.main.orderdetails.orderchildren.data.query[0].order_item_id,{})" dmx-hide="app.main.orderdetails.orderchildren.data.query[0].order_status">
+                            <h4 class="strong text-color-primary">
+                                Change Appointment date
+                            </h4>
+                        </a>
                     </div>
 
-                    <i class="fa-solid fa-angle-right"></i>
+                    <!-- <i class="fa-solid fa-angle-right"></i> -->
 
                 </div>
                 <!-- Rate service -->
-                <div class="bg-color-white display-flex align-items-center justify-content-space-between padding 20-radius-card" dmx-show="(app.main.orderdetails.orderchildren.data.query[0].order_status == 'completed')">
+                <div class="bg-color-white display-flex align-items-center justify-content-space-between  20-radius-card padding-left padding-right" dmx-show="(app.main.orderdetails.orderchildren.data.query[0].order_status == 'completed')">
 
                     <div>
-                        <a href="#" class="link" dmx-on:click="app.main.navigate('/review-service/'+app.main.orderdetails.orderchildren.data.query[0].provider_service_id+'/'+app.main.orderdetails.orderchildren.data.query[0].employee_id+'/'+app.main.orderdetails.route.params.id,{})">Rate Service</a>
+                        <a href="#" class="link" dmx-on:click="app.main.navigate('/review-service/'+app.main.orderdetails.orderchildren.data.query[0].provider_service_id+'/'+app.main.orderdetails.orderchildren.data.query[0].employee_id+'/'+app.main.orderdetails.route.params.id,{})">
+                            <h4 class="strong text-color-primary">
+                                Rate Service
+                            </h4>
+                        </a>
                     </div>
 
-                    <i class="fa-solid fa-angle-right"></i>
+                    <!-- <i class="fa-solid fa-angle-right"></i> -->
 
                 </div>
+            </div>
+        </div>
+    </div>
+    <!-- Report provider -->
+    <div class="sheet-modal flag-provider-sheet" style="height:auto; --f7-sheet-bg-color: #fff;">
+        <div class="toolbar">
+            <div class="toolbar-inner justify-content-center">
+                <div class="left"></div>
+                <div class="title text-align-center">Report this provider?</div>
+                <div class="right"></div>
+            </div>
+        </div>
+
+        <div class="sheet-modal-inner">
+            <div class="block display-flex align-items-center justify-content-center">
+                <p>
+                    We will take your feed back seriously
+                </p>
+            </div>
+            <div class="sheet-modal-swipe-step">
+                <!-- -->
+                <div class="">
+                    <form action="https://api.justpro.me/api/provider/report_provider" is="dmx-serverconnect-form" method="post" id="report_provider_form" site="JustPro-Spa-Backend" dmx-on:success="run([{runJS:{function:'closeFlagProviderSheeet'}},{'f7.dialog.alert':{title:'Thank you',text:'We will carefully investigate the case and get back to you if needed.'}}])">
+                        <input id="customer_id" name="customer_id" type="hidden" dmx-bind:value="app.Current_user.data.customer.id">
+                        <input id="provider_id" name="provider_id" type="hidden" dmx-bind:value="app.main.orderdetails.orderchildren.data.query[0].provider_id">
+                        <div class="list" style="margin-top:-20px !important">
+                            <ul class="row">
+                                <li class="item-content item-input item-input-outline" style="width:100% !important">
+
+                                    <div class="item-inner" style="width:100% !important">
+                                        <div class="item-title item-floating-label strong">Type something <i class="bi bi-geo-alt-fill"></i></div>
+                                        <div class="item-input-wrap">
+                                            <textarea id="message" class="service-form" name="message" placeholder="Start typing"></textarea>
+                                            <span class="input-clear-button"></span>
+                                        </div>
+                                    </div>
+                                </li>
+                            </ul>
+                        </div>
+                    </form>
+                </div>
+            </div>
+
+            <div class="block" dmx-show="app.main.orderdetails.report_provider_form.message.value">
+                <!-- -->
+                <a href="#!" class="text-align-center button-18 bg-color-blue" dmx-on:click="app.main.orderdetails.report_provider_form.submit()" style="width:100% !important; margin-top:-20px !important"><span dmx-hide="app.main.orderdetails.report_provider_form.state.executing" style="width:100% !important">Submit</span>
+                    <div class="preloader color-purple" dmx-show="app.main.orderdetails.report_provider_form.state.executing"></div>
+                </a>
             </div>
         </div>
     </div>
