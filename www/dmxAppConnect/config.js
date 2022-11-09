@@ -464,6 +464,48 @@ dmx.config({
           }
         ]
       }
+    ],
+    "tailoringCart": [
+      {
+        "type": "text",
+        "name": "customer_id"
+      },
+      {
+        "type": "text",
+        "name": "provider_id"
+      },
+      {
+        "type": "text",
+        "name": "quantity"
+      },
+      {
+        "type": "text",
+        "name": "service_name"
+      },
+      {
+        "type": "text",
+        "name": "service_id"
+      },
+      {
+        "type": "text",
+        "name": "customer_address_id"
+      },
+      {
+        "type": "text",
+        "name": "appointmentDate"
+      },
+      {
+        "type": "text",
+        "name": "service_option"
+      },
+      {
+        "type": "text",
+        "name": "timeSlot_start"
+      },
+      {
+        "type": "text",
+        "name": "timeSlot_end"
+      }
     ]
   },
   "onboarding": {

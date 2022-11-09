@@ -1,0 +1,85 @@
+<!-- Wappler include head-page="index.html" is="dmx-app" id="alterationoptionspage" appConnect="local" framework7_6="With App Connect" framework7_icons="local" capacitor="local" -->
+
+<div class="page" path="/alteration-options-page" data-name="alteration-options-page" id="alterationoptionspage">
+
+  <div class="navbar no-hairline no-shadow no-border">
+    <div class="navbar-inner" style="padding-right:0px !important; padding-left:0px !important; margin-right:0px !important">
+      <div class="left">
+        <a href="" class="link back">
+          <i class="icon f7-icons">arrow_left</i>
+        </a>
+
+      </div>
+
+      <div class="title">Alteration</div>
+      <div class="right">
+        <a href="#" class="link panel-open icon-only" data-panel="left">
+
+          <i class="icon f7-icons">ellipsis_vertical</i>
+        </a>
+      </div>
+    </div>
+  </div>
+
+
+  <div class="toolbar toolbar-bottom toolbar-bottom-md">
+    <div class="toolbar-inner justify-content-center" style="padding:10px !important">
+      <button href="" class="button-large button-6 bg-color-primary button-fill rounded-xl" dmx-on:click="run([{run:{action:`app.cart_preFill.set(\'service_option_id\',app.main.alterationoptionspage.serverconnectform1.alteration_type.value);app.cart_preFill.set(\'quantity\',app.main.alterationoptionspage.serverconnectform1.quantity.value)`}},{run:{action:`app.main.navigate(\'/tailoring-appoinment-page/99\',{})`}}])"><span dmx-hide="app.main.updateprofile.update_profile_form.state.executing" style="width:100% !important">Continue</span>
+        <div class="preloader color-purple" dmx-show="app.main.updateprofile.update_profile_form.state.executing"></div>
+      </button>
+    </div>
+  </div>
+  <div class="page-content wappler-block">
+
+    <div class="container pt-50">
+      <div class="block">
+        <h2>Alteration type option</h2>
+      </div>
+      <form action="
+      " is="dmx-serverconnect-form" method="post" id="serverconnectform1">
+        <div class="list">
+          <ul>
+            <li>
+              <div class="item-content item-input">
+                <div class="item-inner">
+                  <div class="item-title item-label">Select alteration type</div>
+                  <div class="item-input-wrap">
+                    <select id="alteration_type" class="form-control profile-form">
+                      <option value="zipper">Zipper</option>
+                      <option value="size reduction">Size reduction</option>
+                      <option value="tear amendment">Tear amendment</option>
+                    </select>
+                  </div>
+                </div>
+              </div>
+            </li>
+          </ul>
+          <ul>
+            <li>
+              <div class="item-content item-input">
+                <div class="item-inner">
+                  <div class="item-title item-label">How many?</div>
+                  <div class="item-input-wrap">
+                    <select id="quantity" class="form-control profile-form">
+                      <option selected="" value="1">1</option>
+                      <option value="2">2</option>
+                      <option value="3">3</option>
+                      <option value="4">4</option>
+                      <option value="5">5</option>
+                      <option value="6">6</option>
+                      <option value="7">7</option>
+                      <option value="8">8</option>
+                      <option value="9">9</option>
+                      <option value="10">10</option>
+                    </select>
+                  </div>
+                </div>
+              </div>
+            </li>
+          </ul>
+        </div>
+
+      </form>
+    </div>
+  </div>
+</div>

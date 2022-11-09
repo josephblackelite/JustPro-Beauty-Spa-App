@@ -126,7 +126,7 @@
           run: {action: "{{app.hideSplashScreen.run()}}"}
         },
         {
-          run: {action: "{{app.main.navigate('/home',{})}}"}
+          run: {action: "{{app.main.navigate('/section-prompt',{})}}"}
         }
       ]
     },
@@ -152,6 +152,7 @@
 
 
     <dmx-datastore id="Cart"></dmx-datastore>
+    <dmx-datastore id="tailoringCart"></dmx-datastore>
 
 
     <dmx-serverconnect id="notification" url="https://api.justpro.me/api/notification/list_notification_4_customer" site="JustPro-Spa-Backend" dmx-param:user_id="local_store.data.user_id" sockets="true" dmx-param:customer_id="Current_user.data.customer.id"></dmx-serverconnect>
@@ -231,6 +232,12 @@
             </a>
             <div class="nav-bar list menu-list dz-list">
               <ul>
+                <li>
+                  <a class="item-link" dmx-on:click="run([{run:{action:`app.main.navigate(\'/section-prompt\',{});app.panelLinkClassToggle.setValue(\'section-prompt\')`}},{runJS:{function:'hidePanel'}}])" dmx-class:item-selected="(panelLinkClassToggle.value == 'section-prompt')">
+                    <i class="bi-shuffle"></i>
+                    <span>Switch section</span>
+                  </a>
+                </li>
                 <li>
                   <a class="item-link" dmx-on:click="run([{run:{action:`app.main.navigate(\'/home\',{});app.panelLinkClassToggle.setValue(\'home\')`}},{runJS:{function:'hidePanel'}}])" dmx-class:item-selected="(panelLinkClassToggle.value == 'home')">
                     <i class="bi bi-house-fill"></i>

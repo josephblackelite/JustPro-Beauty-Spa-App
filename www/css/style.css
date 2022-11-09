@@ -4692,7 +4692,11 @@ height:50px !important;
   border-bottom-left-radius: 20px;
   border-bottom-right-radius: 20px;}
 
-.20-radius-card {}
+.20-radius-card {
+  border-top-left-radius: 20px;
+  border-top-right-radius: 20px;
+  border-bottom-left-radius: 20px;
+  border-bottom-right-radius: 20px;}
 
 .img-radius-all {}
 

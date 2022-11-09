@@ -1,5 +1,9 @@
 var routes = [
   {
+    "path": "/home-tailoring",
+    "url": "./home-tailoring.html"
+  },
+  {
     "path": "/advert/:id",
     "url": "./adverts.html"
   },
@@ -124,5 +128,25 @@ var routes = [
   {
     "path": "/location-permission-page",
     "url": "./location-permission-page.html"
+  },
+  {
+    "path": "/section-prompt",
+    "url": "./section-prompt.html"
+  },
+  {
+    "path": "/tailoring-appoinment-page/:provider_id",
+    "url": "./tailoring-appoinment-page.html"
+  },
+  {
+    "path": "/tailoring-order-confirmation",
+    "url": "./tailoring-order-confirmation.html"
+  },
+  {
+    "path": "/tailoring-choose-address",
+    "url": "./tailoring-choose-address.html"
+  },
+  {
+    "path": "/alteration-options-page",
+    "url": "./alteration-options-page.html"
   }
 ]

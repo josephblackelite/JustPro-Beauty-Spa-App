@@ -1,0 +1,38 @@
+<!-- Wappler include head-page="index.html" is="dmx-app" id="sectionprompt" appConnect="local" framework7_6="With App Connect" framework7_icons="local" capacitor="local" -->
+
+<div class="page" path="/section-prompt" data-name="sectionprompt" id="sectionprompt">
+  <div class="page-content wappler-block pt-100">
+    <div class="container">
+      <div class="display-flex flex-direction-column justify-content-center ">
+        <img src="assets/images/otp_page_logo.png" class="img-radius-all" width="50" height="70">
+        <h2 class="text-align-center text-color-primary mt-50">What do you want today?</h2>
+      </div>
+
+      <div>
+        <div class="row">
+          <div class="padding col-100" dmx-on:click="app.main.navigate('/home-tailoring',{})">
+            <div class="bg-color-white padding 20-radius-card ">
+
+              <div>
+                <img width="100%" src="assets/images/tailoringImage.jpeg" />
+                <p class="text-align-center strong">Tailoring services</p>
+              </div>
+            </div>
+          </div>
+          <div class="padding col-100" dmx-on:click="app.main.navigate('/home',{})">
+            <div class="bg-color-white padding 20-radius-card ">
+
+              <div>
+                <img width="100%" src="assets/images/beautyImage.jpeg">
+                <p class="text-align-center strong">Beauty services</p>
+              </div>
+            </div>
+          </div>
+          <div class="col-50"></div>
+        </div>
+
+        <div></div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -122,5 +122,25 @@
   "location-permission-page.html": {
     "layoutPage": "",
     "description": ""
+  },
+  "section-prompt.html": {
+    "layoutPage": "",
+    "description": ""
+  },
+  "tailoring-appoinment-page.html": {
+    "layoutPage": "",
+    "description": ""
+  },
+  "tailoring-order-confirmation.html": {
+    "layoutPage": "",
+    "description": ""
+  },
+  "tailoring-choose-address.html": {
+    "layoutPage": "",
+    "description": ""
+  },
+  "alteration-options-page.html": {
+    "layoutPage": "",
+    "description": ""
   }
 }
