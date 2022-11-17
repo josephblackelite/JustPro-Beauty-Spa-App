@@ -40,6 +40,10 @@ dmx.config({
       {
         "type": "text",
         "name": "notification_permission_accepted"
+      },
+      {
+        "type": "text",
+        "name": "selected_industry"
       }
     ],
     "Show_proloader": [
@@ -208,6 +212,10 @@ dmx.config({
       {
         "type": "text",
         "name": "service_option_id"
+      },
+      {
+        "type": "text",
+        "name": "can_be_charged_immmediately"
       }
     ],
     "check_bookings_timeSlots": [
@@ -465,14 +473,22 @@ dmx.config({
         ]
       }
     ],
-    "tailoringCart": [
+    "appointmentCart": [
       {
         "type": "text",
-        "name": "customer_id"
+        "name": "provider_service_id"
       },
       {
         "type": "text",
-        "name": "provider_id"
+        "name": "product_price_id"
+      },
+      {
+        "type": "text",
+        "name": "employee_id"
+      },
+      {
+        "type": "text",
+        "name": "name"
       },
       {
         "type": "text",
@@ -480,23 +496,31 @@ dmx.config({
       },
       {
         "type": "text",
-        "name": "service_name"
+        "name": "amount"
       },
       {
         "type": "text",
-        "name": "service_id"
+        "name": "matrix"
       },
       {
         "type": "text",
-        "name": "customer_address_id"
+        "name": "total"
       },
       {
         "type": "text",
-        "name": "appointmentDate"
+        "name": "vat"
       },
       {
         "type": "text",
-        "name": "service_option"
+        "name": "product_avatar"
+      },
+      {
+        "type": "text",
+        "name": "address_id"
+      },
+      {
+        "type": "text",
+        "name": "appointment_date"
       },
       {
         "type": "text",
@@ -505,6 +529,26 @@ dmx.config({
       {
         "type": "text",
         "name": "timeSlot_end"
+      },
+      {
+        "type": "text",
+        "name": "customer_id"
+      },
+      {
+        "type": "text",
+        "name": "parent_provider_id"
+      },
+      {
+        "type": "text",
+        "name": "service_type"
+      },
+      {
+        "type": "text",
+        "name": "selected_timeSlot_expired"
+      },
+      {
+        "type": "text",
+        "name": "service_option_id"
       }
     ]
   },
@@ -678,6 +722,258 @@ dmx.config({
       "outputType": "array"
     },
     "check_bookings_timeSlots": [
+      {
+        "name": "checkDate",
+        "type": "object",
+        "sub": [
+          {
+            "name": "data",
+            "type": "object",
+            "sub": [
+              {
+                "name": "query_provider_appointment",
+                "type": "object",
+                "sub": [
+                  {
+                    "type": "number",
+                    "name": "id"
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "name": "state",
+            "type": "object",
+            "sub": [
+              {
+                "name": "executing",
+                "type": "boolean"
+              },
+              {
+                "name": "uploading",
+                "type": "boolean"
+              },
+              {
+                "name": "processing",
+                "type": "boolean"
+              },
+              {
+                "name": "downloading",
+                "type": "boolean"
+              }
+            ]
+          },
+          {
+            "name": "uploadProgress",
+            "type": "object",
+            "sub": [
+              {
+                "name": "position",
+                "type": "number"
+              },
+              {
+                "name": "total",
+                "type": "number"
+              },
+              {
+                "name": "percent",
+                "type": "number"
+              }
+            ]
+          },
+          {
+            "name": "downloadProgress",
+            "type": "object",
+            "sub": [
+              {
+                "name": "position",
+                "type": "number"
+              },
+              {
+                "name": "total",
+                "type": "number"
+              },
+              {
+                "name": "percent",
+                "type": "number"
+              }
+            ]
+          },
+          {
+            "name": "lastError",
+            "type": "object",
+            "sub": [
+              {
+                "name": "status",
+                "type": "number"
+              },
+              {
+                "name": "message",
+                "type": "text"
+              },
+              {
+                "name": "response",
+                "type": "text"
+              }
+            ]
+          },
+          {
+            "name": "status",
+            "type": "number"
+          }
+        ]
+      },
+      {
+        "name": "checkDate_timeSlot",
+        "type": "object",
+        "sub": [
+          {
+            "name": "data",
+            "type": "object",
+            "sub": [
+              {
+                "name": "querTimeSlot_booking",
+                "type": "array",
+                "sub": [
+                  {
+                    "type": "number",
+                    "name": "time_start"
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "name": "state",
+            "type": "object",
+            "sub": [
+              {
+                "name": "executing",
+                "type": "boolean"
+              },
+              {
+                "name": "uploading",
+                "type": "boolean"
+              },
+              {
+                "name": "processing",
+                "type": "boolean"
+              },
+              {
+                "name": "downloading",
+                "type": "boolean"
+              }
+            ]
+          },
+          {
+            "name": "uploadProgress",
+            "type": "object",
+            "sub": [
+              {
+                "name": "position",
+                "type": "number"
+              },
+              {
+                "name": "total",
+                "type": "number"
+              },
+              {
+                "name": "percent",
+                "type": "number"
+              }
+            ]
+          },
+          {
+            "name": "downloadProgress",
+            "type": "object",
+            "sub": [
+              {
+                "name": "position",
+                "type": "number"
+              },
+              {
+                "name": "total",
+                "type": "number"
+              },
+              {
+                "name": "percent",
+                "type": "number"
+              }
+            ]
+          },
+          {
+            "name": "lastError",
+            "type": "object",
+            "sub": [
+              {
+                "name": "status",
+                "type": "number"
+              },
+              {
+                "name": "message",
+                "type": "text"
+              },
+              {
+                "name": "response",
+                "type": "text"
+              }
+            ]
+          },
+          {
+            "name": "status",
+            "type": "number"
+          }
+        ]
+      },
+      {
+        "name": "repeat",
+        "type": "array",
+        "sub": [
+          {
+            "name": "$index",
+            "type": "number"
+          },
+          {
+            "name": "$number",
+            "type": "number"
+          },
+          {
+            "name": "$name",
+            "type": "text"
+          },
+          {
+            "name": "$value",
+            "type": "object"
+          }
+        ]
+      }
+    ],
+    "checkAppointmentCart_bookings_timeSlots1": [
+      {
+        "name": "repeat",
+        "type": "array",
+        "sub": [
+          {
+            "name": "$index",
+            "type": "number"
+          },
+          {
+            "name": "$number",
+            "type": "number"
+          },
+          {
+            "name": "$name",
+            "type": "text"
+          },
+          {
+            "name": "$value",
+            "type": "object"
+          }
+        ]
+      }
+    ],
+    "checkAppointmentCart_bookings_timeSlots": [
       {
         "name": "checkDate",
         "type": "object",

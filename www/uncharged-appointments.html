@@ -1,0 +1,105 @@
+<!-- Wappler include head-page="index.html" is="dmx-app" id="unchargedappointments" appConnect="local" framework7_6="With App Connect" framework7_icons="local" capacitor="local" components="{dmxPreloader:{}}" -->
+
+<div class="page" id="unchargedappointments" data-name="uncharged-appointments" path="/uncharged-appointments">
+  <dmx-serverconnect id="customers_orders" url="https://api.justpro.me/api/customer_app/bookings/list_orders_unpaid" site="JustPro-Spa-Backend" dmx-param:customer_id="app.Current_user.data.customer.id" dmx-param:order_status="app.main.unchargedappointments.booking_status_select_form.booking_status.value" sockets="true" dmx-on:start="app.showPreloader('purple')" dmx-on:done="app.hidePreloader()"></dmx-serverconnect>
+  <style>
+    .white {
+      background-color: #fff !important;
+      color: #000 !important;
+      font-weight: 600 !important;
+    }
+
+    .toggler {
+      background-color: #CA522A !important;
+      color: #fff !important;
+      font-weight: 800 !important;
+      font-family: 'Catamaran', sans-serif;
+    }
+  </style>
+  <dmx-value id="provider_booking_dates_query_param" dmx-bind:value="app.main.unchargedappointments.booking_status_select_form.booking_status.value"></dmx-value>
+
+  <div class="navbar no-hairline no-shadow no-border">
+    <div class="navbar-inner" style="padding-right:0px !important; padding-left:0px !important; margin-right:0px !important">
+      <div class="left">
+        <a href="#" class="link" dmx-on:click="run({runJS:{function:'cart2Home'}})">
+          <i class="icon f7-icons">arrow_left</i>
+        </a>
+      </div>
+      <div class="title text-brand">Appointments</div>
+      <div class="right">
+        <a href="#" class="link panel-open icon-only" data-panel="left">
+          <i class="icon f7-icons">ellipsis_vertical</i>
+        </a>
+      </div>
+    </div>
+  </div>
+
+
+
+  <div class="page-content content-area mb-150">
+    <dmx-preloader id="justpropreloader" spinner="pulse" color="#ff6600"></dmx-preloader>
+
+    <div class="mb-150">
+      <div class="">
+        <div class="block text-align-center padding-top padding-bottom" dmx-show="(!app.main.unchargedappointments.customers_orders.data.query_orders &amp;&amp; !app.main.unchargedappointments.customers_orders.data.query_orders_null)">
+          <h5 class="custom-font">You don't have any bookings yet.</h5>
+        </div>
+      </div>
+
+      <div class="block" style="display:none;">
+        <form action="" is="dmx-serverconnect-form" method="post" id="booking_status_select_form">
+          <div class="list" style="margin-top:-20px !important">
+            <ul class="row">
+              <li class="item-content item-input item-input-outline" style="width:100% !important">
+
+                <div class="item-inner" style="width:100% !important">
+
+                  <div class="item-input-wrap">
+                    <select id="booking_status" class="form-control" style="width:100% !important">
+                      <option value="">Select status</option>
+                      <option value="completed">Completed</option>
+                      <option value="accepted">Accepted</option>
+                    </select>
+                    <span class="input-clear-button"></span>
+                  </div>
+                </div>
+              </li>
+            </ul>
+          </div>
+        </form>
+      </div>
+      <!-- Not null -->
+      <div class="block" dmx-show="app.main.unchargedappointments.provider_booking_dates_query_param.value">
+        <h5 class="custom-font">{{'You have '+app.main.unchargedappointments.customers_orders.data.query_orders.count()+' past appointments.'}} </h5>
+
+      </div>
+      <div class="card mb-0 no-shadow card-outline" dmx-repeat:repeat_items_slots="app.main.unchargedappointments.customers_orders.data.query_orders" dmx-on:click="app.main.navigate('/order-details/'+id+'/'+order_uuid_id,{})">
+        <span class="badge margin-right margin-left" dmx-show="(order_status == null)">New</span>
+        <span class="badge margin-right margin-left" dmx-show="(order_status == 'accepted')" dmx-class:bg-color-green="(order_status == 'accepted')">Booked</span>
+        <span class="badge margin-right margin-left" dmx-show="(order_status == 'completed')" dmx-class:bg-color-blue="(order_status == 'completed')">Done</span>
+        <div class="card-content" dmx-on:click="app.main.navigate('/order-details/'+order_item_id,{})">
+
+          <div class="list media-list no-ios-edges">
+            <ul dmx-on:click="app.main.navigate('/order-details/'+order_item_id,{})">
+              <li class="item-content">
+                <div class="item-media">
+                  <img dmx-bind:src="item_image " width="60" height="60" />
+                </div>
+                <div class="item-inner text-color-black">
+                  <div class="item-title-row">
+                    <div class="item-title strong ">{{item_name.titlecase()}}</div>
+
+                  </div>
+                  <div class="item-subtitle">{{total_amt.toNumber().formatCurrency('AED', '.', ',', 2)}}</div>
+                  <div class="item-subtitle">{{date.formatDate('dd MMM y')}} at {{time_start.formatDate('hh:mm a')}}</div>
+                </div>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+
+    </div>
+  </div>
+</div>

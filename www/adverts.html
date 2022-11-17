@@ -2,26 +2,26 @@
 
 <div class="page" path="/advert/:id" data-name="adverts" id="adverts">
 
-    <dmx-serverconnect id="live_ads" url="https://api.justpro.me/api/ads/single_ad" site="JustPro-Spa-Backend" dmx-param:id="app.main.adverts.route.params.id" sockets="true"></dmx-serverconnect>
+    <dmx-serverconnect id="live_ads" url="https://api.justpro.me/api/customer_app/ads/single_ad" site="JustPro-Spa-Backend" dmx-param:id="app.main.adverts.route.params.id" sockets="true"></dmx-serverconnect>
 
 
-    <div class="padding-top padding-bottom">
-        <div class="navbar no-hairline no-shadow no-border">
-            <div class="navbar-inner" style="padding-right:0px !important; padding-left:0px !important; margin-right:0px !important">
-                <div class="left">
-                    <a href="#" class="link back">
-                        <i class="icon f7-icons">arrow_left</i>
-                    </a>
-                </div>
-                <div class="title">{{app.main.adverts.live_ads.data.query.title.titlecase()}} </div>
-                <div class="right">
-                    <a href="#" class="link panel-open icon-only" data-panel="left">
-                        <i class="icon f7-icons">ellipsis_vertical</i>
-                    </a>
-                </div>
+
+    <div class="navbar no-hairline no-shadow no-border bg-color-white">
+        <div class="navbar-inner" style="padding-right:0px !important; padding-left:0px !important; margin-right:0px !important">
+            <div class="left">
+                <a href="#" class="link back">
+                    <i class="icon f7-icons">arrow_left</i>
+                </a>
+            </div>
+            <div class="title">{{app.main.adverts.live_ads.data.query.title.titlecase()}} </div>
+            <div class="right">
+                <a href="#" class="link panel-open icon-only" data-panel="left">
+                    <i class="icon f7-icons">ellipsis_vertical</i>
+                </a>
             </div>
         </div>
     </div>
+
     <div class="page-content content-area">
         <dmx-preloader id="justpropreloader" spinner="pulse" color="#ff6600"></dmx-preloader>
         <div style="margin-bottom:150px !important">

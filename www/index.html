@@ -126,7 +126,7 @@
           run: {action: "{{app.hideSplashScreen.run()}}"}
         },
         {
-          run: {action: "{{app.main.navigate('/section-prompt',{})}}"}
+          run: {action: "{{app.main.navigate('/home',{})}}"}
         }
       ]
     },
@@ -142,21 +142,31 @@
     }
   }
 }</script>
+    <script is="dmx-flow" id="set_default_industry" type="text/dmx-flow" autorun>{
+  condition: {
+    if: "{{!local_store.data.selected_industry}}",
+    then: {
+      steps: {
+        run: {action: "{{app.local_store.set('selected_industry','beauty')}}"}
+      }
+    }
+  }
+}</script>
     <dmx-datetime id="date"></dmx-datetime>
     <dmx-value id="user_id"></dmx-value>
     <dmx-session-manager id="cart_preFill"></dmx-session-manager>
 
 
 
-    <dmx-serverconnect id="Current_user" url="https://api.justpro.me/api/security/logged_in_user_data" site="JustPro-Spa-Backend" dmx-param:user_id="local_store.data.user_id" sockets="true"></dmx-serverconnect>
+    <dmx-serverconnect id="Current_user" url="https://api.justpro.me/api/customer_app/security/logged_in_user_data" site="JustPro-Spa-Backend" dmx-param:user_id="local_store.data.user_id" sockets="true"></dmx-serverconnect>
 
 
     <dmx-datastore id="Cart"></dmx-datastore>
-    <dmx-datastore id="tailoringCart"></dmx-datastore>
+    <dmx-datastore id="appointmentCart"></dmx-datastore>
 
 
-    <dmx-serverconnect id="notification" url="https://api.justpro.me/api/notification/list_notification_4_customer" site="JustPro-Spa-Backend" dmx-param:user_id="local_store.data.user_id" sockets="true" dmx-param:customer_id="Current_user.data.customer.id"></dmx-serverconnect>
-    <dmx-serverconnect id="ads" url="https://api.justpro.me/api/ads/list_new_ads" site="JustPro-Spa-Backend" dmx-param:user_id="local_store.data.user_id" sockets="true" dmx-param:customer_id="Current_user.data.customer.id" dmx-param:channel="'customer'"></dmx-serverconnect>
+    <dmx-serverconnect id="notification" url="https://api.justpro.me/api/customer_app/notification/list_notification_4_customer" site="JustPro-Spa-Backend" dmx-param:user_id="local_store.data.user_id" sockets="true" dmx-param:customer_id="Current_user.data.customer.id"></dmx-serverconnect>
+    <dmx-serverconnect id="ads" url="https://api.justpro.me/api/customer_app/ads/list_new_ads" site="JustPro-Spa-Backend" dmx-param:user_id="local_store.data.user_id" sockets="true" dmx-param:customer_id="Current_user.data.customer.id" dmx-param:channel="'customer'"></dmx-serverconnect>
 
     <dmx-json-datasource id="countryList" is="dmx-serverconnect" url="countryList.json"></dmx-json-datasource>
 
@@ -233,12 +243,6 @@
             <div class="nav-bar list menu-list dz-list">
               <ul>
                 <li>
-                  <a class="item-link" dmx-on:click="run([{run:{action:`app.main.navigate(\'/section-prompt\',{});app.panelLinkClassToggle.setValue(\'section-prompt\')`}},{runJS:{function:'hidePanel'}}])" dmx-class:item-selected="(panelLinkClassToggle.value == 'section-prompt')">
-                    <i class="bi-shuffle"></i>
-                    <span>Switch section</span>
-                  </a>
-                </li>
-                <li>
                   <a class="item-link" dmx-on:click="run([{run:{action:`app.main.navigate(\'/home\',{});app.panelLinkClassToggle.setValue(\'home\')`}},{runJS:{function:'hidePanel'}}])" dmx-class:item-selected="(panelLinkClassToggle.value == 'home')">
                     <i class="bi bi-house-fill"></i>
                     <span>Home</span>
@@ -257,7 +261,12 @@
                     <span class="">Appointments</span>
                   </a>
                 </li>
-
+                <li>
+                  <a class="item-link" dmx-on:click="run([{run:{action:`app.main.navigate(\'/uncharged-appointments\',{});app.panelLinkClassToggle.setValue(\'uncharged\')`}},{runJS:{function:'hidePanel'}}])" dmx-class:item-selected="(panelLinkClassToggle.value == 'uncharged')">
+                    <i class="bi bi-person-fill"></i>
+                    <span class="">Uncharged appointment</span>
+                  </a>
+                </li>
                 <li>
                   <a class="item-link" dmx-on:click="run([{run:{action:`app.main.navigate(\'/profile\',{});app.panelLinkClassToggle.setValue(\'profile\')`}},{runJS:{function:'hidePanel'}}])" dmx-class:item-selected="(panelLinkClassToggle.value == 'profile')">
                     <i class="bi bi-person-fill"></i>

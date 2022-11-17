@@ -5,114 +5,6 @@
 
 
 
-  <div id="rating_popup" class="popup popup-push" swipe-to-close="true">
-    <div class="view navbar-fixed view-main" id="rating">
-      <div class="pages navbar-through toolbar-through">
-        <div class="page" data-name="review-service" id="reviewservice">
-
-          <dmx-value id="varQty" dmx-bind:value="app.main.reviewservice.qty_form.quantity.value"></dmx-value>
-          <dmx-serverconnect id="service_info" url="https://api.justpro.me/api/services/service_info" site="JustPro-Spa-Backend" dmx-param:service_id="app.main.reviewservice.route.params.service_id" sockets="true" dmx-param:service_offered_id="app.main.reviewservice.route.params.service_id"></dmx-serverconnect>
-          <dmx-serverconnect id="review" url="https://api.justpro.me/api/services/query_item_review" site="JustPro-Spa-Backend" dmx-param:service_id="app.main.home.last_item_query_4_review.data.query_order_items.provider_service_id" sockets="true" dmx-param:customer_id="app.Current_user.data.customer.id" credentials></dmx-serverconnect>
-
-
-          <script is="dmx-flow" id="ShowSlides" type="text/dmx-flow" autorun>[
-                  {
-                    wait: {delay: 2000}
-                  },
-                  {
-                    condition: {
-                      if: "{{app.main.reviewservice.service_info.data.queryServices.services_photos}}",
-                      then: {
-                        steps: {
-                          runJS: {
-                            function: "showSlides",
-                            args: ["1"]
-                          }
-                        }
-                      }
-                    }
-                  }
-                ]</script>
-          <div class="padding-top padding-bottom">
-            <div class="navbar no-hairline no-shadow no-border">
-              <div class="navbar-inner" style="padding-right:0px !important; padding-left:0px !important; margin-right:0px !important">
-
-              </div>
-            </div>
-
-          </div>
-          <div class="toolbar toolbar-bottom toolbar-bottom-md no-shadow">
-            <div class="toolbar-inner justify-content-center" style="padding:10px !important">
-              <button class="item-link list-button button-large rounded-xl button-6 bg-color-primary button-fill text-color-white" dmx-on:click="run({condition:{if:`(app.main.home.rating_popup.rating.reviewservice.rate_service.rate.value &gt; 0)`,then:{steps:{run:{action:`app.main.home.rating_popup.rating.reviewservice.rate_service.submit()`}}},else:{steps:{'f7.dialog.alert':{title:'Did not rate service?',text:'Click one of the rating buttons to continue '}}}}})" style="width:100%" dmx-bind:disabled="app.main.home.rating_popup.rating.reviewservice.rate_service.state.executing">Submit Review</button>
-            </div>
-          </div>
-          <div class="page-content bg-gray pt-0 mr-0 ml-0">
-
-            <div class="mb-150">
-              <div class="row">
-                <div class="col-100 block">
-                  <h3 class="title text-align-center strong">{{'Loved your '+last_item_query_4_review.data.query_order_items.item_name+' appointment with '+last_item_query_4_review.data.query_order_items.Provider_name.capitalize()+'? rate it!'}}</h3>
-                  <div class="text-align-center">
-                    <input type="hidden" name="vat_amount" id="vat_amount" dmx-bind:value="app.main.reviewservice.working_total.value.toNumber().per(5)">
-                    <input type="hidden" name="working_total" id="working_total" dmx-bind:value="(app.main.reviewservice.service_info.data.queryServices.product_amt.toNumber() * (app.main.reviewservice.qty_form.quantity.value * app.main.reviewservice.qty_form.matrix.value))">
-                    <input type="hidden" name="overall_total" id="overall_total" dmx-bind:value="(app.main.reviewservice.working_total.value.toNumber() + app.main.reviewservice.vat_amount.value.toNumber())">
-                  </div>
-                </div>
-                <div class="col-100 block up-50">
-                  <div class="row">
-                    <div class="col-100">
-                      <div class="">
-                        <div class="reviews-head text-align-center">
-                          <p class="text-black">Please take a minute to provide us feedback about your experience. It will help other users understand the quality of service to expect.</p>
-                        </div>
-                      </div>
-                    </div>
-
-                    <div class="col-100 up-10">
-                      <form is="dmx-serverconnect-form" id="rate_service" method="post" action="https://api.justpro.me/api/services/rate_services" site="JustPro-Spa-Backend" dmx-on:success="run([{'f7.dialog.alert':{title:'Thank you',text:'Thank you. Your feedback has been submitted'}},{run:{action:`app.main.home.rating_popup.close()`}}])">
-
-                        <div class="list no-hairlines-md">
-                          <ul>
-                            <li class="item-content item-input item-input-with-info border">
-                              <div class="item-inner">
-                                <div class="item-input-wrap">
-                                  <textarea type="text" id="comment" name="comment" placeholder="Type Review" class=""></textarea>
-                                  <span class="input-clear-button"></span>
-                                  <div class="item-input-info">What was your experience?</div>
-                                </div>
-                              </div>
-                            </li>
-                          </ul>
-                        </div>
-                        <div class="block">
-                          <div class="col-lg-100 text-align-center justify-content-center">
-                            <span class="fa fa-star fa-3x text-color-gray" dmx-on:click="app.main.home.rating_popup.rating.reviewservice.rate_service.rate.setValue(1)" dmx-class:checked="(app.main.home.rating_popup.rating.reviewservice.rate_service.rate.value &gt; 0)"></span>
-                            <span class="fa fa-star fa-3x text-color-gray" dmx-on:click="app.main.home.rating_popup.rating.reviewservice.rate_service.rate.setValue(2)" dmx-class:checked="(app.main.home.rating_popup.rating.reviewservice.rate_service.rate.value &gt; 1)"></span>
-                            <span class="fa fa-star fa-3x text-color-gray" dmx-on:click="app.main.home.rating_popup.rating.reviewservice.rate_service.rate.setValue(3)" dmx-class:checked="(app.main.home.rating_popup.rating.reviewservice.rate_service.rate.value &gt; 2)"></span>
-                            <span class="fa fa-star fa-3x text-color-gray" dmx-on:click="app.main.home.rating_popup.rating.reviewservice.rate_service.rate.setValue(4)" dmx-class:checked="(app.main.home.rating_popup.rating.reviewservice.rate_service.rate.value &gt; 3)"></span>
-                            <span class="fa fa-star fa-3x text-color-gray" dmx-on:click="app.main.home.rating_popup.rating.reviewservice.rate_service.rate.setValue(5)" dmx-class:checked="(app.main.home.rating_popup.rating.reviewservice.rate_service.rate.value &gt; 4)"></span>
-                          </div>
-                        </div>
-                        <input name="employee_id" id="employee_id" dmx-bind:value="app.main.home.last_item_query_4_review.data.query_order_items.provider_employee_id" type="hidden">
-                        <input name="company_id" id="company_id" dmx-bind:value="app.main.home.last_item_query_4_review.data.query_order_items.provider_id" type="hidden">
-
-                        <input id="review_id" name="review_id" type="hidden">
-                        <input id="rate" name="rating" type="hidden"><input id="customer_id" name="customer_id" dmx-bind:value="app.Current_user.data.customer.id" type="hidden"><input id="service_id" name="service_id" dmx-bind:value="app.main.home.last_item_query_4_review.data.query_order_items.provider_service_id" type="hidden">
-                        <input id="order_item_id" name="order_item_id" dmx-bind:value="app.main.home.last_item_query_4_review.data.query_order_items.id" type="hidden">
-                      </form>
-                    </div>
-                  </div>
-
-                </div>
-              </div>
-              <div class="mb-50" style="margin-top:-20px !important">
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
   <script is="dmx-flow" id="pushPrompt_notifPrompt" type="text/dmx-flow" autorun>{
   meta: {
     $param: [
@@ -250,15 +142,13 @@
 ]</script>
 
   <dmx-datetime id="var1"></dmx-datetime>
-  <dmx-serverconnect id="queryServices" url="https://api.justpro.me/api/services/query_services" site="JustPro-Spa-Backend" dmx-param:category="app.local_store.data.state" dmx-on:start="app.showPreloader('deeporange')" dmx-on:done="app.hidePreloader()" dmx-param:product_delivery="app.local_store.data.service_location"></dmx-serverconnect>
-  <dmx-serverconnect id="querySalons" url="https://api.justpro.me/api/provider/all_salons" site="JustPro-Spa-Backend" dmx-param:category="app.main.home.category_filter.value" dmx-on:start="app.showPreloader('deeporange')" dmx-on:done="app.hidePreloader()" dmx-param:product_delivery="app.main.home.providers.value" dmx-param:customer_lat="app.latitude.value" dmx-param:customer_long="app.longitude.value" dmx-param:provider_type="app.local_store.data.service_location" dmx-param:search_by_name="app.main.home.search_by_name.value"></dmx-serverconnect>
-  <dmx-serverconnect id="home_service_providers" url="https://api.justpro.me/api/provider/home_services_providers" site="JustPro-Spa-Backend" dmx-param:category="app.main.home.category_filter.value" dmx-on:start="app.showPreloader('deeporange')" dmx-on:done="app.hidePreloader()" dmx-param:product_delivery="app.main.home.providers.value" dmx-param:customer_lat="app.latitude.value" dmx-param:customer_long="app.longitude.value" dmx-param:provider_type="app.local_store.data.service_location" dmx-param:search_by_name="app.main.home.search_by_name.value"></dmx-serverconnect>
+
+  <dmx-serverconnect id="querySalons" url="https://api.justpro.me/api/customer_app/provider/all_salons" site="JustPro-Spa-Backend" dmx-param:category="app.main.home.category_filter.value" dmx-on:start="app.showPreloader('deeporange')" dmx-on:done="app.hidePreloader()" dmx-param:product_delivery="app.main.home.providers.value" dmx-param:customer_lat="app.latitude.value" dmx-param:customer_long="app.longitude.value" dmx-param:provider_type="app.local_store.data.service_location" dmx-param:search_by_name="app.main.home.search_by_name.value"></dmx-serverconnect>
+  <dmx-serverconnect id="home_service_providers" url="https://api.justpro.me/api/customer_app/provider/home_services_providers" site="JustPro-Spa-Backend" dmx-param:category="app.main.home.category_filter.value" dmx-on:start="app.showPreloader('deeporange')" dmx-on:done="app.hidePreloader()" dmx-param:product_delivery="app.main.home.providers.value" dmx-param:customer_lat="app.latitude.value" dmx-param:customer_long="app.longitude.value" dmx-param:provider_type="app.local_store.data.service_location" dmx-param:search_by_name="app.main.home.search_by_name.value"></dmx-serverconnect>
   <dmx-value id="category_filter" dmx-bind:value="app.local_store.data.state"></dmx-value>
   <dmx-value id="popover_description"></dmx-value>
-
-  <dmx-serverconnect id="selected_address_data" url="https://api.justpro.me/api/customer_address_actions/selected_address_data" site="JustPro-Spa-Backend" dmx-param:address_id="app.main.home.address_select_form.select_address.value" sockets="true"></dmx-serverconnect>
-  <dmx-serverconnect id="available_categories" url="https://api.justpro.me/api/admin/service_workflows/query_main_categories" site="JustPro-Spa-Backend" dmx-param:address_id="app.main.home.address_select_form.select_address.value" sockets="true" dmx-param:product_delivery="app.local_store.data.service_location"></dmx-serverconnect>
-  <dmx-serverconnect id="category" url="https://api.justpro.me/api/services/single_category" site="JustPro-Spa-Backend" dmx-param:provider_id="app.main.providerservicespage.route.params.provider_id" dmx-param:category="app.main.providerservicespage.route.params.category" dmx-param:search_by_name="app.main.providerservicespage.search.value" dmx-on:start="app.showPreloader('deeporange')" dmx-on:done="app.hidePreloader()" sockets="true" dmx-param:category_id="app.main.home.category_filter.value"></dmx-serverconnect>
+  <dmx-serverconnect id="available_categories" url="https://api.justpro.me/api/customer_app/service_workflows/query_main_categories" site="JustPro-Spa-Backend" dmx-param:address_id="app.main.home.address_select_form.select_address.value" sockets="true" dmx-param:product_delivery="app.local_store.data.service_location" dmx-param:industry="app.local_store.data.selected_industry"></dmx-serverconnect>
+  <dmx-serverconnect id="category" url="https://api.justpro.me/api/customer_app/service_workflows/single_category" site="JustPro-Spa-Backend" dmx-param:provider_id="app.main.providerservicespage.route.params.provider_id" dmx-param:category="app.main.providerservicespage.route.params.category" dmx-param:search_by_name="app.main.providerservicespage.search.value" dmx-on:start="app.showPreloader('deeporange')" dmx-on:done="app.hidePreloader()" sockets="true" dmx-param:category_id="app.main.home.category_filter.value"></dmx-serverconnect>
   <style>
     .strong {
       font-weight: 600 !important;
@@ -281,42 +171,20 @@
         <div class="subnavbar no-shadow no-border bg-color-white">
           <div class="segmented text-color-primary nametag no-margin display-flex align-items-center justify-content-center segmented-raised" style="margin-top:0px !important; margin-bottom:0px !important">
             <button class="button strong text-color-primary " dmx-on:click="app.local_store.set('service_location','home')" style="font-weight: 800;" dmx-class:toggler="(app.local_store.data.service_location == 'home')"><span style="height: 100%;">Home Service</span> </button>
-            <button class="button strong text-color-primary" dmx-on:click="app.local_store.set('service_location','salon')" style="font-weight: 800;" dmx-class:toggler="(app.local_store.data.service_location == 'salon')">Salon Visit</button>
+            <button class="button strong text-color-primary" dmx-on:click="app.local_store.set('service_location','salon')" style="font-weight: 800;" dmx-class:toggler="(app.local_store.data.service_location == 'salon')">Shop Visit</button>
             <span class="segmented-highlight"></span>
           </div>
-          <!-- <div class="row no-margin" style="width: 100%; height: 100%; padding-top:0px !important; padding-bottom:0px !important; margin-bottom:0px !important; margin-top:0px !important">
-            <div class="col-100" style="height: 100%; margin-top:-10px !important; margin-bottom:-10px !important">
-             
 
-            </div>
-          </div> -->
         </div>
-        <!-- <div class="subnavbar justify-content-right border-top" style="border-top:2px solid #ccc" data-intro="Filter Services" data-title="Welcome!">
-                    <div class="list no-margin no-padding" style="width:100%;">
-                        <ul style="width:100%;">
-                            <li style="width:100%;">
-                                <a class="item-link smart-select smart-select-init text-color-black" data-open-in="popup" data-searchbar="true" data-searchbar-placeholder="Search Services" style="position:relative">
-                                    <select class="text-color-black custom-font nametag" style="width:100%;" name="selector" id="selector" dmx-on:changed="app.local_store.set('state',app.main.home.category_filter.value)" dmx-bind:value="app.local_store.data.state" dmx-bind:options="app.main.home.available_categories.data.query_categories" optiontext="category_name.capitalize()" optionvalue="id">
-                                        <option value="" class="nametag"><i class="bi bi-search"></i> Show All</option>
-                                    </select>
-                                    <div class="item-content">
-                                        <div class="item-inner">
-                                            <div class="item-title custom-font strong smallfont"><i class="bi bi-search"></i> Search For Service</div>
-                                        </div>
-                                    </div>
-                                </a>
-                            </li>
-                        </ul>
-                    </div>
-                </div> -->
+
         <div class="left">
           <img src="assets/images/logo-pages.png">
         </div>
         <div class="title">
         </div>
         <div class="right mr-0" style="mr-0">
-          <div class="media" dmx-show="app.Cart.data.count()>0">
-            <a href="/order-confirmation"> <i class="bi bi-basket-fill text-color-primary"></i> <sup>{{app.Cart.data.count()}}</sup></a>
+          <div class="media" dmx-show="((app.Cart.data.count() &gt; 0) || (appointmentCart.data.count() &gt; 0))">
+            <a href="/order-confirmation"> <i class="bi bi-basket-fill text-color-primary"></i> <sup>{{(app.Cart.data.count() + appointmentCart.data.count())}}</sup></a>
           </div>
           <a href="#" class="link panel-open icon-only mr-0 pr-0" data-panel="left" style="margin-right:-30px !important; padding-right:-30px !important">
             <i class="icon f7-icons">ellipsis_vertical</i>
@@ -334,10 +202,10 @@
       <a class="fab-label-button" href="#"><span>2</span><span class="fab-label">Action 2</span></a> -->
     </div>
   </div>
-  <div class="toolbar toolbar-bottom toolbar-bottom-md no-shadow" dmx-show="app.Cart.data.count()>0">
+  <div class="toolbar toolbar-bottom toolbar-bottom-md no-shadow" dmx-show="((app.Cart.data.count() &gt; 0) || (appointmentCart.data.count() &gt; 0))">
     <div class="toolbar-inner justify-content-center" style="padding:10px !important;">
       <a href="/order-confirmation" class="button-6 button-large rounded-lg text-color-white brand-bg" style="width:100%">
-        {{app.Cart.data.count()}} &nbsp;<i class="bi bi-basket"></i> &nbsp; View basket &nbsp;<i class="bi-arrow-right-circle-fill"></i></a>
+        {{(app.Cart.data.count() + appointmentCart.data.count())}} &nbsp;<i class="bi bi-basket"></i> &nbsp; View basket &nbsp;<i class="bi-arrow-right-circle-fill"></i></a>
     </div>
   </div>
 
@@ -391,8 +259,17 @@
 
 
       <div class="row text-color-black padding-left padding-right  no-padding-top">
-        <div class="col-100 display-flex align-items-center justify-content-space-between mb-0">
-          <p class="strong">What services do you need?</p>
+        <div class="col-100 display-flex align-items-center justify-content-space-between mb-0 padding-top padding-bottom">
+          <div class="display-flex align-items-center">
+            <p class="no-margin-bottom no-margin-top margin-right"> Exploring</p>
+            <a href="/industries">
+              <h4 class="strong no-margin-bottom no-margin-top  margin-right text-color-primary">
+                {{app.local_store.data.selected_industry.capitalize()}}
+              </h4>
+            </a>
+
+          </div>
+
           <a href="" dmx-on:click="app.local_store.remove('state')">Show all</a>
         </div>
         <div class="col-100 display-flex no-margin-top up-10">

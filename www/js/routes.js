@@ -148,5 +148,13 @@ var routes = [
   {
     "path": "/alteration-options-page",
     "url": "./alteration-options-page.html"
+  },
+  {
+    "path": "/industries",
+    "url": "./industries.html"
+  },
+  {
+    "path": "/uncharged-appointments",
+    "url": "./uncharged-appointments.html"
   }
 ]

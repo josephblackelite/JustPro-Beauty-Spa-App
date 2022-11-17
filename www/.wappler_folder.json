@@ -142,5 +142,13 @@
   "alteration-options-page.html": {
     "layoutPage": "",
     "description": ""
+  },
+  "industries.html": {
+    "layoutPage": "",
+    "description": ""
+  },
+  "uncharged-appointments.html": {
+    "layoutPage": "",
+    "description": ""
   }
 }

@@ -1,28 +1,26 @@
 <!-- Wappler include head-page="index.html" is="dmx-app" id="checkout" appConnect="local" framework7_6="With App Connect" framework7_icons="local" capacitor="local" components="{dmxSwiper:{},dmxFormRepeat:{},dmxFormatter:{},dmxPreloader:{},dmxValidator:{},dmxDatastore:{},dmxScheduler:{},dmxSockets:{},dmxGooglePlaces:{}}" -->
 
 <div class="page" id="checkout" data-name="checkout" path="/checkout/:address_id">
-  <div class="padding-top padding-bottom">
-    <div class="navbar no-hairline no-shadow no-border">
-      <div class="navbar-inner" style="padding-right:0px !important; padding-left:0px !important; margin-right:0px !important">
-        <div class="left">
-          <a href="#" class="link back">
-            <i class="icon f7-icons">arrow_left</i>
-          </a>
 
-        </div>
+  <div class="navbar no-hairline no-shadow no-border">
+    <div class="navbar-inner" style="padding-right:0px !important; padding-left:0px !important; margin-right:0px !important">
+      <div class="left">
+        <a href="#" class="link back">
+          <i class="icon f7-icons">arrow_left</i>
+        </a>
 
-        <div class="title">Checkout</div>
-        <div class="right">
-          <a href="#" class="link panel-open icon-only" data-panel="left">
+      </div>
 
-            <i class="icon f7-icons">ellipsis_vertical</i>
-          </a>
-        </div>
+      <div class="title">Checkout</div>
+      <div class="right">
+        <a href="#" class="link panel-open icon-only" data-panel="left">
+
+          <i class="icon f7-icons">ellipsis_vertical</i>
+        </a>
       </div>
     </div>
-    <dmx-value id="last_order_id"></dmx-value>
   </div>
-
+  <dmx-value id="last_order_id"></dmx-value>
   <dmx-serverconnect id="customerPaymentMethods" url="https://api.justpro.me/api/stripe/customerPaymentMethods" site="JustPro-Spa-Backend" dmx-param:stripecustomerid="app.Current_user.data.customer.stripe_customer_id" sockets="true" dmx-param:customer_id="app.Current_user.data.customer.id" dmx-on:start="app.showPreloader('purple')" dmx-on:done="app.hidePreloader()"></dmx-serverconnect>
   <dmx-serverconnect id="lastOrder" url="https://api.justpro.me/api/customer_orders/last_order" site="JustPro-Spa-Backend" dmx-param:customer_id="app.Current_user.data.customer.id" sockets="true"></dmx-serverconnect>
   <script is="dmx-flow" id="check_last_order" type="text/dmx-flow">[
@@ -121,6 +119,10 @@
     output: true
   }
 }</script>
+  <script is="dmx-flow" id="clear_cart_prefill" type="text/dmx-flow" autorun="">{
+  run: {action: "{{app.cart_preFill.removeAll()}}"}
+}</script>
+  <dmx-value id="customer_selected_payment_method"></dmx-value>
 
   <div class="toolbar toolbar-bottom toolbar-bottom-md no-shadow">
     <div class="toolbar-inner justify-content-center" style="padding:10px !important">
@@ -155,7 +157,7 @@
                 </div>
               </div>
             </div>
-            <button class="brand-bg text-color-white button-6 margin-top custom-font smallfont" dmx-on:click="run({condition:{if:`(app.Cart.data.where(\`selected_timeSlot_expired\`, 1, \'==\').count() &gt; 0)`,then:{steps:{run:{action:`app.main.navigate(\'/order-confirmation\',{})`}}},else:{steps:{'f7.dialog.confirm':{title:'Ready to pay?',text:`\'You are about to pay with your card ending in \'+last4+\' ?\'`,then:{steps:{run:{action:`app.main.checkout.bill_selected_card.selected_payment_method.setValue(stripe_payment_method_id);app.main.checkout.bill_selected_card.submit()`}}}}}}}})" dmx-bind:disabled="(app.main.checkout.bill_selected_card.state.executing &amp;&amp; (app.main.checkout.bill_selected_card.selected_payment_method.value == stripe_payment_method_id))" style="width:285px !important"><span dmx-hide="(app.main.checkout.bill_selected_card.state.executing &amp;&amp; (app.main.checkout.bill_selected_card.selected_payment_method.value == stripe_payment_method_id))" class="smallfont">Click to Pay with this card</span>
+            <button class="brand-bg text-color-white button-6 margin-top custom-font smallfont" dmx-on:click="run([{run:{action:`app.main.checkout.customer_selected_payment_method.setValue(stripe_payment_method_id)`}},{condition:{if:`((app.Cart.data.where(\`selected_timeSlot_expired\`, 1, \'==\').count() &gt; 0) || (app.appointmentCart.data.where(\`selected_timeSlot_expired\`, 1, \'==\').count() &gt; 0))`,then:{steps:{run:{action:`app.main.navigate(\'/order-confirmation\',{})`}}},else:{steps:{'f7.dialog.confirm':{title:'Ready to pay?',text:`\'You are about to pay with your card ending in \'+last4+\' ?\'`,then:{steps:{condition:{if:`(app.appointmentCart.data.count() &gt; 0)`,then:{steps:{run:{action:`app.main.checkout.appointmentBooking.submit()`}}},else:{steps:{condition:{if:`(app.Cart.data.count() &gt; 0)`,then:{steps:{run:{action:`app.main.checkout.bill_selected_card.submit()`}}}}}}}}}}}}}}])" dmx-bind:disabled="(app.main.checkout.bill_selected_card.state.executing &amp;&amp; (app.main.checkout.bill_selected_card.selected_payment_method.value == stripe_payment_method_id))" style="width:285px !important"><span dmx-hide="(app.main.checkout.bill_selected_card.state.executing &amp;&amp; (app.main.checkout.bill_selected_card.selected_payment_method.value == stripe_payment_method_id))" class="smallfont">Click to Pay with this card</span>
               <span class="preloader color-white" dmx-show="(app.main.checkout.bill_selected_card.state.executing &amp;&amp; (app.main.checkout.bill_selected_card.selected_payment_method.value == stripe_payment_method_id))"></span>
             </button>
 
@@ -215,6 +217,11 @@
           </div>
         </div>
       </div>
+      <div class="block" dmx-show="(appointmentCart.data.count() &gt; 0)">
+        <h3>
+          {{appointmentCart.data.count()}} non billable items will be submitted with this order.
+        </h3>
+      </div>
 
       <div class="block" style="margin-bottom:150px !important">
         <p><img src="assets/images/pbystripe.png"></p>
@@ -241,8 +248,9 @@
 
     </div>
   </form>
-  <form is="dmx-serverconnect-form" id="bill_selected_card" method="post" action="https://api.justpro.me/api/stripe/bill_customer_card" site="JustPro-Spa-Backend" dmx-on:success="run([{run:{action:`app.main.checkout.last_order_id.setValue(app.main.checkout.bill_selected_card.data.insertOrder.identity)`}},{run:{action:`app.main.checkout.justpropreloader.show()`}},{run:{action:`app.main.checkout.scheduler1.start()`,disabled:true}},{run:{action:`app.main.checkout.check_last_order.run()`}}])" dmx-on:start="app.showPreloader('purple')" dmx-on:done="app.hidePreloader()">
-    <input id="selected_payment_method" name="selected_payment_method" type="hidden">
+  <form is="dmx-serverconnect-form" id="bill_selected_card" method="post" action="https://api.justpro.me/api/customer_app/checkOut/bill_customer_card" site="JustPro-Spa-Backend" dmx-on:success="run([{run:{action:`app.main.checkout.last_order_id.setValue(app.main.checkout.bill_selected_card.data.insertOrder.identity)`}},{run:{action:`app.main.checkout.justpropreloader.show()`}},{run:{action:`app.main.checkout.scheduler1.start()`,disabled:true}},{run:{action:`app.main.checkout.check_last_order.run()`}}])" dmx-on:start="app.showPreloader('purple')" dmx-on:done="app.hidePreloader()">
+    <input id="selected_payment_method" name="selected_payment_method" type="hidden" dmx-bind:value="app.main.checkout.customer_selected_payment_method.value">
+
     <input id="User_id_bill_selected_card" name="user_id" dmx-bind:value="app.Current_user.data.customer.id" type="hidden">
     <input id="setUp_bill_selected_card" name="setUp" type="hidden">
     <input id="customer_id_bill_selected_card" name="customer_id" type="hidden" dmx-bind:value="app.Current_user.data.customer.id"><input id="address_id_bill_selected_card" name="address_id" dmx-bind:value="app.main.checkout.route.params.address_id" type="hidden">
@@ -263,6 +271,29 @@
       <input id="item_name" name="item_name" type="hidden" dmx-bind:value="$value.name">
       <input id="address_id" name="address_id" type="hidden" dmx-bind:value="$value.address_id">
       <input id="service_option_id" name="service_option_id" type="hidden" dmx-bind:value="$value.service_option_id">
+    </div>
+  </form>
+  <form is="dmx-serverconnect-form" id="appointmentBooking" method="post" action="https://api.justpro.me/api/customer_app/checkOut/send_non_billable_order" site="JustPro-Spa-Backend" dmx-on:success="run([{run:{action:`app.appointmentCart.clear()`}},{'f7.dialog.confirm':{title:'Success',text:'Non billable items order has been submitted. Do you want to submit the billable items too? Note the charges will occur immediately',then:{steps:{condition:{if:`(app.Cart.data.count() &gt; 0)`,then:{steps:{run:{action:`app.main.checkout.bill_selected_card.submit()`}}},else:{steps:{'f7.dialog.alert':{title:'Note item',text:'Add at least one item to your cart'}}}}}}}}])" dmx-on:start="app.showPreloader('purple')" dmx-on:done="app.hidePreloader()">
+    <input id="selected_payment_method_appointmentBooking" name="selected_payment_method" type="hidden" dmx-bind:value="app.main.checkout.customer_selected_payment_method.value"><input id="User_id_appointmentBooking" name="user_id" dmx-bind:value="app.Current_user.data.customer.id" type="hidden">
+    <input id="setUp_appointmentBooking" name="setUp" type="hidden">
+    <input id="customer_id_appointmentBooking" name="customer_id" type="hidden" dmx-bind:value="app.Current_user.data.customer.id"><input id="address_id__appointmentBooking" name="address_id" dmx-bind:value="app.main.checkout.route.params.address_id" type="hidden">
+    <div is="dmx-form-repeat" id="cartRepeat_appointmentBooking" dmx-bind:items="appointmentCart.data">
+      <input id="provider_service_id_appointmentBooking" name="provider_service_id" type="hidden" dmx-bind:value="$value.provider_service_id">
+      <input id="product_price_id_appointmentBooking" name="product_price_id" type="hidden" dmx-bind:value="$value.product_price_id">
+      <input id="employee_id_appointmentBooking" name="employee_id" type="hidden" dmx-bind:value="$value.employee_id">
+      <input id="parent_provider_id_appointmentBooking" name="parent_provider_id" type="hidden" dmx-bind:value="$value.parent_provider_id">
+      <input id="quantity_appointmentBooking" name="quantity" type="hidden" dmx-bind:value="$value.quantity">
+      <input id="matrix_appointmentBooking" name="matrix" type="hidden" dmx-bind:value="$value.matrix">
+      <input id="amount_appointmentBooking" name="amount" type="hidden" dmx-bind:value="$value.amount">
+      <input id="total_appointmentBooking" name="total" type="hidden" dmx-bind:value="$value.total">
+      <input id="vat_appointmentBooking" name="vat" type="hidden" dmx-bind:value="$value.vat">
+      <input id="appointment_date_appointmentBooking" name="appointment_date" type="hidden" dmx-bind:value="$value.appointment_date">
+      <input id="timeSlot_start_appointmentBooking" name="timeSlot_start" type="hidden" dmx-bind:value="$value.timeSlot_start">
+      <input id="timeSlot_end_appointmentBooking" name="timeSlot_end" type="hidden" dmx-bind:value="$value.timeSlot_end">
+      <input id="item_img_appointmentBooking" name="item_img" type="hidden" dmx-bind:value="$value.product_avatar">
+      <input id="item_name_appointmentBooking" name="item_name" type="hidden" dmx-bind:value="$value.name">
+      <input id="address_id_appointmentBooking" name="address_id" type="hidden" dmx-bind:value="$value.address_id">
+      <input id="service_option_id_appointmentBooking" name="service_option_id" type="hidden" dmx-bind:value="$value.service_option_id">
     </div>
   </form>
 

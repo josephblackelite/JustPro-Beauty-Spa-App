@@ -1,35 +1,35 @@
 <!-- Wappler include head-page="index.html" is="dmx-app" id="chooseaddress" appConnect="local" framework7_6="With App Connect" framework7_icons="local" capacitor="local" components="{dmxDatePicker:{},dmxGoogleMaps:{},dmxGooglePlaces:{},dmxSockets:{},dmxFormatter:{}}" jquery_slim_35="cdn" moment_2="cdn" -->
 
 <div class="page location-tracking" id="chooseaddress" data-name="choose-address" path="/choose-address">
-    <dmx-serverconnect id="selected_address_data" url="https://api.justpro.me/api/customer_address_actions/selected_address_data" site="JustPro-Spa-Backend" dmx-param:address_id="app.main.chooseaddress.address_select_form.select_address.value" sockets="true"></dmx-serverconnect>
+    <dmx-serverconnect id="selected_address_data" url="https://api.justpro.me/api/customer_app/customer_address_actions/selected_address_data" site="JustPro-Spa-Backend" dmx-param:address_id="app.main.chooseaddress.address_select_form.select_address.value" sockets="true"></dmx-serverconnect>
 
     <script is="dmx-flow" id="showAddressSheet" type="text/dmx-flow" autorun>{
   runJS: {function: "showAddressSheet"}
 }</script>
-    <div class="padding-top padding-bottom">
-        <div class="navbar no-hairline no-shadow no-border">
-            <div class="navbar-inner" style="padding-right:0px !important; padding-left:0px !important; margin-right:0px !important">
-                <div class="left">
-                    <a href="#" class="link back">
-                        <i class="icon f7-icons">arrow_left</i>
-                    </a>
 
-                </div>
+    <div class="navbar no-hairline no-shadow no-border">
+        <div class="navbar-inner" style="padding-right:0px !important; padding-left:0px !important; margin-right:0px !important">
+            <div class="left">
+                <a href="#" class="link back">
+                    <i class="icon f7-icons">arrow_left</i>
+                </a>
 
-                <div class="title">Address</div>
-                <div class="right">
-                    <a href="#" class="link panel-open icon-only" data-panel="left">
+            </div>
 
-                        <i class="icon f7-icons">ellipsis_vertical</i>
-                    </a>
-                </div>
+            <div class="title">Address</div>
+            <div class="right">
+                <a href="#" class="link panel-open icon-only" data-panel="left">
+
+                    <i class="icon f7-icons">ellipsis_vertical</i>
+                </a>
             </div>
         </div>
-
     </div>
+
+
     <div class="toolbar toolbar-bottom toolbar-bottom-md" dmx-show="app.main.chooseaddress.address_select_form.select_address.value">
         <div class="toolbar-inner justify-content-center" style="padding:10px !important">
-            <a class="button-6 button-large button-fill bg-color-primary text-color-white" href="" style="width:100%" dmx-on:click="run({condition:{if:`app.main.chooseaddress.address_select_form.select_address.value`,then:{steps:[{run:{action:`app.Cart.upsert({provider_service_id: app.cart_preFill.data.provider_service_id},{provider_service_id: app.cart_preFill.data.provider_service_id, product_price_id: app.cart_preFill.data.product_price_id, employee_id: app.selected_employee_id.value, name: app.cart_preFill.data.name, quantity: app.cart_preFill.data.quantity, amount: app.cart_preFill.data.amount, matrix: app.cart_preFill.data.matrix, total: app.cart_preFill.data.total, vat: app.cart_preFill.data.vat, product_avatar: app.cart_preFill.data.product_avatar, address_id: app.main.chooseaddress.address_select_form.select_address.value, appointment_date: app.cart_preFill.data.appointment_date, timeSlot_start: app.cart_preFill.data.timeSlot_start, timeSlot_end: app.cart_preFill.data.timeSlot_end, customer_id: app.cart_preFill.data.customer_id, parent_provider_id: app.cart_preFill.data.parent_provider_id, service_type: app.cart_preFill.data.service_type})`}},{run:{action:`app.main.navigate(\'/order-confirmation\',{})`}}]},else:{steps:{'f7.dialog.alert':{title:'No address?',text:'Choose or add an address to continue'}}}}})">Continue &nbsp;<i class="bi-arrow-right-circle-fill"></i></a>
+            <a class="button-6 button-large button-fill bg-color-primary text-color-white" href="" style="width:100%" dmx-on:click="run({condition:{if:`app.main.chooseaddress.address_select_form.select_address.value`,then:{steps:{condition:{if:`(app.cart_preFill.data.can_be_charged_immmediately == 1)`,then:{steps:[{run:{action:`app.Cart.upsert({provider_service_id: app.cart_preFill.data.provider_service_id},{provider_service_id: app.cart_preFill.data.provider_service_id, product_price_id: app.cart_preFill.data.product_price_id, employee_id: app.selected_employee_id.value, name: app.cart_preFill.data.name, quantity: app.cart_preFill.data.quantity, amount: app.cart_preFill.data.amount, matrix: app.cart_preFill.data.matrix, total: app.cart_preFill.data.total, vat: app.cart_preFill.data.vat, product_avatar: app.cart_preFill.data.product_avatar, address_id: app.main.chooseaddress.address_select_form.select_address.value, appointment_date: app.cart_preFill.data.appointment_date, timeSlot_start: app.cart_preFill.data.timeSlot_start, timeSlot_end: app.cart_preFill.data.timeSlot_end, customer_id: app.cart_preFill.data.customer_id, parent_provider_id: app.cart_preFill.data.parent_provider_id, service_type: app.cart_preFill.data.service_type, service_option_id: app.cart_preFill.data.service_option_id, selected_timeSlot_expired: 0})`}},{run:{action:`app.main.navigate(\'/order-confirmation\',{})`}}]},else:{steps:[{run:{action:`app.appointmentCart.upsert({provider_service_id: app.cart_preFill.data.provider_service_id},{provider_service_id: app.cart_preFill.data.provider_service_id, product_price_id: app.cart_preFill.data.product_price_id, employee_id: app.selected_employee_id.value, name: app.cart_preFill.data.name, quantity: app.cart_preFill.data.quantity, amount: app.cart_preFill.data.amount, matrix: app.cart_preFill.data.matrix, total: app.cart_preFill.data.total, vat: app.cart_preFill.data.vat, product_avatar: app.cart_preFill.data.product_avatar, address_id: app.main.chooseaddress.address_select_form.select_address.value, appointment_date: app.cart_preFill.data.appointment_date, timeSlot_start: app.cart_preFill.data.timeSlot_start, timeSlot_end: app.cart_preFill.data.timeSlot_end, customer_id: app.cart_preFill.data.customer_id, parent_provider_id: app.cart_preFill.data.parent_provider_id, service_type: app.cart_preFill.data.service_type, service_option_id: app.cart_preFill.data.service_option_id, selected_timeSlot_expired: 0})`}},{run:{action:`app.main.navigate(\'/order-confirmation\',{})`}}]}}}},else:{steps:{'f7.dialog.alert':{title:'No address?',text:'Choose or add an address to continue'}}}}})">Continue &nbsp;<i class="bi-arrow-right-circle-fill"></i></a>
         </div>
     </div>
     <div class="fab fab-left-bottom">
