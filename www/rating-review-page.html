@@ -2,32 +2,30 @@
 
 
 <div class="page" path="/rating-review-page/:provider_id/:service_offered_id?" data-name="rating-review-page" id="ratingreviewpage">
-  <dmx-serverconnect id="provider_review" url="https://api.justpro.me/api/reviews/reviews" site="JustPro-Spa-Backend" dmx-param:provider_id="app.main.ratingreviewpage.route.params.provider_id" dmx-param:service_offered_id="app.main.ratingreviewpage.route.params.service_offered_id" sockets="true"></dmx-serverconnect>
-  <dmx-serverconnect id="provider_info" url="https://api.justpro.me/api/admin/providers/provider_info" site="JustPro-Spa-Backend" dmx-param:provider_id="app.main.ratingreviewpage.route.params.provider_id" dmx-param:service_offered_id="app.main.ratingreviewpage.route.params.service_offered_id" sockets="true"></dmx-serverconnect>
-  <div class="padding-top padding-bottom">
-    <div class="navbar no-hairline no-shadow no-border">
-      <div class="navbar-inner" style="padding-right:0px !important; padding-left:0px !important; margin-right:0px !important">
-        <div class="left">
-          <a href="#" class="link back">
-            <i class="icon f7-icons">arrow_left</i>
-          </a>
+  <dmx-serverconnect id="provider_review" url="https://api.justpro.me/api/customer_app/reviews/reviews" site="JustPro-Spa-Backend" dmx-param:provider_id="app.main.ratingreviewpage.route.params.provider_id" dmx-param:service_offered_id="app.main.ratingreviewpage.route.params.service_offered_id" sockets="true"></dmx-serverconnect>
+  <dmx-serverconnect id="provider_info" url="https://api.justpro.me/api/customer_app/provider/provider_info" site="JustPro-Spa-Backend" dmx-param:provider_id="app.main.ratingreviewpage.route.params.provider_id" dmx-param:service_offered_id="app.main.ratingreviewpage.route.params.service_offered_id" sockets="true"></dmx-serverconnect>
 
-        </div>
+  <div class="navbar no-hairline no-shadow no-border">
+    <div class="navbar-inner" style="padding-right:0px !important; padding-left:0px !important; margin-right:0px !important">
+      <div class="left">
+        <a href="#" class="link back">
+          <i class="icon f7-icons">arrow_left</i>
+        </a>
 
-        <div class="title">
-          <h3 class="no-margin">
-            Reviews
-          </h3>
-        </div>
-        <div class="right">
-          <a href="#" class="link panel-open icon-only" data-panel="left">
+      </div>
 
-            <i class="icon f7-icons">ellipsis_vertical</i>
-          </a>
-        </div>
+      <div class="title">
+        <h3 class="no-margin">
+          Reviews
+        </h3>
+      </div>
+      <div class="right">
+        <a href="#" class="link panel-open icon-only" data-panel="left">
+
+          <i class="icon f7-icons">ellipsis_vertical</i>
+        </a>
       </div>
     </div>
-
   </div>
   <div class="page-content wappler-block">
 
@@ -48,6 +46,10 @@
                 <div>
                   <h3 class="no-margin">{{customer_name.capitalize()}} </h3>
                   <small>{{rating_dateTime.formatDate('dd/MM/yy hh:mm a')}} </small>
+                  <div class="display-flex align-items-center padding">
+                    <p class="strong no-margin-bottom no-margin-top margin-right">For </p>
+                    <span class="no-margin-bottom">{{service_name.capitalize()}} </span>
+                  </div>
                 </div>
               </div>
               <!-- Rating -->
