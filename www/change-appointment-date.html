@@ -4,36 +4,35 @@
   <script is="dmx-flow" id="flow1" type="text/dmx-flow" autorun>{
   runJS: {function: "runCalendar"}
 }</script>
-  <dmx-serverconnect id="query_order_item" url="https://api.justpro.me/api/admin/providers/order_item_details" site="JustPro-Spa-Backend" dmx-param:order_item_id="app.main.changeappointmentdate.route.params.order_item_id" sockets="true"></dmx-serverconnect>
-  <dmx-serverconnect id="queryProvider_booking_dates" url="https://api.justpro.me/api/provider/query_appointment" site="JustPro-Spa-Backend" dmx-param:date_time="app.main.changeappointmentdate.form.appointmentDate.value.toDate()" dmx-param:provider_id="app.main.changeappointmentdate.query_order_item.data.query_employee_data.id" sockets="true"></dmx-serverconnect>
-  <dmx-serverconnect id="query_provider_working_days" url="https://api.justpro.me/api/admin/providers/list_provider_working_days" site="JustPro-Spa-Backend" dmx-param:date_time="app.main.changeappointmentdate.form.appointmentDate.value.toDate()" dmx-param:provider_id="app.main.changeappointmentdate.query_order_item.data.query_employee_data.id" sockets="true"></dmx-serverconnect>
+  <dmx-serverconnect id="query_order_item" url="https://api.justpro.me/api/customer_app/bookings/order_item_details" site="JustPro-Spa-Backend" dmx-param:order_item_id="app.main.changeappointmentdate.route.params.order_item_id" sockets="true"></dmx-serverconnect>
+  <dmx-serverconnect id="queryProvider_booking_dates" url="https://api.justpro.me/api/customer_app/provider/query_appointment" site="JustPro-Spa-Backend" dmx-param:date_time="app.main.changeappointmentdate.form.appointmentDate.value.toDate()" dmx-param:provider_id="app.main.changeappointmentdate.query_order_item.data.query_employee_data.id" sockets="true"></dmx-serverconnect>
+  <dmx-serverconnect id="query_provider_working_days" url="https://api.justpro.me/api/customer_app/provider/list_provider_working_days" site="JustPro-Spa-Backend" dmx-param:date_time="app.main.changeappointmentdate.form.appointmentDate.value.toDate()" dmx-param:provider_id="app.main.changeappointmentdate.query_order_item.data.query_employee_data.id" sockets="true"></dmx-serverconnect>
   <dmx-array id="working_days_array" dmx-bind:items="app.main.changeappointmentdate.query_provider_working_days.data.queryWorking_days.values(`day_name`)"></dmx-array>
-  <dmx-serverconnect id="query_time_slots" url="https://api.justpro.me/api/provider/available_time_slots" site="JustPro-Spa-Backend" dmx-param:date_time="app.main.changeappointmentdate.form.appointmentDate.value.toDate()" dmx-param:provider_last_time_slot_end="app.main.changeappointmentdate.queryProvider_booking_dates.data.provider_last_booking_time_slot.time_start" dmx-on:start="app.showPreloader('deeporange')" dmx-on:done="app.hidePreloader()" dmx-param:date_id="app.main.changeappointmentdate.queryProvider_booking_dates.data.query_provider_appointment.id" dmx-param:provider_id="app.main.changeappointmentdate.query_order_item.data.query_employee_data.id" sockets="true"></dmx-serverconnect>
+  <dmx-serverconnect id="query_time_slots" url="https://api.justpro.me/api/customer_app/provider/available_time_slots" site="JustPro-Spa-Backend" dmx-param:date_time="app.main.changeappointmentdate.form.appointmentDate.value.toDate()" dmx-param:provider_last_time_slot_end="app.main.changeappointmentdate.queryProvider_booking_dates.data.provider_last_booking_time_slot.time_start" dmx-on:start="app.showPreloader('deeporange')" dmx-on:done="app.hidePreloader()" dmx-param:date_id="app.main.changeappointmentdate.queryProvider_booking_dates.data.query_provider_appointment.id" dmx-param:provider_id="app.main.changeappointmentdate.query_order_item.data.query_employee_data.id" sockets="true"></dmx-serverconnect>
 
 
   <dmx-value id="appointment_timeStart"></dmx-value>
   <dmx-value id="appointment_timeEnd"></dmx-value>
-  <div class="padding-top padding-bottom">
-    <div class="navbar no-hairline no-shadow no-border">
-      <div class="navbar-inner" style="padding-right:0px !important; padding-left:0px !important; margin-right:0px !important">
-        <div class="left">
-          <a href="/home" class="link back">
-            <i class="icon f7-icons">arrow_left</i>
-          </a>
 
-        </div>
+  <div class="navbar no-hairline no-shadow no-border bg-color-white">
+    <div class="navbar-inner" style="padding-right:0px !important; padding-left:0px !important; margin-right:0px !important">
+      <div class="left">
+        <a href="/home" class="link back">
+          <i class="icon f7-icons">arrow_left</i>
+        </a>
 
-        <div class="title">Change appointment date</div>
-        <div class="right">
-          <a href="#" class="link panel-open icon-only" data-panel="left">
+      </div>
 
-            <i class="icon f7-icons">ellipsis_vertical</i>
-          </a>
-        </div>
+      <div class="title">Change appointment date</div>
+      <div class="right">
+        <a href="#" class="link panel-open icon-only" data-panel="left">
+
+          <i class="icon f7-icons">ellipsis_vertical</i>
+        </a>
       </div>
     </div>
-
   </div>
+
   <div class="toolbar toolbar-bottom toolbar-bottom-md no-shadow">
     <div class="toolbar-inner justify-content-center" style="padding:10px !important">
 
@@ -41,7 +40,7 @@
       <button class="item-link list-button button-large rounded-xl button-6 bg-color-black button-fill text-color-white margin-right" style="width:100%" href="#!" dmx-on:click="run({run:{action:`app.main.changeappointmentdate.update_booked_date.submit()`}})" dmx-show="(app.main.changeappointmentdate.update_booked_date.timeSlot_start.value &amp;&amp; app.main.changeappointmentdate.update_booked_date.timeSlot_end.value)" dmx-bind:disabled="app.main.changeappointmentdate.update_booked_date.state.executing">Change appointment date</button>
     </div>
   </div>
-  <form is="dmx-serverconnect-form" id="update_booked_date" method="post" action="https://api.justpro.me/api/customer_orders/change_appointment_date" site="JustPro-Spa-Backend" dmx-on:success="run({runJS:{function:'back'}})">
+  <form is="dmx-serverconnect-form" id="update_booked_date" method="post" action="https://api.justpro.me/api/customer_app/bookings/change_appointment_date" site="JustPro-Spa-Backend" dmx-on:success="run({runJS:{function:'back'}})">
     <input id="date" name="date" dmx-bind:value="app.main.changeappointmentdate.form.appointmentDate.value.toDate()" type="hidden">
     <input id="order_item_id" name="order_item_id" dmx-bind:value="app.main.changeappointmentdate.route.params.order_item_id" type="hidden">
     <input id="timeSlot_start" name="timeSlot_start" dmx-bind:value="app.main.changeappointmentdate.appointment_timeStart.value" type="hidden">

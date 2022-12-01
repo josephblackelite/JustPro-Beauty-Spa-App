@@ -1,26 +1,26 @@
 <!-- Wappler include head-page="index.html" is="dmx-app" id="updateprofile" appConnect="local" framework7_6="With App Connect" framework7_icons="local" capacitor="local" components="{dmxFormatter:{},dmxDropzone:{},dmxValidator:{}}" -->
 
 <div class="page profile-wrapper" id="updateprofile" data-name="update-profile" path="/update-profile">
-    <div class="padding-top padding-bottom">
-        <div class="navbar no-hairline no-shadow no-border">
-            <div class="navbar-inner" style="padding-right:0px !important; padding-left:0px !important; margin-right:0px !important">
-                <div class="left">
-                    <a href="#" class="link back">
-                        <i class="icon f7-icons">arrow_left</i>
-                    </a>
 
-                </div>
+    <div class="navbar no-hairline no-shadow no-border">
+        <div class="navbar-inner" style="padding-right:0px !important; padding-left:0px !important; margin-right:0px !important">
+            <div class="left">
+                <a href="#" class="link back">
+                    <i class="icon f7-icons">arrow_left</i>
+                </a>
 
-                <div class="title">Edit Profile</div>
-                <div class="right">
-                    <a href="#" class="link panel-open icon-only" data-panel="left">
+            </div>
 
-                        <i class="icon f7-icons">ellipsis_vertical</i>
-                    </a>
-                </div>
+            <div class="title">Edit Profile</div>
+            <div class="right">
+                <a href="#" class="link panel-open icon-only" data-panel="left">
+
+                    <i class="icon f7-icons">ellipsis_vertical</i>
+                </a>
             </div>
         </div>
     </div>
+
     <div class="toolbar toolbar-bottom toolbar-bottom-md">
         <div class="toolbar-inner justify-content-center" style="padding:10px !important">
             <button href="" class="button-large button-6 bg-color-primary button-fill rounded-xl" dmx-on:click="run({condition:{if:`(app.main.updateprofile.update_profile_form.name.value &amp;&amp; (app.main.updateprofile.update_profile_form.gender.value &amp;&amp; (app.main.updateprofile.update_profile_form.mobile_number.value &amp;&amp; app.main.updateprofile.update_profile_form.email.value)))`,then:{steps:{run:{action:`app.main.updateprofile.update_profile_form.submit()`}}}}})" dmx-bind:disabled="app.main.updateprofile.update_profile_form.state.executing"><span dmx-hide="app.main.updateprofile.update_profile_form.state.executing" style="width:100% !important">Save Profile</span>
@@ -31,7 +31,7 @@
     <div class="page-content content-area">
         <div class="container mb-150">
             <div class="form-elements">
-                <form is="dmx-serverconnect-form" method="post" id="update_profile_form" dmx-on:success="run({'f7.dialog.confirm':{title:'Success',text:'Your profile information is now updated!',then:{steps:{run:{action:`app.main.back(\'/profile\',{})`}}}}})" site="JustPro-Spa-Backend" action="https://api.justpro.me/api/security/update_profile" dmx-on:invalid="run({'f7.dialog.alert':{title:'Error',text:`app.main.updateprofile.update_profile_form.lastError.response`}})">
+                <form is="dmx-serverconnect-form" method="post" id="update_profile_form" dmx-on:success="run({'f7.dialog.confirm':{title:'Success',text:'Your profile information is now updated!',then:{steps:{run:{action:`app.main.back(\'/profile\',{})`}}}}})" site="JustPro-Spa-Backend" action="https://api.justpro.me/api/customer_app/security/update_profile" dmx-on:invalid="run({'f7.dialog.alert':{title:'Error',text:`app.main.updateprofile.update_profile_form.lastError.response`}})">
                     <input id="user_id" name="user_id" type="hidden" dmx-bind:value="app.Current_user.data.customer.id">
                     <div class="title-head">
                         <p>Kindly provide basic information to help our stylists identify and contact you. </p>

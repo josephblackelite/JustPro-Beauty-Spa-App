@@ -1,26 +1,26 @@
 <!-- Wappler include head-page="index.html" is="dmx-app" id="createnewaddress" appConnect="local" framework7_6="With App Connect" framework7_icons="local" capacitor="local" components="{dmxGooglePlaces:{},dmxValidator:{}}" -->
 
 <div class="page profile-wrapper" id="addaddress" data-name="create-new-address" path="/create-new-address/:from_manage_address?">
-    <div class="padding-top padding-bottom">
-        <div class="navbar no-hairline no-shadow no-border">
-            <div class="navbar-inner" style="padding-right:0px !important; padding-left:0px !important; margin-right:0px !important">
-                <div class="left">
-                    <a href="#" class="link back">
-                        <i class="icon f7-icons">arrow_left</i>
-                    </a>
 
-                </div>
+    <div class="navbar no-hairline no-shadow no-border">
+        <div class="navbar-inner" style="padding-right:0px !important; padding-left:0px !important; margin-right:0px !important">
+            <div class="left">
+                <a href="#" class="link back">
+                    <i class="icon f7-icons">arrow_left</i>
+                </a>
 
-                <div class="title">Add Address</div>
-                <div class="right">
-                    <a href="#" class="link panel-open icon-only" data-panel="left">
+            </div>
 
-                        <i class="icon f7-icons">ellipsis_vertical</i>
-                    </a>
-                </div>
+            <div class="title">Add Address</div>
+            <div class="right">
+                <a href="#" class="link panel-open icon-only" data-panel="left">
+
+                    <i class="icon f7-icons">ellipsis_vertical</i>
+                </a>
             </div>
         </div>
     </div>
+
     <div class="toolbar toolbar-bottom toolbar-bottom-md">
         <div class="toolbar-inner justify-content-center" style="padding:10px !important">
             <button href="" class="button-large button-6 button-fill rounded-xl bg-color-primary" dmx-on:click="app.main.addaddress.add_new_address.submit()" dmx-bind:disabled="app.main.addaddress.add_new_address.state.executing"><span dmx-hide="app.main.addaddress.add_new_address.state.executing" style="width:100% !important">Save Address</span>
@@ -31,7 +31,7 @@
     <div class="page-content content-area wappler-block">
         <div class="container mb-150">
             <div class="form-elements">
-                <form is="dmx-serverconnect-form" method="post" id="add_new_address" dmx-on:success="run([{run:{action:`app.local_store.set(\'customer_last_address_id\',app.main.addaddress.add_new_address.data.insert_address.identity)`}},{condition:{if:`app.main.addaddress.route.params.from_manage_address`,then:{steps:{run:{action:`app.main.back(\'/choose-address\',{})`}}},else:{steps:{run:{action:`app.main.back(\'/choose-address\',{})`}}}}}])" site="JustPro-Spa-Backend" action="https://api.justpro.me/api/customer_address_actions/create_new_address"><input id="customer_id" name="customer_id" type="hidden" dmx-bind:value="app.Current_user.data.customer.id">
+                <form is="dmx-serverconnect-form" method="post" id="add_new_address" dmx-on:success="run([{run:{action:`app.local_store.set(\'customer_last_address_id\',app.main.addaddress.add_new_address.data.insert_address.identity)`}},{condition:{if:`app.main.addaddress.route.params.from_manage_address`,then:{steps:{run:{action:`app.main.back(\'/choose-address\',{})`}}},else:{steps:{run:{action:`app.main.back(\'/choose-address\',{})`}}}}}])" site="JustPro-Spa-Backend" action="https://api.justpro.me/api/customer_app/customer_address_actions/create_new_address"><input id="customer_id" name="customer_id" type="hidden" dmx-bind:value="app.Current_user.data.customer.id">
                     <input id="country" name="country" type="hidden" dmx-bind:value="app.main.addaddress.add_new_address.inp_location.components.country.long">
                     <input id="logitude" name="logitude" type="hidden" dmx-bind:value="app.main.addaddress.add_new_address.inp_location.longitude">
                     <input id="latitude" name="latitude" type="hidden" dmx-bind:value="app.main.addaddress.add_new_address.inp_location.latitude">

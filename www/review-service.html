@@ -10,9 +10,9 @@
 <div class="page" path="/review-service/:service_id/:employee_id/:order_item_id" data-name="review-service" id="reviewservice">
 
     <dmx-value id="varQty" dmx-bind:value="app.main.reviewservice.qty_form.quantity.value"></dmx-value>
-    <dmx-serverconnect id="service_info" url="https://api.justpro.me/api/services/service_info" site="JustPro-Spa-Backend" dmx-param:service_id="app.main.reviewservice.route.params.service_id" sockets="true" dmx-param:service_offered_id="app.main.reviewservice.route.params.service_id"></dmx-serverconnect>
-    <dmx-serverconnect id="review" url="https://api.justpro.me/api/services/query_item_review" site="JustPro-Spa-Backend" dmx-param:service_id="app.main.reviewservice.route.params.service_id" sockets="true" dmx-param:customer_id="app.Current_user.data.customer.id" credentials></dmx-serverconnect>
-    <dmx-serverconnect id="order_item" url="https://api.justpro.me/api/services/item_4_review_query" site="JustPro-Spa-Backend" dmx-param:service_id="app.main.reviewservice.route.params.service_id" sockets="true" dmx-param:customer_id="" credentials="" dmx-param:order_item_id="app.main.reviewservice.route.params.order_item_id"></dmx-serverconnect>
+    <dmx-serverconnect id="service_info" url="https://api.justpro.me/api/customer_app/service_workflows/service_info" site="JustPro-Spa-Backend" dmx-param:service_id="app.main.reviewservice.route.params.service_id" sockets="true" dmx-param:service_offered_id="app.main.reviewservice.route.params.service_id"></dmx-serverconnect>
+    <dmx-serverconnect id="review" url="https://api.justpro.me/api/customer_app/bookings/query_item_review" site="JustPro-Spa-Backend" dmx-param:service_id="app.main.reviewservice.route.params.service_id" sockets="true" dmx-param:customer_id="app.Current_user.data.customer.id" credentials></dmx-serverconnect>
+    <dmx-serverconnect id="order_item" url="https://api.justpro.me/api/customer_app/bookings/item_4_review_query" site="JustPro-Spa-Backend" dmx-param:service_id="app.main.reviewservice.route.params.service_id" sockets="true" dmx-param:customer_id="" credentials="" dmx-param:order_item_id="app.main.reviewservice.route.params.order_item_id"></dmx-serverconnect>
 
 
     <script is="dmx-flow" id="ShowSlides" type="text/dmx-flow" autorun>[
@@ -33,33 +33,33 @@
     }
   }
 ]</script>
-    <div class="padding-top padding-bottom">
-        <div class="navbar no-hairline no-shadow no-border">
-            <div class="navbar-inner" style="padding-right:0px !important; padding-left:0px !important; margin-right:0px !important">
-                <div class="left">
-                    <a href="#" class="link back">
-                        <i class="icon f7-icons">arrow_left</i>
-                    </a>
 
-                </div>
+    <div class="navbar no-hairline no-shadow no-border">
+        <div class="navbar-inner" style="padding-right:0px !important; padding-left:0px !important; margin-right:0px !important">
+            <div class="left">
+                <a href="#" class="link back">
+                    <i class="icon f7-icons">arrow_left</i>
+                </a>
 
-                <div class="title">Review service</div>
-                <div class="right">
-                    <a href="#" class="link panel-open icon-only" data-panel="left">
+            </div>
 
-                        <i class="icon f7-icons">ellipsis_vertical</i>
-                    </a>
-                </div>
+            <div class="title">Review service</div>
+            <div class="right">
+                <a href="#" class="link panel-open icon-only" data-panel="left">
+
+                    <i class="icon f7-icons">ellipsis_vertical</i>
+                </a>
             </div>
         </div>
-
     </div>
+
+
     <div class="toolbar toolbar-bottom toolbar-bottom-md no-shadow">
         <div class="toolbar-inner justify-content-center" style="padding:10px !important">
             <button class="item-link list-button button-large rounded-xl button-6 bg-color-primary button-fill text-color-white" dmx-on:click="run({condition:{if:`(app.main.reviewservice.rate_service.rating.value > 0)`,then:{steps:{run:{action:`app.main.reviewservice.rate_service.submit()`}}},else:{steps:{'f7.dialog.alert':{title:'Did not rate service?',text:'Click one of the rating buttons to continue '}}}}})" style="width:100%" dmx-bind:disabled="app.main.reviewservice.rate_service.state.executing">Submit Review</button>
         </div>
     </div>
-    <div class="page-content bg-gray pt-0 mr-0 ml-0">
+    <div class="page-content bg-gray pt-70 mr-0 ml-0">
         <dmx-preloader id="justpropreloader" spinner="pulse" color="#ff6600"></dmx-preloader>
 
         <div class="mb-150">
@@ -113,7 +113,7 @@
                         </div>
 
                         <div class="col-100 up-10">
-                            <form is="dmx-serverconnect-form" id="rate_service" method="post" action="https://api.justpro.me/api/services/rate_services" site="JustPro-Spa-Backend" dmx-on:success="run([{'f7.dialog.alert':{title:'Thank you',text:'Thank you. Your feedback has been submitted'}},{runJS:{function:'back'}},{run:{action:`app.main.back(\'/home\',{})`}}])">
+                            <form is="dmx-serverconnect-form" id="rate_service" method="post" action="https://api.justpro.me/api/customer_app/bookings/rate_services" site="JustPro-Spa-Backend" dmx-on:success="run([{'f7.dialog.alert':{title:'Thank you',text:'Thank you. Your feedback has been submitted'}},{runJS:{function:'back'}},{run:{action:`app.main.back(\'/home\',{})`}}])">
 
                                 <div class="list no-hairlines-md">
                                     <ul>

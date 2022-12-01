@@ -158,7 +158,7 @@
 
 
 
-    <dmx-serverconnect id="Current_user" url="https://api.justpro.me/api/customer_app/security/logged_in_user_data" site="JustPro-Spa-Backend" dmx-param:user_id="751" sockets="true"></dmx-serverconnect>
+    <dmx-serverconnect id="Current_user" url="https://api.justpro.me/api/customer_app/security/logged_in_user_data" site="JustPro-Spa-Backend" dmx-param:user_id="local_store.data.user_id" sockets="true"></dmx-serverconnect>
 
 
     <dmx-datastore id="Cart"></dmx-datastore>
@@ -259,12 +259,6 @@
                   <a class="item-link" dmx-on:click="run([{run:{action:`app.main.navigate(\'/orders\',{});app.panelLinkClassToggle.setValue(\'orders\')`}},{runJS:{function:'hidePanel'}}])" dmx-class:item-selected="(panelLinkClassToggle.value == 'orders')">
                     <i class="bi bi-person-fill"></i>
                     <span class="">Appointments</span>
-                  </a>
-                </li>
-                <li>
-                  <a class="item-link" dmx-on:click="run([{run:{action:`app.main.navigate(\'/uncharged-appointments\',{});app.panelLinkClassToggle.setValue(\'uncharged\')`}},{runJS:{function:'hidePanel'}}])" dmx-class:item-selected="(panelLinkClassToggle.value == 'uncharged')">
-                    <i class="bi bi-person-fill"></i>
-                    <span class="">Uncharged appointment</span>
                   </a>
                 </li>
                 <li>
@@ -389,7 +383,7 @@
               </div>
             </div>
             <div class="clearfix mt-auto padding">
-              <form action="https://api.justpro.me/api/security/login_register_with_number" is="dmx-serverconnect-form" method="post" id="login_register_with_number" site="JustPro-Spa-Backend" dmx-on:invalid="run({'f7.dialog.alert':{title:'Error',text:`app.main.login.login_register_with_number.lastError.response`}})" dmx-on:success="run({condition:{if:`(app.main.login.login_register_with_number.mobile_number.value == (524540296 || 0524540296))`,then:{steps:[{run:{action:`app.local_store.set(\'user_id\',669)`}},{run:{action:`app.main.navigate(\'/home\',{clearPreviousHistory: true, history: false})`}}]},else:{steps:{condition:{if:`app.main.login.login_register_with_number.data.Logged_in_user_id`,then:{steps:[{run:{action:`app.user_id.setValue(app.main.login.login_register_with_number.data.Logged_in_user_id)`}},{condition:{if:`(app.main.login.login_register_with_number.data.send_otp_for_login_user.api.data.status == \'open\')`,then:{steps:[{run:{action:`app.otp_id.setValue(app.main.login.login_register_with_number.data.send_otp_for_login_user.api.data.otp_id)`}},{run:{action:`app.main.login.navigate_to_verify_otp.run()`}}]},else:{steps:{run:{action:`app.main.navigate(\'/home\',{})`}}}}}]},else:{steps:[{run:{action:`app.user_id.setValue(app.main.login.login_register_with_number.data.insert.identity)`}},{condition:{if:`(app.main.login.login_register_with_number.data.send_otp_for_new_user.api.data.status== \'open\')`,then:{steps:[{run:{action:`app.otp_id.setValue(app.main.login.login_register_with_number.data.send_otp_for_new_user.api.data.otp_id)`}},{run:{action:`app.main.login.navigate_to_verify_otp.run()`}}]},else:{steps:{run:{action:`app.main.navigate(\'/home\',{})`}}}}}]}}}}}})">
+              <form action="https://api.justpro.me/api/customer_app/security/login_register_with_number" is="dmx-serverconnect-form" method="post" id="login_register_with_number" site="JustPro-Spa-Backend" dmx-on:invalid="run({'f7.dialog.alert':{title:'Error',text:`app.main.login.login_register_with_number.lastError.response`}})" dmx-on:success="run({condition:{if:`(app.main.login.login_register_with_number.mobile_number.value == (524540296 || 0524540296))`,then:{steps:[{run:{action:`app.local_store.set(\'user_id\',669)`}},{run:{action:`app.main.navigate(\'/home\',{clearPreviousHistory: true, history: false})`}}]},else:{steps:{condition:{if:`app.main.login.login_register_with_number.data.Logged_in_user_id`,then:{steps:[{run:{action:`app.user_id.setValue(app.main.login.login_register_with_number.data.Logged_in_user_id)`}},{condition:{if:`(app.main.login.login_register_with_number.data.send_otp_for_login_user.api.data.status == \'open\')`,then:{steps:[{run:{action:`app.otp_id.setValue(app.main.login.login_register_with_number.data.send_otp_for_login_user.api.data.otp_id)`}},{run:{action:`app.main.login.navigate_to_verify_otp.run()`}}]},else:{steps:{run:{action:`app.main.navigate(\'/home\',{})`}}}}}]},else:{steps:[{run:{action:`app.user_id.setValue(app.main.login.login_register_with_number.data.insert.identity)`}},{condition:{if:`(app.main.login.login_register_with_number.data.send_otp_for_new_user.api.data.status== \'open\')`,then:{steps:[{run:{action:`app.otp_id.setValue(app.main.login.login_register_with_number.data.send_otp_for_new_user.api.data.otp_id)`}},{run:{action:`app.main.login.navigate_to_verify_otp.run()`}}]},else:{steps:{run:{action:`app.main.navigate(\'/home\',{})`}}}}}]}}}}}})">
                 <div class="list">
                   <ul class="row">
                     <li class="item-content item-input col-100">

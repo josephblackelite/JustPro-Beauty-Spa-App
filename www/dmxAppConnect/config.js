@@ -723,210 +723,6 @@ dmx.config({
     },
     "check_bookings_timeSlots": [
       {
-        "name": "checkDate",
-        "type": "object",
-        "sub": [
-          {
-            "name": "data",
-            "type": "object",
-            "sub": [
-              {
-                "name": "query_provider_appointment",
-                "type": "object",
-                "sub": [
-                  {
-                    "type": "number",
-                    "name": "id"
-                  }
-                ]
-              }
-            ]
-          },
-          {
-            "name": "state",
-            "type": "object",
-            "sub": [
-              {
-                "name": "executing",
-                "type": "boolean"
-              },
-              {
-                "name": "uploading",
-                "type": "boolean"
-              },
-              {
-                "name": "processing",
-                "type": "boolean"
-              },
-              {
-                "name": "downloading",
-                "type": "boolean"
-              }
-            ]
-          },
-          {
-            "name": "uploadProgress",
-            "type": "object",
-            "sub": [
-              {
-                "name": "position",
-                "type": "number"
-              },
-              {
-                "name": "total",
-                "type": "number"
-              },
-              {
-                "name": "percent",
-                "type": "number"
-              }
-            ]
-          },
-          {
-            "name": "downloadProgress",
-            "type": "object",
-            "sub": [
-              {
-                "name": "position",
-                "type": "number"
-              },
-              {
-                "name": "total",
-                "type": "number"
-              },
-              {
-                "name": "percent",
-                "type": "number"
-              }
-            ]
-          },
-          {
-            "name": "lastError",
-            "type": "object",
-            "sub": [
-              {
-                "name": "status",
-                "type": "number"
-              },
-              {
-                "name": "message",
-                "type": "text"
-              },
-              {
-                "name": "response",
-                "type": "text"
-              }
-            ]
-          },
-          {
-            "name": "status",
-            "type": "number"
-          }
-        ]
-      },
-      {
-        "name": "checkDate_timeSlot",
-        "type": "object",
-        "sub": [
-          {
-            "name": "data",
-            "type": "object",
-            "sub": [
-              {
-                "name": "querTimeSlot_booking",
-                "type": "array",
-                "sub": [
-                  {
-                    "type": "number",
-                    "name": "time_start"
-                  }
-                ]
-              }
-            ]
-          },
-          {
-            "name": "state",
-            "type": "object",
-            "sub": [
-              {
-                "name": "executing",
-                "type": "boolean"
-              },
-              {
-                "name": "uploading",
-                "type": "boolean"
-              },
-              {
-                "name": "processing",
-                "type": "boolean"
-              },
-              {
-                "name": "downloading",
-                "type": "boolean"
-              }
-            ]
-          },
-          {
-            "name": "uploadProgress",
-            "type": "object",
-            "sub": [
-              {
-                "name": "position",
-                "type": "number"
-              },
-              {
-                "name": "total",
-                "type": "number"
-              },
-              {
-                "name": "percent",
-                "type": "number"
-              }
-            ]
-          },
-          {
-            "name": "downloadProgress",
-            "type": "object",
-            "sub": [
-              {
-                "name": "position",
-                "type": "number"
-              },
-              {
-                "name": "total",
-                "type": "number"
-              },
-              {
-                "name": "percent",
-                "type": "number"
-              }
-            ]
-          },
-          {
-            "name": "lastError",
-            "type": "object",
-            "sub": [
-              {
-                "name": "status",
-                "type": "number"
-              },
-              {
-                "name": "message",
-                "type": "text"
-              },
-              {
-                "name": "response",
-                "type": "text"
-              }
-            ]
-          },
-          {
-            "name": "status",
-            "type": "number"
-          }
-        ]
-      },
-      {
         "name": "repeat",
         "type": "array",
         "sub": [
@@ -2846,6 +2642,18 @@ dmx.config({
           }
         ]
       }
+    ],
+    "setFreelancerCardToggleState": [
+      {
+        "name": "$param",
+        "type": "object",
+        "sub": [
+          {
+            "type": "text",
+            "name": "user_id"
+          }
+        ]
+      }
     ]
   },
   "notifications": {
@@ -2924,6 +2732,101 @@ dmx.config({
         }
       ],
       "outputType": "array"
+    }
+  },
+  "industries": {
+    "repeat_industries": {
+      "meta": [
+        {
+          "type": "number",
+          "name": "id"
+        },
+        {
+          "type": "text",
+          "name": "industry_name"
+        },
+        {
+          "type": "text",
+          "name": "industry_avatar"
+        }
+      ],
+      "outputType": "array"
+    },
+    "repeat_industry": {
+      "meta": [
+        {
+          "type": "number",
+          "name": "id"
+        },
+        {
+          "type": "text",
+          "name": "industry_name"
+        },
+        {
+          "type": "text",
+          "name": "industry_avatar"
+        }
+      ],
+      "outputType": "array"
+    }
+  },
+  "categoriespage": {
+    "repeat_categories": {
+      "meta": [
+        {
+          "type": "number",
+          "name": "id"
+        },
+        {
+          "type": "text",
+          "name": "category_name"
+        },
+        {
+          "type": "text",
+          "name": "avatar"
+        }
+      ],
+      "outputType": "array"
+    },
+    "repeat_all_categories": {
+      "meta": [
+        {
+          "type": "number",
+          "name": "id"
+        },
+        {
+          "type": "text",
+          "name": "category_name"
+        },
+        {
+          "type": "text",
+          "name": "avatar"
+        }
+      ],
+      "outputType": "array"
+    }
+  },
+  "providerlistpage": {
+    "repeat_categories": {
+      "meta": [
+        {
+          "type": "number",
+          "name": "id"
+        },
+        {
+          "type": "text",
+          "name": "category_name"
+        },
+        {
+          "type": "text",
+          "name": "avatar"
+        }
+      ],
+      "outputType": "array"
+    },
+    "selected_category": {
+      "meta": null,
+      "outputType": "text"
     }
   }
 });

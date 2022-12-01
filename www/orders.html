@@ -3,7 +3,7 @@
 
 
 <div class="page" id="orders" data-name="orders" path="/orders">
-    <dmx-serverconnect id="customers_orders" url="https://api.justpro.me/api/customer_app/bookings/list_orders_paid" site="JustPro-Spa-Backend" dmx-param:customer_id="app.Current_user.data.customer.id" dmx-param:order_status="app.main.orders.booking_status_select_form.booking_status.value" sockets="true" dmx-on:start="app.showPreloader('purple')" dmx-on:done="app.hidePreloader()"></dmx-serverconnect>
+    <dmx-serverconnect id="customers_orders" url="https://api.justpro.me/api/customer_app/bookings/list_orders" site="JustPro-Spa-Backend" dmx-param:customer_id="app.Current_user.data.customer.id" dmx-param:order_status="app.main.orders.booking_status_select_form.booking_status.value" sockets="true" dmx-on:start="app.showPreloader('purple')" dmx-on:done="app.hidePreloader()"></dmx-serverconnect>
     <style>
         .white {
             background-color: #fff !important;

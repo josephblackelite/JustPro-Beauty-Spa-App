@@ -1,0 +1,41 @@
+<!-- Wappler include head-page="index.html" is="dmx-app" id="categoriespage" appConnect="local" framework7_6="With App Connect" framework7_icons="local" capacitor="local" components="{dmxSockets:{},dmxPreloader:{}}" -->
+
+
+<div class="page" path="/categories-page" data-name="categories-page" id="categoriespage">
+  <dmx-serverconnect id="categories_query" url="https://api.justpro.me/api/customer_app/service_workflows/query_main_categories" site="JustPro-Spa-Backend" dmx-param:search="app.main.categoriespage.search_categories.value" sockets="true"></dmx-serverconnect>
+  <div class="navbar no-hairline no-shadow no-border">
+    <div class="navbar-inner" style="padding-right:0px !important; padding-left:0px !important; margin-right:0px !important">
+      <div class="left">
+        <a href="#" class="link back">
+          <i class="icon f7-icons">arrow_left</i>
+        </a>
+      </div>
+      <div class="title">Categories</div>
+      <div class="right">
+        <a href="#" class="link panel-open icon-only" data-panel="left">
+          <i class="icon f7-icons">ellipsis_vertical</i>
+        </a>
+      </div>
+    </div>
+  </div>
+  <div class="page-content wappler-block">
+    <dmx-preloader id="justpropreloader" spinner="pulse" color="#ff6600"></dmx-preloader>
+    <div class="block">
+      <div class="row">
+        <div class="col padding">
+          <input id="search_categories" name="text1" type="text" class="profile-form " placeholder="Search..">
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-auto col-50 padding" dmx-repeat:repeat_all_categories="app.main.categoriespage.categories_query.data.query_categories" dmx-on:click="app.main.navigate('/provider-list-page/'+id,{})">
+          <div class="display-flex flex-direction-column align-items-center">
+            <img src="" alt="" width="100" height="100" class="industry-img-round" dmx-bind:src="avatar">
+            <h5 class="margin-top text-color-primary">
+              {{category_name.capitalize()}}
+            </h5>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

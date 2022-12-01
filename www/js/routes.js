@@ -156,5 +156,13 @@ var routes = [
   {
     "path": "/uncharged-appointments",
     "url": "./uncharged-appointments.html"
+  },
+  {
+    "path": "/categories-page",
+    "url": "./categories-page.html"
+  },
+  {
+    "path": "/provider-list-page/:category_id",
+    "url": "./provider-list-page.html"
   }
 ]

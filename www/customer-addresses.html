@@ -2,31 +2,29 @@
 
 <div class="page" path="/customer-addresses" data-name="customer-addresses" id="customerAddresses">
 
-    <div class="padding-top padding-bottom">
-        <div class="navbar no-hairline no-shadow no-border">
-            <div class="navbar-inner" style="padding-right:0px !important; padding-left:0px !important; margin-right:0px !important">
-                <div class="left">
-                    <a href="#" class="link back">
-                        <i class="icon f7-icons">arrow_left</i>
-                    </a>
-                </div>
-                <div class="title">Address</div>
 
-                <div class="right">
-                    <a href="#" class="link panel-open icon-only" data-panel="left">
-                        <i class="icon f7-icons">ellipsis_vertical</i>
-                    </a>
-                </div>
+    <div class="navbar no-hairline no-shadow no-border">
+        <div class="navbar-inner" style="padding-right:0px !important; padding-left:0px !important; margin-right:0px !important">
+            <div class="left">
+                <a href="#" class="link back">
+                    <i class="icon f7-icons">arrow_left</i>
+                </a>
+            </div>
+            <div class="title">Address</div>
+
+            <div class="right">
+                <a href="#" class="link panel-open icon-only" data-panel="left">
+                    <i class="icon f7-icons">ellipsis_vertical</i>
+                </a>
             </div>
         </div>
-
     </div>
     <div class="toolbar toolbar-bottom toolbar-bottom-md no-shadow">
         <div class="toolbar-inner justify-content-center" style="padding:10px !important">
             <a class="button-large rounded-xl button-18 bg-color-primary text-color-white" style="width:100%" dmx-bind:href="'/create-new-address/1'">Add a new address</a>
         </div>
     </div>
-    <form is="dmx-serverconnect-form" id="delete_address" method="post" action="https://api.justpro.me/api/customer_address_actions/delete_address" site="JustPro-Spa-Backend">
+    <form is="dmx-serverconnect-form" id="delete_address" method="post" action="https://api.justpro.me/api/customer_app/customer_address_actions/delete_address" site="JustPro-Spa-Backend">
         <input id="address_id" name="id" type="hidden">
     </form>
     <div class="page-content">

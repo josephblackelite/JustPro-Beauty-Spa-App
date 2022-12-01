@@ -1,40 +1,38 @@
 <!-- Wappler include head-page="index.html" is="dmx-app" id="orders" appConnect="local" framework7_6="With App Connect" framework7_icons="local" capacitor="local" components="{dmxSwiper:{},dmxFormatter:{},dmxSockets:{},dmxPreloader:{}}" bootstrap_icons="local" fontawesome_6="local" -->
 
 <div class="page" id="orderdetails" data-name="ordersdetails" path="/order-details/:id/:uuid">
-    <div class="padding-top padding-bottom">
-        <div class="navbar no-hairline no-shadow no-border">
-            <div class="navbar-inner" style="padding-right:0px !important; padding-left:0px !important; margin-right:0px !important">
-                <div class="left">
-                    <a href="#" class="link back">
-                        <i class="icon f7-icons">arrow_left</i>
-                    </a>
-                </div>
-                <div class="title">Details</div>
-                <div class="right">
-                    <a href="#" class="link panel-open icon-only" data-panel="left">
-                        <i class="icon f7-icons">ellipsis_vertical</i>
-                    </a>
-                </div>
+
+    <div class="navbar no-hairline no-shadow no-border">
+        <div class="navbar-inner" style="padding-right:0px !important; padding-left:0px !important; margin-right:0px !important">
+            <div class="left">
+                <a href="#" class="link back">
+                    <i class="icon f7-icons">arrow_left</i>
+                </a>
+            </div>
+            <div class="title">Details</div>
+            <div class="right">
+                <a href="#" class="link panel-open icon-only" data-panel="left">
+                    <i class="icon f7-icons">ellipsis_vertical</i>
+                </a>
             </div>
         </div>
     </div>
-
     <div class="page-content content-area">
         <dmx-preloader id="justpropreloader" spinner="pulse" color="#ff6600"></dmx-preloader>
 
-        <dmx-serverconnect id="orderinfo" url="https://api.justpro.me/api/customer_orders/order_details" site="JustPro-Spa-Backend" dmx-param:order_id="app.main.orderdetails.route.params.uuid" dmx-on:start="app.showPreloader('purple')" dmx-on:done="app.hidePreloader()" sockets="true"></dmx-serverconnect>
-        <dmx-serverconnect id="orderchildren" url="https://api.justpro.me/api/customer_orders/order_items_details" site="JustPro-Spa-Backend" dmx-param:order_uuid="app.main.orderdetails.route.params.uuid" dmx-on:start="app.showPreloader('purple')" dmx-on:done="app.hidePreloader()" sockets="true" dmx-param:order_item_id="app.main.orderdetails.route.params.id"></dmx-serverconnect>
+        <dmx-serverconnect id="orderinfo" url="https://api.justpro.me/api/customer_app/bookings/order_details" site="JustPro-Spa-Backend" dmx-param:order_id="app.main.orderdetails.route.params.uuid" dmx-on:start="app.showPreloader('purple')" dmx-on:done="app.hidePreloader()" sockets="true"></dmx-serverconnect>
+        <dmx-serverconnect id="orderchild" url="https://api.justpro.me/api/customer_app/bookings/order_items_details" site="JustPro-Spa-Backend" dmx-param:order_uuid="app.main.orderdetails.route.params.uuid" dmx-on:start="app.showPreloader('purple')" dmx-on:done="app.hidePreloader()" sockets="true" dmx-param:order_item_id="app.main.orderdetails.route.params.id"></dmx-serverconnect>
         <div class="container text-color-black mb-150 margin-top">
             <!-- image -->
             <div style="width: 100%;">
-                <img dmx-bind:src="app.main.orderdetails.orderchildren.data.query[0].item_image" class="order-details-image">
+                <img dmx-bind:src="app.main.orderdetails.orderchild.data.query.item_image" class="order-details-image">
             </div>
             <!-- order details meta -->
             <div class="margin-top">
                 <!-- Total -->
                 <div class="display-flex align-items-center justify-content-space-between">
                     <h3 class="nametag strong no-margin" style="font-size:22px !important;">
-                        {{app.main.orderdetails.orderchildren.data.query[0].total_amt.toNumber().formatCurrency('AED', '.', ',', 2)}}
+                        {{app.main.orderdetails.orderchild.data.query.total_amt.toNumber().formatCurrency('AED', '.', ',', 2)}} - <small>{{app.main.orderdetails.orderchild.data.query.paid ? 'Paid' : 'Payment pending'}}</small>
                     </h3>
                     <div class="display-flex align-items-center " dmx-on:click="run({'f7.dialog.confirm':{title:'Report provider?',text:'We will investigate the case as soon as possible. ',then:{steps:{runJS:{function:'showFlagProviderSheeet'}}}}})">
                         <a href="">Report</a>
@@ -45,32 +43,32 @@
                 <div class="display-flex align-items-center justify-content-space-between">
                     <div class="display-flex align-items-center">
                         <i class="bi-handbag-fill"></i>
-                        <p class="margin-left">{{app.main.orderdetails.orderchildren.data.query[0].order_status?app.main.orderdetails.orderchildren.data.query[0].order_status.titlecase():'Waiting for provider'}} </p>
+                        <p class="margin-left">{{app.main.orderdetails.orderchild.data.query.order_status?app.main.orderdetails.orderchild.data.query.order_status.titlecase():'Waiting for provider'}} </p>
                     </div>
-                    <p class="">Booked {{app.main.orderdetails.orderchildren.data.query[0].order_dateTime.formatDate('dd MMM y')}}</p>
+                    <p class="">Booked {{app.main.orderdetails.orderchild.data.query.order_dateTime.formatDate('dd MMM y')}}</p>
                 </div>
                 <!-- Item name - link -->
                 <div class="display-flex align-items-center justify-content-space-between">
-                    <h3 class="strong">{{app.main.orderdetails.orderchildren.data.query[0].item_name.capitalize()}} </h3>
-                    <a href="" dmx-on:click="run({condition:{if:`(app.main.orderdetails.orderchildren.data.query[0].provider_type == \'home\')`,then:{steps:[{run:{action:`app.cart_preFill.set(\'employee_id\',app.main.orderdetails.orderchildren.data.query[0].parent_provider_id);app.local_store.set(\'service_location\',\'home\')`}},{run:{action:`app.main.navigate(\'/product-info/\'+app.main.orderdetails.orderchildren.data.query[0].provider_service_id+\'/\'+app.main.orderdetails.orderchildren.data.query[0].employee_name,{})`}}]},else:{steps:[{run:{action:`app.local_store.set(\'service_location\',\'salon\')`}},{run:{action:`app.main.navigate(\'/provider-services-page/\'+app.main.orderdetails.orderchildren.data.query[0].parent_provider_id+\'/\'+app.main.orderdetails.orderchildren.data.query[0].parent_provider_name,{})`}}]}}})">Book again</a>
+                    <h3 class="strong">{{app.main.orderdetails.orderchild.data.query.item_name.capitalize()}} </h3>
+                    <a href="" dmx-on:click="run({condition:{if:`(app.main.orderdetails.orderchild.data.query.provider_type == \'home\')`,then:{steps:[{run:{action:`app.cart_preFill.set(\'employee_id\',app.main.orderdetails.orderchild.data.query.parent_provider_id);app.local_store.set(\'service_location\',\'home\')`}},{run:{action:`app.main.navigate(\'/product-info/\'+app.main.orderdetails.orderchild.data.query.provider_service_id+\'/\'+app.main.orderdetails.orderchild.data.query.employee_name,{})`}}]},else:{steps:[{run:{action:`app.local_store.set(\'service_location\',\'salon\')`}},{run:{action:`app.main.navigate(\'/provider-services-page/\'+app.main.orderdetails.orderchild.data.query.parent_provider_id+\'/\'+app.main.orderdetails.orderchild.data.query.parent_provider_name,{})`}}]}}})">Book again</a>
                 </div>
                 <!-- Pending - order -->
-                <div class="" dmx-show="(app.main.orderdetails.orderchildren.data.query[0].order_status == null)">
+                <div class="" dmx-show="(app.main.orderdetails.orderchild.data.query.order_status == null)">
                     <!-- Adress card-home -->
-                    <div class="bg-color-white display-flex align-items-center padding 20-radius-card" dmx-show="(app.main.orderdetails.orderchildren.data.query[0].provider_type == 'home')">
+                    <div class="bg-color-white display-flex align-items-center padding 20-radius-card" dmx-show="(app.main.orderdetails.orderchild.data.query.provider_type == 'home')">
                         <i class="fa-solid fa-location-pin padding"></i>
                         <div>
-                            <p> You will be served at home by {{app.main.orderdetails.orderchildren.data.query[0].employee_name.titlecase()}} on {{app.main.orderdetails.orderchildren.data.query[0].appointment_date.formatDate('dddd, dd MMMM y')}} at {{app.main.orderdetails.orderchildren.data.query[0].time_slot_start}}. {{app.main.orderdetails.orderchildren.data.query[0].employee_name.titlecase()}} will arrive early.
+                            <p> You will be served at home by {{app.main.orderdetails.orderchild.data.query.employee_name.titlecase()}} on {{app.main.orderdetails.orderchild.data.query.appointment_date.formatDate('dddd, dd MMMM y')}} at {{app.main.orderdetails.orderchild.data.query.time_slot_start}}. {{app.main.orderdetails.orderchild.data.query.employee_name.titlecase()}} will arrive early.
                             </p>
                         </div>
 
                     </div>
                     <!-- Adress card-Salon -->
-                    <div class="bg-color-white display-flex align-items-center padding 20-radius-card" dmx-show="(app.main.orderdetails.orderchildren.data.query[0].provider_type == 'salon')">
+                    <div class="bg-color-white display-flex align-items-center padding 20-radius-card" dmx-show="(app.main.orderdetails.orderchild.data.query.provider_type == 'salon')">
                         <i class="fa-solid fa-location-pin text-color-primary padding"></i>
-                        <a class="link external" dmx-bind:href="'https://www.google.com/maps/place/?q=place_id:'+app.main.orderdetails.orderchildren.data.query[0].google_place_id">
-                            <p>You will be served in {{app.main.orderdetails.orderchildren.data.query[0].parent_provider_name.titlecase()}} by {{app.main.orderdetails.orderchildren.data.query[0].employee_name.titlecase()}} on {{app.main.orderdetails.orderchildren.data.query[0].appointment_date.formatDate('dddd dd MMMM y')}} at {{app.main.orderdetails.orderchildren.data.query[0].time_slot_start}}. Please arrive earlier.
-                                {{app.main.orderdetails.orderchildren.data.query[0].shop_number}}, {{app.main.orderdetails.orderchildren.data.query[0].building}} {{app.main.orderdetails.orderchildren.data.query[0].street}}, {{app.main.orderdetails.orderchildren.data.query[0].city}}
+                        <a class="link external" dmx-bind:href="'https://www.google.com/maps/place/?q=place_id:'+app.main.orderdetails.orderchild.data.query.google_place_id">
+                            <p>You will be served in {{app.main.orderdetails.orderchild.data.query.parent_provider_name.titlecase()}} by {{app.main.orderdetails.orderchild.data.query.employee_name.titlecase()}} on {{app.main.orderdetails.orderchild.data.query.appointment_date.formatDate('dddd dd MMMM y')}} at {{app.main.orderdetails.orderchild.data.query.time_slot_start}}. Please arrive earlier.
+                                {{app.main.orderdetails.orderchild.data.query.shop_number}}, {{app.main.orderdetails.orderchild.data.query.building}} {{app.main.orderdetails.orderchild.data.query.street}}, {{app.main.orderdetails.orderchild.data.query.city}}
 
                             </p>
                         </a>
@@ -78,39 +76,39 @@
                     </div>
                 </div>
                 <!-- Completed - order -->
-                <div class="" dmx-show="(app.main.orderdetails.orderchildren.data.query[0].order_status == 'completed')">
+                <div class="" dmx-show="(app.main.orderdetails.orderchild.data.query.order_status == 'completed')">
                     <!-- Salon service -->
-                    <div class="bg-color-white display-flex align-items-center padding 20-radius-card" dmx-show="(app.main.orderdetails.orderchildren.data.query[0].provider_type == 'salon')">
+                    <div class="bg-color-white display-flex align-items-center padding 20-radius-card" dmx-show="(app.main.orderdetails.orderchild.data.query.provider_type == 'salon')">
                         <i class="fa-solid fa-location-pin padding text-color-primary"></i>
                         <div>
-                            <p> You were served in {{app.main.orderdetails.orderchildren.data.query[0].parent_provider_name.titlecase()}} by {{app.main.orderdetails.orderchildren.data.query[0].employee_name.titlecase()}} on {{app.main.orderdetails.orderchildren.data.query[0].appointment_date.formatDate('dddd dd MMMM y')}}. Please rate this service to share your experience.
+                            <p> You were served in {{app.main.orderdetails.orderchild.data.query.parent_provider_name.titlecase()}} by {{app.main.orderdetails.orderchild.data.query.employee_name.titlecase()}} on {{app.main.orderdetails.orderchild.data.query.appointment_date.formatDate('dddd dd MMMM y')}}. Please rate this service to share your experience.
                             </p>
                         </div>
                     </div>
                     <!-- Home service -->
-                    <div class="bg-color-white display-flex align-items-center padding 20-radius-card" dmx-show="(app.main.orderdetails.orderchildren.data.query[0].provider_type == 'home')">
+                    <div class="bg-color-white display-flex align-items-center padding 20-radius-card" dmx-show="(app.main.orderdetails.orderchild.data.query.provider_type == 'home')">
                         <i class="fa-solid fa-location-pin padding text-color-primary"></i>
                         <div>
-                            <p> You were served in {{app.main.orderdetails.orderchildren.data.query[0].parent_provider_name.titlecase()}} by {{app.main.orderdetails.orderchildren.data.query[0].employee_name.titlecase()}} on {{app.main.orderdetails.orderchildren.data.query[0].appointment_date.formatDate('dddd dd MMMM y')}}. Please rate this service to share your experience.
+                            <p> You were served in {{app.main.orderdetails.orderchild.data.query.parent_provider_name.titlecase()}} by {{app.main.orderdetails.orderchild.data.query.employee_name.titlecase()}} on {{app.main.orderdetails.orderchild.data.query.appointment_date.formatDate('dddd dd MMMM y')}}. Please rate this service to share your experience.
                             </p>
                         </div>
                     </div>
                 </div>
                 <!-- Rejected - order -->
-                <div class="" dmx-show="(app.main.orderdetails.orderchildren.data.query[0].order_status == 'rejected')">
+                <div class="" dmx-show="(app.main.orderdetails.orderchild.data.query.order_status == 'rejected')">
                     <!-- Salon service -->
-                    <div class="bg-color-white display-flex align-items-center padding 20-radius-card" dmx-show="(app.main.orderdetails.orderchildren.data.query[0].provider_type == 'salon')">
+                    <div class="bg-color-white display-flex align-items-center padding 20-radius-card" dmx-show="(app.main.orderdetails.orderchild.data.query.provider_type == 'salon')">
                         <i class="fa-solid fa-bag-shopping text-color-primary padding"></i>
                         <div>
-                            <p> Your order was rejected by {{app.main.orderdetails.orderchildren.data.query[0].parent_provider_name.titlecase()}} or {{app.main.orderdetails.orderchildren.data.query[0].employee_name.titlecase()}}. A refund is on it's way to your bank account.
+                            <p> Your order was rejected by {{app.main.orderdetails.orderchild.data.query.parent_provider_name.titlecase()}} or {{app.main.orderdetails.orderchild.data.query.employee_name.titlecase()}}. A refund is on it's way to your bank account.
                             </p>
                         </div>
                     </div>
                     <!-- Home service -->
-                    <div class="bg-color-white display-flex align-items-center padding 20-radius-card" dmx-show="(app.main.orderdetails.orderchildren.data.query[0].provider_type == 'home')">
+                    <div class="bg-color-white display-flex align-items-center padding 20-radius-card" dmx-show="(app.main.orderdetails.orderchild.data.query.provider_type == 'home')">
                         <i class="fa-solid fa-bag-shopping text-color-primary padding"></i>
                         <div>
-                            <p> Your order was rejected by {{app.main.orderdetails.orderchildren.data.query[0].employee_name.titlecase()}}. A refund is on it's way to your bank account.
+                            <p> Your order was rejected by {{app.main.orderdetails.orderchild.data.query.employee_name.titlecase()}}. A refund is on it's way to your bank account.
                             </p>
                         </div>
                     </div>
@@ -123,14 +121,14 @@
                 </h3>
                 <div class="bg-color-white display-flex align-items-center justify-content-space-between 20-radius-card">
                     <div class="padding display-flex align-items-center">
-                        <img src="" alt="" width="50" height="50" class="elevation-1 img-radius-all" dmx-bind:src="app.main.orderdetails.orderchildren.data.query[0].parent_provider_avatar">
+                        <img src="" alt="" width="50" height="50" class="elevation-1 img-radius-all" dmx-bind:src="app.main.orderdetails.orderchild.data.query.parent_provider_avatar">
                         <div class="margin-left ">
-                            <a class="link" dmx-on:click="run({condition:{if:`(app.main.orderdetails.orderchildren.data.query[0].provider_type == \'home\')`,then:{steps:[{run:{action:`app.cart_preFill.set(\'employee_id\',app.main.orderdetails.orderchildren.data.query[0].parent_provider_id);app.local_store.set(\'service_location\',\'home\')`}},{run:{action:`app.main.navigate(\'/provider-services-page/\'+app.main.orderdetails.orderchildren.data.query[0].parent_provider_id+\'/\'+app.main.orderdetails.orderchildren.data.query[0].parent_provider_name,{})`}}]},else:{steps:[{run:{action:`app.local_store.set(\'service_location\',\'salon\')`}},{run:{action:`app.main.navigate(\'/provider-services-page/\'+app.main.orderdetails.orderchildren.data.query[0].parent_provider_id+\'/\'+app.main.orderdetails.orderchildren.data.query[0].parent_provider_name,{})`}}]}}})">
+                            <a class="link" dmx-on:click="run({condition:{if:`(app.main.orderdetails.orderchild.data.query.provider_type == \'home\')`,then:{steps:[{run:{action:`app.cart_preFill.set(\'employee_id\',app.main.orderdetails.orderchild.data.query.parent_provider_id);app.local_store.set(\'service_location\',\'home\')`}},{run:{action:`app.main.navigate(\'/provider-services-page/\'+app.main.orderdetails.orderchild.data.query.parent_provider_id+\'/\'+app.main.orderdetails.orderchild.data.query.parent_provider_name,{})`}}]},else:{steps:[{run:{action:`app.local_store.set(\'service_location\',\'salon\')`}},{run:{action:`app.main.navigate(\'/provider-services-page/\'+app.main.orderdetails.orderchild.data.query.parent_provider_id+\'/\'+app.main.orderdetails.orderchild.data.query.parent_provider_name,{})`}}]}}})">
                                 <div>
-                                    <p>{{app.main.orderdetails.orderchildren.data.query[0].parent_provider_name.capitalize()}}
+                                    <p>{{app.main.orderdetails.orderchild.data.query.parent_provider_name.capitalize()}}
                                     </p>
                                     <p class="margin-top">
-                                        {{app.main.orderdetails.orderchildren.data.query[0].parent_provider_job_tilte.capitalize()}}
+                                        {{app.main.orderdetails.orderchild.data.query.parent_provider_job_tilte.capitalize()}}
                                     </p>
                                 </div>
                             </a>
@@ -138,10 +136,10 @@
                     </div>
 
                     <div class="display-flex align-items-center">
-                        <a href="" dmx-bind:href="'tel:'+app.main.orderdetails.orderchildren.data.query[0].parent_provider_phone_number" class="padding external">
+                        <a href="" dmx-bind:href="'tel:'+app.main.orderdetails.orderchild.data.query.parent_provider_phone_number" class="padding external">
                             <i class="fa-solid fa-phone-flip fa-2x"></i>
                         </a>
-                        <a href="" dmx-bind:href="'https://wa.me/'+app.main.orderdetails.orderchildren.data.query[0].parent_provider_phone_number" class="padding external">
+                        <a href="" dmx-bind:href="'https://wa.me/'+app.main.orderdetails.orderchild.data.query.parent_provider_phone_number" class="padding external">
                             <i class="fa-brands fa-square-whatsapp text-color-green fa-2x"></i>
                         </a>
                     </div>
@@ -161,10 +159,10 @@
                     <i class="fa-solid fa-angle-right"></i>
                 </div> -->
                 <!-- Change appointment date -->
-                <div class="bg-color-white display-flex align-items-center justify-content-space-between 20-radius-card padding-left padding-right" dmx-hide="app.main.orderdetails.orderchildren.data.query[0].order_status">
+                <div class="bg-color-white display-flex align-items-center justify-content-space-between 20-radius-card padding-left padding-right" dmx-hide="app.main.orderdetails.orderchild.data.query.order_status">
 
                     <div>
-                        <a class="link" style="width:100%" href="#!" dmx-on:click="app.main.navigate('/change-appointment-date/'+app.main.orderdetails.orderchildren.data.query[0].order_item_id,{})" dmx-hide="app.main.orderdetails.orderchildren.data.query[0].order_status">
+                        <a class="link" style="width:100%" href="#!" dmx-on:click="app.main.navigate('/change-appointment-date/'+app.main.orderdetails.orderchild.data.query.order_item_id,{})" dmx-hide="app.main.orderdetails.orderchild.data.query.order_status">
                             <h4 class="strong text-color-primary">
                                 Change Appointment date
                             </h4>
@@ -175,10 +173,10 @@
 
                 </div>
                 <!-- Rate service -->
-                <div class="bg-color-white display-flex align-items-center justify-content-space-between  20-radius-card padding-left padding-right" dmx-show="(app.main.orderdetails.orderchildren.data.query[0].order_status == 'completed')">
+                <div class="bg-color-white display-flex align-items-center justify-content-space-between  20-radius-card padding-left padding-right" dmx-show="(app.main.orderdetails.orderchild.data.query.order_status == 'completed')">
 
                     <div>
-                        <a href="#" class="link" dmx-on:click="app.main.navigate('/review-service/'+app.main.orderdetails.orderchildren.data.query[0].provider_service_id+'/'+app.main.orderdetails.orderchildren.data.query[0].employee_id+'/'+app.main.orderdetails.route.params.id,{})">
+                        <a href="#" class="link" dmx-on:click="app.main.navigate('/review-service/'+app.main.orderdetails.orderchild.data.query.provider_service_id+'/'+app.main.orderdetails.orderchild.data.query.employee_id+'/'+app.main.orderdetails.route.params.id,{})">
                             <h4 class="strong text-color-primary">
                                 Rate Service
                             </h4>
@@ -210,9 +208,9 @@
             <div class="sheet-modal-swipe-step">
                 <!-- -->
                 <div class="">
-                    <form action="https://api.justpro.me/api/provider/report_provider" is="dmx-serverconnect-form" method="post" id="report_provider_form" site="JustPro-Spa-Backend" dmx-on:success="run([{runJS:{function:'closeFlagProviderSheeet'}},{'f7.dialog.alert':{title:'Thank you',text:'We will carefully investigate the case and get back to you if needed.'}}])">
+                    <form action="https://api.justpro.me/api/customer_app/provider/report_provider" is="dmx-serverconnect-form" method="post" id="report_provider_form" site="JustPro-Spa-Backend" dmx-on:success="run([{runJS:{function:'closeFlagProviderSheeet'}},{'f7.dialog.alert':{title:'Thank you',text:'We will carefully investigate the case and get back to you if needed.'}}])">
                         <input id="customer_id" name="customer_id" type="hidden" dmx-bind:value="app.Current_user.data.customer.id">
-                        <input id="provider_id" name="provider_id" type="hidden" dmx-bind:value="app.main.orderdetails.orderchildren.data.query[0].provider_id">
+                        <input id="provider_id" name="provider_id" type="hidden" dmx-bind:value="app.main.orderdetails.orderchild.data.query.provider_id">
                         <div class="list" style="margin-top:-20px !important">
                             <ul class="row">
                                 <li class="item-content item-input item-input-outline" style="width:100% !important">

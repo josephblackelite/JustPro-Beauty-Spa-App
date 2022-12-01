@@ -21,8 +21,8 @@
     </div>
   </div>
   <dmx-value id="last_order_id"></dmx-value>
-  <dmx-serverconnect id="customerPaymentMethods" url="https://api.justpro.me/api/stripe/customerPaymentMethods" site="JustPro-Spa-Backend" dmx-param:stripecustomerid="app.Current_user.data.customer.stripe_customer_id" sockets="true" dmx-param:customer_id="app.Current_user.data.customer.id" dmx-on:start="app.showPreloader('purple')" dmx-on:done="app.hidePreloader()"></dmx-serverconnect>
-  <dmx-serverconnect id="lastOrder" url="https://api.justpro.me/api/customer_orders/last_order" site="JustPro-Spa-Backend" dmx-param:customer_id="app.Current_user.data.customer.id" sockets="true"></dmx-serverconnect>
+  <dmx-serverconnect id="customerPaymentMethods" url="https://api.justpro.me/api/customer_app/stripe/customerPaymentMethods" site="JustPro-Spa-Backend" dmx-param:stripecustomerid="app.Current_user.data.customer.stripe_customer_id" sockets="true" dmx-param:customer_id="app.Current_user.data.customer.id" dmx-on:start="app.showPreloader('purple')" dmx-on:done="app.hidePreloader()"></dmx-serverconnect>
+  <dmx-serverconnect id="lastOrder" url="https://api.justpro.me/api/customer_app/bookings/last_order" site="JustPro-Spa-Backend" dmx-param:customer_id="app.Current_user.data.customer.id" sockets="true"></dmx-serverconnect>
   <script is="dmx-flow" id="check_last_order" type="text/dmx-flow">[
   {
     wait: {delay: 20000}
@@ -72,7 +72,7 @@
       steps: [
         {
           serverConnect: {
-            url: "https://api.justpro.me/api/provider/query_appointment",
+            url: "https://api.justpro.me/api/customer_app/provider/query_appointment",
             site: "JustPro-Spa-Backend",
             params: {date_time: "{{appointment_date}}", provider_id: "{{employee_id}}"},
             name: "checkDate",
@@ -81,7 +81,7 @@
         },
         {
           serverConnect: {
-            url: "https://api.justpro.me/api/checkout_workflows/check_booked_timeSlot",
+            url: "https://api.justpro.me/api/customer_app/checkout_workflows/check_booked_timeSlot",
             site: "JustPro-Spa-Backend",
             params: {
               date_id: "{{checkDate.data.query_provider_appointment.id}}",
@@ -231,7 +231,7 @@
   </div>
 
 
-  <form is="dmx-serverconnect-form" id="Setup_Intent_ephemeral_key_gen" method="post" action="https://api.justpro.me/api/stripe/create_setup_intent" site="JustPro-Spa-Backend" dmx-on:success="run([{run:{action:`app.main.checkout.last_order_id.setValue(app.main.checkout.Setup_Intent_ephemeral_key_gen.data.insertOrder.identity)`}},{runJS:{function:'createPaymentFlow',args:[`app.main.checkout.Setup_Intent_ephemeral_key_gen.data.client_secret`,`app.main.checkout.Setup_Intent_ephemeral_key_gen.data.customer_id`,`app.main.checkout.Setup_Intent_ephemeral_key_gen.data.ephemeral_key`]}}])" dmx-on:start="app.showPreloader('purple')" dmx-on:done="app.hidePreloader()"><input id="User_id" name="user_id" dmx-bind:value="app.Current_user.data.customer.id" type="hidden">
+  <form is="dmx-serverconnect-form" id="Setup_Intent_ephemeral_key_gen" method="post" action="https://api.justpro.me/api/customer_app/stripe/create_setup_intent" site="JustPro-Spa-Backend" dmx-on:success="run([{run:{action:`app.main.checkout.last_order_id.setValue(app.main.checkout.Setup_Intent_ephemeral_key_gen.data.insertOrder.identity)`}},{runJS:{function:'createPaymentFlow',args:[`app.main.checkout.Setup_Intent_ephemeral_key_gen.data.client_secret`,`app.main.checkout.Setup_Intent_ephemeral_key_gen.data.customer_id`,`app.main.checkout.Setup_Intent_ephemeral_key_gen.data.ephemeral_key`]}}])" dmx-on:start="app.showPreloader('purple')" dmx-on:done="app.hidePreloader()"><input id="User_id" name="user_id" dmx-bind:value="app.Current_user.data.customer.id" type="hidden">
     <input id="setUp" name="setUp" type="hidden" value="setUp">
     <input id="custmer_id" name="customer_id" type="hidden" dmx-bind:value="app.Current_user.data.customer.id">
     <div is="dmx-form-repeat" id="cartRepeat" dmx-bind:items="app.Cart.data">
@@ -273,7 +273,7 @@
       <input id="service_option_id" name="service_option_id" type="hidden" dmx-bind:value="$value.service_option_id">
     </div>
   </form>
-  <form is="dmx-serverconnect-form" id="appointmentBooking" method="post" action="https://api.justpro.me/api/customer_app/checkOut/send_non_billable_order" site="JustPro-Spa-Backend" dmx-on:success="run([{run:{action:`app.appointmentCart.clear()`}},{'f7.dialog.confirm':{title:'Success',text:'Non billable items order has been submitted. Do you want to submit the billable items too? Note the charges will occur immediately',then:{steps:{condition:{if:`(app.Cart.data.count() &gt; 0)`,then:{steps:{run:{action:`app.main.checkout.bill_selected_card.submit()`}}},else:{steps:{'f7.dialog.alert':{title:'Note item',text:'Add at least one item to your cart'}}}}}}}}])" dmx-on:start="app.showPreloader('purple')" dmx-on:done="app.hidePreloader()">
+  <form is="dmx-serverconnect-form" id="appointmentBooking" method="post" action="https://api.justpro.me/api/customer_app/checkOut/send_non_billable_order" site="JustPro-Spa-Backend" dmx-on:success="run([{run:{action:`app.appointmentCart.clear()`}},{'f7.dialog.confirm':{title:'Success',text:'Non billable items order has been submitted. Do you want to submit the billable items too? Note the charges will occur immediately',then:{steps:{condition:{if:`(app.Cart.data.count() &gt; 0)`,then:{steps:{run:{action:`app.main.checkout.bill_selected_card.submit()`}}},else:{steps:{'f7.dialog.confirm':{text:'Add at least one item to your cart',title:'No items?',then:{steps:{run:{action:`app.main.navigate(\'/order-tracking\',{})`}}},else:{steps:{run:{action:`app.main.navigate(\'/order-tracking\',{})`}}}}}}}}}}}])" dmx-on:start="app.showPreloader('purple')" dmx-on:done="app.hidePreloader()">
     <input id="selected_payment_method_appointmentBooking" name="selected_payment_method" type="hidden" dmx-bind:value="app.main.checkout.customer_selected_payment_method.value"><input id="User_id_appointmentBooking" name="user_id" dmx-bind:value="app.Current_user.data.customer.id" type="hidden">
     <input id="setUp_appointmentBooking" name="setUp" type="hidden">
     <input id="customer_id_appointmentBooking" name="customer_id" type="hidden" dmx-bind:value="app.Current_user.data.customer.id"><input id="address_id__appointmentBooking" name="address_id" dmx-bind:value="app.main.checkout.route.params.address_id" type="hidden">
@@ -350,7 +350,7 @@
     </div>
     <div class="sheet-modal-inner">
       <div class="block no-margin-top">
-        <form action="https://api.justpro.me/api/security/collect_user_email_for_checkout" is="dmx-serverconnect-form" method="post" id="enter_email_address" site="JustPro-Spa-Backend" dmx-on:success="run([{runJS:{function:'closeEnterEmailAddressSheet'}},{run:{action:`app.main.checkout.Setup_Intent_ephemeral_key_gen.submit()`}}])" class="no-padding" dmx-on:invalid="run({'f7.dialog.alert':{title:'Error',text:'There is an error'}})"><input id="user__id" name="user_id" type="hidden" dmx-bind:value="app.Current_user.data.customer.id">
+        <form action="https://api.justpro.me/api/customer_app/security/collect_user_email_for_checkout" is="dmx-serverconnect-form" method="post" id="enter_email_address" site="JustPro-Spa-Backend" dmx-on:success="run([{runJS:{function:'closeEnterEmailAddressSheet'}},{run:{action:`app.main.checkout.Setup_Intent_ephemeral_key_gen.submit()`}}])" class="no-padding" dmx-on:invalid="run({'f7.dialog.alert':{title:'Error',text:'There is an error'}})"><input id="user__id" name="user_id" type="hidden" dmx-bind:value="app.Current_user.data.customer.id">
 
 
           <div class="list no-hairlines-md no-margin-top no-margin-bottom">

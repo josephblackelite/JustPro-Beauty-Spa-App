@@ -148,7 +148,7 @@
   <dmx-value id="category_filter" dmx-bind:value="app.local_store.data.state"></dmx-value>
   <dmx-value id="popover_description"></dmx-value>
 
-  <dmx-serverconnect id="selected_address_data" url="https://api.justpro.me/api/customer_address_actions/selected_address_data" site="JustPro-Spa-Backend" dmx-param:address_id="app.main.home.address_select_form.select_address.value" sockets="true"></dmx-serverconnect>
+  <dmx-serverconnect id="selected_address_data" url="https://api.justpro.me/api/customer_app/customer_address_actions/selected_address_data" site="JustPro-Spa-Backend" dmx-param:address_id="app.main.home.address_select_form.select_address.value" sockets="true"></dmx-serverconnect>
   <dmx-serverconnect id="available_categories" url="https://api.justpro.me/api/admin/service_workflows/query_main_categories" site="JustPro-Spa-Backend" dmx-param:address_id="app.main.home.address_select_form.select_address.value" sockets="true" dmx-param:product_delivery="app.local_store.data.service_location"></dmx-serverconnect>
   <dmx-serverconnect id="category" url="https://api.justpro.me/api/services/single_category" site="JustPro-Spa-Backend" dmx-param:provider_id="app.main.providerservicespage.route.params.provider_id" dmx-param:category="app.main.providerservicespage.route.params.category" dmx-param:search_by_name="app.main.providerservicespage.search.value" dmx-on:start="app.showPreloader('deeporange')" dmx-on:done="app.hidePreloader()" sockets="true" dmx-param:category_id="app.main.home.category_filter.value"></dmx-serverconnect>
   <style>

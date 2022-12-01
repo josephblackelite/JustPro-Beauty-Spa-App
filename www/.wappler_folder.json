@@ -150,5 +150,13 @@
   "uncharged-appointments.html": {
     "layoutPage": "",
     "description": ""
+  },
+  "categories-page.html": {
+    "layoutPage": "",
+    "description": ""
+  },
+  "provider-list-page.html": {
+    "layoutPage": "",
+    "description": ""
   }
 }

@@ -3,21 +3,22 @@
 
 <div class="page" path="/provider-services-page/:provider_id/:provider_name/:category?" data-name="provider-services-page" id="providerservicespage">
     <dmx-preloader id="justpropreloader" spinner="pulse" color="#ff6600"></dmx-preloader>
-    <dmx-serverconnect id="queryProviderServices" url="https://api.justpro.me/api/provider/list_provider_services_4_category" site="JustPro-Spa-Backend" dmx-param:provider_id="app.main.providerservicespage.route.params.provider_id" dmx-param:category="app.main.providerservicespage.route.params.category" dmx-param:search_by_name="app.main.providerservicespage.search.value" dmx-on:start="app.showPreloader('deeporange')" dmx-on:done="app.hidePreloader()" sockets="true"></dmx-serverconnect>
-    <dmx-serverconnect id="category" url="https://api.justpro.me/api/services/single_category" site="JustPro-Spa-Backend" dmx-param:provider_id="app.main.providerservicespage.route.params.provider_id" dmx-param:category="app.main.providerservicespage.route.params.category" dmx-param:search_by_name="app.main.providerservicespage.search.value" dmx-on:start="app.showPreloader('deeporange')" dmx-on:done="app.hidePreloader()" sockets="true" dmx-param:category_id="app.main.providerservicespage.route.params.category"></dmx-serverconnect>
-    <dmx-serverconnect id="provider_info" url="https://api.justpro.me/api/provider/provider_info" site="JustPro-Spa-Backend" dmx-param:provider_id="app.main.providerservicespage.route.params.provider_id" dmx-on:start="app.showPreloader('deeporange')" dmx-on:done="app.hidePreloader()" dmx-param:customer_longitude="app.longitude.value" dmx-param:customer_latitude="app.latitude.value"></dmx-serverconnect>
-    <div class="padding-top padding-bottom">
-        <div class="navbar no-hairline no-shadow no-border">
-            <div class="navbar-inner" style="padding-right:0px !important; padding-left:0px !important; margin-right:0px !important">
-                <div class="subnavbar">
-                    <a href="#!" class="link smallfont text-align-left" dmx-on:click="app.main.navigate('/rating-review-page/'+app.main.providerservicespage.route.params.provider_id,{})"><span class="fa fa-star small" dmx-class:checked="(app.main.providerservicespage.provider_info.data.rating &gt; 0)"></span>
-                        <span class="fa fa-star small" dmx-class:checked="(app.main.providerservicespage.provider_info.data.rating &gt; 1)"></span>
-                        <span class="fa fa-star small" dmx-class:checked="(app.main.providerservicespage.provider_info.data.rating &gt; 2)"></span>
-                        <span class="fa fa-star small" dmx-class:checked="(app.main.providerservicespage.provider_info.data.rating &gt; 3)"></span>
-                        <span class="fa fa-star small" dmx-class:checked="(app.main.providerservicespage.provider_info.data.rating &gt; 4)"></span></a>
-                    <a href="#!" class="link smallfont text-align-right">{{app.main.providerservicespage.provider_info.data.distance.Distance.toNumber().floor()}}km away</a>
+    <dmx-serverconnect id="queryProviderServices" url="https://api.justpro.me/api/customer_app/provider/list_provider_services_4_category" site="JustPro-Spa-Backend" dmx-param:provider_id="app.main.providerservicespage.route.params.provider_id" dmx-param:category="app.main.providerservicespage.route.params.category" dmx-param:search_by_name="app.main.providerservicespage.search.value" dmx-on:start="app.showPreloader('deeporange')" dmx-on:done="app.hidePreloader()" sockets="true"></dmx-serverconnect>
+    <dmx-serverconnect id="category" url="https://api.justpro.me/api/customer_app/service_workflows/single_category" site="JustPro-Spa-Backend" dmx-param:provider_id="app.main.providerservicespage.route.params.provider_id" dmx-param:category="app.main.providerservicespage.route.params.category" dmx-param:search_by_name="app.main.providerservicespage.search.value" dmx-on:start="app.showPreloader('deeporange')" dmx-on:done="app.hidePreloader()" sockets="true" dmx-param:category_id="app.main.providerservicespage.route.params.category"></dmx-serverconnect>
+    <dmx-serverconnect id="provider_info" url="https://api.justpro.me/api/customer_app/provider/provider_info_copy" site="JustPro-Spa-Backend" dmx-param:provider_id="app.main.providerservicespage.route.params.provider_id" dmx-on:start="app.showPreloader('deeporange')" dmx-on:done="app.hidePreloader()" dmx-param:customer_longitude="app.longitude.value" dmx-param:customer_latitude="app.latitude.value"></dmx-serverconnect>
 
-                    <!--  
+
+    <div class="navbar no-hairline no-shadow no-border">
+        <div class="navbar-inner" style="padding-right:0px !important; padding-left:0px !important; margin-right:0px !important">
+            <div class="subnavbar">
+                <a href="#!" class="link smallfont text-align-left" dmx-on:click="app.main.navigate('/rating-review-page/'+app.main.providerservicespage.route.params.provider_id,{})"><span class="fa fa-star small" dmx-class:checked="(app.main.providerservicespage.provider_info.data.rating &gt; 0)"></span>
+                    <span class="fa fa-star small" dmx-class:checked="(app.main.providerservicespage.provider_info.data.rating &gt; 1)"></span>
+                    <span class="fa fa-star small" dmx-class:checked="(app.main.providerservicespage.provider_info.data.rating &gt; 2)"></span>
+                    <span class="fa fa-star small" dmx-class:checked="(app.main.providerservicespage.provider_info.data.rating &gt; 3)"></span>
+                    <span class="fa fa-star small" dmx-class:checked="(app.main.providerservicespage.provider_info.data.rating &gt; 4)"></span></a>
+                <a href="#!" class="link smallfont text-align-right">{{app.main.providerservicespage.provider_info.data.distance.Distance.toNumber().floor()}}km away</a>
+
+                <!--  
                     <div class="row">
                         <div class="col-100">
                             <div class="block text-align-right">
@@ -33,25 +34,25 @@
                     </div>
                     <p></p>-->
 
-                </div>
-                <div class="left">
-                    <a href="#" class="link back">
-                        <i class="icon f7-icons">arrow_left</i> &nbsp; Back
-                    </a>
+            </div>
+            <div class="left">
+                <a href="#" class="link back">
+                    <i class="icon f7-icons">arrow_left</i> &nbsp; Back
+                </a>
 
-                </div>
+            </div>
 
-                <div class="title"> </div>
+            <div class="title"> </div>
 
-                <div class="right">
-                    <a href="#" class="link panel-open icon-only" data-panel="left">
+            <div class="right">
+                <a href="#" class="link panel-open icon-only" data-panel="left">
 
-                        <i class="icon f7-icons">ellipsis_vertical</i>
-                    </a>
-                </div>
+                    <i class="icon f7-icons">ellipsis_vertical</i>
+                </a>
             </div>
         </div>
     </div>
+
     <div class="page-content newbg">
         <div id="" class="mb-150">
 

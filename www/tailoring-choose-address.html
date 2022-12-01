@@ -1,7 +1,7 @@
 <!-- Wappler include head-page="index.html" is="dmx-app" id="tailoringchooseaddress" appConnect="local" framework7_6="With App Connect" framework7_icons="local" capacitor="local" components="{dmxGoogleMaps:{}}" -->
 
 <div class="page location-tracking" id="chooseaddress" data-name="choose-address" path="/tailoring-choose-address">
-  <dmx-serverconnect id="selected_address_data" url="https://api.justpro.me/api/customer_address_actions/selected_address_data" site="JustPro-Spa-Backend" dmx-param:address_id="app.main.chooseaddress.address_select_form.select_address.value" sockets="true"></dmx-serverconnect>
+  <dmx-serverconnect id="selected_address_data" url="https://api.justpro.me/api/customer_app/customer_address_actions/selected_address_data" site="JustPro-Spa-Backend" dmx-param:address_id="app.main.chooseaddress.address_select_form.select_address.value" sockets="true"></dmx-serverconnect>
 
   <script is="dmx-flow" id="showAddressSheet" type="text/dmx-flow" autorun>{
   runJS: {function: "showAddressSheet"}

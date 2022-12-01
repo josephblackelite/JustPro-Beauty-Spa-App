@@ -2,10 +2,9 @@
 
 <div class="page welcome-screen" path="/choose-professional/:service_id/:parent_provider_id/:provider_service_id" data-name="choose-professional" id="chooseprofessional">
 
-    <dmx-serverconnect id="list_employees" url="https://api.justpro.me/api/provider/list_provider_employees_4_service" site="JustPro-Spa-Backend" dmx-param:service_id="app.main.chooseprofessional.route.params.service_id" dmx-param:provider_type="app.local_store.data.service_location" dmx-param:customer_address_id="app.main.chooseprofessional.search_by_name.value" dmx-param:search_by_name="app.main.chooseprofessional.search_by_name.value" dmx-param:parent_provider_id="app.main.chooseprofessional.route.params.parent_provider_id"></dmx-serverconnect>
-    <dmx-serverconnect id="service_info" url="https://api.justpro.me/api/services/service_info" site="JustPro-Spa-Backend" dmx-param:service_id="app.main.chooseprofessional.route.params.service_id" sockets="true"></dmx-serverconnect>
+    <dmx-serverconnect id="list_employees" url="https://api.justpro.me/api/customer_app/provider/list_provider_employees_4_service" site="JustPro-Spa-Backend" dmx-param:service_id="app.main.chooseprofessional.route.params.service_id" dmx-param:provider_type="app.local_store.data.service_location" dmx-param:customer_address_id="app.main.chooseprofessional.search_by_name.value" dmx-param:search_by_name="app.main.chooseprofessional.search_by_name.value" dmx-param:parent_provider_id="app.main.chooseprofessional.route.params.parent_provider_id"></dmx-serverconnect>
 
-    <div class="navbar no-hairline no-shadow no-border">
+    <div class="navbar no-hairline no-shadow no-border bg-color-white">
         <div class="navbar-inner" style="padding-right:0px !important; padding-left:0px !important; margin-right:0px !important">
             <div class="subnavbar">
                 <div class="block">
@@ -48,7 +47,7 @@
                 <ul>
                     <li dmx-repeat:repeat_employees="app.main.chooseprofessional.list_employees.data.repeatEmployees" dmx-on:click="run([{run:{action:`app.cart_preFill.set(\'employee_id\',id);app.cart_preFill.set(\'parent_provider_id\',parent_provider_id)`}},{run:{action:`app.selected_employee_id.setValue(id)`}},{run:{action:`app.main.navigate(\'/appointment-page/\'+id+\'/\'+app.main.chooseprofessional.route.params.provider_service_id,{})`}}])">
                         <a href="#" class="item-link item-content">
-                            <div class="item-media"><img src="https://cdn.framework7.io/placeholder/fashion-88x88-5.jpg" width="60" /></div>
+                            <div class="item-media"><img src="https://cdn.framework7.io/placeholder/fashion-88x88-5.jpg" width="60" dmx-bind:src="provider_avatar" /></div>
                             <div class="item-inner">
                                 <div class="item-title-row">
                                     <div class="item-title">{{staff_name.capitalize()}}</div>

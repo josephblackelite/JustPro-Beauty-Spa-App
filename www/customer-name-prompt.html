@@ -1,25 +1,25 @@
 <!-- Wappler include head-page="index.html" is="dmx-app" id="customernameprompt" appConnect="local" framework7_6="With App Connect" framework7_icons="local" capacitor="local" components="{dmxDropzone:{},dmxGooglePlaces:{}}" -->
 
 <div class="page profile-wrapper" path="/customer-name-prompt" data-name="customer-name-prompt" id="customernameprompt">
-    <div class="padding-top padding-bottom" style="padding-top:30px !important; padding-bottom:40px !important">
-        <div class="navbar no-hairline no-shadow no-border">
-            <div class="navbar-inner" data-name="order-prompt">
 
-                <div class="left">
-                    <img src="assets/images/logo-pages.png">
+    <div class="navbar no-hairline no-shadow no-border">
+        <div class="navbar-inner" data-name="order-prompt">
 
-                </div>
-                <div class="title">
+            <div class="left">
+                <img src="assets/images/logo-pages.png">
 
-                </div>
-                <div class="right mr-0" style="mr-0">
-                    <a href="#" class="link panel-open icon-only mr-0 pr-0" data-panel="left" style="margin-right:-30px !important; padding-right:-30px !important">
-                        <i class="icon f7-icons">ellipsis_vertical</i>
-                    </a>
-                </div>
+            </div>
+            <div class="title">
+
+            </div>
+            <div class="right mr-0" style="mr-0">
+                <a href="#" class="link panel-open icon-only mr-0 pr-0" data-panel="left" style="margin-right:-30px !important; padding-right:-30px !important">
+                    <i class="icon f7-icons">ellipsis_vertical</i>
+                </a>
             </div>
         </div>
     </div>
+
     <div class="toolbar toolbar-bottom toolbar-bottom-md no-shadow">
         <div class="toolbar-inner justify-content-center" style="padding:10px !important;">
             <button href="" class="button-6 button-large rounded-lg text-color-white bg-color-primary" dmx-on:click="run({condition:{if:`app.main.customernameprompt.update_profile_form.name.value`,then:{steps:{run:{action:`app.main.customernameprompt.update_profile_form.submit()`}}}}})" dmx-bind:disabled="app.main.customernameprompt.update_profile_form.state.executing"><span dmx-hide="app.main.customernameprompt.update_profile_form.state.executing">Save &amp; Continue &nbsp;<i class="bi-arrow-right-circle-fill"></i></span>
@@ -31,7 +31,7 @@
     <div class="page-content content-area pt-90">
         <div class="container">
             <div class="form-elements">
-                <form is="dmx-serverconnect-form" method="post" id="update_profile_form" dmx-on:success="run({run:{action:`app.main.navigate(\'/home\',{})`}})" site="JustPro-Spa-Backend" action="https://api.justpro.me/api/security/customer_name_entry_prompt" dmx-on:invalid="run({'f7.dialog.alert':{title:'Error',text:`app.main.customernameprompt.update_profile_form.lastError.response`}})">
+                <form is="dmx-serverconnect-form" method="post" id="update_profile_form" dmx-on:success="run({run:{action:`app.main.navigate(\'/home\',{})`}})" site="JustPro-Spa-Backend" action="https://api.justpro.me/api/customer_app/security/customer_name_entry_prompt" dmx-on:invalid="run({'f7.dialog.alert':{title:'Error',text:`app.main.customernameprompt.update_profile_form.lastError.response`}})">
                     <input id="user_id" name="id" type="hidden" dmx-bind:value="app.Current_user.data.customer.id">
                     <div class="title-head">
                         <h4 class="title text-align-center tajawal-s">What is your lovely name?</h4>

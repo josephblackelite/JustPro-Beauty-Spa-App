@@ -1,0 +1,489 @@
+<!-- Wappler include head-page="index.html" is="dmx-app" id="home" appconnect="local" framework7_6="With App Connect" framework7_icons="local" capacitor="local" components="{dmxSwiper:{},dmxFormatter:{},dmxSockets:{},dmxPreloader:{},dmxSlideshow:{}}" bootstrap_icons="local" fontawesome_6="local" -->
+
+<div class="page page-home" path="/home" data-name="home" id="home">
+  <script is="dmx-flow" id="pushPrompt_notifPrompt" type="text/dmx-flow" autorun>{
+  meta: {
+    $param: [
+      {type: "text", name: "user_id"}
+    ]
+  },
+  exec: {
+    steps: [
+      {
+        wait: {delay: 2000}
+      },
+      {
+        condition: {
+          if: "{{!app.local_store.data.notification_permission_accepted}}",
+          then: {
+            steps: {
+              run: {action: "{{app.main.navigate('/accept-push-page',{})}}"}
+            }
+          },
+          else: {
+            steps: {
+              condition: {
+                if: "{{!app.local_store.data.location_permission_accepted}}",
+                then: {
+                  steps: {
+                    run: {action: "{{app.main.navigate('/location-permission-page',{})}}"}
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    ]
+  }
+}</script>
+  <script is="dmx-flow" id="check_location" type="text/dmx-flow" autorun>[
+  {
+    wait: {delay: 2000}
+  },
+  {
+    condition: {
+      if: "{{!app.local_store.data.service_location}}",
+      then: {
+        steps: {
+          run: {action: "{{app.local_store.set('service_location','home')}}"}
+        }
+      }
+    }
+  }
+]</script>
+  <script is="dmx-flow" id="freelancer_card_toggle" type="text/dmx-flow" autorun="">[
+  {
+    wait: {delay: 2000}
+  },
+  {
+    condition: {
+      if: "{{!app.local_store.data.service_location}}",
+      then: {
+        steps: {
+          run: {
+            action: "{{app.local_store.set('service_location',app.main.home.providers.value)}}"
+          }
+        }
+      }
+    }
+  }
+]</script>
+
+  <script is="dmx-flow" id="AddOneSignal_user_id" type="text/dmx-flow" autorun>{
+  meta: {
+    $param: [
+      {type: "text", name: "user_id"}
+    ]
+  },
+  exec: {
+    steps: [
+      {
+        wait: {delay: 5000}
+      },
+      {
+        runJS: {
+          function: "addExternalUserId",
+          args: ["{{Current_user.data.customer.id}}"]
+        }
+      }
+    ]
+  }
+}</script>
+  <script is="dmx-flow" id="getUserPosition" type="text/dmx-flow" autorun="">{
+  meta: {
+    $param: [
+      {type: "text", name: "user_id"}
+    ]
+  },
+  exec: {
+    steps: {
+      condition: {
+        if: "{{app.local_store.data.location_permission_accepted}}",
+        then: {
+          steps: {
+            runJS: {function: "getPosition"}
+          }
+        }
+      }
+    }
+  }
+}</script>
+  <script is="dmx-flow" id="setFreelancerCardToggleState" type="text/dmx-flow" autorun="">{
+  meta: {
+    $param: [
+      {type: "text", name: "user_id"}
+    ]
+  },
+  exec: {
+    steps: {
+      condition: {
+        if: "{{(app.local_store.data.freelacer_card_class_toggle != 1 || 0)}}",
+        then: {
+          steps: {
+            run: {action: "{{app.local_store.set('freelacer_card_class_toggle',1)}}"}
+          }
+        }
+      }
+    }
+  }
+}</script>
+
+  <dmx-serverconnect id="last_item_query_4_review" url="https://api.justpro.me/api/customer_app/bookings/last_item_query_4_review" site="JustPro-Spa-Backend" dmx-param:user_id="local_store.data.user_id" sockets="true" dmx-param:customer_id="Current_user.data.customer.id"></dmx-serverconnect>
+  <script is="dmx-flow" id="prompt_user_4_review" type="text/dmx-flow" autorun="">[
+  {
+    wait: {delay: 10000}
+  },
+  {
+    condition: {
+      if: "{{app.main.home.last_item_query_4_review.data.query_order_items}}",
+      then: {
+        steps: [
+          {
+            runJS: {function: "openRatingPopUp", disabled: true}
+          },
+          {
+            run: {action: "{{app.main.home.rating_popup.open()}}", disabled: true}
+          },
+          {
+            run: {
+              action: "{{app.main.navigate('/review-service/'+app.main.home.last_item_query_4_review.data.query_order_items.provider_service_id+'/'+app.main.home.last_item_query_4_review.data.query_order_items.provider_employee_id+'/'+app.main.home.last_item_query_4_review.data.query_order_items.id,{})}}"
+            }
+          }
+        ]
+      }
+    }
+  }
+]</script>
+
+  <dmx-datetime id="var1"></dmx-datetime>
+
+  <dmx-serverconnect id="querySalons" url="https://api.justpro.me/api/customer_app/provider/all_salons" site="JustPro-Spa-Backend" dmx-param:category="app.main.home.category_filter.value" dmx-on:start="app.showPreloader('deeporange')" dmx-on:done="app.hidePreloader()" dmx-param:product_delivery="app.main.home.providers.value" dmx-param:customer_lat="app.latitude.value" dmx-param:customer_long="app.longitude.value" dmx-param:provider_type="app.local_store.data.service_location" dmx-param:search_by_name="app.main.home.search_by_name.value" dmx-param:industry="app.local_store.data.selected_industry"></dmx-serverconnect>
+  <dmx-serverconnect id="home_service_providers" url="https://api.justpro.me/api/customer_app/provider/home_services_providers" site="JustPro-Spa-Backend" dmx-param:category="app.main.home.category_filter.value" dmx-on:start="app.showPreloader('deeporange')" dmx-on:done="app.hidePreloader()" dmx-param:product_delivery="app.main.home.providers.value" dmx-param:customer_lat="app.latitude.value" dmx-param:customer_long="app.longitude.value" dmx-param:provider_type="app.local_store.data.service_location" dmx-param:search_by_name="app.main.home.search_by_name.value" dmx-param:industry="app.local_store.data.selected_industry"></dmx-serverconnect>
+  <dmx-value id="category_filter" dmx-bind:value="app.local_store.data.state"></dmx-value>
+  <dmx-value id="popover_description"></dmx-value>
+  <dmx-serverconnect id="available_categories" url="https://api.justpro.me/api/customer_app/service_workflows/query_main_categories" site="JustPro-Spa-Backend" dmx-param:address_id="app.main.home.address_select_form.select_address.value" sockets="true" dmx-param:product_delivery="app.local_store.data.service_location" dmx-param:industry="app.local_store.data.selected_industry"></dmx-serverconnect>
+  <dmx-serverconnect id="category" url="https://api.justpro.me/api/customer_app/service_workflows/single_category" site="JustPro-Spa-Backend" dmx-param:provider_id="app.main.providerservicespage.route.params.provider_id" dmx-param:category="app.main.providerservicespage.route.params.category" dmx-param:search_by_name="app.main.providerservicespage.search.value" dmx-on:start="app.showPreloader('deeporange')" dmx-on:done="app.hidePreloader()" sockets="true" dmx-param:category_id="app.main.home.category_filter.value"></dmx-serverconnect>
+  <style>
+    .strong {
+      font-weight: 600 !important;
+    }
+
+    .custom-font {
+      font-family: 'Maven Pro', sans-serif !important;
+    }
+
+    .toggler {
+      background-color: #CA522A !important;
+      color: #fff !important;
+      font-weight: 800 !important;
+      font-family: 'Catamaran', sans-serif;
+    }
+  </style>
+
+  <div class="navbar no-hairline no-shadow no-border">
+    <div class="navbar-inner" data-name="order-prompt">
+      <div class="subnavbar no-shadow no-border bg-color-white">
+        <div class="segmented text-color-primary nametag no-margin display-flex align-items-center justify-content-center segmented-raised" style="margin-top:0px !important; margin-bottom:0px !important">
+          <button class="button strong text-color-primary " dmx-on:click="app.local_store.set('service_location','home')" style="font-weight: 800;" dmx-class:toggler="(app.local_store.data.service_location == 'home')"><span style="height: 100%;">Home Service</span> </button>
+          <button class="button strong text-color-primary" dmx-on:click="app.local_store.set('service_location','salon')" style="font-weight: 800;" dmx-class:toggler="(app.local_store.data.service_location == 'salon')">Shop Visit</button>
+          <span class="segmented-highlight"></span>
+        </div>
+
+      </div>
+
+      <div class="left">
+        <img src="assets/images/logo-pages.png">
+      </div>
+      <div class="title">
+      </div>
+      <div class="right mr-0" style="mr-0">
+        <div class="media" dmx-show="((app.Cart.data.count() &gt; 0) || (appointmentCart.data.count() &gt; 0))">
+          <a href="/order-confirmation"> <i class="bi bi-basket-fill text-color-primary"></i> <sup>{{(app.Cart.data.count() + appointmentCart.data.count())}}</sup></a>
+        </div>
+        <a href="#" class="link panel-open icon-only mr-0 pr-0" data-panel="left" style="margin-right:-30px !important; padding-right:-30px !important">
+          <i class="icon f7-icons">ellipsis_vertical</i>
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <div class="fab fab-right-bottom color-green mb-50">
+    <a href="https://wa.me/+97143279184" class="external">
+      <i class="fa-brands fa-whatsapp fa-2x text-color-black strong"></i>
+    </a>
+    <div class="fab-buttons fab-buttons-top">
+      <!-- <a class="fab-label-button" href="#"><span>1</span><span class="fab-label">Action 1</span></a>
+      <a class="fab-label-button" href="#"><span>2</span><span class="fab-label">Action 2</span></a> -->
+    </div>
+  </div>
+  <div class="toolbar toolbar-bottom toolbar-bottom-md no-shadow" dmx-show="((app.Cart.data.count() &gt; 0) || (appointmentCart.data.count() &gt; 0))">
+    <div class="toolbar-inner justify-content-center" style="padding:10px !important;">
+      <a href="/order-confirmation" class="button-6 button-large rounded-lg text-color-white brand-bg" style="width:100%">
+        {{(app.Cart.data.count() + appointmentCart.data.count())}} &nbsp;<i class="bi bi-basket"></i> &nbsp; View basket &nbsp;<i class="bi-arrow-right-circle-fill"></i></a>
+    </div>
+  </div>
+
+  <div class="page-content newbg pt-150">
+    <dmx-preloader id="justpropreloader" spinner="pulse" color="#ff6600"></dmx-preloader>
+    <div class="searchbar-backdrop" style="border-bottom:0px !important"></div>
+
+    <div class="mb-150">
+
+      <!-- Sort -->
+      <div class="block no-margin no-padding">
+        <div class="row bg-color-white" style="transition: width 0.5s;">
+          <div class="col display-flex align-items-center">
+            <p style="width: 100%;">
+              <input id="search_by_name" name="text1" type="text" style="height:20px; border:0px !important; font-weight:600; margin-left:5px" class="form-control" placeholder="Type Name">
+            </p>
+          </div>
+          <div class="col display-flex align-items-center justify-content-center">
+            <p style="width: 100%;">
+
+              <select id="filter" name="filter" style="height:20px; border:0px !important; font-size:14px !important" class="form-control text-align-center small text-color-black" placeholder="Filter" dmx-on:changed="app.local_store.set('rating',app.main.home.filter.value)" dmx-bind:value="app.local_store.data.rating">
+                <option value="" selected="">Filter by Rating</option>
+                <option value="5">5 Star Rating</option>
+                <option value="4">4 Star Rating</option>
+                <option value="3">3 Star Rating</option>
+                <option value="2">2 Star Rating</option>
+                <option value="1">1 Star Rating</option>
+              </select>
+            </p>
+          </div>
+          <div class="col text-align-right justify-content-right">
+
+            <p class="segmented no-padding no-margin justify-content-right text-align-right segmented-raised">
+
+              <button class="button smallbox" dmx-on:click="app.local_store.set('freelacer_card_class_toggle',0)" dmx-class:text-color-black="(app.local_store.data.freelacer_card_class_toggle == 1)"><i class="bi bi-window-fullscreen grow"></i></button>
+              <button class="button smallbox" dmx-on:click="app.local_store.set('freelacer_card_class_toggle',1)" dmx-class:text-color-black="(app.local_store.data.freelacer_card_class_toggle == 0)"><i class="bi bi-window-split grow"></i></button>
+            </p>
+          </div>
+        </div>
+      </div>
+      <!-- Category-swiper -->
+
+      <div is="dmx-swiper" id="ads" dmx-bind:slides="app.ads.data.query" dmx-bind:initial-slide="" centered-slides="true" autoplay="true" style="padding:0px !important; margin:0px !important" auto-height="true">
+        <div class="swiper-slide display-flex justify-content-center" dmx-on:click="app.main.navigate('/advert/'+id,{})">
+          <img dmx-bind:src="avatar" width="100%" style="width:100%">
+        </div>
+
+
+      </div>
+
+
+
+      <div class="row text-color-black padding-left padding-right  no-padding-top">
+        <div class="col-100 display-flex align-items-center justify-content-space-between mb-0 padding-top padding-bottom">
+          <div class="display-flex align-items-center">
+            <p class="no-margin-bottom no-margin-top margin-right"> Exploring</p>
+            <a href="/industries">
+              <h4 class="strong no-margin-bottom no-margin-top  margin-right text-color-primary">
+                {{app.local_store.data.selected_industry.capitalize()}}
+              </h4>
+            </a>
+
+          </div>
+
+          <a href="" dmx-on:click="app.local_store.remove('state')">Show all</a>
+        </div>
+        <div class="col-100 display-flex no-margin-top up-10">
+          <div is="dmx-swiper" id="categories_swiper" dmx-bind:slides="app.main.home.available_categories.data.query_categories" slides-per-view="3" pagination="bullets" slides-per-group="3" style="width: 100%;">
+            <div class="swiper-slide">
+              <div class="display-flex flex-direction-column align-items-center padding" dmx-on:click="app.local_store.set('state',id)">
+                <img src="" alt="" dmx-bind:src="avatar" class="" dmx-class:gray-border="(app.main.home.category_filter.value == id)" width="100" height="100">
+                <p class="no-margin-top">
+                  {{category_name.capitalize()}}
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- Repeat salons -->
+      <div class="row no-gap up-10" dmx-show="(app.local_store.data.service_location == 'salon')">
+        <div class="col-100 padding text-color-black">
+          <p class="text-18 strong no-margin">
+            {{app.main.home.querySalons.data.repeat_providers.count()+' '+app.main.home.category.data.query_category.category_name.capitalize()+' salons near you.'}}
+          </p>
+        </div>
+        <div class="col-100" dmx-show="(app.local_store.data.freelacer_card_class_toggle == 0)" dmx-repeat:repeat_salons="(app.main.home.querySalons.data.repeat_providers.where(`rating`, app.main.home.filter.value, '==').sort(`distance.Distance`).count() &gt; 0)?app.main.home.querySalons.data.repeat_providers.where(`rating`, app.main.home.filter.value, '==').sort(`distance.Distance`):app.main.home.querySalons.data.repeat_providers.sort(`distance.Distance`))">
+
+          <div class="card demo-card-header-pic no-shadow card-outline border-10" dmx-on:click="app.main.navigate('/provider-services-page/'+id+'/'+staff_name+'/'+app.main.home.category_filter.value,{})">
+            <div class="ribbon" dmx-show="verified"><span>Verified</span></div>
+            <div class="card-header align-items-flex-end" dmx-style:background-image="'url('+ provider_avatar +')'" style="height:256px; background-position:bottom">
+              <span style="font-size:26px; text-transform:capitalize; strong" class="tajawal nametag">
+                {{staff_name.capitalize()}} <br>
+                <small> {{job_title.titlecase()}} </small>
+              </span>
+
+            </div>
+            <div class="card-footer no-border bg-transparent" style="padding-top:-210px !important; ">
+              <div class="row">
+                <div class="col-100 no-padding">
+                  <span class="fa-solid fa-star small" dmx-class:checked="(rating > 0)"></span>
+                  <span class="fa-solid fa-star small" dmx-class:checked="(rating > 1)"></span>
+                  <span class="fa-solid fa-star small" dmx-class:checked="(rating > 2)"></span>
+                  <span class="fa-solid fa-star small" dmx-class:checked="(rating > 3)"></span>
+                  <span class="fa-solid fa-star small" dmx-class:checked="(rating > 4)"></span>
+                </div>
+                <div class="no-padding smallfont">
+                  {{distance.Distance.floor()}} km away
+                </div>
+              </div>
+
+            </div>
+          </div>
+        </div>
+
+        <div class="col-100" dmx-show="(app.local_store.data.freelacer_card_class_toggle == 1)">
+          <div class="bg-color-white display-flex align-items-center padding 20-radius-card margin-bottom" dmx-repeat:repeat_salons="(app.main.home.querySalons.data.repeat_providers.where(`rating`, app.main.home.filter.value, '==').sort(`distance.Distance`).count() &gt; 0)?app.main.home.querySalons.data.repeat_providers.where(`rating`, app.main.home.filter.value, '==').sort(`distance.Distance`):app.main.home.querySalons.data.repeat_providers.sort(`distance.Distance`))" dmx-on:click="app.main.navigate('/provider-services-page/'+id+'/'+staff_name+'/'+app.main.home.category_filter.value,{})">
+            <img src="https://cdn.framework7.io/placeholder/fashion-88x88-5.jpg" width="80" dmx-bind:src="provider_avatar" />
+            <div class="margin-left w-100">
+              <h2 class="no-margin strong">{{staff_name.capitalize()}} <span dmx-show="verified"><i class="fa-solid fa-circle-check fa-xs text-color-green"></i></span></h2>
+              <small>{{job_title.capitalize()}}</small>
+              <div class="">
+                <div class="display-flex align-items-center" dmx-show="rating">
+                  <span class="fa-solid fa-star small smallfont"></span>
+                  <p class="no-margin ">{{rating.toNumber().ceil()}}</p>
+                </div>
+                <hr>
+                <div class="display-flex justify-content-space-between">
+                  <p class="no-margin">{{city.capitalize()}}</p>
+                  <p class="no-margin">
+                    {{distance.Distance.floor()}} km away
+                  </p>
+
+                </div>
+              </div>
+            </div>
+          </div>
+          <!-- <div class="list media-list inset">
+                    <ul>
+                      <li dmx-repeat:repeat_home_providers_2="(app.main.home.home_service_providers.data.repeat_providers.where(`rating`, app.main.home.filter.value, '==').sort(`distance.Distance`).count() &gt; 0)?app.main.home.home_service_providers.data.repeat_providers.where(`rating`, app.main.home.filter.value, '==').sort(`distance.Distance`):app.main.home.home_service_providers.data.repeat_providers.sort(`distance.Distance`))" dmx-on:click="run([{run:{action:`app.selected_employee_id.setValue(id)`}},{run:{action:`app.cart_preFill.set(\'employee_id\',id);app.cart_preFill.set(\'parent_provider_id\',id)`}},{run:{action:`app.main.navigate(\'/provider-services-page/\'+parent_provider_id+\'/\'+staff_name+\'/\'+app.main.home.category_filter.value,{})`}}])" class="margin-bottom padding">
+                        <div class="item-media display-flex align-items-center justify-content-space-between">
+                          <img src="https://cdn.framework7.io/placeholder/fashion-88x88-5.jpg" width="80" dmx-bind:src="provider_avatar" />
+                          <div>
+                            <p> {{city.capitalize()}}, {{distance.Distance.floor()}} km away</p>
+                          </div>
+                        </div>
+                        <div class="item-inner no-margin">
+        
+                          <div class="item-title-row">
+                            <div class="item-title">{{staff_name.capitalize()}}</div>
+                          </div>
+                          <div class="item-subtitle">
+                            <span class="fa fa-star small smallfont" dmx-class:checked="(rating > 0)"></span>
+                            <span class="fa fa-star small smallfont" dmx-class:checked="(rating > 1)"></span>
+                            <span class="fa fa-star small smallfont" dmx-class:checked="(rating > 2)"></span>
+                            <span class="fa fa-star small smallfont" dmx-class:checked="(rating > 3)"></span>
+                            <span class="fa fa-star small smallfont" dmx-class:checked="(rating > 4)"></span>
+                          </div>
+                        </div>
+                      </li>
+        
+                    </ul>
+                  </div> -->
+        </div>
+      </div>
+      <!-- Repeat home providers -->
+      <div class="row no-gap up-10 no-padding" dmx-show="(app.local_store.data.service_location == 'home')">
+        <div class="col-100 padding text-color-black">
+          <p class="text-18 strong no-margin">
+            {{app.main.home.home_service_providers.data.repeat_providers.count()+'  '+app.main.home.category.data.query_category.category_name+' professionals near you.'}}
+          </p>
+        </div>
+        <div class="col-100" dmx-show="(app.local_store.data.freelacer_card_class_toggle == 0)" dmx-repeat:repeat_home_providers="(app.main.home.home_service_providers.data.repeat_providers.where(`rating`, app.main.home.filter.value, '==').sort(`distance.Distance`).count() &gt; 0)?app.main.home.home_service_providers.data.repeat_providers.where(`rating`, app.main.home.filter.value, '==').sort(`distance.Distance`):app.main.home.home_service_providers.data.repeat_providers.sort(`distance.Distance`))">
+          <div class="card demo-card-header-pic no-shadow card-outline border-10" dmx-on:click="run([{run:{action:`app.selected_employee_id.setValue(id)`}},{run:{action:`app.cart_preFill.set(\'employee_id\',id);app.cart_preFill.set(\'parent_provider_id\',id)`}},{run:{action:`app.main.navigate(\'/provider-services-page/\'+parent_provider_id+\'/\'+staff_name+\'/\'+app.main.home.category_filter.value,{})`}}])">
+            <div class="ribbon" dmx-show="verified"><span>Verified</span></div>
+            <div class="card-header align-items-flex-end" dmx-style:background-image="'url('+ provider_avatar +')'" style="height:256px; background-position:bottom">
+
+              <span style="font-size:26px; text-transform:capitalize; strong" class="tajawal nametag">
+                <!--{{}}-->{{staff_name.capitalize()}} <br>
+                <span class="small up-20"> {{job_title.titlecase()}} </span>
+              </span>
+            </div>
+            <div class="card-footer no-border bg-transparent" style="padding-top:-210px !important; ">
+              <div class="row">
+                <div class="col-100">
+                  <span class="fa-solid fa-star" dmx-class:checked="(rating > 0)"></span>
+                  <span class="fa-solid fa-star" dmx-class:checked="(rating > 1)"></span>
+                  <span class="fa-solid fa-star" dmx-class:checked="(rating > 2)"></span>
+                  <span class="fa-solid fa-star" dmx-class:checked="(rating > 3)"></span>
+                  <span class="fa-solid fa-star" dmx-class:checked="(rating > 4)"></span>
+                </div>
+                <div class="no-padding smallfont">
+                  {{distance.Distance.floor()}} km away
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-100" dmx-show="(app.local_store.data.freelacer_card_class_toggle == 1)">
+          <div class="bg-color-white display-flex align-items-center padding 20-radius-card margin-bottom" dmx-repeat:repeat_home_providers_2="(app.main.home.home_service_providers.data.repeat_providers.where(`rating`, app.main.home.filter.value, '==').sort(`distance.Distance`).count() &gt; 0)?app.main.home.home_service_providers.data.repeat_providers.where(`rating`, app.main.home.filter.value, '==').sort(`distance.Distance`):app.main.home.home_service_providers.data.repeat_providers.sort(`distance.Distance`))" dmx-on:click="run([{run:{action:`app.selected_employee_id.setValue(id)`}},{run:{action:`app.cart_preFill.set(\'employee_id\',id);app.cart_preFill.set(\'parent_provider_id\',id)`}},{run:{action:`app.main.navigate(\'/provider-services-page/\'+parent_provider_id+\'/\'+staff_name+\'/\'+app.main.home.category_filter.value,{})`}}])">
+            <img src="https://cdn.framework7.io/placeholder/fashion-88x88-5.jpg" width="80" dmx-bind:src="provider_avatar" />
+            <div class="margin-left w-100">
+              <h2 class="no-margin strong">{{staff_name.capitalize()}} <span dmx-show="verified"><i class="fa-solid fa-circle-check fa-xs text-color-green"></i></span></h2>
+              <small>{{job_title.capitalize()}}</small>
+              <div class="">
+                <div class="display-flex align-items-center" dmx-show="rating">
+                  <span class="fa-solid fa-star small smallfont"></span>
+                  <p class="no-margin ">{{rating.toNumber().ceil()}}</p>
+                </div>
+                <hr>
+                <div class="display-flex justify-content-space-between">
+                  <p class="no-margin">{{city.capitalize()}}</p>
+                  <p class="no-margin">
+                    {{distance.Distance.floor()}} km away
+                  </p>
+
+                </div>
+              </div>
+            </div>
+          </div>
+          <!-- <div class="list media-list inset">
+            <ul>
+              <li dmx-repeat:repeat_home_providers_2="(app.main.home.home_service_providers.data.repeat_providers.where(`rating`, app.main.home.filter.value, '==').sort(`distance.Distance`).count() &gt; 0)?app.main.home.home_service_providers.data.repeat_providers.where(`rating`, app.main.home.filter.value, '==').sort(`distance.Distance`):app.main.home.home_service_providers.data.repeat_providers.sort(`distance.Distance`))" dmx-on:click="run([{run:{action:`app.selected_employee_id.setValue(id)`}},{run:{action:`app.cart_preFill.set(\'employee_id\',id);app.cart_preFill.set(\'parent_provider_id\',id)`}},{run:{action:`app.main.navigate(\'/provider-services-page/\'+parent_provider_id+\'/\'+staff_name+\'/\'+app.main.home.category_filter.value,{})`}}])" class="margin-bottom padding">
+                <div class="item-media display-flex align-items-center justify-content-space-between">
+                  <img src="https://cdn.framework7.io/placeholder/fashion-88x88-5.jpg" width="80" dmx-bind:src="provider_avatar" />
+                  <div>
+                    <p> {{city.capitalize()}}, {{distance.Distance.floor()}} km away</p>
+                  </div>
+                </div>
+                <div class="item-inner no-margin">
+
+                  <div class="item-title-row">
+                    <div class="item-title">{{staff_name.capitalize()}}</div>
+                  </div>
+                  <div class="item-subtitle">
+                    <span class="fa fa-star small smallfont" dmx-class:checked="(rating > 0)"></span>
+                    <span class="fa fa-star small smallfont" dmx-class:checked="(rating > 1)"></span>
+                    <span class="fa fa-star small smallfont" dmx-class:checked="(rating > 2)"></span>
+                    <span class="fa fa-star small smallfont" dmx-class:checked="(rating > 3)"></span>
+                    <span class="fa fa-star small smallfont" dmx-class:checked="(rating > 4)"></span>
+                  </div>
+                </div>
+              </li>
+
+            </ul>
+          </div> -->
+        </div>
+      </div>
+
+
+    </div>
+    <div class="popover popover-links" id="filter_popover">
+      <div class="popover-inner">
+        <div class="list">
+          <ul>
+            <li><a class="list-button item-link" href="#">Link 1</a></li>
+            <li><a class="list-button item-link" href="#">Link 2</a></li>
+            <li><a class="list-button item-link" href="#">Link 3</a></li>
+            <li><a class="list-button item-link" href="#">Link 4</a></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>

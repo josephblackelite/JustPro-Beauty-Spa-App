@@ -2,7 +2,7 @@
 
 
 <div class="page" id="orderconfirmation" data-name="order_confirmation" path="/order-confirmation">
-  <script is="dmx-flow" id="checkCart_bookings_timeSlots" type="text/dmx-flow" autorun>{
+  <!-- <script is="dmx-flow" id="checkCart_bookings_timeSlots" type="text/dmx-flow" autorun>{
   repeat: {
     repeat: "{{app.Cart.data}}",
     outputFields: [],
@@ -56,16 +56,16 @@
     name: "repeat",
     output: true
   }
-}</script>
-  <script is="dmx-flow" id="checkAppointmentCart_bookings_timeSlots" type="text/dmx-flow" autorun="">{
+}</script> -->
+  <script is="dmx-flow" id="check_bookings_timeSlots" type="text/dmx-flow" autorun>{
   repeat: {
-    repeat: "{{app.appointmentCart.data}}",
+    repeat: "{{app.Cart.data}}",
     outputFields: [],
     exec: {
       steps: [
         {
           serverConnect: {
-            url: "https://api.justpro.me/api/provider/query_appointment",
+            url: "https://api.justpro.me/api/customer_app/provider/query_appointment",
             site: "JustPro-Spa-Backend",
             params: {date_time: "{{appointment_date}}", provider_id: "{{employee_id}}"},
             name: "checkDate",
@@ -74,7 +74,7 @@
         },
         {
           serverConnect: {
-            url: "https://api.justpro.me/api/checkout_workflows/check_booked_timeSlot",
+            url: "https://api.justpro.me/api/customer_app/checkout_workflows/check_booked_timeSlot",
             site: "JustPro-Spa-Backend",
             params: {
               date_id: "{{checkDate.data.query_provider_appointment.id}}",
@@ -91,7 +91,62 @@
               steps: [
                 {
                   run: {
-                    action: "{{app.appointmentCart.upsert({provider_service_id: provider_service_id},{selected_timeSlot_expired: 1})}}",
+                    action: "{{app.Cart.upsert({provider_service_id: provider_service_id},{selected_timeSlot_expired: 1})}}",
+                    output: true
+                  }
+                },
+                {
+                  runJS: {
+                    function: "log",
+                    args: ["{{checkDate_timeSlot.data.querTimeSlot_booking[0].time_start}}"],
+                    output: true
+                  }
+                }
+              ]
+            }
+          }
+        }
+      ]
+    },
+    name: "repeat",
+    output: true
+  }
+}</script>
+  <script is="dmx-flow" id="app.checkAppointmentCart_bookings_timeSlots" type="text/dmx-flow" autorun="">{
+  repeat: {
+    repeat: "{{appointmentCart.data}}",
+    outputFields: [],
+    exec: {
+      steps: [
+        {
+          serverConnect: {
+            url: "https://api.justpro.me/api/customer_app/provider/query_appointment",
+            site: "JustPro-Spa-Backend",
+            params: {date_time: "{{appointment_date}}", provider_id: "{{employee_id}}"},
+            name: "checkDate",
+            output: true
+          }
+        },
+        {
+          serverConnect: {
+            url: "https://api.justpro.me/api/customer_app/checkout_workflows/check_booked_timeSlot",
+            site: "JustPro-Spa-Backend",
+            params: {
+              date_id: "{{checkDate.data.query_provider_appointment.id}}",
+              timeslot_start: "{{timeSlot_start}}"
+            },
+            name: "checkDate_timeSlot",
+            output: true
+          }
+        },
+        {
+          condition: {
+            if: "{{checkDate_timeSlot.data.querTimeSlot_booking[0].time_start}}",
+            then: {
+              steps: [
+                {
+                  run: {
+                    action: "{{app.Cart.upsert({provider_service_id: provider_service_id},{selected_timeSlot_expired: 1})}}",
                     output: true
                   }
                 },
