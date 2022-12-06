@@ -1,8 +1,8 @@
-<!-- Wappler include head-page="index.html" is="dmx-app" id="industries" appConnect="local" framework7_6="With App Connect" framework7_icons="local" capacitor="local" components="{dmxSockets:{}}" -->
+<!-- Wappler include head-page="index.html" is="dmx-app" id="industries" appConnect="local" framework7_6="With App Connect" framework7_icons="local" capacitor="local" components="{dmxSockets:{},dmxPreloader:{}}" -->
 
 
 <div class="page" path="/industries" data-name="industries" id="industries">
-  <dmx-serverconnect id="industry" url="https://api.justpro.me/api/customer_app/industries/list_industries" site="JustPro-Spa-Backend"></dmx-serverconnect>
+  <dmx-serverconnect id="industry" url="https://api.justpro.me/api/customer_app/industries/list_industries" site="JustPro-Spa-Backend" dmx-param:search="app.main.industries.search_industries.value"></dmx-serverconnect>
   <div class="navbar no-hairline no-shadow no-border bg-color-white">
     <div class="navbar-inner" style="padding-right:0px !important; padding-left:0px !important; margin-right:0px !important">
       <div class="left">
@@ -20,15 +20,19 @@
   </div>
   <div class="page-content wappler-block">
     <dmx-preloader id="justpropreloader" spinner="pulse" color="#ff6600"></dmx-preloader>
-    <div class="container">
+    <div class="block">
       <div class="row">
-        <div class="padding col-50" dmx-on:click="app.local_store.set('selected_industry',industry_name);app.local_store.remove('state');app.main.navigate('/home',{})" dmx-repeat:repeat_industry="app.main.industries.industry.data.query">
-          <div class="bg-color-white padding-bottom 20-radius-card ">
-
-            <div>
-              <img width="100%" src="assets/images/tailoringImage.jpeg" dmx-bind:src="industry_avatar" />
-              <p class="text-align-center strong" dmx-text="industry_name.capitalize()"><small>Tailoring</small></p>
-            </div>
+        <div class="col padding">
+          <input id="search_industries" name="text1" type="text" class="profile-form " placeholder="Search..">
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-auto col-50 padding" dmx-on:click="app.main.navigate('/categories-page/'+industry_name,{})" dmx-repeat:repeat_all_industries="app.main.industries.industry.data.query">
+          <div class="display-flex flex-direction-column align-items-center">
+            <img src="" alt="" width="100" height="100" class="industry-img-round" dmx-bind:src="industry_avatar">
+            <h5 class="margin-top text-color-primary">
+              {{industry_name.capitalize()}}
+            </h5>
           </div>
         </div>
       </div>

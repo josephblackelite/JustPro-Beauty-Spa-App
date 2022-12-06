@@ -1,18 +1,19 @@
-<!-- Wappler include head-page="index.html" is="dmx-app" id="categoriespage" appConnect="local" framework7_6="With App Connect" framework7_icons="local" capacitor="local" components="{dmxSockets:{},dmxPreloader:{},dmxSwiper:{},dmxFormatter:{}}" fontawesome_6="local" bootstrap_icons="local" -->
+<!-- Wappler include head-page="index.html" is="dmx-app" id="categoriesfilterpage" appConnect="local" framework7_6="With App Connect" framework7_icons="local" capacitor="local" components="{dmxPreloader:{},dmxSwiper:{}}" bootstrap_icons="local" -->
 
-
-<div class="page" path="/categories-page/:industry/:category_id?" data-name="categories-page" id="categoriespage">
-  <dmx-serverconnect id="categories_query" url="https://api.justpro.me/api/customer_app/service_workflows/query_main_categories" site="JustPro-Spa-Backend" dmx-param:search="app.main.categoriespage.search_categories.value" sockets="true" dmx-param:industry="app.main.categoriespage.route.params.industry"></dmx-serverconnect>
-  <dmx-serverconnect id="providers_query" url="https://api.justpro.me/api/customer_app/provider/providers_multiQuery" site="JustPro-Spa-Backend" dmx-param:category="app.local_store.data.selected_category" dmx-on:start="app.showPreloader('deeporange')" dmx-on:done="app.hidePreloader()" dmx-param:product_delivery="app.main.categoriespage.providers.value" dmx-param:customer_lat="app.latitude.value" dmx-param:customer_long="app.longitude.value" dmx-param:provider_type="app.local_store.data.service_location" dmx-param:search_by_name="app.main.categoriespage.search_by_name.value" dmx-param:industry="app.main.categoriespage.route.params.industry" dmx-param:sex="app.main.categoriespage.gender_select.value"></dmx-serverconnect>
+<div class="page" path="/categories-filter-page/:category_id/:service_id" data-name="categories-filter-page" id="categoriesfilterpage">
+  <dmx-serverconnect id="providers_4_service" url="https://api.justpro.me/api/customer_app/service_workflows/providers_4_service" site="JustPro-Spa-Backend" dmx-param:service_id="app.main.categoriesfilterpage.service_id.value" dmx-param:provider_id="" dmx-param:search_by_name="app.main.categoriesfilterpage.search_by_name.value" dmx-param:gender="app.main.categoriesfilterpage.gender.value" dmx-param:customer_long="app.longitude.value" dmx-param:customer_lat="app.latitude.value" dmx-param:provider_type="app.local_store.data.service_location"></dmx-serverconnect>
+  <dmx-serverconnect id="category_services" url="https://api.justpro.me/api/customer_app/service_workflows/category_services" site="JustPro-Spa-Backend" dmx-param:category_id="app.main.categoriesfilterpage.route.params.category_id" sockets="true" dmx-param:service_id=""></dmx-serverconnect>
+  <dmx-serverconnect id="query_service" url="https://api.justpro.me/api/customer_app/service_workflows/category_services" site="JustPro-Spa-Backend" dmx-param:category_id="" sockets="true" dmx-param:service_id="app.main.categoriesfilterpage.service_id.value"></dmx-serverconnect>
+  <dmx-serverconnect id="category" url="https://api.justpro.me/api/customer_app/service_workflows/single_category" site="JustPro-Spa-Backend" dmx-param:provider_id="app.main.providerservicespage.route.params.provider_id" dmx-param:category="app.main.providerservicespage.route.params.category" dmx-param:search_by_name="app.main.providerservicespage.search.value" dmx-on:start="app.showPreloader('deeporange')" dmx-on:done="app.hidePreloader()" sockets="true" dmx-param:category_id="app.main.categoriesfilterpage.route.params.category_id"></dmx-serverconnect>
+  <dmx-value id="service_id" dmx-bind:value="app.main.categoriesfilterpage.route.params.service_id"></dmx-value>
   <div class="navbar no-hairline no-shadow no-border">
     <div class="navbar-inner" style="padding-right:0px !important; padding-left:0px !important; margin-right:0px !important">
-
       <div class="left">
         <a href="#" class="link back">
           <i class="icon f7-icons">arrow_left</i>
         </a>
       </div>
-      <div class="title" dmx-text="app.main.categoriespage.route.params.industry.capitalize()">Categories</div>
+      <div class="title">Providers</div>
       <div class="right">
         <a href="#" class="link panel-open icon-only" data-panel="left">
           <i class="icon f7-icons">ellipsis_vertical</i>
@@ -61,27 +62,19 @@
       </div>
     </div>
     <div class="block">
-      <!-- Selected categories -->
-      <div class="row padding-left padding-right">
+      <div class="row">
         <div class="col-100">
           <div class="display-flex align-items-center justify-content-space-between">
-            <h3 class="no-margin primary-border">
-              {{app.main.categoriespage.route.params.industry.capitalize()}} Services
+            <h3 class="no-margin primary-border">More services in {{app.main.categoriesfilterpage.category.data.query_category.category_name.capitalize()}}
             </h3>
-            <div class="chip" dmx-on:click="app.main.navigate('/industries',{})">
-              <div class="chip-label">More services</div>
-              <i class="bi-chevron-right"></i>
-            </div>
           </div>
         </div>
         <div class="col-100">
-          <div is="dmx-swiper" id="categories_swiper" slides-per-view="3" dmx-bind:slides="app.main.categoriespage.categories_query.data.query_categories" pagination="bullets">
-            <div class="swiper-slide" dmx-on:click="app.local_store.set('selected_category',id)">
+          <div is="dmx-swiper" id="repeat_category_services_swiper" slides-per-view="3" dmx-bind:slides="app.main.categoriesfilterpage.category_services.data.query_services" pagination="bullets">
+            <div class="swiper-slide" dmx-on:click="app.main.categoriesfilterpage.service_id.setValue(id)">
               <div class="display-flex flex-direction-column align-items-center padding">
-                <img height="200" width="150" class="category-img-round" dmx-bind:src="avatar" dmx-class:gray-border="(app.local_store.data.selected_category == id)">
-                <p class="text-align-center text-color-black">
-                  {{category_name.capitalize()}}
-                </p>
+                <img height="200" width="150" class="category-img-round" dmx-bind:src="product_avatar" dmx-class:gray-border="(app.main.categoriesfilterpage.service_id.value == id)">
+                <p class="text-align-center text-color-black">{{product_name.capitalize()}}</p>
               </div>
 
             </div>
@@ -89,15 +82,15 @@
         </div>
       </div>
       <!-- Repeat salons -->
-      <div class="row no-gap up-10" dmx-show="(app.main.categoriespage.providers_query.data.repeat_providers.count() &gt; 0)">
+      <div class="row no-gap up-10" dmx-show="(app.main.categoriesfilterpage.providers_4_service.data.repeat_providers.count() &gt; 0)">
         <div class="col-100 padding text-color-black">
           <p class="text-18 strong no-margin">
-            {{app.main.categoriespage.providers_query.data.repeat_providers.count()+' '+app.main.categoriespage.category.data.query_category.category_name.capitalize()+' providers near you.'}}
+            {{app.main.categoriesfilterpage.providers_4_service.data.repeat_providers.count()+' '+app.main.categoriesfilterpage.query_service.data.query_services[0].product_name.capitalize()+' providers near you.'}}
           </p>
         </div>
-        <div class="col-100" dmx-show="(app.local_store.data.freelacer_card_class_toggle == 0)" dmx-repeat:repeat_provider="(app.main.categoriespage.providers_query.data.repeat_providers.where(`rating`, app.main.categoriespage.filter.value, '==').sort(`distance.Distance`).count() &gt; 0)?app.main.categoriespage.providers_query.data.repeat_providers.where(`rating`, app.main.categoriespage.filter.value, '==').sort(`distance.Distance`):app.main.categoriespage.providers_query.data.repeat_providers.sort(`distance.Distance`))">
+        <div class="col-100" dmx-show="(app.local_store.data.freelacer_card_class_toggle == 0)" dmx-repeat:repeat_provider="(app.main.categoriesfilterpage.providers_4_service.data.repeat_providers.where(`rating`, app.main.categoriespage.filter.value, '==').sort(`distance.Distance`).count() &gt; 0)?app.main.categoriesfilterpage.providers_4_service.data.repeat_providers.where(`rating`, app.main.categoriespage.filter.value, '==').sort(`distance.Distance`):app.main.categoriesfilterpage.providers_4_service.data.repeat_providers.sort(`distance.Distance`))">
 
-          <div class="card demo-card-header-pic no-shadow card-outline border-10" dmx-on:click="run({condition:{if:`(app.local_store.data.service_location == \'home\')`,then:{steps:[{run:{action:`app.selected_employee_id.setValue(id)`}},{run:{action:`app.main.navigate(\'/provider-services-page/\'+id+\'/\'+staff_name+\'/\'+app.main.home.category_filter.value,{})`}}]},else:{steps:{run:{action:`app.main.navigate(\'/provider-services-page/\'+id+\'/\'+staff_name+\'/\'+app.main.home.category_filter.value,{})`}}}}})">
+          <div class="card demo-card-header-pic no-shadow card-outline border-10" dmx-on:click="run({condition:{if:`(app.local_store.data.service_location == \'home\')`,then:{steps:[{run:{action:`app.selected_employee_id.setValue(id)`}},{run:{action:`app.main.navigate(\'/product-info/\'+service_offered_id+\'/\'+staff_name,{})`}}]},else:{steps:{run:{action:`app.main.navigate(\'/product-info/\'+service_offered_id+\'/\'+staff_name,{})`}}}}})">
             <div class="ribbon" dmx-show="verified"><span>Verified</span></div>
             <div class="card-header align-items-flex-end no-padding" dmx-style:background-image="'url('+ provider_avatar +')'" style="height: 256px; background-position: bottom;">
               <span style="font-size: 26px; text-transform: capitalize; width: 100%; background-color: rgba(0,0,0,0.6);" class="tajawal nametag padding">
@@ -125,7 +118,7 @@
         </div>
 
         <div class="col-100" dmx-show="(app.local_store.data.freelacer_card_class_toggle == 1)">
-          <div class="relative block bg-color-white rounded-sm  border-gray-100 p-8 shadow-xl margin padding" dmx-repeat:repeat_salons="(app.main.categoriespage.providers_query.data.repeat_providers.where(`rating`, app.main.categoriespage.filter.value, '==').sort(`distance.Distance`).count() &gt; 0)?app.main.categoriespage.providers_query.data.repeat_providers.where(`rating`, app.main.categoriespage.filter.value, '==').sort(`distance.Distance`):app.main.categoriespage.providers_query.data.repeat_providers.sort(`distance.Distance`))" dmx-on:click="run({condition:{if:`(app.local_store.data.service_location == \'home\')`,then:{steps:[{run:{action:`app.selected_employee_id.setValue(id)`}},{run:{action:`app.main.navigate(\'/provider-services-page/\'+id+\'/\'+staff_name+\'/\'+app.main.home.category_filter.value,{})`}}]},else:{steps:{run:{action:`app.main.navigate(\'/provider-services-page/\'+id+\'/\'+staff_name+\'/\'+app.main.home.category_filter.value,{})`}}}}})">
+          <div class="relative block bg-color-white rounded-sm  border-gray-100 p-8 shadow-xl margin padding" dmx-repeat:repeat_salons="(app.main.categoriesfilterpage.providers_4_service.data.repeat_providers.where(`rating`, app.main.categoriespage.filter.value, '==').sort(`distance.Distance`).count() &gt; 0)?app.main.categoriesfilterpage.providers_4_service.data.repeat_providers.where(`rating`, app.main.categoriespage.filter.value, '==').sort(`distance.Distance`):app.main.categoriesfilterpage.providers_4_service.data.repeat_providers.sort(`distance.Distance`))" dmx-on:click="run({condition:{if:`(app.local_store.data.service_location == \'home\')`,then:{steps:[{run:{action:`app.selected_employee_id.setValue(id)`}},{run:{action:`app.main.navigate(\'/product-info/\'+service_offered_id+\'/\'+staff_name,{})`}}]},else:{steps:{run:{action:`app.main.navigate(\'/product-info/\'+service_offered_id+\'/\'+staff_name,{})`}}}}})">
             <div class="mt-4 display-flex ">
               <div class="display-flex justify-content-space-between margin-right">
                 <img src="" alt="" width="100" height="100" class="rounded-sm" dmx-bind:src="provider_avatar" dmx-class:verified-border="verified">
@@ -151,6 +144,7 @@
               </div>
 
             </div>
+
           </div>
         </div>
       </div>

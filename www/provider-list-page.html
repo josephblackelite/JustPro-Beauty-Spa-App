@@ -17,10 +17,48 @@
           <i class="icon f7-icons">ellipsis_vertical</i>
         </a>
       </div>
+      <div class="subnavbar no-shadow no-border bg-color-white">
+        <div class="segmented text-color-primary nametag no-margin display-flex align-items-center justify-content-center segmented-raised" style="margin-top:0px !important; margin-bottom:0px !important">
+          <button class="button strong text-color-primary " dmx-on:click="app.local_store.set('service_location','home')" style="font-weight: 800;" dmx-class:toggler="(app.local_store.data.service_location == 'home')"><span style="height: 100%;">Home Service</span> </button>
+          <button class="button strong text-color-primary" dmx-on:click="app.local_store.set('service_location','salon')" style="font-weight: 800;" dmx-class:toggler="(app.local_store.data.service_location == 'salon')">Shop Visit</button>
+          <span class="segmented-highlight"></span>
+        </div>
+
+      </div>
     </div>
   </div>
   <div class="page-content wappler-block">
     <dmx-preloader id="justpropreloader" spinner="pulse" color="#ff6600"></dmx-preloader>
+    <div class="block no-margin no-padding">
+      <div class="row bg-color-white" style="transition: width 0.5s;">
+        <div class="col display-flex align-items-center">
+          <p style="width: 100%;">
+            <input id="search_by_name" name="text1" type="text" style="height:20px; border:0px !important; font-weight:600; margin-left:5px" class="form-control" placeholder="Search provider">
+          </p>
+        </div>
+        <div class="col display-flex align-items-center justify-content-center">
+          <p style="width: 100%;">
+
+            <select id="filter" name="filter" style="height:20px; border:0px !important; font-size:14px !important" class="form-control text-align-center small text-color-black" placeholder="Filter" dmx-on:changed="app.local_store.set('rating',app.main.home.filter.value)" dmx-bind:value="app.local_store.data.rating">
+              <option value="" selected="">Filter by Rating</option>
+              <option value="5">5 Star Rating</option>
+              <option value="4">4 Star Rating</option>
+              <option value="3">3 Star Rating</option>
+              <option value="2">2 Star Rating</option>
+              <option value="1">1 Star Rating</option>
+            </select>
+          </p>
+        </div>
+        <div class="col text-align-right justify-content-right">
+
+          <p class="segmented no-padding no-margin justify-content-right text-align-right segmented-raised">
+
+            <button class="button smallbox" dmx-on:click="app.local_store.set('freelacer_card_class_toggle',0)" dmx-class:text-color-black="(app.local_store.data.freelacer_card_class_toggle == 1)"><i class="bi bi-window-fullscreen grow"></i></button>
+            <button class="button smallbox" dmx-on:click="app.local_store.set('freelacer_card_class_toggle',1)" dmx-class:text-color-black="(app.local_store.data.freelacer_card_class_toggle == 0)"><i class="bi bi-window-split grow"></i></button>
+          </p>
+        </div>
+      </div>
+    </div>
     <div class="block">
       <div class="row">
         <div class="col display-flex" style="overflow: scroll;">

@@ -163,12 +163,11 @@
   <dmx-datetime id="var1"></dmx-datetime>
 
   <dmx-serverconnect id="industries" url="https://api.justpro.me/api/customer_app/industries/list_industries" site="JustPro-Spa-Backend" dmx-param:category="app.main.home.category_filter.value" dmx-on:start="app.showPreloader('deeporange')" dmx-on:done="app.hidePreloader()" dmx-param:product_delivery="app.main.home.providers.value" dmx-param:customer_lat="app.latitude.value" dmx-param:customer_long="app.longitude.value" dmx-param:provider_type="app.local_store.data.service_location" dmx-param:search_by_name="app.main.home.search_by_name.value" dmx-param:industry="app.local_store.data.selected_industry"></dmx-serverconnect>
-  <dmx-serverconnect id="providers_query" url="https://api.justpro.me/api/customer_app/provider/providers_multiQuery" site="JustPro-Spa-Backend" dmx-param:category="app.main.home.category_filter.value" dmx-on:start="app.showPreloader('deeporange')" dmx-on:done="app.hidePreloader()" dmx-param:product_delivery="app.main.home.providers.value" dmx-param:customer_lat="app.latitude.value" dmx-param:customer_long="app.longitude.value" dmx-param:provider_type="app.local_store.data.service_location" dmx-param:search_by_name="app.main.home.search_by_name.value" dmx-param:industry="app.local_store.data.selected_industry" dmx-param:sex="app.main.home.gender_select.value"></dmx-serverconnect>
+  <dmx-serverconnect id="providers_query" url="https://api.justpro.me/api/customer_app/provider/providers_multiQuery" site="JustPro-Spa-Backend" dmx-param:category="app.local_store.data.selected_category" dmx-on:start="app.showPreloader('deeporange')" dmx-on:done="app.hidePreloader()" dmx-param:product_delivery="app.main.home.providers.value" dmx-param:customer_lat="app.latitude.value" dmx-param:customer_long="app.longitude.value" dmx-param:provider_type="app.local_store.data.service_location" dmx-param:search_by_name="app.main.home.search_by_name.value" dmx-param:industry="app.local_store.data.selected_industry" dmx-param:sex="app.main.home.gender_select.value"></dmx-serverconnect>
 
-  <dmx-value id="category_filter" dmx-bind:value="app.local_store.data.state"></dmx-value>
   <dmx-value id="popover_description"></dmx-value>
-  <dmx-serverconnect id="available_categories" url="https://api.justpro.me/api/customer_app/service_workflows/query_main_categories" site="JustPro-Spa-Backend" dmx-param:address_id="app.main.home.address_select_form.select_address.value" sockets="true" dmx-param:product_delivery="app.local_store.data.service_location" dmx-param:industry=""></dmx-serverconnect>
-  <dmx-serverconnect id="category" url="https://api.justpro.me/api/customer_app/service_workflows/single_category" site="JustPro-Spa-Backend" dmx-param:provider_id="app.main.providerservicespage.route.params.provider_id" dmx-param:category="app.main.providerservicespage.route.params.category" dmx-param:search_by_name="app.main.providerservicespage.search.value" dmx-on:start="app.showPreloader('deeporange')" dmx-on:done="app.hidePreloader()" sockets="true" dmx-param:category_id="app.main.home.category_filter.value"></dmx-serverconnect>
+  <dmx-serverconnect id="available_categories" url="https://api.justpro.me/api/customer_app/service_workflows/query_main_categories" site="JustPro-Spa-Backend" dmx-param:address_id="app.main.home.address_select_form.select_address.value" sockets="true" dmx-param:product_delivery="app.local_store.data.service_location" dmx-param:industry="app.local_store.data.selected_industry"></dmx-serverconnect>
+  <dmx-serverconnect id="category" url="https://api.justpro.me/api/customer_app/service_workflows/single_category" site="JustPro-Spa-Backend" dmx-param:provider_id="app.main.providerservicespage.route.params.provider_id" dmx-param:category="app.main.providerservicespage.route.params.category" dmx-param:search_by_name="app.main.providerservicespage.search.value" dmx-on:start="app.showPreloader('deeporange')" dmx-on:done="app.hidePreloader()" sockets="true" dmx-param:category_id="app.local_store.data.selected_category"></dmx-serverconnect>
   <style>
     .strong {
       font-weight: 600 !important;
@@ -198,7 +197,15 @@
       </div>
 
       <div class="left">
-        <img src="assets/images/logo-pages.png">
+        <div class="display-flex flex-direction-column ">
+          <h4 class="no-margin text-color-primary">
+            HELLO
+          </h4>
+          <P class="no-margin text-color-primary">
+            {{app.Current_user.data.customer.customer_name.capitalize()}}
+          </P>
+        </div>
+        <!-- <img src="assets/images/logo-pages.png"> -->
       </div>
       <div class="title">
       </div>
@@ -273,22 +280,47 @@
           <img dmx-bind:src="avatar" width="100%" style="width:100%">
         </div>
       </div>
-
-      <div class="row text-color-black padding-left padding-right  no-padding-top">
+      <!-- Industries -->
+      <div class="row text-color-black padding-left padding-right">
         <div class="col-100 display-flex align-items-center justify-content-space-between mb-0 padding-top padding-bottom">
           <div class="display-flex align-items-center">
             <h3 class="no-margin-bottom no-margin-top margin-right">Explore</h3>
           </div>
-          <a href="/categories-page">
+          <a href="/industries">
             <h3 class="no-margin text-color-primary">Show all</h3>
           </a>
         </div>
         <div class="col-100 display-flex no-margin-top up-10">
-          <div is="dmx-swiper" id="categories_swiper" dmx-bind:slides="app.main.home.available_categories.data.query_categories" slides-per-view="3" pagination="bullets" slides-per-group="3" style="width: 100%;">
-            <div class="swiper-slide">
-              <div class="display-flex flex-direction-column align-items-center padding" dmx-on:click="app.local_store.set('state',id)">
-                <img src="" alt="" dmx-bind:src="avatar" class="industry-img-round" dmx-class:gray-border="(app.main.home.category_filter.value == id)" width="100" height="100">
-                <p class="no-margin-top">
+          <div is="dmx-swiper" id="industry_swiper" dmx-bind:slides="app.main.home.industries.data.query" slides-per-view="3" space-between="1" pagination="bullets">
+            <div class="swiper-slide " dmx-on:click="app.local_store.set('selected_industry',industry_name)">
+              <div class="display-flex flex-direction-column align-items-center padding">
+                <img src="" alt="" dmx-bind:src="industry_avatar" class="category-img-round" width="50" height="50" dmx-class:gray-border="(app.local_store.data.selected_industry == industry_name)">
+                <p class="no-margin-top">{{industry_name.capitalize()}}</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- Selected categories -->
+      <div class="row padding-left padding-right" dmx-show="(app.main.home.available_categories.data.query_categories.count() &gt; 0)">
+        <div class="col-100">
+          <div class="display-flex align-items-center justify-content-space-between">
+            <h3 class="no-margin primary-border">
+
+              {{app.local_store.data.selected_industry.capitalize()}} Services
+            </h3>
+            <div class="chip" dmx-on:click="app.main.navigate('/categories-page/'+app.local_store.data.selected_industry,{})">
+              <div class="chip-label">See all</div>
+              <i class="bi-chevron-right"></i>
+            </div>
+          </div>
+        </div>
+        <div class="col-100">
+          <div is="dmx-swiper" id="categories_swiper" slides-per-view="3" dmx-bind:slides="app.main.home.available_categories.data.query_categories" pagination="bullets">
+            <div class="swiper-slide " dmx-on:click="app.local_store.set('selected_category',id)">
+              <div class="display-flex flex-direction-column align-items-center padding">
+                <img height="100" width="80" class="rounded-sm" dmx-bind:src="avatar" dmx-class:gray-border="(app.local_store.data.selected_category == id)">
+                <p class="text-align-center text-color-black">
                   {{category_name.capitalize()}}
                 </p>
               </div>
@@ -296,30 +328,22 @@
           </div>
         </div>
       </div>
-      <div class="row">
-        <div class="padding col-50">
-          <select id="gender_select" class="profile-form">
-            <option value="male">Male Customers Only</option>
-            <option selected="" value="female">Female Customers Only</option>
-            <option value="Both">Male &amp; Female Customers</option>
-          </select>
-        </div>
-      </div>
       <!-- Repeat salons -->
-      <div class="row no-gap up-10">
+      <div class="row no-gap up-10" dmx-show="(app.main.home.providers_query.data.repeat_providers.count() &gt; 0)">
         <div class="col-100 padding text-color-black">
-          <p class="text-18 strong no-margin">
+          <p class="text-18 strong ">
             {{app.main.home.providers_query.data.repeat_providers.count()+' '+app.main.home.category.data.query_category.category_name.capitalize()+' providers near you.'}}
           </p>
         </div>
         <div class="col-100" dmx-show="(app.local_store.data.freelacer_card_class_toggle == 0)" dmx-repeat:repeat_provider="(app.main.home.providers_query.data.repeat_providers.where(`rating`, app.main.home.filter.value, '==').sort(`distance.Distance`).count() &gt; 0)?app.main.home.providers_query.data.repeat_providers.where(`rating`, app.main.home.filter.value, '==').sort(`distance.Distance`):app.main.home.providers_query.data.repeat_providers.sort(`distance.Distance`))">
 
-          <div class="card demo-card-header-pic no-shadow card-outline border-10" dmx-on:click="app.main.navigate('/provider-services-page/'+id+'/'+staff_name+'/'+app.main.home.category_filter.value,{})">
+          <div class="card demo-card-header-pic no-shadow card-outline border-10" dmx-on:click="run({condition:{if:`(app.local_store.data.service_location == \'home\')`,then:{steps:[{run:{action:`app.selected_employee_id.setValue(id)`}},{run:{action:`app.main.navigate(\'/provider-services-page/\'+id+\'/\'+staff_name+\'/\'+app.main.home.category_filter.value,{})`}}]},else:{steps:{run:{action:`app.main.navigate(\'/provider-services-page/\'+id+\'/\'+staff_name+\'/\'+app.main.home.category_filter.value,{})`}}}}})">
             <div class="ribbon" dmx-show="verified"><span>Verified</span></div>
             <div class="card-header align-items-flex-end no-padding" dmx-style:background-image="'url('+ provider_avatar +')'" style="height: 256px; background-position: bottom;">
               <span style="font-size: 26px; text-transform: capitalize; width: 100%; background-color: rgba(0,0,0,0.6);" class="tajawal nametag padding">
                 {{staff_name.capitalize()}} <br>
-                <small> {{job_title.titlecase()}} </small>
+                <small> {{job_title.titlecase()}} </small> <br>
+                <small dmx-show="(industry == 'beauty')"> {{(gender == 'both' ? 'Female and male customers' : gender.capitalize()+' customers')}} </small>
               </span>
 
             </div>
@@ -341,12 +365,12 @@
         </div>
 
         <div class="col-100" dmx-show="(app.local_store.data.freelacer_card_class_toggle == 1)">
-          <div class="relative block bg-color-white rounded-sm  border-gray-100 p-8 shadow-xl margin padding" dmx-repeat:repeat_salons="(app.main.home.providers_query.data.repeat_providers.where(`rating`, app.main.home.filter.value, '==').sort(`distance.Distance`).count() &gt; 0)?app.main.home.providers_query.data.repeat_providers.where(`rating`, app.main.home.filter.value, '==').sort(`distance.Distance`):app.main.home.providers_query.data.repeat_providers.sort(`distance.Distance`))" dmx-on:click="app.main.navigate('/provider-services-page/'+id+'/'+staff_name+'/'+app.main.home.category_filter.value,{})">
+          <div class="relative block bg-color-white rounded-sm  border-gray-100 p-8 shadow-xl margin padding" dmx-repeat:repeat_salons="(app.main.home.providers_query.data.repeat_providers.where(`rating`, app.main.home.filter.value, '==').sort(`distance.Distance`).count() &gt; 0)?app.main.home.providers_query.data.repeat_providers.where(`rating`, app.main.home.filter.value, '==').sort(`distance.Distance`):app.main.home.providers_query.data.repeat_providers.sort(`distance.Distance`))" dmx-on:click="run({condition:{if:`(app.local_store.data.service_location == \'home\')`,then:{steps:[{run:{action:`app.selected_employee_id.setValue(id)`}},{run:{action:`app.main.navigate(\'/provider-services-page/\'+id+\'/\'+staff_name+\'/\'+app.main.home.category_filter.value,{})`}}]},else:{steps:{run:{action:`app.main.navigate(\'/provider-services-page/\'+id+\'/\'+staff_name+\'/\'+app.main.home.category_filter.value,{})`}}}}})">
 
 
             <div class="mt-4 display-flex ">
               <div class="display-flex justify-content-space-between margin-right">
-                <img src="" alt="" width="100" height="100" class="rounded-sm" dmx-bind:src="provider_avatar">
+                <img src="" alt="" width="100" height="100" class="rounded-sm" dmx-bind:src="provider_avatar" dmx-class:verified-border="verified">
               </div>
 
               <div>
@@ -354,15 +378,17 @@
 
                 <p class="text-sm no-margin ">
                   {{job_title.capitalize()}}
+                  <small dmx-show="(industry == 'beauty')"> {{(gender == 'both' ? '- Female and male customers' : '- '+gender.capitalize()+' customers')}} </small>
                 </p>
                 <p class="text-sm no-margin">
                   {{city.capitalize()}} {{distance.Distance.floor()}} km away
                 </p>
                 <p class="no-margin">
-                  <span class="absolute right-4 top-4 rounded-full bg-green-100 px-3 py-1.5 text-xs font-medium text-green-600">
-                    {{rating.toNumber().ceil()}}
-                    <i class="fa-solid fa-star text-color-primary"></i>
-                  </span>
+                  <span class="fa-solid fa-star small" dmx-class:checked="(rating > 0)"></span>
+                  <span class="fa-solid fa-star small" dmx-class:checked="(rating > 1)"></span>
+                  <span class="fa-solid fa-star small" dmx-class:checked="(rating > 2)"></span>
+                  <span class="fa-solid fa-star small" dmx-class:checked="(rating > 3)"></span>
+                  <span class="fa-solid fa-star small" dmx-class:checked="(rating > 4)"></span>
                 </p>
               </div>
 
@@ -370,21 +396,7 @@
           </div>
         </div>
       </div>
-      <!-- Repeat home providers -->
 
-
-    </div>
-    <div class="popover popover-links" id="filter_popover">
-      <div class="popover-inner">
-        <div class="list">
-          <ul>
-            <li><a class="list-button item-link" href="#">Link 1</a></li>
-            <li><a class="list-button item-link" href="#">Link 2</a></li>
-            <li><a class="list-button item-link" href="#">Link 3</a></li>
-            <li><a class="list-button item-link" href="#">Link 4</a></li>
-          </ul>
-        </div>
-      </div>
     </div>
   </div>
 

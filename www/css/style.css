@@ -4753,6 +4753,14 @@ height:50px !important;
   border-bottom-right-radius: 100px;
   }
 
+.category-img-round {
+  width: 70px;
+  height: 70px;
+  border-top-left-radius: 70px;
+  border-top-right-radius: 70px;
+  border-bottom-left-radius: 70px;
+  border-bottom-right-radius: 70px;
+  }
 .pill-button {
   background-color: black;
   border: none;
@@ -4772,6 +4780,15 @@ height:50px !important;
   display: none;
 }
 
+.white-border {
+  border: 2px solid gray;
+}
 
+.primary-border {
+  padding-left: 5px;
+  border-left: 2px solid #f05742;
+}
 
-
+.verified-border {
+  border: 2px solid #f05742;
+}

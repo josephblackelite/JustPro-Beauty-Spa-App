@@ -158,5 +158,9 @@
   "provider-list-page.html": {
     "layoutPage": "",
     "description": ""
+  },
+  "categories-filter-page.html": {
+    "layoutPage": "",
+    "description": ""
   }
 }

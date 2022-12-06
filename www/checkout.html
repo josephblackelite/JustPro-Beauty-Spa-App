@@ -170,12 +170,6 @@
           <input id="customer_id" name="customer_id" type="hidden" dmx-bind:value="app.Current_user.data.customer.id">
           <input id="coupon_amount_off" name="coupon_amount_off" type="hidden" dmx-bind:value="app.Current_user.data.customer.amount_off">
           <input id="coupon_percent_off" name="coupon_percent_off" type="hidden" dmx-bind:value="Cart.data.sum(`total.toNumber().per(app.Current_user.data.customer.percent_off)`).toNumber().formatCurrency('AED', '.', ',', 2)">
-
-
-
-
-
-
           <p class="mb-0 text-color-black"><small>Have a discount coupon?</small></p>
           <div class="row  display-flex align-items-center justify-content-center  no-gutter">
             <div class="col-60 no-padding">
@@ -185,13 +179,6 @@
               <button class="button bg-color-primary text-color-white" dmx-on:click="run({condition:{if:`!app.Current_user.data.customer.customer_email`,then:{steps:{runJS:{function:'showEnterEmailAddressSheet'}}},else:{steps:{condition:{if:`app.Current_user.data.customer.discount_id`,then:{steps:{'f7.dialog.alert':{title:'Coupon applied',text:'You already have a discount. You can\'t use multiple discounts.'}}},else:{steps:{run:{action:`app.main.checkout.coupon_code_form.submit()`}}}}}}}})" style="width: 100%; height: 40px;">Apply</button>
             </div>
           </div>
-
-
-
-
-
-
-
         </form>
       </div>
       <div class="block">
@@ -199,28 +186,22 @@
           <div id="no_discount" dmx-hide="app.Current_user.data.customer.discount_id">
             <h4 class="title tajawal-s no-margin-bottom">You are about to pay</h4>
             <p dmx-show="app.Current_user.data.customer.discount_id" class="text-color-black">{{app.main.checkout.coupon_code_form.coupon_percent_off.value+' off discount will be applied when you submit order.'}}</p>
-            <h1 class="checkout-total strong no-margin-top text-color-black" style="margin-bottom:-5px !important">{{Cart.data.sum(`total.toNumber()`).formatCurrency('AED', '.', ',', 2)}}</h1>
-            <small> + 5% VAT of {{Cart.data.sum(`vat.toNumber()`).formatCurrency('AED', '.', ',', 2)}}</small>
+            <h1 class="checkout-total strong no-margin-top text-color-black" style="margin-bottom:-5px !important">{{(Cart.data.sum(`total.toNumber()`) + 3.70).formatCurrency('AED', '.', ',', 2)}}</h1>
+            <small> + 5% VAT of {{Cart.data.sum(`vat.toNumber()`).formatCurrency('AED', '.', ',', 2)}}</small><br>
+            <small>You will be charged a service fee of AED3.70</small>
           </div>
-
           <div id="discounted" dmx-show="app.Current_user.data.customer.discount_id">
             <h4 class="title tajawal-s no-margin-bottom">You are about to pay</h4>
-            <!-- <p dmx-show="app.Current_user.data.customer.discount_id" class="text-color-black">{{app.main.checkout.coupon_code_form.coupon_percent_off.value+' discount is applied on this order'}}</p> -->
             <div class="">
-              <h4 class="checkout-total strong no-margin  text-color-black" style="text-decoration: line-through;">{{Cart.data.sum(`total.toNumber()`).formatCurrency('AED', '.', ',', 2)}}</h4>
+              <h4 class="checkout-total strong no-margin  text-color-black" style="text-decoration: line-through;">{{(Cart.data.sum(`total.toNumber()`) + 3.70).formatCurrency('AED', '.', ',', 2)}}</h4>
               <h1 class="checkout-total strong no-margin-top text-color-black" style="margin-bottom:-5px !important">
-                {{(Cart.data.sum(`total.toNumber()`) - Cart.data.sum(`total.toNumber().per(app.Current_user.data.customer.percent_off)`)).formatCurrency('AED', '.', ',', 2)}}
-
+                {{((Cart.data.sum(`total.toNumber()`) - Cart.data.sum(`total.toNumber().per(app.Current_user.data.customer.percent_off)`)) + 3.7).formatCurrency('AED', '.', ',', 2)}}
               </h1>
             </div>
-            <small> + 5% VAT of {{Cart.data.sum(`vat.toNumber()`).formatCurrency('AED', '.', ',', 2)}}</small>
+            <small> + 5% VAT of {{Cart.data.sum(`vat.toNumber()`).formatCurrency('AED', '.', ',', 2)}}</small><br>
+            <small>You will be charged a service fee of AED3.70</small>
           </div>
         </div>
-      </div>
-      <div class="block" dmx-show="(appointmentCart.data.count() &gt; 0)">
-        <h3>
-          {{appointmentCart.data.count()}} non billable items will be submitted with this order.
-        </h3>
       </div>
 
       <div class="block" style="margin-bottom:150px !important">
@@ -229,8 +210,6 @@
       </div>
     </div>
   </div>
-
-
   <form is="dmx-serverconnect-form" id="Setup_Intent_ephemeral_key_gen" method="post" action="https://api.justpro.me/api/customer_app/stripe/create_setup_intent" site="JustPro-Spa-Backend" dmx-on:success="run([{run:{action:`app.main.checkout.last_order_id.setValue(app.main.checkout.Setup_Intent_ephemeral_key_gen.data.insertOrder.identity)`}},{runJS:{function:'createPaymentFlow',args:[`app.main.checkout.Setup_Intent_ephemeral_key_gen.data.client_secret`,`app.main.checkout.Setup_Intent_ephemeral_key_gen.data.customer_id`,`app.main.checkout.Setup_Intent_ephemeral_key_gen.data.ephemeral_key`]}}])" dmx-on:start="app.showPreloader('purple')" dmx-on:done="app.hidePreloader()"><input id="User_id" name="user_id" dmx-bind:value="app.Current_user.data.customer.id" type="hidden">
     <input id="setUp" name="setUp" type="hidden" value="setUp">
     <input id="custmer_id" name="customer_id" type="hidden" dmx-bind:value="app.Current_user.data.customer.id">

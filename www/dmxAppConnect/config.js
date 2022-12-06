@@ -19,7 +19,7 @@ dmx.config({
       },
       {
         "type": "text",
-        "name": "state"
+        "name": "selected_category"
       },
       {
         "type": "text",
@@ -1020,6 +1020,23 @@ dmx.config({
         }
       ],
       "outputType": "array"
+    },
+    "repeat_category_services": {
+      "meta": [
+        {
+          "type": "text",
+          "name": "product_name"
+        },
+        {
+          "type": "number",
+          "name": "id"
+        },
+        {
+          "type": "number",
+          "name": "main_category_id"
+        }
+      ],
+      "outputType": "array"
     }
   },
   "checkout": {
@@ -1580,7 +1597,10 @@ dmx.config({
           }
         ]
       }
-    ]
+    ],
+    "cart_total": {
+      "outputType": "text"
+    }
   },
   "chooseaddress": {
     "var": {
@@ -2768,6 +2788,19 @@ dmx.config({
         }
       ],
       "outputType": "array"
+    },
+    "repeat_all_industries": {
+      "meta": [
+        {
+          "type": "text",
+          "name": "industry_name"
+        },
+        {
+          "type": "text",
+          "name": "industry_avatar"
+        }
+      ],
+      "outputType": "array"
     }
   },
   "categoriespage": {
@@ -2827,6 +2860,25 @@ dmx.config({
     "selected_category": {
       "meta": null,
       "outputType": "text"
+    }
+  },
+  "categoriesfilterpage": {
+    "service_id": {
+      "meta": null,
+      "outputType": "text"
+    },
+    "repeat_category_services": {
+      "meta": [
+        {
+          "type": "text",
+          "name": "product_name"
+        },
+        {
+          "type": "number",
+          "name": "id"
+        }
+      ],
+      "outputType": "array"
     }
   }
 });

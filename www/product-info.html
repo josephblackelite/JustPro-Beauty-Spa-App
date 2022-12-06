@@ -1,4 +1,4 @@
-<!-- Wappler include head-page="index.html" is="dmx-app" id="productinfo" appConnect="local" framework7_6="With App Connect" framework7_icons="local" capacitor="local" fontawesome_5="local" components="{dmxSwiper:{},dmxFormatter:{},dmxSockets:{},dmxPreloader:{},dmxValidator:{},dmxSlideshow:{}}" -->
+<!-- Wappler include head-page="index.html" is="dmx-app" id="productinfo" appConnect="local" framework7_6="With App Connect" framework7_icons="local" capacitor="local" components="{dmxSwiper:{},dmxFormatter:{},dmxSockets:{},dmxPreloader:{},dmxValidator:{},dmxSlideshow:{}}" fontawesome_6="local" bootstrap_icons="local" -->
 
 <style>
     .strong {
@@ -7,10 +7,12 @@
 </style>
 <div class="page" path="/product-info/:service_offered_id/:freelancer_name?" data-name="product-info" id="product_info">
 
-    <dmx-value id="varQty" dmx-bind:value="app.main.product_info.qty_form.quantity.value"></dmx-value>
+    <dmx-value id="varQty" dmx-bind:value="app.main.productx_info.qty_form.quantity.value"></dmx-value>
     <dmx-serverconnect id="service_info" url="https://api.justpro.me/api/customer_app/service_workflows/service_info" site="JustPro-Spa-Backend" dmx-param:service_id="app.main.product_info.route.params.id" sockets="true" dmx-param:service_offered_id="app.main.product_info.route.params.service_offered_id"></dmx-serverconnect>
     <dmx-serverconnect id="service_options" url="https://api.justpro.me/api/customer_app/service_workflows/service_offered_options" site="JustPro-Spa-Backend" dmx-param:service_id="app.main.product_info.route.params.id" sockets="true" dmx-param:service_offered_id="app.main.product_info.route.params.service_offered_id"></dmx-serverconnect>
     <dmx-serverconnect id="service_option_data" url="https://api.justpro.me/api/customer_app/service_workflows/service_offered_option_data" site="JustPro-Spa-Backend" dmx-param:service_id="app.main.product_info.route.params.id" sockets="true" dmx-param:service_offered_id="app.main.product_info.route.params.service_offered_id" dmx-param:service_offered_option_data_id="app.main.product_info.qty_form.option.value"></dmx-serverconnect>
+    <dmx-serverconnect id="other_providers_4_service" url="https://api.justpro.me/api/customer_app/provider/providers_4_service" site="JustPro-Spa-Backend" dmx-param:service_id="app.main.product_info.service_info.data.queryServices.service_id" dmx-param:provider_id="app.main.product_info.service_info.data.queryServices.provider_id"></dmx-serverconnect>
+    <dmx-serverconnect id="category_services" url="https://api.justpro.me/api/customer_app/service_workflows/category_services" site="JustPro-Spa-Backend" dmx-param:category_id="app.main.product_info.service_info.data.queryServices.service_category_id" sockets="true"></dmx-serverconnect>
 
 
     <script is="dmx-flow" id="ShowSlides" type="text/dmx-flow" autorun>[
@@ -52,7 +54,7 @@
     </div>
     <div class="toolbar toolbar-bottom toolbar-bottom-md no-shadow">
         <div class="toolbar-inner justify-content-center" style="padding:10px !important">
-            <a href="#!" class="item-link list-button button-large rounded-xl button-6 strong bg-color-primary button-fill text-color-white" dmx-on:click="run({condition:{if:`app.main.product_info.qty_form.option.value`,then:{steps:{condition:{if:`(app.main.product_info.qty_form.quantity.value &gt;= 1)`,then:{steps:{condition:{if:`app.main.product_info.service_info.data.queryServices.can_be_charged_immediately`,then:{steps:[{run:{action:`app.cart_preFill.set(\'provider_service_id\',app.main.product_info.service_info.data.queryServices.provider_service_id);app.cart_preFill.set(\'product_price_id\',app.main.product_info.service_option_data.data.query_service_options.stripe_price_id);app.cart_preFill.set(\'name\',app.main.product_info.service_info.data.queryServices.product_name+\' - \'+app.main.product_info.service_option_data.data.query_service_options.option_name);app.cart_preFill.set(\'quantity\',app.main.product_info.qty_form.quantity.value.toNumber());app.cart_preFill.set(\'amount\',app.main.product_info.service_option_data.data.query_service_options.item_price_with_tax);app.cart_preFill.set(\'matrix\',app.main.product_info.qty_form.matrix.value);app.cart_preFill.set(\'total\',app.main.product_info.overall_total.value);app.cart_preFill.set(\'vat\',app.main.product_info.vat_amount.value);app.cart_preFill.set(\'product_avatar\',app.main.product_info.service_info.data.queryServices.product_avatar);app.cart_preFill.set(\'customer_id\',app.Current_user.data.customer.id);app.cart_preFill.set(\'service_type\',app.local_store.data.service_location);app.cart_preFill.set(\'service_option_id\',app.main.product_info.service_option_data.data.query_service_options.id);app.cart_preFill.set(\'can_be_charged_immmediately\',1)`}},{condition:{if:`(app.local_store.data.service_location == \'home\')`,then:{steps:{run:{action:`app.main.navigate(\'/appointment-page/\'+app.main.product_info.service_info.data.queryServices.parent_provider_id+\'/\'+app.main.product_info.route.params.service_offered_id,{})`}}},else:{steps:{run:{action:`app.main.navigate(\'/choose-professional/\'+app.main.product_info.service_info.data.queryServices.id+\'/\'+app.main.product_info.service_info.data.queryServices.parent_provider_id+\'/\'+app.main.product_info.route.params.service_offered_id,{})`}}}}}]},else:{steps:[{run:{action:`app.cart_preFill.set(\'provider_service_id\',app.main.product_info.service_info.data.queryServices.provider_service_id);app.cart_preFill.set(\'product_price_id\',app.main.product_info.service_option_data.data.query_service_options.stripe_price_id);app.cart_preFill.set(\'name\',app.main.product_info.service_info.data.queryServices.product_name+\' - \'+app.main.product_info.service_option_data.data.query_service_options.option_name);app.cart_preFill.set(\'quantity\',app.main.product_info.qty_form.quantity.value.toNumber());app.cart_preFill.set(\'amount\',app.main.product_info.service_option_data.data.query_service_options.item_price_with_tax);app.cart_preFill.set(\'matrix\',app.main.product_info.qty_form.matrix.value);app.cart_preFill.set(\'total\',app.main.product_info.overall_total.value);app.cart_preFill.set(\'vat\',app.main.product_info.vat_amount.value);app.cart_preFill.set(\'product_avatar\',app.main.product_info.service_info.data.queryServices.product_avatar);app.cart_preFill.set(\'customer_id\',app.Current_user.data.customer.id);app.cart_preFill.set(\'service_type\',app.local_store.data.service_location);app.cart_preFill.set(\'service_option_id\',app.main.product_info.service_option_data.data.query_service_options.id)`}},{condition:{if:`(app.local_store.data.service_location == \'home\')`,then:{steps:{run:{action:`app.main.navigate(\'/appointment-page/\'+app.main.product_info.service_info.data.queryServices.parent_provider_id+\'/\'+app.main.product_info.route.params.service_offered_id,{})`}}},else:{steps:{run:{action:`app.main.navigate(\'/choose-professional/\'+app.main.product_info.service_info.data.queryServices.id+\'/\'+app.main.product_info.service_info.data.queryServices.parent_provider_id+\'/\'+app.main.product_info.route.params.service_offered_id,{})`}}}}}]}}}},else:{steps:{'f7.dialog.alert':{text:'Please select the number of people that need this service.',title:'How many people?'}}}}}},else:{steps:{'f7.dialog.alert':{title:'Service option?',text:'Please select an option to proceed'}}}}})" dmx-show="app.main.product_info.service_info.data.queryServices" style="width:100%" dmx-text="(app.local_store.data.service_location == 'home' ? 'Book '+app.main.product_info.route.params.freelancer_name.titlecase() : 'Choose Staff')">Choose Staff</a>
+            <a href="#!" class="item-link list-button button-large rounded-xl button-6 strong bg-color-primary button-fill text-color-white" dmx-on:click="run({condition:{if:`app.main.product_info.qty_form.option.value`,then:{steps:{condition:{if:`(app.main.product_info.qty_form.quantity.value &gt;= 1)`,then:{steps:[{run:{action:`app.cart_preFill.set(\'provider_service_id\',app.main.product_info.service_info.data.queryServices.provider_service_id);app.cart_preFill.set(\'product_price_id\',app.main.product_info.service_option_data.data.query_service_options.stripe_price_id);app.cart_preFill.set(\'name\',app.main.product_info.service_info.data.queryServices.product_name+\' - \'+app.main.product_info.service_option_data.data.query_service_options.option_name);app.cart_preFill.set(\'quantity\',app.main.product_info.qty_form.quantity.value.toNumber());app.cart_preFill.set(\'amount\',app.main.product_info.service_option_data.data.query_service_options.item_price_with_tax);app.cart_preFill.set(\'matrix\',app.main.product_info.qty_form.matrix.value);app.cart_preFill.set(\'total\',app.main.product_info.overall_total.value);app.cart_preFill.set(\'vat\',app.main.product_info.vat_amount.value);app.cart_preFill.set(\'product_avatar\',app.main.product_info.service_info.data.queryServices.product_avatar);app.cart_preFill.set(\'customer_id\',app.Current_user.data.customer.id);app.cart_preFill.set(\'service_type\',app.local_store.data.service_location);app.cart_preFill.set(\'service_option_id\',app.main.product_info.service_option_data.data.query_service_options.id);app.cart_preFill.set(\'can_be_charged_immmediately\',1)`}},{condition:{if:`(app.local_store.data.service_location == \'home\')`,then:{steps:{run:{action:`app.main.navigate(\'/appointment-page/\'+app.main.product_info.service_info.data.queryServices.parent_provider_id+\'/\'+app.main.product_info.route.params.service_offered_id,{})`}}},else:{steps:{run:{action:`app.main.navigate(\'/choose-professional/\'+app.main.product_info.service_info.data.queryServices.id+\'/\'+app.main.product_info.service_info.data.queryServices.parent_provider_id+\'/\'+app.main.product_info.route.params.service_offered_id,{})`}}}}}]},else:{steps:{'f7.dialog.alert':{text:'Please select the number of people that need this service.',title:'How many people?'}}}}}},else:{steps:{'f7.dialog.alert':{title:'Service option?',text:'Please select an option to proceed'}}}}})" dmx-show="app.main.product_info.service_info.data.queryServices" style="width:100%" dmx-text="(app.local_store.data.service_location == 'home' ? 'Book '+app.main.product_info.route.params.freelancer_name.titlecase() : 'Choose Staff')">Choose Staff</a>
         </div>
     </div>
     <div class="page-content pt-90">
@@ -143,39 +145,21 @@
 
 
 
-            <div class="mb-50" style="margin-top:-40px !important">
+            <div class="">
                 <div class="row">
-
-                    <!--   <div class="col-100 mt-10 mb-0 ml-10" style="margin-bottom:0px !important">
-                    <h5 class="custom-font mb-0" style="margin-bottom:0px !important; color:#c5c5c5"> Book Now <i class="bi bi-chevron-down"></i></h5>
-                </div> -->
-
-                    <div class="col-100 mt-0" style="margin-top:5px !important">
-
-
-
-                    </div>
-
-                    <div class="block mt-0 up-20 text-color-black">
-
-                        <div class="col">
-
-                        </div>
-                    </div>
-
-                    <div class="col-100" dmx-hide="!app.main.product_info.service_info.data.rating">
-                        <div class="write-reviews-box container margin-bottom">
+                    <div class="col-100 no-padding" dmx-hide="!app.main.product_info.service_info.data.rating">
+                        <div class="write-reviews-box container margin-bottom no-padding-top no-padding-bottom">
                             <div class="reviews-head text-align-center">
                             </div>
                             <div class="rating-info small">
-                                <h2 class="rating-text">{{app.main.product_info.service_info.data.rating.toNumber().round(0)}}</h2>
+                                <h2 class="rating-text">{{app.main.product_info.service_info.data.rating.toFixed(1)}}</h2>
                                 <div>
 
-                                    <span class="fa fa-star small" dmx-class:checked="(app.main.product_info.service_info.data.rating > 0)"></span>
-                                    <span class="fa fa-star small" dmx-class:checked="(app.main.product_info.service_info.data.rating > 1)"></span>
-                                    <span class="fa fa-star small" dmx-class:checked="(app.main.product_info.service_info.data.rating > 2)"></span>
-                                    <span class="fa fa-star small" dmx-class:checked="(app.main.product_info.service_info.data.rating > 3)"></span>
-                                    <span class="fa fa-star small" dmx-class:checked="(app.main.product_info.service_info.data.rating > 4)"></span>
+                                    <span class="fa-solid fa-star small" dmx-class:checked="(app.main.product_info.service_info.data.rating > 0)"></span>
+                                    <span class="fa-solid fa-star small" dmx-class:checked="(app.main.product_info.service_info.data.rating > 1)"></span>
+                                    <span class="fa-solid fa-star small" dmx-class:checked="(app.main.product_info.service_info.data.rating > 2)"></span>
+                                    <span class="fa-solid fa-star small" dmx-class:checked="(app.main.product_info.service_info.data.rating > 3)"></span>
+                                    <span class="fa-solid fa-star small" dmx-class:checked="(app.main.product_info.service_info.data.rating > 4)"></span>
                                 </div>
                             </div>
 
@@ -183,6 +167,50 @@
 
                     </div>
                 </div>
+            </div>
+
+            <div class="block no-margin-top no-margin-bottom" dmx-show="(app.main.product_info.other_providers_4_service.data.repeat_providers.count() &gt; 0)">
+                <div class="row">
+                    <div class="col-100 display-flex align-items-center justify-content-space-between mb-0 padding-top padding-bottom">
+                        <div class="display-flex align-items-center">
+                            <h5 class="no-margin-bottom no-margin-top margin-right">More {{app.main.product_info.service_info.data.queryServices.product_name.capitalize()}} providers</h5>
+                        </div>
+                        <a href="/categories-page" dmx-show="">
+                            <h6 class="no-margin text-color-primary">Show all</h6>
+                        </a>
+                    </div>
+                    <div class="col-100 display-flex no-margin-top">
+                        <div is="dmx-swiper" id="providers_swiper" dmx-bind:slides="app.main.product_info.other_providers_4_service.data.repeat_providers" slides-per-view="3" pagination="bullets">
+                            <div class="swiper-slide display-flex flex-direction-column align-items-center padding" dmx-on:click="run({condition:{if:`(provider_type == \'home\')`,then:{steps:[{run:{action:`app.local_store.set(\'service_location\',\'home\');app.selected_employee_id.setValue(id)`}},{run:{action:`app.main.navigate(\'/product-info/\'+service_offered_id+\'/\'+staff_name,{reloadCurrent: true})`}}]},else:{steps:{run:{action:`app.main.navigate(\'/product-info/\'+service_offered_id+\'/\'+staff_name,{reloadCurrent: true})`}}}}})">
+
+                                <img src="" alt="" dmx-bind:src="provider_avatar" class="category-img-round" width="100" height="100" dmx-class:verified-border="verified">
+                                <p class="no-margin text-align-center">
+                                    {{staff_name.capitalize()}}<br>
+                                    <small class="no-margin" dmx-show="(industry == 'beauty')"> {{(gender == 'both' ? 'Female and male customers' : gender.capitalize()+' customers')}} </small>
+                                </p>
+                                <p class="no-margin" dmx-show="rating">
+                                    {{rating.toFixed(1)}}<span class="fa-solid fa-star small" dmx-class:checked="(app.main.product_info.service_info.data.rating > 0)"></span>
+                                </p>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="block no-padding-top no-padding-bottom">
+                <div class="row">
+                    <div class="col-100 padding-top padding-bottom">
+                        <h5 class="no-margin-bottom no-margin-top margin-right">
+                            More in {{app.main.product_info.service_info.data.queryServices.category_name.capitalize()}}
+                        </h5>
+                    </div>
+                    <div class="col-100">
+                        <div class="col display-flex" style="flex-wrap: wrap;">
+                            <button class="pill-button flex-shrink-0" dmx-repeat:repeat_category_services="app.main.product_info.category_services.data.query_services" dmx-on:click="app.main.navigate('/categories-filter-page/'+app.main.product_info.service_info.data.queryServices.service_category_id+'/'+id,{})">{{product_name.capitalize()}} </button>
+                        </div>
+                    </div>
+                </div>
+
             </div>
         </div>
     </div>
