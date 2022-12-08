@@ -9,37 +9,37 @@
 
   <div class="navbar no-hairline no-shadow no-border">
     <div class="navbar-inner" style="padding-right:0px !important; padding-left:0px !important; margin-right:0px !important">
-      <div class="title text-align-center">Allow push notification</div>
+      <div class="title text-align-center"></div>
     </div>
   </div>
 
 
   <div class="toolbar toolbar-bottom toolbar-bottom-md no-shadow">
     <div class="toolbar-inner justify-content-center" style="padding:10px !important">
-      <button class="item-link list-button button-large rounded-xl button-6 bg-color-primary button-fill text-color-white" style="width:100%" dmx-on:click="run({runJS:{function:'pushPrompt'}})">Allow</button>
+      <button class="item-link list-button button-large rounded-xl button-6 bg-color-primary button-fill text-color-white" style="width:100%" dmx-on:click="run({runJS:{function:'pushPrompt'}})">Allow Notifications</button>
 
 
     </div>
   </div>
-  <div class="page-content bg-gray pt-120">
+  <div class="page-content bg-gray pt-120 display-flex">
 
-    <div class="mb-150">
-      <div class="row">
-        <div class="col-100 block up-50">
-          <div class="row">
-            <div class="col-100">
-              <div class="">
-                <div class="reviews-head text-align-center">
-                  <p class="text-black strong">Push notifications keep you up to date with appointments, changes to your appointments and daily appointment reminders. We will also occasionally send you deals and offers via push notifications.</p>
-                </div>
+
+    <div class="row" style="margin-top:auto; margin-bottom:auto; margin-right:auto; margin-left:auto">
+      <div class="col-100 block up-50">
+        <div class="row">
+          <div class="col-100">
+            <div class="">
+              <div class="reviews-head text-align-center">
+                <p class="text-black" style="font-size:18px; color:gray; line-height:40px">Don't miss important notifications about your appointments.</p>
               </div>
             </div>
-            <div class="col display-flex align-items-center justify-content-center margin-top padding">
-              <i class="fa-solid fa-bell fa-10x"></i>
-            </div>
+          </div>
+          <div class="col display-flex align-items-center justify-content-center margin-top padding">
+            <i class="fa-solid fa-bell fa-5x fa-shake"></i>
           </div>
         </div>
       </div>
     </div>
   </div>
+
 </div>

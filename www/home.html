@@ -185,25 +185,28 @@
     }
   </style>
 
-  <div class="navbar no-hairline no-shadow no-border">
+  <div class="navbar no-hairline no-shadow no-border bg-transparent" style="background-color:transparent">
     <div class="navbar-inner" data-name="order-prompt">
-      <div class="subnavbar no-shadow no-border bg-color-white">
+      <!--  <div class="subnavbar no-shadow no-border">
         <div class="segmented text-color-primary nametag no-margin display-flex align-items-center justify-content-center segmented-raised" style="margin-top:0px !important; margin-bottom:0px !important">
           <button class="button strong text-color-primary " dmx-on:click="app.local_store.set('service_location','home')" style="font-weight: 800;" dmx-class:toggler="(app.local_store.data.service_location == 'home')"><span style="height: 100%;">Home Service</span> </button>
           <button class="button strong text-color-primary" dmx-on:click="app.local_store.set('service_location','salon')" style="font-weight: 800;" dmx-class:toggler="(app.local_store.data.service_location == 'salon')">Shop Visit</button>
           <span class="segmented-highlight"></span>
         </div>
-
-      </div>
+        
+        <div class="row">
+          <div class="col display-flex align-items-center">
+            <p style="width: 100%;">
+              <input id="search_by_name" name="text1" type="text" style="height:20px; border:0px !important; font-weight:600; margin-left:5px" class="form-control" placeholder="Search Industry">
+            </p>
+          </div>
+        </div>
+      </div>-->
 
       <div class="left">
         <div class="display-flex flex-direction-column ">
-          <h4 class="no-margin text-color-primary">
-            HELLO
-          </h4>
-          <P class="no-margin text-color-primary">
-            {{app.Current_user.data.customer.customer_name.capitalize()}}
-          </P>
+
+
         </div>
         <!-- <img src="assets/images/logo-pages.png"> -->
       </div>
@@ -243,7 +246,7 @@
     <div class="mb-150">
 
       <!-- Sort -->
-      <div class="block no-margin no-padding">
+      <!-- <div class="block no-margin no-padding" style="display:none">
         <div class="row bg-color-white" style="transition: width 0.5s;">
           <div class="col display-flex align-items-center">
             <p style="width: 100%;">
@@ -272,7 +275,7 @@
             </p>
           </div>
         </div>
-      </div>
+      </div> -->
       <!-- Category-swiper -->
 
       <div is="dmx-swiper" id="ads" dmx-bind:slides="app.ads.data.query" dmx-bind:initial-slide="" centered-slides="true" autoplay="true" style="padding:0px !important; margin:0px !important" auto-height="true">
@@ -281,16 +284,50 @@
         </div>
       </div>
       <!-- Industries -->
-      <div class="row text-color-black padding-left padding-right">
-        <div class="col-100 display-flex align-items-center justify-content-space-between mb-0 padding-top padding-bottom">
-          <div class="display-flex align-items-center">
-            <h3 class="no-margin-bottom no-margin-top margin-right">Explore</h3>
+
+      <div class="block">
+        <div class="row">
+          <div class="col-100">
+            <p class="no-margin-top no-margin-bottom">Welcome back,</p>
+            <h2 class="no-margin-top">Joseph</h2>
           </div>
-          <a href="/industries">
-            <h3 class="no-margin text-color-primary">Show all</h3>
-          </a>
+          <div class="col-100">
+            <style>
+              #search_by_name {
+                width: 60%;
+                height: 25px;
+                margin: 0 auto;
+                border: none;
+
+                border: solid 1px #ccc;
+                border-radius: 10px;
+              }
+            </style>
+            <input id="search_by_name" name="text1" type="text" style="height:30px; width:100%; border:1px #000 !important; font-weight:600;" class="rounded-sm bg-color-white" placeholder="Search Industry">
+
+          </div>
+
+
+          <div class="col-100" style="margin-top:-0px">
+            <h4 class="text-color-primary" style="margin-bottom:0px">What services do you need?</h4>
+            <p class="no-padding-top text-color-primary" style="margin-top:-0px">Book professional freelancers in multiple industries.</p>
+          </div>
         </div>
-        <div class="col-100 display-flex no-margin-top up-10">
+
+      </div>
+      <div class="block no-padding-top">
+        <div class="row">
+          <div class="col-auto col-50" dmx-on:click="app.main.navigate('/categories-page/'+industry_name,{})" dmx-repeat:repeat_all_industries="app.main.home.industries.data.query">
+            <div class="display-flex flex-direction-column align-items-center">
+              <img src="" alt="" width="auto" height="120" class="rounded-lg" dmx-bind:src="industry_avatar" style="width:100%">
+              <p class="text-color-primary no-margin-top">
+                {{industry_name.capitalize()}} Services
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- <div class="col-100 display-flex no-margin-top up-10">
           <div is="dmx-swiper" id="industry_swiper" dmx-bind:slides="app.main.home.industries.data.query" slides-per-view="3" space-between="1" pagination="bullets">
             <div class="swiper-slide " dmx-on:click="app.local_store.set('selected_industry',industry_name)">
               <div class="display-flex flex-direction-column align-items-center padding">
@@ -299,105 +336,103 @@
               </div>
             </div>
           </div>
-        </div>
-      </div>
-      <!-- Selected categories -->
-      <div class="row padding-left padding-right" dmx-show="(app.main.home.available_categories.data.query_categories.count() &gt; 0)">
-        <div class="col-100">
-          <div class="display-flex align-items-center justify-content-space-between">
-            <h3 class="no-margin primary-border">
-
-              {{app.local_store.data.selected_industry.capitalize()}} Services
-            </h3>
-            <div class="chip" dmx-on:click="app.main.navigate('/categories-page/'+app.local_store.data.selected_industry,{})">
-              <div class="chip-label">See all</div>
-              <i class="bi-chevron-right"></i>
-            </div>
-          </div>
-        </div>
-        <div class="col-100">
-          <div is="dmx-swiper" id="categories_swiper" slides-per-view="3" dmx-bind:slides="app.main.home.available_categories.data.query_categories" pagination="bullets">
-            <div class="swiper-slide " dmx-on:click="app.local_store.set('selected_category',id)">
-              <div class="display-flex flex-direction-column align-items-center padding">
-                <img height="100" width="80" class="rounded-sm" dmx-bind:src="avatar" dmx-class:gray-border="(app.local_store.data.selected_category == id)">
-                <p class="text-align-center text-color-black">
-                  {{category_name.capitalize()}}
-                </p>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-      <!-- Repeat salons -->
-      <div class="row no-gap up-10" dmx-show="(app.main.home.providers_query.data.repeat_providers.count() &gt; 0)">
-        <div class="col-100 padding text-color-black">
-          <p class="text-18 strong ">
-            {{app.main.home.providers_query.data.repeat_providers.count()+' '+app.main.home.category.data.query_category.category_name.capitalize()+' providers near you.'}}
-          </p>
-        </div>
-        <div class="col-100" dmx-show="(app.local_store.data.freelacer_card_class_toggle == 0)" dmx-repeat:repeat_provider="(app.main.home.providers_query.data.repeat_providers.where(`rating`, app.main.home.filter.value, '==').sort(`distance.Distance`).count() &gt; 0)?app.main.home.providers_query.data.repeat_providers.where(`rating`, app.main.home.filter.value, '==').sort(`distance.Distance`):app.main.home.providers_query.data.repeat_providers.sort(`distance.Distance`))">
-
-          <div class="card demo-card-header-pic no-shadow card-outline border-10" dmx-on:click="run({condition:{if:`(app.local_store.data.service_location == \'home\')`,then:{steps:[{run:{action:`app.selected_employee_id.setValue(id)`}},{run:{action:`app.main.navigate(\'/provider-services-page/\'+id+\'/\'+staff_name+\'/\'+app.main.home.category_filter.value,{})`}}]},else:{steps:{run:{action:`app.main.navigate(\'/provider-services-page/\'+id+\'/\'+staff_name+\'/\'+app.main.home.category_filter.value,{})`}}}}})">
-            <div class="ribbon" dmx-show="verified"><span>Verified</span></div>
-            <div class="card-header align-items-flex-end no-padding" dmx-style:background-image="'url('+ provider_avatar +')'" style="height: 256px; background-position: bottom;">
-              <span style="font-size: 26px; text-transform: capitalize; width: 100%; background-color: rgba(0,0,0,0.6);" class="tajawal nametag padding">
-                {{staff_name.capitalize()}} <br>
-                <small> {{job_title.titlecase()}} </small> <br>
-                <small dmx-show="(industry == 'beauty')"> {{(gender == 'both' ? 'Female and male customers' : gender.capitalize()+' customers')}} </small>
-              </span>
-
-            </div>
-            <div class="card-footer no-border bg-transparent" style="padding-top:-210px !important; ">
-              <div class="row">
-                <div class="col-100 no-padding">
-                  <span class="fa-solid fa-star small" dmx-class:checked="(rating > 0)"></span>
-                  <span class="fa-solid fa-star small" dmx-class:checked="(rating > 1)"></span>
-                  <span class="fa-solid fa-star small" dmx-class:checked="(rating > 2)"></span>
-                  <span class="fa-solid fa-star small" dmx-class:checked="(rating > 3)"></span>
-                  <span class="fa-solid fa-star small" dmx-class:checked="(rating > 4)"></span>
-                </div>
-                <div class="no-padding smallfont">
-                  {{distance.Distance.floor()}} km away
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <div class="col-100" dmx-show="(app.local_store.data.freelacer_card_class_toggle == 1)">
-          <div class="relative block bg-color-white rounded-sm  border-gray-100 p-8 shadow-xl margin padding" dmx-repeat:repeat_salons="(app.main.home.providers_query.data.repeat_providers.where(`rating`, app.main.home.filter.value, '==').sort(`distance.Distance`).count() &gt; 0)?app.main.home.providers_query.data.repeat_providers.where(`rating`, app.main.home.filter.value, '==').sort(`distance.Distance`):app.main.home.providers_query.data.repeat_providers.sort(`distance.Distance`))" dmx-on:click="run({condition:{if:`(app.local_store.data.service_location == \'home\')`,then:{steps:[{run:{action:`app.selected_employee_id.setValue(id)`}},{run:{action:`app.main.navigate(\'/provider-services-page/\'+id+\'/\'+staff_name+\'/\'+app.main.home.category_filter.value,{})`}}]},else:{steps:{run:{action:`app.main.navigate(\'/provider-services-page/\'+id+\'/\'+staff_name+\'/\'+app.main.home.category_filter.value,{})`}}}}})">
-
-
-            <div class="mt-4 display-flex ">
-              <div class="display-flex justify-content-space-between margin-right">
-                <img src="" alt="" width="100" height="100" class="rounded-sm" dmx-bind:src="provider_avatar" dmx-class:verified-border="verified">
-              </div>
-
-              <div>
-                <h3 class="text-xl font-bold text-gray-900 no-margin">{{staff_name.capitalize()}}</h3>
-
-                <p class="text-sm no-margin ">
-                  {{job_title.capitalize()}}
-                  <small dmx-show="(industry == 'beauty')"> {{(gender == 'both' ? '- Female and male customers' : '- '+gender.capitalize()+' customers')}} </small>
-                </p>
-                <p class="text-sm no-margin">
-                  {{city.capitalize()}} {{distance.Distance.floor()}} km away
-                </p>
-                <p class="no-margin">
-                  <span class="fa-solid fa-star small" dmx-class:checked="(rating > 0)"></span>
-                  <span class="fa-solid fa-star small" dmx-class:checked="(rating > 1)"></span>
-                  <span class="fa-solid fa-star small" dmx-class:checked="(rating > 2)"></span>
-                  <span class="fa-solid fa-star small" dmx-class:checked="(rating > 3)"></span>
-                  <span class="fa-solid fa-star small" dmx-class:checked="(rating > 4)"></span>
-                </p>
-              </div>
-
-            </div>
-          </div>
-        </div>
-      </div>
-
+        </div> -->
     </div>
-  </div>
+    <!-- Selected categories -->
+    <div class="row padding-left padding-right" dmx-show="(app.main.home.available_categories.data.query_categories.count() &gt; 0)">
+      <div class="col-100">
+        <div class="display-flex align-items-center justify-content-space-between">
+          <h3 class="no-margin primary-border">
 
+            {{app.local_store.data.selected_industry.capitalize()}} Services
+          </h3>
+          <div class="chip" dmx-on:click="app.main.navigate('/categories-page/'+app.local_store.data.selected_industry,{})">
+            <div class="chip-label">See all</div>
+            <i class="bi-chevron-right"></i>
+          </div>
+        </div>
+      </div>
+      <div class="col-100">
+        <div is="dmx-swiper" id="categories_swiper" slides-per-view="3" dmx-bind:slides="app.main.home.available_categories.data.query_categories" pagination="bullets">
+          <div class="swiper-slide " dmx-on:click="app.local_store.set('selected_category',id)">
+            <div class="display-flex flex-direction-column align-items-center padding">
+              <img height="100" width="80" class="rounded-sm" dmx-bind:src="avatar" dmx-class:gray-border="(app.local_store.data.selected_category == id)">
+              <p class="text-align-center text-color-black">
+                {{category_name.capitalize()}}
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- Repeat salons -->
+    <div class="row no-gap up-10" dmx-show="(app.main.home.providers_query.data.repeat_providers.count() &gt; 0)">
+      <div class="col-100 padding text-color-black">
+        <p class="text-18 strong ">
+          {{app.main.home.providers_query.data.repeat_providers.count()+' '+app.main.home.category.data.query_category.category_name.capitalize()+' providers near you.'}}
+        </p>
+      </div>
+      <div class="col-100" dmx-show="(app.local_store.data.freelacer_card_class_toggle == 0)" dmx-repeat:repeat_provider="(app.main.home.providers_query.data.repeat_providers.where(`rating`, app.main.home.filter.value, '==').sort(`distance.Distance`).count() &gt; 0)?app.main.home.providers_query.data.repeat_providers.where(`rating`, app.main.home.filter.value, '==').sort(`distance.Distance`):app.main.home.providers_query.data.repeat_providers.sort(`distance.Distance`))">
+
+        <div class="card demo-card-header-pic no-shadow card-outline border-10" dmx-on:click="run({condition:{if:`(app.local_store.data.service_location == \'home\')`,then:{steps:[{run:{action:`app.selected_employee_id.setValue(id)`}},{run:{action:`app.main.navigate(\'/provider-services-page/\'+id+\'/\'+staff_name+\'/\'+app.main.home.category_filter.value,{})`}}]},else:{steps:{run:{action:`app.main.navigate(\'/provider-services-page/\'+id+\'/\'+staff_name+\'/\'+app.main.home.category_filter.value,{})`}}}}})">
+          <div class="ribbon" dmx-show="verified"><span>Verified</span></div>
+          <div class="card-header align-items-flex-end no-padding" dmx-style:background-image="'url('+ provider_avatar +')'" style="height: 256px; background-position: bottom;">
+            <span style="font-size: 26px; text-transform: capitalize; width: 100%; background-color: rgba(0,0,0,0.6);" class="tajawal nametag padding">
+              {{staff_name.capitalize()}} <br>
+              <small> {{job_title.titlecase()}} </small> <br>
+              <small dmx-show="(industry == 'beauty')"> {{(gender == 'both' ? 'Female and male customers' : gender.capitalize()+' customers')}} </small>
+            </span>
+
+          </div>
+          <div class="card-footer no-border bg-transparent" style="padding-top:-210px !important; ">
+            <div class="row">
+              <div class="col-100 no-padding">
+                <span class="fa-solid fa-star small" dmx-class:checked="(rating > 0)"></span>
+                <span class="fa-solid fa-star small" dmx-class:checked="(rating > 1)"></span>
+                <span class="fa-solid fa-star small" dmx-class:checked="(rating > 2)"></span>
+                <span class="fa-solid fa-star small" dmx-class:checked="(rating > 3)"></span>
+                <span class="fa-solid fa-star small" dmx-class:checked="(rating > 4)"></span>
+              </div>
+              <div class="no-padding smallfont">
+                {{distance.Distance.floor()}} km away
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-100" dmx-show="(app.local_store.data.freelacer_card_class_toggle == 1)">
+        <div class="relative block bg-color-white rounded-sm  border-gray-100 p-8 shadow-xl margin padding" dmx-repeat:repeat_salons="(app.main.home.providers_query.data.repeat_providers.where(`rating`, app.main.home.filter.value, '==').sort(`distance.Distance`).count() &gt; 0)?app.main.home.providers_query.data.repeat_providers.where(`rating`, app.main.home.filter.value, '==').sort(`distance.Distance`):app.main.home.providers_query.data.repeat_providers.sort(`distance.Distance`))" dmx-on:click="run({condition:{if:`(app.local_store.data.service_location == \'home\')`,then:{steps:[{run:{action:`app.selected_employee_id.setValue(id)`}},{run:{action:`app.main.navigate(\'/provider-services-page/\'+id+\'/\'+staff_name+\'/\'+app.main.home.category_filter.value,{})`}}]},else:{steps:{run:{action:`app.main.navigate(\'/provider-services-page/\'+id+\'/\'+staff_name+\'/\'+app.main.home.category_filter.value,{})`}}}}})">
+
+
+          <div class="mt-4 display-flex ">
+            <div class="display-flex justify-content-space-between margin-right">
+              <img src="" alt="" width="100" height="100" class="rounded-sm" dmx-bind:src="provider_avatar" dmx-class:verified-border="verified">
+            </div>
+
+            <div>
+              <h3 class="text-xl font-bold text-gray-900 no-margin">{{staff_name.capitalize()}}</h3>
+
+              <p class="text-sm no-margin ">
+                {{job_title.capitalize()}}
+                <small dmx-show="(industry == 'beauty')"> {{(gender == 'both' ? '- Female and male customers' : '- '+gender.capitalize()+' customers')}} </small>
+              </p>
+              <p class="text-sm no-margin">
+                {{city.capitalize()}} {{distance.Distance.floor()}} km away
+              </p>
+              <p class="no-margin">
+                <span class="fa-solid fa-star small" dmx-class:checked="(rating > 0)"></span>
+                <span class="fa-solid fa-star small" dmx-class:checked="(rating > 1)"></span>
+                <span class="fa-solid fa-star small" dmx-class:checked="(rating > 2)"></span>
+                <span class="fa-solid fa-star small" dmx-class:checked="(rating > 3)"></span>
+                <span class="fa-solid fa-star small" dmx-class:checked="(rating > 4)"></span>
+              </p>
+            </div>
+
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
 </div>
