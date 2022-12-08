@@ -227,7 +227,7 @@
 
     </div>
   </form>
-  <form is="dmx-serverconnect-form" id="bill_selected_card" method="post" action="https://api.justpro.me/api/customer_app/checkOut/bill_customer_card" site="JustPro-Spa-Backend" dmx-on:success="run([{run:{action:`app.main.checkout.last_order_id.setValue(app.main.checkout.bill_selected_card.data.insertOrder.identity)`}},{run:{action:`app.main.checkout.justpropreloader.show()`}},{run:{action:`app.main.checkout.scheduler1.start()`,disabled:true}},{run:{action:`app.main.checkout.check_last_order.run()`}}])" dmx-on:start="app.showPreloader('purple')" dmx-on:done="app.hidePreloader()">
+  <form is="dmx-serverconnect-form" id="bill_selected_card" method="post" action="https://api.justpro.me/api/customer_app/checkOut/bill_customer_card" site="JustPro-Spa-Backend" dmx-on:success="run([{run:{action:`app.main.checkout.last_order_id.setValue(app.main.checkout.bill_selected_card.data.insertOrder.identity)`}},{run:{action:`app.main.checkout.justpropreloader.show()`}},{run:{action:`app.main.checkout.scheduler1.start()`,disabled:true}},{run:{action:`app.main.checkout.check_last_order.run()`}}])" dmx-on:start="app.showPreloader('purple')" dmx-on:done="app.hidePreloader()" dmx-on:error="run({'f7.dialog.alert':{title:'Invalid card?',text:`app.main.checkout.bill_selected_card.lastError.response`}})">
     <input id="selected_payment_method" name="selected_payment_method" type="hidden" dmx-bind:value="app.main.checkout.customer_selected_payment_method.value">
 
     <input id="User_id_bill_selected_card" name="user_id" dmx-bind:value="app.Current_user.data.customer.id" type="hidden">
